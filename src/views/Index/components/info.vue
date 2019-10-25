@@ -3,21 +3,18 @@
         <div class="inner info">
             <ul class="top">
                 <li v-for="(item, index) in list1" :key="index">
-                    <img :src="item.imgUrl">
+                    <img :src="item">
                 </li>
             </ul>
             <ul class="bottom">
                 <li v-for="(item, index) in list2" :key="index">
                     <img :src="item.imgUrl">
-                    <p>
-                        <span class="key">{{ item.key }}:</span>
-                        <span class="value">{{ item.value1 }}</span>
-                        <span>{{ item.unit }}</span>
-                    </p>
+                    <div>
+                        <p class="value">{{ item.value1 }}</p>
+                        <p class="text">{{ item.text }}</p>
+                    </div>
                 </li>
             </ul>
-            <p class="border">有追求，有梦想</p>
-            <div class="divide"></div>
         </div>
     </div>
 </template>
@@ -28,40 +25,28 @@ export default {
     data() {
         return {
             list1: [
-                {
-                    imgUrl: require('./images/info1.jpg'),
-                    text: '资金保障'
-                },
-                {
-                    imgUrl: require('./images/info2.jpg'),
-                    text: '真实店源'
-                },
-                {
-                    imgUrl: require('./images/info3.jpg'),
-                    text: '丰富资源'
-                }
+                require('./images/info1.png'),
+                require('./images/info2.png'),
+                require('./images/info3.png')
             ],
             list2: [
                 {
-                    imgUrl: require('./images/info6.png'),
-                    key: '累计服务用户',
-                    value1: 0,
-                    value2: 4976,
-                    unit: "位"
-                },
-                {
                     imgUrl: require('./images/info4.png'),
-                    key: '成交网店数量',
+                    text: '成交网店数量/个',
                     value1: 0,
-                    value2: 2736,
-                    unit: "家"
+                    value2: 2736
                 },
                 {
                     imgUrl: require('./images/info5.png'),
-                    key: '成交店铺金额',
+                    text: '成交店铺金额/万',
                     value1: 0,
-                    value2: 27858,
-                    unit: "万"
+                    value2: 27858
+                },
+                {
+                    imgUrl: require('./images/info6.png'),
+                    text: '累计服务用户/位',
+                    value1: 0,
+                    value2: 4976
                 }
                 
             ]
@@ -85,19 +70,19 @@ export default {
 
 <style lang="less" scoped>
     .info-bg {
-        background-color: #f5f5f5;
+        background-color: #f8f8f8;
 
         .info {
-            padding-top: 20px;
+            padding: 16px 0;
             position: relative;
 
             .top {
                 display: flex;
                 justify-content: space-between;
-                margin-bottom: 15px;
+                margin-bottom: 16px;
 
                 li {
-                    height: 162px;
+                    height: 130px;
                     overflow: hidden;
                     transition: .4s;
                     cursor: pointer;
@@ -111,59 +96,34 @@ export default {
             .bottom {
                 display: flex;
                 justify-content: space-between;
-                padding: 15px 30px;
+                padding: 24px 0;
                 background-color: #fff;
 
                 li {
+                    width: 33%;
                     display: flex;
-                    padding: 0 ;
+                    justify-content: center;
+                    align-items: center;
 
-                    p {
-                        color: #a7a7a7;
-                        display: flex;
-                        align-items: flex-end;
-                        margin-left: 14px;
+                    div {
+                        text-align: left;
+                        margin-left: 24px;
                         
-                        span {
-                            font-size: 18px;
-                            line-height: 18px;
+                        .value {
+                            font-size: 34px;
+                            line-height: 34px;
+                            font-weight: bold;
+                            font-family:'[ShiShangZhongHei]';
+                            color: #333333;
+                            margin-bottom: 10px;
                         }
 
-                        .value {
-                            font-size: 30px;
-                            line-height: 26px;
-                            font-weight: bold;
-                            color: #ff0036;
-                            margin: 0 14px 0 20px;
+                        .text {
+                            font-size: 16px;
+                            line-height: 16px;
+                            color: #333333;
                         }
                     }
-                }
-            }
-
-            .border{
-                width: 180px;
-                font-size: 18px;
-                font-weight: bold;
-                line-height: 18px;
-                color: #ff0036;
-                margin: 40px auto 0;
-                
-                
-                &:before, &:after {
-                    content: "";
-                    width: 43%;
-                    height: 1px;
-                    background-color: #ff0036;
-                    position: absolute;
-                    bottom: 8px;
-                }
-
-                &:before {
-                    left: 0;
-                }
-
-                &:after {
-                    right: 0;
                 }
             }
         }

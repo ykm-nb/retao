@@ -63,43 +63,39 @@
         </div>
 
         <div class="banner-right">
-          <form>
-            <div class="item">
-              <div class="img">
-                <img src="./components/images/form1.png">
-              </div>
-              <input type="text" placeholder="请输入类目">
-            </div>
-            <div class="item">
-              <div class="img">
-                <img src="./components/images/form2.png">
-              </div>
-              <input type="text" placeholder="请输入手机号">
-            </div>
-            <div class="btn">
-              <button class="submit" type="button">提交</button>
-              <button type="button">扫码咨询</button>
-            </div>
-          </form>
+          <div class="avatar">
+            <img src="./components/images/avatar.png">
+            <p>专注电商，助推企业成长</p>
+          </div>
+          <div class="btn">
+            <button type="button">请登录</button>
+            <button class="regist" type="button">立即注册</button>
+          </div>
+          <div class="wx">
+            <img src="./components/images/wx.png">
+            <p>扫一扫 ，有惊喜</p>
+          </div>
         </div>
       </div>
     </div>
 
     <Info></Info>
 
-    <Shop id="shop"></Shop>
+    <Shop1 id="shop"></Shop1>
 
     <Service></Service>
-    
-    <Message></Message>
 
-    <Safe></Safe>
+    <Shop2 id="shop"></Shop2>
+    
+    <!-- <Message></Message> -->
+
+    <!-- <Safe></Safe> -->
 
     <!-- 底部 -->
     <Footer id="footer"></Footer>
 
     <!-- 锚点 -->
-    <ul class="anchor" :class="{'show-anchor': showAnchor}">
+    <!-- <ul class="anchor" :class="{'show-anchor': showAnchor}">
       <li class="service">
         <img src="@/assets/images/author1.png">
         <p>客服</p>
@@ -113,7 +109,7 @@
         <img src="@/assets/images/author2.png">
         <p>顶部</p>
       </li>
-    </ul>
+    </ul> -->
 
   </div>
 </template>
@@ -123,7 +119,8 @@ import ls from "store2";
 import Header from "@/components/Header/Header.vue";
 import Nav from "@/components/Nav/Nav.vue";
 import Info from "./components/info.vue";
-import Shop from "./components/shop.vue";
+import Shop1 from "./components/shop1.vue";
+import Shop2 from "./components/shop2.vue";
 import Safe from "./components/safe.vue";
 import Service from "./components/service.vue";
 import Message from "./components/message.vue";
@@ -132,7 +129,7 @@ export default {
   name: 'index',
   components: {
     Footer, Header,
-    Nav, Shop,
+    Nav, Shop1, Shop2,
     Safe, Service,
     Message, Info
   },
@@ -289,57 +286,60 @@ html, body {
         }
 
         .banner-right {
-          width: 223px;
+          width: 243px;
           height: 100%;
-          padding: 160px 20px 0;
-          background: url('./components/images/banner-right.png') no-repeat center;
+          padding-top: 75px;
+          background: url('./components/images/banner-right.png') no-repeat 0 75px;
 
-          .item {
-            display: flex;
-            margin-bottom: 10px;
-            border: 1px solid #dfdfdf;
-            border-radius: 4px;
-            overflow: hidden;
+          .avatar {
+            padding-top: 75px;
+            position: relative;
 
-            .img {
-              height: 36px;
-              width: 40px;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              background-color: #fafafa;
-              border-right: 1px solid #dfdfdf;
+            img {
+              position: absolute;
+              top: 0;
+              left: 50%;
+              transform: translate(-50%,-50%);
             }
 
-            input {
-              width: 100%;
-              font-size: 14px;
-              text-indent: 28px;
-              color: #c2c1c1;
-              border: none;
+            p {
+              font-size: 16px;
+              line-height: 16px;
+              color: #333333;
             }
           }
 
           .btn {
             display: flex;
-            padding-top: 6px;
+            justify-content: center;
+            margin: 20px 0 55px;
 
             button {
-              width: 120px;
-              height: 33px;
-              font-size: 18px;
-              line-height: 33px;
+              width: 78px;
+              height: 32px;
+              font-size: 16px;
+              line-height: 32px;
               color: #fff;
-              // background: url('./components/images/btn2.png') no-repeat center;
+              background-color: #ff0036;
               border: none;
+              border-radius: 4px;
               cursor: pointer;
             }
 
-            .submit {
-              width: 60px;
-              margin-right: 5px;
-              // background: url('./components/images/btn1.png') no-repeat center;
+            .regist {
+              width: 92px;
+              color: #6d6d6d;
+              margin-left: 10px;
+              background-color: #fff;
+              border: 1px solid #ff0036;
             }
+          }
+
+          .wx p {
+            font-size: 16px;
+            line-height: 16px;
+            color: #999999;
+            margin-top: 5px; 
           }
         }
       }

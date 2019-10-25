@@ -2,11 +2,8 @@
     <div class="inner-bg service-bg">
         <div class="inner service">
             <div class="title-box">
-                <p class="title">
-                    <img src="./images/service.png">
-                    <span>高级顾问</span>
-                </p>
-                <p class="info">我们一直致力于打造全网安全、高校、诚信的虚拟资产服务平台</p>
+                <p class="title">高级顾问</p>
+                <p class="info">senior advisor</p>
             </div>
 
             <ul class="tag">
@@ -26,14 +23,21 @@
                         v-for="(item, index) in serviceList" 
                         :key="index"
                         v-show="(index >= tagIndex * 4) && (index < (tagIndex * 4) + 4)"
+                        :style="`background: url(${item.imgUrl}) no-repeat 50% -4px`"
                     >
-                        <img class="avatar" :src="item.avatar">
-                        <p class="name">{{ item.name }}</p>
-                        <p class="description">{{ item.description }}</p>
-                        <button class="qq" type="button" @click="consultQQ">QQ咨询</button>
-                        <button class="wechat" type="button">微信咨询</button>
+                        <div class="info">
+                            <span class="name">{{ item.name }}</span>
+                            <span class="description">{{ item.description }}</span>
+                            <img src="./images/wechat.png">
+                        </div>
+                        <div class="btn">
+                            <button class="qq" type="button" @click="consultQQ">QQ咨询</button>
+                            <button class="wechat" type="button">微信咨询</button>
+                        </div>
                     </li>
                 </ul>
+                <img @click="changeIndex(tagIndex - 1)" class="go prev" src="./images/service-left.png">
+                <img @click="changeIndex(tagIndex + 1)" class="go next" src="./images/service-right.png">
             </div>
         </div>
     </div>
@@ -45,127 +49,150 @@ export default {
     data() {
         return {
             tagIndex: 0,
-            tagList: ["网店转让", "网店入驻", "商标转让", "电商服务", "企业服务"],
+            tagList: ["天猫转让", "淘宝转让", "天猫入驻", "电商运营", "企业服务"],
             serviceList: [
                 {
-                    avatar: require('./images/service1.png'),
-                    name: '缘粟1',
-                    description: '2年从业经验'
+                    imgUrl: require('./images/service1.png'),
+                    name: '张文豪',
+                    description: '3年从业经验'
                 },
                 {
-                    avatar: require('./images/service1.png'),
-                    name: '缘粟1',
-                    description: '2年从业经验'
+                    imgUrl: require('./images/service2.png'),
+                    name: '张文豪',
+                    description: '3年从业经验'
                 },
                 {
-                    avatar: require('./images/service1.png'),
-                    name: '缘粟1',
-                    description: '2年从业经验'
+                    imgUrl: require('./images/service3.png'),
+                    name: '张文豪',
+                    description: '3年从业经验'
                 },
                 {
-                    avatar: require('./images/service1.png'),
-                    name: '缘粟1',
-                    description: '2年从业经验'
+                    imgUrl: require('./images/service4.png'),
+                    name: '张文豪',
+                    description: '3年从业经验'
                 },
                 {
-                    avatar: require('./images/service1.png'),
-                    name: '缘粟2',
-                    description: '2年从业经验'
+                    imgUrl: require('./images/service1.png'),
+                    name: '张文豪',
+                    description: '3年从业经验'
                 },
                 {
-                    avatar: require('./images/service1.png'),
-                    name: '缘粟2',
-                    description: '2年从业经验'
+                    imgUrl: require('./images/service2.png'),
+                    name: '张文豪',
+                    description: '3年从业经验'
                 },
                 {
-                    avatar: require('./images/service1.png'),
-                    name: '缘粟2',
-                    description: '2年从业经验'
+                    imgUrl: require('./images/service3.png'),
+                    name: '张文豪',
+                    description: '3年从业经验'
                 },
                 {
-                    avatar: require('./images/service1.png'),
-                    name: '缘粟2',
-                    description: '2年从业经验'
+                    imgUrl: require('./images/service4.png'),
+                    name: '张文豪',
+                    description: '3年从业经验'
                 },
                 {
-                    avatar: require('./images/service1.png'),
-                    name: '缘粟3',
-                    description: '2年从业经验'
+                    imgUrl: require('./images/service1.png'),
+                    name: '张文豪',
+                    description: '3年从业经验'
                 },
                 {
-                    avatar: require('./images/service1.png'),
-                    name: '缘粟3',
-                    description: '2年从业经验'
+                    imgUrl: require('./images/service2.png'),
+                    name: '张文豪',
+                    description: '3年从业经验'
                 },
                 {
-                    avatar: require('./images/service1.png'),
-                    name: '缘粟3',
-                    description: '2年从业经验'
+                    imgUrl: require('./images/service3.png'),
+                    name: '张文豪',
+                    description: '3年从业经验'
                 },
                 {
-                    avatar: require('./images/service1.png'),
-                    name: '缘粟3',
-                    description: '2年从业经验'
+                    imgUrl: require('./images/service4.png'),
+                    name: '张文豪',
+                    description: '3年从业经验'
                 },
                 {
-                    avatar: require('./images/service1.png'),
-                    name: '缘粟4',
-                    description: '2年从业经验'
+                    imgUrl: require('./images/service1.png'),
+                    name: '张文豪',
+                    description: '3年从业经验'
                 },
                 {
-                    avatar: require('./images/service1.png'),
-                    name: '缘粟4',
-                    description: '2年从业经验'
+                    imgUrl: require('./images/service2.png'),
+                    name: '张文豪',
+                    description: '3年从业经验'
                 },
                 {
-                    avatar: require('./images/service1.png'),
-                    name: '缘粟4',
-                    description: '2年从业经验'
+                    imgUrl: require('./images/service3.png'),
+                    name: '张文豪',
+                    description: '3年从业经验'
                 },
                 {
-                    avatar: require('./images/service1.png'),
-                    name: '缘粟4',
-                    description: '2年从业经验'
+                    imgUrl: require('./images/service4.png'),
+                    name: '张文豪',
+                    description: '3年从业经验'
                 },
                 {
-                    avatar: require('./images/service1.png'),
-                    name: '缘粟5',
-                    description: '2年从业经验'
+                    imgUrl: require('./images/service1.png'),
+                    name: '张文豪',
+                    description: '3年从业经验'
                 },
                 {
-                    avatar: require('./images/service1.png'),
-                    name: '缘粟5',
-                    description: '2年从业经验'
+                    imgUrl: require('./images/service2.png'),
+                    name: '张文豪',
+                    description: '3年从业经验'
                 },
                 {
-                    avatar: require('./images/service1.png'),
-                    name: '缘粟5',
-                    description: '2年从业经验'
+                    imgUrl: require('./images/service3.png'),
+                    name: '张文豪',
+                    description: '3年从业经验'
                 },
                 {
-                    avatar: require('./images/service1.png'),
-                    name: '缘粟5',
-                    description: '2年从业经验'
-                }
+                    imgUrl: require('./images/service4.png'),
+                    name: '张文豪',
+                    description: '3年从业经验'
+                },
             ]
         }
     },
     methods: {
         changeIndex(index) {
-            let service = this.$refs.service.style;
+            const service = this.$refs.service.style,
+                  tagIndex = this.tagIndex,
+                  length = this.tagList.length;
 
-            Object.assign(service, {
+            if(index === tagIndex) return;
+
+            let obj = {
                 transform: "translate(-1200px)", 
                 opacity: "0"
-            })
-            this.tagIndex = index
+            }
+
+            if(index > tagIndex) { // next
+                Object.assign(service, obj)
+                setTimeout(() => {
+                    obj.transform = "translate(1200px)"
+                    Object.assign(service, obj)
+                }, 400)
+                setTimeout(() => {
+                    obj = {transform: "translate(0)", opacity: "1"}
+                    Object.assign(service, obj)
+                }, 800)
+            } else { // prev
+                obj.transform = "translate(1200px)";
+                Object.assign(service, obj)
+                setTimeout(() => {
+                    obj.transform = "translate(-1200px)"
+                    Object.assign(service, obj)
+                }, 400)
+                setTimeout(() => {
+                    obj = {transform: "translate(0)", opacity: "1"}
+                    Object.assign(service, obj)
+                }, 800)
+            }
             
-            setTimeout(() => {
-                Object.assign(service, {
-                    transform: "translate(0)", 
-                    opacity: "1"
-                })
-            }, 500)
+            this.tagIndex = index;
+            (index < 0) && (this.tagIndex = length - 1);
+            (index > length - 1) && (this.tagIndex = 0);
         },
         consultQQ() {
             var qq = '243910661';
@@ -182,113 +209,140 @@ export default {
     }
 
     .service-bg {
-        background-color: #f5f5f5;
+        background: url("./images/service-bg.png") no-repeat center;
+        overflow: hidden;
 
         .service {
-            padding: 85px 0 40px;
+            height: 561px;
+            padding-top: 65px;
 
             .title-box {
-                margin-bottom: 62px;
+                width: 298px;
+                color: #fff;
+                margin: 0 auto 12px;
+                background: url("./images/service-title.png") no-repeat center;
 
                 .title {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    margin-bottom: 22px;
-
-                    span {
-                        font-size: 48px;
-                        font-weight: bold;
-                        color: #000;
-                        margin-left: 12px;
-                    }
+                    font-size: 30px;
+                    font-weight: bold;
+                    line-height: 30px;
+                    margin-bottom: 5px;
                 }
 
                 .info {
-                    font-size: 24px;
-                    line-height: 24px;
-                    color: #000;
+                    font-size: 16px;
+                    line-height: 16px;
                 }
             }
 
             .tag {
                 width: 960px;
                 .flex();
-                margin: 0 auto 35px;
+                margin: 0 auto 15px;
 
                 li {
-                    font-size: 20px;
-                    line-height: 40px;
-                    color: #aeaeae;
-                    padding: 0 30px;
-                    border: 1px solid #999999;
-                    border-radius: 25px;
+                    width: 104px;
+                    height: 35px;
+                    font-size: 16px;
+                    line-height: 35px;
+                    color: #fff;
+                    border: 1px solid transparent;
+                    border-radius: 4px;
                     transition: .4s;
                     cursor: pointer;
 
-                    &:hover {
-                        color: #d71421;
-                        border: 1px solid #d71421;
-                    }
-
-                    &.active {
-                        color: #fff;
-                        background-color: #d71421;
-                        border: 1px solid #d71421;
+                    &:hover, &.active {
+                        background-color: #ff0537;
+                        border: 1px solid #fff;
                     }
                 }
             }
 
             .content-bg {
-                overflow: hidden;
+                height: 327px;
+                position: relative;
 
                 .content {
-                    transition: .4s;
+                    width: 100%;
                     .flex();
+                    transition: .4s;
 
                     li {
-                        width: 250px;
-                        padding: 28px 45px 50px;
-                        background-color: #fff;
-                        box-sizing: border-box;
-                        border-radius: 5px;
+                        width: 280px;
+                        height: 327px;
+                        padding: 230px 18px 0;
                         transition: .4s;
 
                         &:hover {
                             transform: translate(0,-6px);
-                            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
                         }
 
-                        .name {
-                            font-size: 24px;
-                            line-height: 24px;
-                            color: #333333;
-                            margin: 15px 0 10px;
-                        }
-
-                        .description {
-                            font-size: 16px;
-                            line-height: 16px;
-                            color: #999;
-                            margin-bottom: 24px;
-                        }
-
-                        button {
-                            width: 142px;
-                            font-size: 16px;
-                            line-height: 42px;
+                        .info {
                             color: #fff;
-                            margin-bottom: 20px;
-                            background-color: #d71421;
-                            border: none;
-                            border-radius: 25px;
-                            cursor: pointer;
+                            display: flex;
+                            align-items: flex-end;
+                            padding-bottom: 12px;
+                            border-bottom: 1px solid #959ba9;
+
+                            .name {
+                                font-size: 22px;
+                                line-height: 22px;
+                            }
+
+                            .description {
+                                font-size: 14px;
+                                line-height: 14px;
+                                margin: 0 5px 0 10px;
+                            }
                         }
 
-                        .wechat {
-                            margin-bottom: 0;
+                        .btn {
+                            margin-top: 18px;
+
+                            button {
+                                width: 100px;
+                                height: 25px;
+                                font-size: 12px;
+                                line-height: 25px;
+                                color: #fff;
+                                background-color: transparent;
+                                border: 1px solid #fff;
+                                border-radius: 25px;
+                                transition: .4s;
+                                cursor: pointer;
+                            }
+
+                            .qq {
+                                margin-right: 12px;
+
+                                &:hover {
+                                    background-color: #3bcfff;
+                                    border: 1px solid #3bcfff;
+                                }
+                            }
+
+                            .wechat:hover {
+                                background-color: #22af17;
+                                border: 1px solid #22af17;
+                            }
                         }
                     }
+                }
+
+                .go {
+                    position: absolute;
+                    top: 50%;
+                    cursor: pointer;
+                }
+
+                .prev {
+                    left: -18px;
+                    transform: translate(-100%,-50%);
+                }
+
+                .next {
+                    right: -18px;
+                    transform: translate(100%,-50%);
                 }
             }
         }
