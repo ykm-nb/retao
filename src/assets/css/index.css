@@ -1,0 +1,7 @@
+.inner-bg {
+  min-width: 1200px;
+}
+.inner-bg .inner {
+  width: 1200px;
+  margin: 0 auto;
+}
