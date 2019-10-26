@@ -87,29 +87,26 @@
 
     <Shop2 id="shop"></Shop2>
     
-    <!-- <Message></Message> -->
+    <Message></Message>
 
-    <!-- <Safe></Safe> -->
+    <Safe></Safe>
 
     <!-- 底部 -->
     <Footer id="footer"></Footer>
 
     <!-- 锚点 -->
-    <!-- <ul class="anchor" :class="{'show-anchor': showAnchor}">
-      <li class="service">
-        <img src="@/assets/images/author1.png">
-        <p>客服</p>
-      </li>
-      <li class="item">倡意入驻</li>
-      <li @click="goto('shop')" class="item">精选店铺</li>
-      <li class="item">稀缺类目</li>
-      <li class="item">热门店铺</li>
-      <li @click="goto('footer')" class="item">帮助中心</li>
+    <ul class="anchor" :class="{'show-anchor': showAnchor}">
+      <li class="item">客服中心</li>
+      <li class="item">特惠店铺</li>
+      <li @click="goto('shop')" class="item">优质店铺</li>
+      <li class="item">稀缺店铺</li>
+      <li class="item">天猫转让</li>
+      <li @click="goto('footer')" class="item">淘宝过户</li>
+      <li @click="goto('footer')" class="item">行业资讯</li>
       <li class="top" @click="goto('header')">
-        <img src="@/assets/images/author2.png">
-        <p>顶部</p>
+        <p>返回</p>
       </li>
-    </ul> -->
+    </ul>
 
   </div>
 </template>
@@ -170,12 +167,10 @@ html, body {
 .index {
   // 锚点
   .anchor {
-      width: 50px;
+      width: 52px;
       background-color: #fff;
-      border: 1px solid #dddddd;
-      border-radius: 4px;
       position: fixed;
-      right: 2%;
+      left: 2%;
       top: 50%;
       transform: translate(0,-50%);
       z-index: -999;
@@ -190,39 +185,30 @@ html, body {
 
       li {
         font-size: 14px;
-        padding: 10px 0;
+        padding: 10px;
         cursor: pointer;
       }
 
-      .service {
-        background-color: #f46469;
-
-        p {
-          font-size: 12px;
-          line-height: 8px;
-          color: #fff;
-        }
-      }
-
       .item {
-        text-indent: 2px;
-        letter-spacing: 5px;
-        line-height: 22px;
-        color: #313131;
-        padding: 10px 0 10px 4px;
+        line-height: 16px;
+        color: #9e9d9d;
         border-bottom: 1px dashed #dfdfdf;
         transition: .4s;
 
         &:hover {
           color: #fff;
-          background-color: #fc5f1e;
+          background-color: #ff0036;
         }
       }
 
       .top {
+        height: 36px;
+        padding-top: 15px;
+        background: url("./components/images/author.png") no-repeat center;
+
         p {
-          font-size: 12px;
-          color: #8c8c8c;
+          font-size: 14px;
+          color: #fff;
         }
       }
   }

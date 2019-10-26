@@ -1,10 +1,7 @@
 <template>
     <div class="inner-bg safe-bg">
         <div class="inner safe">
-            <div class="title-box">
-                <img src="./images/safe.png">
-                <span class="title">买的放心 用的安心</span>
-            </div>
+            <div class="title-box">我们的服务</div>
 
             <ul class="content">
                 <li v-for="(item, index) in list" 
@@ -12,7 +9,8 @@
                     @click="$router.push('message')"
                 >
                     <img :src="item.imgUrl">
-                    <p class="text">{{ item.text }}</p>
+                    <p class="title">{{ item.title }}</p>
+                    <p class="description">{{ item.description }}</p>
                 </li>
             </ul>
         </div>
@@ -27,23 +25,28 @@ export default {
             list: [
                 {
                     imgUrl: require('./images/safe1.png'),
-                    text: '资金保障'
+                    title: '资金保障',
+                    description: "FUNDS SAFEGUARD"
                 },
                 {
                     imgUrl: require('./images/safe2.png'),
-                    text: '真实店源'
+                    title: '真实店源',
+                    description: "REAL STORE SOURCE"
                 },
                 {
                     imgUrl: require('./images/safe3.png'),
-                    text: '丰富资源'
+                    title: '资源丰富',
+                    description: "ABUNDANT RESOURCES"
                 },
                 {
                     imgUrl: require('./images/safe4.png'),
-                    text: '优质服务'
+                    title: '优质服务',
+                    description: "FIRST-RATE SERVICE"
                 },
                 {
                     imgUrl: require('./images/safe5.png'),
-                    text: '法务支援'
+                    title: '法律资源',
+                    description: "LEGAL RESOURCES"
                 }
             ]
         }
@@ -54,45 +57,41 @@ export default {
 <style lang="less" scoped>
     .safe-bg {
         .safe {
-            padding: 75px 0 80px 0;
-            border-bottom: 3px solid #f5f5f5;
+            padding: 55px 0 50px;
+            background-color: #fff;
 
             .title-box {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin-bottom: 65px;
-
-                img {
-                    margin-right: 12px;
-                }
-
-                .title {
-                    color: #000;
-                    font-size: 48px;
-                    font-weight: bold;
-                }
+                font-size: 32px;
+                font-weight: bold;
+                color: #333;
+                margin-bottom: 38px;
+                background: url("./images/msg-title.png") no-repeat center;
             }
 
             .content {
+                height: 246px;
                 display: flex;
                 justify-content: space-between;
-                padding: 0 25px;
 
                 li {
+                    width: 225px;
+                    padding-top: 58px;
+                    box-shadow: 1px 5px 10px rgba(0,0,0,.1);
                     cursor: pointer;
                     transition: .4s;
 
-                    img {
-                        width: 90px;
-                        height: 90px;
+                    .title {
+                        font-size: 20px;
+                        font-weight: bold;
+                        line-height: 20px;
+                        color: #333;
+                        margin: 28px 0 10px;
                     }
 
-                    .text {
-                        font-size: 28px;
-                        line-height: 28px;
-                        color: #000;
-                        margin-top: 20px;
+                    .description {
+                        font-size: 16px;
+                        line-height: 16px;
+                        color: #666;
                     }
 
                     &:hover {

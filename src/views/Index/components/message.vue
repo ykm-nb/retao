@@ -2,114 +2,176 @@
     <div class="inner-bg message-bg">
         <div class="inner message">
             <div class="title-box">
-                <p class="title">资讯中心</p>
-                <p class="info">聚焦行业动态</p>
-                <div class="btn">
-                    <button type="button">行业资讯</button>
-                    <button type="button">帮助中心</button>
-                    <div class="more">
-                        <p class="top">MORE</p>
-                        <p class="bottom">点击查看更多</p>
-                    </div>
-                </div>
+                <p class="title">行业资讯</p>
+                <p class="info">NEWS</p>
+                <button class="help" type="button">帮助中心</button>
             </div>
 
-            <div class="content">
-                <ul v-for="(item, index) in list" :key="index">
-                    <li class="top">
-                        <div class="top-left">
-                            <p class="day">{{ item[0].date.substring(8) }}</p>
-                            <p class="date">{{ item[0].date.substring(0,7) }}</p>
-                        </div>
-                        <div class="top-right">
-                            <p class="title">{{ item[0].title }}</p>
-                            <p class="answer">{{ item[0].answer }}</p>
-                        </div>
-                    </li>
-                    <li class="item" v-for="(li, index2) in item" :key="index2">
-                        <span class="title">{{ li.title }}</span>
-                        <span class="date">{{ li.date }}</span>
-                    </li>
-                </ul>
-            </div>
+            <ul class="imgs">
+                <li v-for="(item, index) in imgsList" 
+                    :key="index" 
+                    @mouseover="imgIndex = index" 
+                    @mouseout="imgIndex = -1" 
+                    :class="{'img-hover': imgIndex === index}">
+                    <div class="img">
+                        <img :src="item.imgUrl">
+                    </div>
+                    <div class="text">
+                        <p class="title">{{ item.title }}</p>
+                        <p class="more">
+                            <span>了解更多</span>
+                            <img :src="imgIndex === index ? item.arrow2 : item.arrow1">
+                        </p>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="content">
+                <li v-for="(item, index) in list" :key="index">
+                    <div class="time">
+                        <p class="day">{{ item[0].day }}</p>
+                        <p class="date">{{ item[0].date }}</p>
+                    </div>
+                    <p class="text" v-for="(p, index1) in item.slice(1)" :key="index1">
+                        <span class="title">{{ p.title }}</span>
+                        <span class="date">{{ p.date }}</span>
+                    </p>
+                </li>
+            </ul>
+
+            <button class="btn-more" type="button">查看更多</button>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: "index-safe",
+    name: "index-msg",
     data() {
         return {
+            imgIndex: -1,
+            imgsList: [
+                {
+                    imgUrl: require('./images/msg1.png'),
+                    title: "国家扶贫日交答卷,社交电商扣开扶贫新大门",
+                    arrow1: require('./images/msg-arrow1.png'),
+                    arrow2: require('./images/msg-arrow2.png'),
+                },
+                {
+                    imgUrl: require('./images/msg2.png'),
+                    title: "月薪4万招不到人,曾经电商的巨型风口将在这里重现?",
+                    arrow1: require('./images/msg-arrow1.png'),
+                    arrow2: require('./images/msg-arrow2.png'),
+                },
+                {
+                    imgUrl: require('./images/msg3.png'),
+                    title: "汪向东:对农村电商扶贫与乡村振兴的新思考",
+                    arrow1: require('./images/msg-arrow1.png'),
+                    arrow2: require('./images/msg-arrow2.png'),
+                }
+            ],
             list: [
                 [
                     {
-                        title: "开淘宝网店为什么要选择淘宝网店转让？",
-                        answer: "我相信好多好多的运营店铺的人常有这样的感触，开淘宝网店愈来愈难，问题是为啥大家都知道开淘宝网店难",
-                        date: "2019-10-10"
+                        date: "2019-10",
+                        day: "19"
                     },
                     {
-                        title: "购买网店转让的网店有没有风险？",
-                        date: "2019-06-18"
+                        title: "购买转让的网店有没有风险？",
+                        date: "10-10"
                     },
                     {
-                        title: "天猫店铺转让如何选择第三方店铺转让平台？",
-                        date: "2019-10-10"
+                        title: "购买转让的网店有没有风险？",
+                        date: "10-10"
                     },
                     {
-                        title: "购买网店转让前需要做哪些“功课？",
-                        date: "2019-10-10"
+                        title: "购买转让的网店有没有风险？",
+                        date: "10-10"
                     },
                     {
-                        title: "第三方网店转让平台到底安不安全？",
-                        date: "2019-10-10"
-                    }
+                        title: "购买转让的网店有没有风险？",
+                        date: "10-10"
+                    },
+                    {
+                        title: "购买转让的网店有没有风险？",
+                        date: "10-10"
+                    },
+                    {
+                        title: "购买转让的网店有没有风险？",
+                        date: "10-10"
+                    },
+                    {
+                        title: "购买转让的网店有没有风险？",
+                        date: "10-10"
+                    },
                 ],
                 [
                     {
-                        title: "淘宝网店怎么降低店铺的跳出率?",
-                        answer: "我听了很多朋友说，很多人开淘宝网店，今天参加天天特价的活动，明天就是直通车推广，大家每天都是在很辛苦的为自己的店铺引流",
-                        date: "2019-10-10"
+                        date: "2019-10",
+                        day: "18"
                     },
                     {
-                        title: "注册淘宝店铺和购买淘宝店铺转让，哪个比较划算?",
-                        date: "2019-10-10"
+                        title: "购买转让的网店有没有风险？",
+                        date: "10-10"
                     },
                     {
-                        title: "淘宝开网店留住老客户的方法有哪些？",
-                        date: "2019-10-10"
+                        title: "购买转让的网店有没有风险？",
+                        date: "10-10"
                     },
                     {
-                        title: "淘宝开网店常常会碰到的误区有哪些？",
-                        date: "2019-10-10"
+                        title: "购买转让的网店有没有风险？",
+                        date: "10-10"
                     },
                     {
-                        title: "新手开淘宝网店大多数都做不起来是怎么回事?",
-                        date: "2019-10-10"
-                    }
+                        title: "购买转让的网店有没有风险？",
+                        date: "10-10"
+                    },
+                    {
+                        title: "购买转让的网店有没有风险？",
+                        date: "10-10"
+                    },
+                    {
+                        title: "购买转让的网店有没有风险？",
+                        date: "10-10"
+                    },
+                    {
+                        title: "购买转让的网店有没有风险？",
+                        date: "10-10"
+                    },
                 ],
                 [
                     {
-                        title: "淘宝店铺转让需要注意哪些问题?",
-                        answer: "我相信好多好多的运营店铺的人常有这样的感觉，我相信好多好多的运营店铺的人常有这样的感觉",
-                        date: "2019-10-10"
+                        date: "2019-10",
+                        day: "17"
                     },
                     {
-                        title: "购买网店转让如何防止店铺被找回?",
-                        date: "2019-10-10"
+                        title: "购买转让的网店有没有风险？",
+                        date: "10-10"
                     },
                     {
-                        title: "淘宝网店转让签订合同有没有用?",
-                        date: "2019-10-10"
+                        title: "购买转让的网店有没有风险？",
+                        date: "10-10"
                     },
                     {
-                        title: "网店转让行业为什么发展得如此快速?",
-                        date: "2019-10-10"
+                        title: "购买转让的网店有没有风险？",
+                        date: "10-10"
                     },
                     {
-                        title: "天猫网店转让为什么要选择网店转让平台交易？",
-                        date: "2019-10-10"
-                    }
+                        title: "购买转让的网店有没有风险？",
+                        date: "10-10"
+                    },
+                    {
+                        title: "购买转让的网店有没有风险？",
+                        date: "10-10"
+                    },
+                    {
+                        title: "购买转让的网店有没有风险？",
+                        date: "10-10"
+                    },
+                    {
+                        title: "购买转让的网店有没有风险？",
+                        date: "10-10"
+                    },
                 ],
             ]
         }
@@ -119,189 +181,181 @@ export default {
 
 <style lang="less" scoped>
     .message-bg {
-        background-color: #f5f5f5;
+        background-color: #f8f8f8;
 
         .message {
-            padding: 50px 0 30px;
+            padding: 44px 0 46px;
 
             .title-box {
+                background: url('./images/msg-title.png') no-repeat center;
+                position: relative;
+
                 .title {
+                    font-size: 30px;
+                    font-weight: bold;
+                    line-height: 30px;
                     color: #333;
-                    font-size: 33px;
-                    line-height: 44px;
-                    display: inline-block;
-                    position: relative;
-
-                    &:before, &:after {
-                        content: "";
-                        width: 20px;
-                        height: 5px;
-                        background-color: #C6302F;
-                        position: absolute;
-                        top: 50%;
-                    }
-
-                    &:before {
-                        left: 0px;
-                        transform: translate(-140%,-50%);
-                    }
-
-                    &:after {
-                        right: 0px;
-                        transform: translate(140%,-50%);
-                    }
                 }
 
                 .info {
-                    color: #7f7e7e;
-                    font-size: 22px;
-                    line-height: 44px;
-                    margin-top: 4px;
+                    font-size: 16px;
+                    line-height: 16px;
+                    color: #ccc;
+                    margin-top: 6px;
                 }
 
-                .btn {
-                    margin: 25px 0 40px;
-                    position: relative;
+                .help {
+                    width: 120px;
+                    height: 36px;
+                    line-height: 36px;
+                    font-size: 16px;
+                    color: #fff;
+                    background-color: #ff0036;
+                    border: none;
+                    border-radius: 50px;
+                    cursor: pointer;
+                    position: absolute;
+                    right: 0;
+                    top: 2px;
+                }
+            }
 
-                    button {
-                        width: 100px;
-                        height: 28px;
-                        line-height: 28px;
-                        font-size: 14px;
-                        color: #000;
-                        margin: 0 10px;
-                        background-color: transparent;
-                        border: 1px solid #000;
-                        border-radius: 50px;
-                        cursor: pointer;
+            .imgs {
+                display: flex;
+                justify-content: space-between;
+                margin: 34px 0 74px;
 
-                        &:hover {
-                            color: #fff;
-                            background-color: #fc4747;
-                            border: 1px solid #fc4747;
+                li {
+                    width: 382px;
+                    height: 465px;
+                    background-color: #fff;
+                    overflow: hidden;
+                    transition: .4s;
+                    cursor: pointer;
+
+                    .img {
+                        width: 100%;
+                        height: 255px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        overflow: hidden;
+                    }
+
+                    .text {
+                        padding: 32px 10px;
+                        margin: 0 18px;
+                        border-bottom: 1px solid #999;
+
+                        .title {
+                            font-size: 22px;
+                            line-height: 36px;
+                            text-align: left;
+                            letter-spacing: 1px;
+                            color: #999;
+                            margin-bottom: 30px;
+                        }
+
+                        .more {
+                            text-align: left;
+
+                            span {
+                                font-size: 18px;
+                                line-height: 18px;
+                                color: #999;
+                                display: inline-block;
+                                margin-right: 14px;
+                            }
                         }
                     }
 
-                    .more {
-                        padding-right: 8px;
-                        border-right: 1px dashed #DBDBDB;
-                        position: absolute;
-                        top: 50%;
-                        right: 0;
-                        transform: translate(0,-50%);
-                        cursor: pointer;
+                    // hover 状态
+                    &.img-hover {
+                        box-shadow: 1px 1px 15px rgba(0,0,0,.1);
 
-                        p {
-                            font-size: 14px;
-                            line-height: 20px;
-                            text-align: left;
-                        }
+                        .text {
+                            color: #ff0036;
+                            border-bottom: 1px solid #ff0036;
 
-                        .top {
-                            color: #C7C7C7;
-                        }
+                            .title {
+                                color: #ff0036;
+                            }
 
-                        .bottom {
-                            color: #CD5554;
+                            .more span {
+                                color: #ff0036;
+                            }
                         }
                     }
                 }
             }
 
             .content {
+                height: 368px;
                 display: flex;
                 justify-content: space-between;
 
-                ul {
-                    width: 380px;
+                li {
+                    width: 382px;
+                    padding: 70px 30px 0;
                     background-color: #fff;
-                    border-radius: 6px;
+                    border-bottom: 1px solid #E6E6E6;
+                    border-radius: 4x;
+                    box-shadow: 1px 1px 15px rgba(0,0,0,.1);
+                    position: relative;
 
-                    li {
-                        border-bottom: 1px solid #E6E6E6;
-                    }
-
-                    .top {
-                        display: flex;
-                        padding: 8px 20px 8px 0;
+                    .time {
+                        width: 148px;
+                        border-radius: 6px;
+                        position: absolute;
+                        left: 50%;
+                        top: 0;
+                        transform: translate(-50%,-50%);
                         overflow: hidden;
 
-                        .top-left {
+                        p {
+                            line-height: 42px;
                             color: #fff;
-                            padding: 6px 18px;
-                            background-color: #fc4747;
-
-                            .day {
-                                font-size: 55px;
-                                line-height: 55px;
-                            }
-
-                            .date {
-                                font-size: 16px;
-                                line-height: 16px;
-                            }
                         }
 
-                        .top-right {
-                            width: 68%;
-                            text-align: left;
-                            margin-left: 15px;
-
-                            .title {
-                                width: 100%;
-                                font-size: 18px;
-                                line-height: 32px;
-                                color: #333;
-                                margin-bottom: 8px;
-                                white-space: nowrap;
-                                text-overflow: ellipsis;
-                                overflow: hidden;
-                                cursor: pointer;
-                            }
-
-                            .answer {
-                                width: 100%;
-                                font-size: 12px;
-                                line-height: 20px;
-                                color: #999;
-                                text-overflow: ellipsis;
-                                display: -webkit-box;
-                                -webkit-line-clamp: 2;
-                                -webkit-box-orient: vertical;
-                                overflow: hidden;
-                            }
-                        }
-                    }
-
-                    .item {
-                        height: 65px;
-                        display: flex;
-                        align-items: center;
-                        padding: 0 20px;
-                        cursor: pointer;
-
-                        &:hover .title {
-                            color: #fc4747;
-                        }
-
-                        .title {
-                            width: 210px;
-                            font-size: 14px;
-                            color: #000;
-                            text-align: left;
-                            display: inline-block;
-                            margin-right: 15px;
-                            white-space: nowrap;
-                            text-overflow: ellipsis;
-                            overflow: hidden;
+                        .day {
+                            font-size: 28px;
+                            background-color: #ff0036;
                         }
 
                         .date {
-                            font-size: 12px;
+                            font-size: 20px;
+                            background-color: #e20030;
+                        }
+                    }
+
+                    .text {
+                        font-size: 18px;
+                        line-height: 18px;
+                        display: flex;
+                        justify-content: space-between;
+                        margin-bottom: 20px;
+                        cursor: pointer;
+
+                        .title {
+                            color: #333;
+                        }
+
+                        .date {
                             color: #999;
                         }
                     }
                 }
+            }
+
+            .btn-more {
+                width: 145px;
+                font-size: 16px;
+                line-height: 40px;
+                color: #fff;
+                margin-top: 48px;
+                background-color: #ff0036;
+                border: none;
+                border-radius: 30px;
             }
         }
     }

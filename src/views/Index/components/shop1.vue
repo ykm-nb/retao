@@ -392,7 +392,7 @@ export default {
                                 p {
                                     font-size: 24px;
                                     font-weight: bold;
-                                    font-weight: 44px;
+                                    line-height: 44px;
                                     color: #ff5050;
                                 }
                             }

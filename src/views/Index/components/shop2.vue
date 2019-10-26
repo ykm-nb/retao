@@ -8,12 +8,7 @@
                 </div>
 
                 <ul class="layer-right">
-                    <li class="item" v-for="(item, index) in shopList1.slice(1)" :key="index">
-                        <div class="time-limit">
-                            <img src="./images/shop1-limit.png">
-                            <span>{{ item.time }}</span>
-                        </div>
-                        <img class="goods-img" :src="item.imgUrl">
+                    <li class="item" :class="`item${index}`" v-for="(item, index) in shopList1.slice(1)" :key="index">
                         <div class="section1">
                             <img src="./images/tm.png">
                             <div>
@@ -25,17 +20,41 @@
                                 </p>
                             </div>
                         </div>
+                        <ul class="tags">
+                            <li v-for="(tag, index1) in item.tagList" :key="index1">{{ tag }}</li>
+                        </ul>
                         <div class="section2">
-                            <div class="left">
-                                <p class="store-type">{{ item.storeType }}</p>
+                            <p class="new">新品</p>
+                            <p class="price">{{ item.price }}万</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="layer layer2">
+                <div class="layer-left">
+                    <img src="./images/shop2-left2.png">
+                </div>
+
+                <ul class="layer-right">
+                    <li class="item" :class="`item${index}`" v-for="(item, index) in shopList1.slice(1)" :key="index">
+                        <div class="section1">
+                            <img src="./images/tb.png">
+                            <div>
+                                <p class="name">{{ item.storeName }}</p>
                                 <p>
+                                    <span>{{ item.firstCategory }}</span>
+                                    <span>{{ item.trademarkCategory }}</span>
                                     <span>{{ item.brand }}</span>
-                                    <span>{{ item.city }}</span>
                                 </p>
                             </div>
-                            <div class="right">
-                                <p>{{ item.price }}万</p>
-                            </div>
+                        </div>
+                        <ul class="tags">
+                            <li v-for="(tag, index1) in item.tagList" :key="index1">{{ tag }}</li>
+                        </ul>
+                        <div class="section2">
+                            <p class="new">新品</p>
+                            <p class="price">{{ item.price }}万</p>
                         </div>
                     </li>
                 </ul>
@@ -62,36 +81,51 @@ export default {
                     price: 9.5
                 },
                 {
-                    time: '02天01时58分24秒',
-                    imgUrl: require('./images/shop1-goods2.png'),
                     storeName: '质邦旗舰店',
                     firstCategory: '餐饮具类目',
                     trademarkCategory: '21类',
                     brand: 'R标',
-                    storeType: '居家日用旗舰店',
-                    city: '浙江省宁波市',
+                    tagList: ["居家日用", "旗舰店", "R标", "浙江省宁波市"],
                     price: 10.80
                 },
                 {
-                    time: '02天01时58分24秒',
-                    imgUrl: require('./images/shop1-goods2.png'),
                     storeName: '质邦旗舰店',
                     firstCategory: '餐饮具类目',
                     trademarkCategory: '21类',
                     brand: 'R标',
-                    storeType: '居家日用旗舰店',
-                    city: '浙江省宁波市',
+                    tagList: ["居家日用", "旗舰店", "R标", "浙江省宁波市"],
                     price: 10.80
                 },
                 {
-                    time: '02天01时58分24秒',
-                    imgUrl: require('./images/shop1-goods2.png'),
                     storeName: '质邦旗舰店',
                     firstCategory: '餐饮具类目',
                     trademarkCategory: '21类',
                     brand: 'R标',
-                    storeType: '居家日用旗舰店',
-                    city: '浙江省宁波市',
+                    tagList: ["居家日用", "旗舰店", "R标", "浙江省宁波市"],
+                    price: 10.80
+                },
+                {
+                    storeName: '质邦旗舰店',
+                    firstCategory: '餐饮具类目',
+                    trademarkCategory: '21类',
+                    brand: 'R标',
+                    tagList: ["居家日用", "旗舰店", "R标", "浙江省宁波市"],
+                    price: 10.80
+                },
+                {
+                    storeName: '质邦旗舰店',
+                    firstCategory: '餐饮具类目',
+                    trademarkCategory: '21类',
+                    brand: 'R标',
+                    tagList: ["居家日用", "旗舰店", "R标", "浙江省宁波市"],
+                    price: 10.80
+                },
+                {
+                    storeName: '质邦旗舰店',
+                    firstCategory: '餐饮具类目',
+                    trademarkCategory: '21类',
+                    brand: 'R标',
+                    tagList: ["居家日用", "旗舰店", "R标", "浙江省宁波市"],
                     price: 10.80
                 }
             ],
@@ -151,72 +185,66 @@ export default {
                 .layer-left {
                     width: 300px;
                     display: flex;
-                    
+                    justify-content: center;
+                    align-items: center;
                     border-right: 1px solid #f4f4f4;
-                    
-
-                    img {
-
-                    }
                 }
 
                 .layer-right {
                     width: calc(100% - 300px);
                     display: flex;
+                    flex-wrap: wrap;
                     background-color: #fff;
                     box-sizing: border-box;
 
                     .item {
                         width: 300px;
-                        padding-top: 12px;
+                        height: 200px;
+                        padding: 32px 20px;
                         border-right: 1px solid #f4f4f4;
-
-                        .time-limit {
-                            width: 225px;
-                            height: 38px;
-                            display: flex;
-                            align-items: center;
-                            padding-left: 15px;
-                            background-color: #fff3f3;
-                            border-radius: 0 30px 30px 0;
-
-                            span {
-                                font-size: 14px;
-                                line-height: 38px;
-                                color: #ff0036;
-                                margin-left: 8px;
-                            }
-                        }
-
-                        .goods-img {
-                            display: block;
-                            margin: 12px auto 24px;
-                        }
+                        border-bottom: 1px solid #f4f4f4;
 
                         .section1 {
                             display: flex;
                             align-items: center;
-                            padding-left: 20px;
-                            margin-bottom: 14px;
 
                             div {
                                 text-align: left;
                                 margin-left: 10px;
 
                                 .name {
-                                    font-size: 20px;
-                                    line-height: 20px;
+                                    font-size: 18px;
+                                    line-height: 18px;
                                     font-weight: bold;
                                     color: #000;
                                     margin-bottom: 5px;
                                 }
 
-                                p span {
+                                p {
                                     font-size: 14px;
                                     line-height: 14px;
-                                    color: #999999;
-                                    display: inline-block;
+
+                                    span {
+                                        color: #999999;
+                                        display: inline-block;
+                                        margin-right: 5px;
+                                    }
                                 }
+                            }
+                        }
+
+                        .tags {
+                            display: flex;
+                            justify-content: space-between;
+                            margin: 16px 0 24px;
+
+                            li {
+                                font-size: 12px;
+                                line-height: 26px;
+                                color: #666666;
+                                padding: 0 9px;
+                                background-color: #f8f8f8;
+                                border-radius: 20px;
                             }
                         }
 
@@ -224,39 +252,33 @@ export default {
                             display: flex;
                             justify-content: space-between;
                             align-items: center;
-                            padding-left: 20px;
 
-                            .left {
-                                p {
-                                    font-size: 14px;
-                                    line-height: 14px;
-                                    text-align: left;
-                                    color: #999;
-                                }
-                                .store-type {
-                                    margin-bottom: 4px;
-                                }
-
-                                p span {
-                                    display: inline-block;
-                                    margin-right: 4px;
-                                }
+                            .new {
+                                width: 78px;
+                                font-size: 14px;
+                                font-weight: bold;
+                                line-height: 32px;
+                                color: #ff0036;
+                                background-color: #fff3f3;
+                                border-radius: 20px;
                             }
 
-                            .right {
-                                width: 130px;
+                            .price {
+                                font-size: 24px;
+                                font-weight: bold;
+                                line-height: 24px;
                                 text-align: center;
-                                background-color: #fff3f3;
-                                border-radius: 30px 0 0 30px;
-                                
-                                p {
-                                    font-size: 24px;
-                                    font-weight: bold;
-                                    font-weight: 44px;
-                                    color: #ff5050;
-                                }
+                                color: #ff5050;
                             }
                         }
+                    }
+
+                    .item2, .item5 {
+                        border-right: none;
+                    }
+
+                    .item3, .item4, .item5 {
+                        border-bottom: none;
                     }
                 }
             }

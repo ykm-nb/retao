@@ -8,11 +8,25 @@
                         <p @click="gotoExplain" class="item" v-for="(p, index2) in li.slice(1)" :key="index2">{{ p.text }}</p>
                     </li>
                 </ul>
+                <div class="wx-code">
+                    <div class="code1">
+                        <img src="./code1.png">
+                        <p>关注我们</p>
+                    </div>
+                    <div class="code2">
+                        <img src="./code2.png">
+                        <p>客服咨询</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="footer-bottom">
-                <p>Copyright@2013-2019  热淘retao.com 版权所有  蜀ICP备12352365号  ########科技有限公司</p>
+            <div class="imgs">
+                <img src="./img1.png">
+                <img src="./img2.png">
+                <img src="./img3.png">
             </div>
+
+            <p class="footer-bottom">浙ICP备19040911号 版权所有 | 仟呗（绍兴）信息科技有限公司 浙江绍兴文化创意产业园6幢</p>
         </footer>
     </div>
 </template>
@@ -25,14 +39,14 @@ export default {
             list: [
                 [
                     {
-                        text: "帮助中心"
+                        text: "帮助"
                     },
                     {
-                        text: "购买流程",
+                        text: "购买网店",
                         path: "index"
                     },
                     {
-                        text: "出售流程",
+                        text: "出售网店",
                         path: "index"
                     },
                     {
@@ -42,48 +56,61 @@ export default {
                 ],
                 [
                     {
-                        text: "安全保障"
+                        text: "资金"
+                    },
+                    {
+                        text: "充值服务",
+                        path: "index"
+                    },
+                    {
+                        text: "提现服务",
+                        path: "index"
+                    },
+                    {
+                        text: "服务费用",
+                        path: "index"
+                    }
+                ],
+                [
+                    {
+                        text: "保障"
+                    },
+                    {
+                        text: "资金安全",
+                        path: "index"
                     },
                     {
                         text: "担保交易",
                         path: "index"
                     },
                     {
-                        text: "隐私保护",
-                        path: "index"
-                    },
-                    {
-                        text: "合同法律效力",
+                        text: "用户协议",
                         path: "index"
                     }
                 ],
                 [
                     {
-                        text: "客服中心"
-                    },
-                    {
-                        text: "投诉建议",
-                        path: "index"
+                        text: "客服"
                     },
                     {
                         text: "在线客服",
                         path: "index"
                     },
                     {
-                        text: "常见问题",
+                        text: "投诉建议",
+                        path: "index"
+                    },
+                    {
+                        text: "售后客服",
                         path: "index"
                     }
                 ],
                 [
                     {
-                        text: "关于我们"
+                        text: "我们"
                     },
                     {
                         text: "公司简介",
-                        path: "index"
-                    },
-                    {
-                        text: "联系我们",
                         path: "index"
                     },
                     {
@@ -91,7 +118,7 @@ export default {
                         path: "index"
                     },
                     {
-                        text: "加入我们",
+                        text: "联系我们",
                         path: "index"
                     }
                 ]
@@ -109,7 +136,7 @@ export default {
 
 <style lang="less" scoped>
 .footer-bg {
-    background-color: #fff;
+    background-color: #e5e5e5;
 
     .flex {
         display: flex;
@@ -117,33 +144,32 @@ export default {
     }
 
     footer {
-        padding-top: 50px;
+        padding: 58px 115px 32px;
         position: relative;
 
         .footer-top {
             width: 100%;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #f5f5f5;
+            .flex();
 
             ul {
+                width: 700px;
                 .flex();
-                margin: 0 120px;
 
                 li {
                     p {
                         font-size: 14px;
                         line-height: 14px;
                         text-align: center;
-                        color: #a0a3a8;
-                        margin-bottom: 15px;
+                        color: #495167;
+                        margin-bottom: 10px;
                         cursor: pointer;
                     }
 
                     .title {
-                        font-size: 16px;
-                        line-height: 16px;
-                        color: #5c6066;
-                        margin-bottom: 25px;
+                        font-size: 18px;
+                        line-height: 18px;
+                        color: #333;
+                        margin-bottom: 15px;
                     }
 
                     .item {
@@ -159,15 +185,32 @@ export default {
                     }
                 }
             }
+
+            .wx-code {
+                width: 220px;
+                .flex();
+
+                div p {
+                    font-size: 14px;
+                    line-height: 14px;
+                    color: #868fac;
+                    margin-top: 5px;
+                }
+            }
+        }
+
+        .imgs {
+            width: 575px;
+            .flex();
+            margin: 18px 0 28px;
         }
 
         .footer-bottom {
-            p {
-                font-size: 16px;
-                line-height: 45px;
-                text-align: center;
-                color: #a0a3a8;
-            }
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 14px;
+            text-align: left;
+            color: #333;
         }
     }
 }  
