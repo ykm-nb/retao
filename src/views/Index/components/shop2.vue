@@ -282,6 +282,10 @@ export default {
                     }
                 }
             }
+
+            .layer2 {
+                margin-bottom: 0;
+            }
         }
     }
 </style>

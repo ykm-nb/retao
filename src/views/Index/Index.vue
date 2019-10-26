@@ -97,12 +97,12 @@
     <!-- 锚点 -->
     <ul class="anchor" :class="{'show-anchor': showAnchor}">
       <li class="item">客服中心</li>
-      <li class="item">特惠店铺</li>
+      <li @click="goto('shop')" class="item">特惠店铺</li>
       <li @click="goto('shop')" class="item">优质店铺</li>
-      <li class="item">稀缺店铺</li>
+      <li @click="goto('shop')" class="item">稀缺店铺</li>
       <li class="item">天猫转让</li>
-      <li @click="goto('footer')" class="item">淘宝过户</li>
-      <li @click="goto('footer')" class="item">行业资讯</li>
+      <li class="item">淘宝过户</li>
+      <li class="item">行业资讯</li>
       <li class="top" @click="goto('header')">
         <p>返回</p>
       </li>
