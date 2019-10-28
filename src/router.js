@@ -45,13 +45,22 @@ var router = new Router({
       name: 'regist',
       component: () => import('@/components/Regist/Regist.vue')
     },
+    // === 列表页 ===
     {
       meta: {
-        title: '天猫转让'
+        title: '天猫列表页'
       },
-      path: '/tmtransfer',
-      name: 'tmtransfer',
-      component: () => import('@/views/tmTransfer/tmTransfer.vue')
+      path: '/tmlistpage',
+      name: 'tmlistpage',
+      component: () => import('@/views/tmListPage/index.vue')
+    },
+    {
+      meta: {
+        title: '淘宝列表页'
+      },
+      path: '/tblistpage',
+      name: 'tblistpage',
+      component: () => import('@/views/tbListPage/index.vue')
     },
     {
       meta: {

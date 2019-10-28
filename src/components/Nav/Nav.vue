@@ -15,8 +15,8 @@
 
                 <div class="search">
                     <input v-model="searchText" @keyup.enter="handleSearch" type="text" placeholder="请输入店铺关键词进行查找">
-                    <button class="btn1" @click="handleSearch" type="button">查看网店</button>
-                    <button class="btn2" @click="handleSearch" type="button">我要卖网店</button>
+                    <button class="btn1" @click="$router.push('tmlistpage')" type="button">查看网店</button>
+                    <button class="btn2" @click="$router.push('tblistpage')" type="button">我要卖网店</button>
                     <img class="logo-search" src="./search.png">
                 </div>
             </div>
@@ -80,7 +80,7 @@ export default {
             this.$router.push('index')
         },
         handleSearch(text) {
-            
+            // this.$router.push('tmlistpage')
         }
     },
     created() {

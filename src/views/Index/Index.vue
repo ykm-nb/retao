@@ -383,7 +383,7 @@ html, body {
             background: url('./components/images/banner2.png') no-repeat center;
           }
           .slide2 {
-            background: url('./components/images/banner3.png') no-repeat 0 99%;
+            background: url('./components/images/banner3.png') no-repeat center;
           }
           .slide3 {
             background: url('./components/images/banner4.png') no-repeat center;
