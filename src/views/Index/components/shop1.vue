@@ -168,7 +168,6 @@
 
 <script>
 import api from '@/api';
-import Swiper from 'swiper';
 export default {
     name: "index-shop",
     data() {

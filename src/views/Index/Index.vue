@@ -77,17 +77,31 @@
           </div>
         </div>
       </div>
+
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide slide1">
+          </div>
+          <div class="swiper-slide slide2">
+          </div>
+          <div class="swiper-slide slide3">
+          </div>
+        </div>
+
+        <!-- 分页器 -->
+        <div class="swiper-pagination"></div>
+      </div>
     </div>
 
     <Info></Info>
 
-    <Shop1 id="shop"></Shop1>
+    <Shop1 id="shop1"></Shop1>
 
-    <Service></Service>
+    <Service id="service"></Service>
 
-    <Shop2 id="shop"></Shop2>
+    <Shop2 id="shop2"></Shop2>
     
-    <Message></Message>
+    <Message id="msg"></Message>
 
     <Safe></Safe>
 
@@ -96,13 +110,13 @@
 
     <!-- 锚点 -->
     <ul class="anchor" :class="{'show-anchor': showAnchor}">
-      <li class="item">客服中心</li>
-      <li @click="goto('shop')" class="item">特惠店铺</li>
-      <li @click="goto('shop')" class="item">优质店铺</li>
-      <li @click="goto('shop')" class="item">稀缺店铺</li>
-      <li class="item">天猫转让</li>
-      <li class="item">淘宝过户</li>
-      <li class="item">行业资讯</li>
+      <li @click="goto('service')" class="item">客服中心</li>
+      <li @click="goto('shop1', 'start')" class="item">特惠店铺</li>
+      <li @click="goto('shop1')" class="item">优质店铺</li>
+      <li @click="goto('shop1', 'end')" class="item">稀缺店铺</li>
+      <li @click="goto('shop2')" class="item">天猫转让</li>
+      <li @click="goto('shop2')" class="item">淘宝过户</li>
+      <li @click="goto('msg', 'start')" class="item">行业资讯</li>
       <li class="top" @click="goto('header')">
         <p>返回</p>
       </li>
@@ -122,6 +136,8 @@ import Safe from "./components/safe.vue";
 import Service from "./components/service.vue";
 import Message from "./components/message.vue";
 import Footer from "@/components/Footer/Footer.vue";
+// Swiper
+import Swiper from 'swiper';
 export default {
   name: 'index',
   components: {
@@ -136,11 +152,31 @@ export default {
     }
   },
   methods: {
-    goto(value) {
-      let ele = document.getElementById(value);
+    initSwiper() {
+      var mySwiper = new Swiper ('.swiper-container', {
+        loop: true, // 循环模式选项
+        autoplay: {
+          delay: 1000,
+          // stopOnLastSlide: false,
+          // disableOnInteraction: true,
+        },
+        
+        // 分页器
+        pagination: {
+          el: '.swiper-pagination',
+        },
+        
+        // 如果需要滚动条
+        scrollbar: {
+          el: '.swiper-scrollbar',
+        },
+      })
+    },
+    goto(value, block = 'center') {
+      const ele = document.getElementById(value);
       ele.scrollIntoView({
         behavior: 'smooth',
-        // block: 'center'
+        block
       })
     },
     keyupEnter() {
@@ -150,6 +186,7 @@ export default {
   },
   created() {
     ls.session.set("rtSearch", "")
+    this.initSwiper()
   },
   mounted() {
     window.addEventListener('scroll', this.keyupEnter)
@@ -215,7 +252,7 @@ html, body {
 
   .banner-bg {
       height: 515px;
-      background: url('./components/images/banner1.png') no-repeat center;
+      position: relative;
 
       .banner {
         height: 100%;
@@ -229,6 +266,7 @@ html, body {
           padding-top: 40px;
           background-color: rgba(0, 0, 0, .4);
           overflow: hidden;
+          z-index: 2;
 
           div {
             .title {
@@ -276,6 +314,7 @@ html, body {
           height: 100%;
           padding-top: 75px;
           background: url('./components/images/banner-right.png') no-repeat 0 75px;
+          z-index: 2;
 
           .avatar {
             padding-top: 75px;
@@ -326,6 +365,42 @@ html, body {
             line-height: 16px;
             color: #999999;
             margin-top: 5px; 
+          }
+        }
+      }
+
+      /deep/.swiper-container {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        
+        .swiper-wrapper {
+          width: 100%;
+
+          .slide1 {
+            background: url('./components/images/banner2.png') no-repeat center;
+          }
+          .slide2 {
+            background: url('./components/images/banner3.png') no-repeat 0 99%;
+          }
+          .slide3 {
+            background: url('./components/images/banner4.png') no-repeat center;
+          }
+        }
+
+        .swiper-pagination {
+          .swiper-pagination-bullet {
+            width: 8px;
+            height: 8px;
+            margin: 0 5px;
+            background-color: #fff;
+          }
+
+          .swiper-pagination-bullet-active {
+            width: 32px;
+            border-radius: 20px;
           }
         }
       }

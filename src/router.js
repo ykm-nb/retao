@@ -15,6 +15,12 @@ var router = new Router({
       }
     },
     {
+      path: '/main',
+      redirect: {
+        name: "index"
+      }
+    },
+    {
       meta: {
         title: '热淘网'
       },
@@ -70,64 +76,7 @@ var router = new Router({
       path: '/explain',
       name: 'explain',
       component: () => import('@/views/explain.vue')
-    },
-    // // === 仟呗 ===
-    // {
-    //   meta: {
-    //     title: '仟呗'
-    //   },
-    //   path: '/qbindex',
-    //   name: 'qbindex',
-    //   component: () => import('@/views/qbIndex/Index.vue')
-    // },
-    // {
-    //   meta: {
-    //     title: "热淘——代入驻"
-    //   },
-    //   path: "/enter",
-    //   name: "enter",
-    //   component: () => import("@/views/Enter.vue")
-    // },
-    // {
-    //   meta: {
-    //     title: "热淘——代运营"
-    //   },
-    //   path: "/operation",
-    //   name: "operation",
-    //   component: () => import("@/views/Operation.vue")
-    // },
-    // {
-    //   meta: {
-    //     title: "热淘——企业服务"
-    //   },
-    //   path: "/enterpriseservice",
-    //   name: "enterpriseservice",
-    //   component: () => import("@/views/EnterpriseService.vue")
-    // },
-    // {
-    //   meta: {
-    //     title: "热淘——软文营销"
-    //   },
-    //   path: "/marketing",
-    //   name: "marketing",
-    //   component: () => import("@/views/Marketing.vue")
-    // },
-    // {
-    //   meta: {
-    //     title: "热淘——网站建设"
-    //   },
-    //   path: "/websitedevelopment",
-    //   name: "websitedevelopment",
-    //   component: () => import("@/views/WebsiteDevelopment.vue")
-    // },
-    // {
-    //   meta: {
-    //     title: "热淘——知识产权"
-    //   },
-    //   path: "/intellectualproperty",
-    //   name: "intellectualproperty",
-    //   component: () => import("@/views/IntellectualProperty.vue")
-    // }
+    }
   ]
 })
 
