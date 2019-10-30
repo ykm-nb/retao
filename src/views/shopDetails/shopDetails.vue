@@ -3,29 +3,36 @@
         
     <Header></Header>
 
+    <Nav></Nav>
+
     <div class="inner-bg nav-bg">
-        <Nav></Nav>
         <div class="inner bread-crumb">
-            <span>当前位置：</span>
-            <span class="page page-index">热淘网</span>
-            <span class="arrow">></span>
-            <span class="page page-transfer">天猫转让</span>
-            <span class="arrow">></span>
-            <span class="page page-type">服装</span>
-            <span class="arrow">></span>
-            <span class="page page-cur">华南地区 2字名字中文 店铺名字好听  诚心出售</span>
+            <span>所在位置：</span>
+            <span class="page page-index">猫元素</span>
+            <span class="arrow">>></span>
+            <span class="page page-transfer">天猫店转让</span>
+            <span class="arrow">>></span>
+            <span class="page page-cur">店铺详情</span>
         </div>
     </div>
+
+    <Goods :goodsList="goodsList"></Goods>
+
+    <!-- 店铺截图 -->
+    <ScreenShot></ScreenShot>
+
+    <!-- 费用估计 -->
+    <Money></Money>
+
+    <!-- 购买流程 -->
+    <Process></Process>
+
+    <City></City>
     
-    <div class="inner-bg">
-        <div class="inner">
-            <Goods :goodsList="goodsList"></Goods>
-            <Process :processIndex="0"></Process>
-            <Recommend></Recommend>
-            <Help></Help>
-            <MoreShop :showHelp="false"></MoreShop>
-        </div>
-    </div>
+    <!-- 仟呗头条 -->
+    <HeadLine></HeadLine>
+
+    <More></More>
 
     <Footer></Footer>
 
@@ -38,18 +45,21 @@ import ls from "store2";
 import Header from "@/components/Header/Header";
 import Nav from "@/components/Nav/Nav";
 import Goods from "./components/goods";
+import ScreenShot from "./components/screenshot";
 import Process from "./components/process";
-import Recommend from "./components/recommend";
-import Help from "./components/help";
-import MoreShop from "@/components/MoreShop/MoreShop.vue";
+import City from "./components/city";
+import HeadLine from "./components/headline";
+import Money from "./components/money";
+import More from "./components/more.vue";
 import Footer from "@/components/Footer/Footer";
 export default {
     name: 'shop-details',
     components: {
         Header, Nav,
-        Goods, Process,
-        Recommend, Help,
-        MoreShop, Footer
+        Goods, ScreenShot,
+        Money, Process,
+        City, HeadLine,
+        More, Footer
     },
     data() {
         return {
@@ -84,18 +94,18 @@ export default {
 
 <style lang="less" scoped>
     .shop-details {
-        background-color: #f1f1f1;
+        background-color: #f8f8f8;
 
         .nav-bg {
-            background-color: #fff;
-
             .bread-crumb {
-                height: 60px;
-                line-height: 60px;
+                height: 30px;
+                line-height: 30px;
                 text-align: left;
-                padding-left: 22px;
-                border-top: 1px solid #e1e1e1;
-                box-sizing: border-box;
+
+                span {
+                    font-size: 14px;
+                    color: #999;
+                }
 
                 .page {
                     cursor: pointer;
@@ -110,6 +120,5 @@ export default {
                 }
             }
         }
-        
     }
 </style>

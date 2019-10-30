@@ -202,7 +202,7 @@ export default {
         .imgs {
             width: 575px;
             .flex();
-            margin: 18px 0 28px;
+            margin: 10px 0 20px;
         }
 
         .footer-bottom {

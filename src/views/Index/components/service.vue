@@ -209,7 +209,7 @@ export default {
     }
 
     .service-bg {
-        background: url("./images/service-bg.png") no-repeat center;
+        background: url("./images/service-bg.jpg") no-repeat center;
         overflow: hidden;
 
         .service {

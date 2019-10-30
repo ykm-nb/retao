@@ -1,6 +1,7 @@
 <template>
     <div class="inner-bg shop1-bg">
         <div class="inner shop1">
+            <!-- 特价 -->
             <div class="layer layer1">
                 <div class="layer-left">
                     <div class="top">
@@ -27,7 +28,9 @@
                             <img src="./images/shop1-limit.png">
                             <span>{{ item.time }}</span>
                         </div>
-                        <img class="goods-img" :src="item.imgUrl">
+                        <div class="goods-img">
+                            <img :src="item.imgUrl">
+                        </div>
                         <div class="section1">
                             <img src="./images/tm.png">
                             <div>
@@ -55,6 +58,7 @@
                 </ul>
             </div>
 
+            <!-- 优质 -->
             <div class="layer layer2">
                 <div class="layer-left">
                     <div class="top">
@@ -62,26 +66,28 @@
                         <p class="info">品牌商标任您挑</p>
                     </div>
                     <div class="first-shop">
-                        <img :src="shopList1[0].imgUrl">
+                        <img :src="shopList2[0].imgUrl">
                         <p class="item1">
-                            <span class="name">{{ shopList1[0].storeName }}</span>
-                            <span class="price">{{ shopList1[0].price }}万</span>
+                            <span class="name">{{ shopList2[0].storeName }}</span>
+                            <span class="price">{{ shopList2[0].price }}万</span>
                         </p>
                         <p class="item2">
-                            <span>{{ shopList1[0].firstCategory }}</span>
-                            <span>{{ shopList1[0].trademarkCategory }}</span>
-                            <span>{{ shopList1[0].brand }}</span>
+                            <span>{{ shopList2[0].firstCategory }}</span>
+                            <span>{{ shopList2[0].trademarkCategory }}</span>
+                            <span>{{ shopList2[0].brand }}</span>
                         </p>
                     </div>
                 </div>
 
                 <ul class="layer-right">
-                    <li class="item" v-for="(item, index) in shopList1.slice(1)" :key="index">
+                    <li class="item" v-for="(item, index) in shopList2.slice(1)" :key="index">
                         <div class="time-limit">
-                            <img src="./images/shop1-limit.png">
-                            <span>{{ item.time }}</span>
+                            <span>商标 :</span>
+                            <span>{{ item.sb }}</span>
                         </div>
-                        <img class="goods-img" :src="item.imgUrl">
+                        <div class="goods-img">
+                            <img :src="item.imgUrl">
+                        </div>
                         <div class="section1">
                             <img src="./images/tm.png">
                             <div>
@@ -109,6 +115,7 @@
                 </ul>
             </div>
 
+            <!-- 稀缺 -->
             <div class="layer layer3">
                 <div class="layer-left">
                     <div class="top">
@@ -116,26 +123,28 @@
                         <p class="info">稀缺类目高价值</p>
                     </div>
                     <div class="first-shop">
-                        <img :src="shopList1[0].imgUrl">
+                        <img :src="shopList3[0].imgUrl">
                         <p class="item1">
-                            <span class="name">{{ shopList1[0].storeName }}</span>
-                            <span class="price">{{ shopList1[0].price }}万</span>
+                            <span class="name">{{ shopList3[0].storeName }}</span>
+                            <span class="price">{{ shopList3[0].price }}万</span>
                         </p>
                         <p class="item2">
-                            <span>{{ shopList1[0].firstCategory }}</span>
-                            <span>{{ shopList1[0].trademarkCategory }}</span>
-                            <span>{{ shopList1[0].brand }}</span>
+                            <span>{{ shopList3[0].firstCategory }}</span>
+                            <span>{{ shopList3[0].trademarkCategory }}</span>
+                            <span>{{ shopList3[0].brand }}</span>
                         </p>
                     </div>
                 </div>
 
                 <ul class="layer-right">
-                    <li class="item" v-for="(item, index) in shopList1.slice(1)" :key="index">
+                    <li class="item" v-for="(item, index) in shopList3.slice(1)" :key="index">
                         <div class="time-limit">
-                            <img src="./images/shop1-limit.png">
-                            <span>{{ item.time }}</span>
+                            <span>一级类目 :</span>
+                            <span>{{ item.category }}</span>
                         </div>
-                        <img class="goods-img" :src="item.imgUrl">
+                        <div class="goods-img">
+                            <img :src="item.imgUrl">
+                        </div>
                         <div class="section1">
                             <img src="./images/tm.png">
                             <div>
@@ -172,6 +181,7 @@ export default {
     name: "index-shop",
     data() {
         return {
+            // 特价店铺
             shopList1: [
                 {
                     imgUrl: require('./images/shop1-goods1.png'),
@@ -194,7 +204,7 @@ export default {
                 },
                 {
                     time: '02天01时58分24秒',
-                    imgUrl: require('./images/shop1-goods2.png'),
+                    imgUrl: require('./images/shop1-goods3.png'),
                     storeName: '质邦旗舰店',
                     firstCategory: '餐饮具类目',
                     trademarkCategory: '21类',
@@ -205,7 +215,95 @@ export default {
                 },
                 {
                     time: '02天01时58分24秒',
+                    imgUrl: require('./images/shop1-goods4.png'),
+                    storeName: '质邦旗舰店',
+                    firstCategory: '餐饮具类目',
+                    trademarkCategory: '21类',
+                    brand: 'R标',
+                    storeType: '居家日用旗舰店',
+                    city: '浙江省宁波市',
+                    price: 10.80
+                }
+            ],
+            // 优质店铺
+            shopList2: [
+                {
+                    imgUrl: require('./images/shop1-goods1.png'),
+                    storeName: '倍纯旗舰店',
+                    firstCategory: '餐饮具类目',
+                    trademarkCategory: '21类',
+                    brand: 'R标',
+                    price: 9.5
+                },
+                {
+                    sb: '2字中文',
+                    imgUrl: require('./images/shop1-goods6.png'),
+                    storeName: '质邦旗舰店',
+                    firstCategory: '餐饮具类目',
+                    trademarkCategory: '21类',
+                    brand: 'R标',
+                    storeType: '居家日用旗舰店',
+                    city: '浙江省宁波市',
+                    price: 10.80
+                },
+                {
+                    sb: '英文',
+                    imgUrl: require('./images/shop1-goods7.png'),
+                    storeName: '质邦旗舰店',
+                    firstCategory: '餐饮具类目',
+                    trademarkCategory: '21类',
+                    brand: 'R标',
+                    storeType: '居家日用旗舰店',
+                    city: '浙江省宁波市',
+                    price: 10.80
+                },
+                {
+                    sb: '中英文',
+                    imgUrl: require('./images/shop1-goods8.png'),
+                    storeName: '质邦旗舰店',
+                    firstCategory: '餐饮具类目',
+                    trademarkCategory: '21类',
+                    brand: 'R标',
+                    storeType: '居家日用旗舰店',
+                    city: '浙江省宁波市',
+                    price: 10.80
+                }
+            ],
+            // 稀缺店铺
+            shopList3: [
+                {
+                    imgUrl: require('./images/shop1-goods1.png'),
+                    storeName: '倍纯旗舰店',
+                    firstCategory: '餐饮具类目',
+                    trademarkCategory: '21类',
+                    brand: 'R标',
+                    price: 9.5
+                },
+                {
+                    category: '节庆用品/礼品',
                     imgUrl: require('./images/shop1-goods2.png'),
+                    storeName: '质邦旗舰店',
+                    firstCategory: '餐饮具类目',
+                    trademarkCategory: '21类',
+                    brand: 'R标',
+                    storeType: '居家日用旗舰店',
+                    city: '浙江省宁波市',
+                    price: 10.80
+                },
+                {
+                    category: '节庆用品/礼品',
+                    imgUrl: require('./images/shop1-goods3.png'),
+                    storeName: '质邦旗舰店',
+                    firstCategory: '餐饮具类目',
+                    trademarkCategory: '21类',
+                    brand: 'R标',
+                    storeType: '居家日用旗舰店',
+                    city: '浙江省宁波市',
+                    price: 10.80
+                },
+                {
+                    category: '节庆用品/礼品',
+                    imgUrl: require('./images/shop1-goods4.png'),
                     storeName: '质邦旗舰店',
                     firstCategory: '餐饮具类目',
                     trademarkCategory: '21类',
@@ -328,8 +426,11 @@ export default {
                         }
 
                         .goods-img {
-                            display: block;
-                            margin: 12px auto 24px;
+                            width: 100%;
+                            height: 230px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
                         }
 
                         .section1 {
@@ -406,11 +507,27 @@ export default {
 
             .layer2 {
                 background-color: #ff711b;
+
+                .layer-right {
+                    .item {
+                        .time-limit {
+                            width: 150px;
+                        }
+                    }
+                }
             }
 
             .layer3 {
                 margin-bottom: 0;
                 background-color: #ffa70d;
+
+                .layer-right {
+                    .item {
+                        .time-limit {
+                            width: 200px;
+                        }
+                    }
+                }
             }
         }
     }

@@ -15,8 +15,6 @@
 
         <Goods ref="good"></Goods>
 
-        <!-- <MoreShop></MoreShop> -->
-
         <!-- 底部 -->
         <Footer></Footer>
     </div>
@@ -26,14 +24,12 @@
 import Header from "@/components/Header/Header.vue";
 import Nav from "@/components/Nav/Nav.vue";
 import Goods from "./components/goods.vue";
-import MoreShop from "@/components/MoreShop/MoreShop.vue";
 import Footer from "@/components/Footer/Footer";
 export default {
     name: "tmlistpage",
     components: {
         Header, Nav,
-        Goods, MoreShop,
-        Footer
+        Goods, Footer
     },
     mounted() {
         this.$refs.good.getGoodsList();

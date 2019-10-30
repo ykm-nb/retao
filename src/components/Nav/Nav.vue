@@ -3,58 +3,54 @@
         <div class="inner">
             <div class="search-wrap">
                 <div class="wrap-left">
-                    <div class="logo" @click="gotoIndex">
+                    <div class="logo" @click="gotoPage('index')">
                         <img src="./logo.png" alt="logo">
-                    </div>
-                    <div class="divide"></div>
-                    <div class="description">
-                        <p>专注天猫新店交易</p>
-                        <p>安全有保障交易快</p>
                     </div>
                 </div>
 
                 <div class="search">
                     <input v-model="searchText" @keyup.enter="handleSearch" type="text" placeholder="请输入店铺关键词进行查找">
-                    <button class="btn1" @click="$router.push('tmlistpage')" type="button">查看网店</button>
-                    <button class="btn2" @click="$router.push('tblistpage')" type="button">我要卖网店</button>
+                    <button class="btn1" type="button">查看网店</button>
+                    <button class="btn2" type="button">我要卖网店</button>
                     <img class="logo-search" src="./search.png">
                 </div>
             </div>
 
             <ul class="nav">
-                <li class="hot" v-show="isIndex">
+                <li class="hot">
                     <img src="./bar.png">
                     <span>热门店铺</span>
                 </li>
-                <li class="home">
+                <li @click="gotoPage('index')" class="home">
                     <img src="./home.png">
-                    <span class="text" @click="gotoIndex">首页</span>
+                    <span class="text">首页</span>
                 </li>
                 <div class="divide"></div>
-                <li>
+                <li @click="gotoPage('tmlistpage')">
                     <img src="./tm.png">
                     <span class="text">天猫新店</span>
                 </li>
                 <div class="divide"></div>
-                <li>
+                <li @click="gotoPage('tmlistpage')">
                     <img src="./du.png">
                     <span class="text">独家店铺</span>
                 </li>
                 <div class="divide"></div>
-                <li>
+                <li @click="gotoPage('tblistpage')">
                     <img src="./tao.png">
                     <span class="text">淘宝店铺</span>
                 </li>
                 <div class="divide"></div>
-                <li>
+                <li @click="gotoPage('enter')">
                     <img src="./mao.png">
                     <span class="text">天猫入驻</span>
                 </li>
                 <div class="divide"></div>
-                <li>
+                <li @click="gotoPage('service')">
                     <img src="./dai.png">
                     <span class="text">电商代运营</span>
                 </li>
+                <div class="divide"></div>
             </ul>
         </div>
     </div>
@@ -68,16 +64,16 @@ export default {
     name: "index-nav",
     data() {
         return {
-            isIndex: true,
             searchText: ""
         }
     },
     methods: {
-        gotoIndex() {
+        // 跳转页面
+        gotoPage(page) {
             const curPath = this.$route.path.substring(1);
 
-            if(curPath === "index") return;
-            this.$router.push('index')
+            if(curPath === page) return; // 页面相同
+            this.$router.push(page)
         },
         handleSearch(text) {
             // this.$router.push('tmlistpage')
@@ -85,8 +81,6 @@ export default {
     },
     created() {
         let route = this.$route.path;
-        // 不是首页
-        if(route.indexOf('/index') === -1) this.isIndex = false;
 
         let obj = ls.session.get("rtSearch");
         if(typeof obj === "object") {
@@ -111,23 +105,10 @@ export default {
                 display: flex;
                 align-items: center;
                 padding: 30px 0 30px 14px;
-                margin-right: 145px;
+                margin-right: 180px;
 
                 .logo {
                     cursor: pointer;
-                }
-
-                .divide {
-                    width: 1px;
-                    height: 32px;
-                    margin: 0 30px;
-                    background-color: #b3b3b3;
-                }
-
-                .description p {
-                    font-size: 17px;
-                    line-height: 22px;
-                    color: #ff0036;
                 }
             }
 
@@ -191,7 +172,7 @@ export default {
             }
 
             li {
-                width: 150px;
+                width: 156px;
                 height: 42px;
                 display: flex;
                 align-items: center;

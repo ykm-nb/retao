@@ -1,64 +1,59 @@
 <template>
-    <div class="process">
-        
-        <p class="process-title">网店购买流程</p>
+    <!-- 购买流程 -->
+    <div class="inner-bg process-bg">
+        <div class="inner process">
+            <div class="title-box">
+                <p class="title">购买流程</p>
+                <p class="info">Purchase process</p>
+            </div>
 
-        <ul>
-            <template v-for="(item, index) in processList">
-                <li>
+            <ul class="process-bottom">
+                <li v-for="(item, index) in processList" :key="index">
                     <img :src="item.url">
-                    <p class="title" :class="{'cur-title': processIndex === index}">{{ item.title }}</p>
+                    <p class="title">{{ item.title }}</p>
                     <p class="info">{{ item.info }}</p>
+                    <div class="number">{{ item.number }}</div>
                 </li>
-                <div class="arrow" v-if="index != 5">
-                    <img src="./images/arrow.png">
-                </div>
-            </template>
-        </ul>
-
+            </ul>
+        </div>
     </div>
 </template>
 
 <script>
 export default {
     name: "process",
-    props: {
-        processIndex: {
-            type: Number
-        }
-    },
     data() {
         return {
             processList: [
                 {
-                    url: require('./images/shop1.png'),
+                    url: require('./images/process1.png'),
+                    title: '注册',
+                    info: '一分钟快速注册仟呗账号',
+                    number: "1"
+                },
+                {
+                    url: require('./images/process2.png'),
                     title: '选择网店',
-                    info: '选择合适自己的网店'
+                    info: '仟呗100万资源供您选择',
+                    number: "2"
                 },
                 {
-                    url: require('./images/shop2.png'),
-                    title: '支付网店定金',
-                    info: '选择自己的支付方式'
+                    url: require('./images/process3.png'),
+                    title: '联系客服',
+                    info: '网站客服专属陪同只为梦想护航',
+                    number: "3"
                 },
                 {
-                    url: require('./images/shop3.png'),
-                    title: '核对信息',
-                    info: '签署协议并核对信息'
+                    url: require('./images/process4.png'),
+                    title: '交接过户',
+                    info: '优质的店铺转让资源',
+                    number: "4"
                 },
                 {
-                    url: require('./images/shop4.png'),
-                    title: '签署购点合同',
-                    info: '交接网店资料并过户公司'
-                },
-                {
-                    url: require('./images/shop5.png'),
-                    title: '交接及过户',
-                    info: '交接网店资料并过户公司'
-                },
-                {
-                    url: require('./images/shop6.png'),
-                    title: '购买成功',
-                    info: '购买成功预祝生意兴隆'
+                    url: require('./images/process5.png'),
+                    title: '签署合同',
+                    info: '专业合同受法律保障',
+                    number: "5"
                 }
             ]
         }
@@ -67,68 +62,80 @@ export default {
 </script>
 
 <style lang="less" scoped>
-    .process {
-        padding: 40px 0 30px 48px;
-        margin: 15px 0 10px;
-        background-color: #fff;
-        border-radius: 4px;
+    .process-bg {
+        margin-top: 10px;
+        background-color: #f8f8f8;
 
-        .process-title {
-            font-size: 22px;
-            line-height: 22px;
-            font-weight: bold;
-            text-align: left;
-            color: #333333;
-            padding-bottom: 15px;
-            margin: 0 40px 30px 0;
-            border-bottom: 1px solid #e1e1e1;
-            position: relative;
+        .process {
+            padding: 70px 0 88px;
 
-            &:after {
-                content: "";
-                width: 130px;
-                height: 4px;
-                background-color: #fc324c;
-                position: absolute;
-                left: 0;
-                bottom: 0;
-                transform: translate(0,50%);
-            }
-        }
-
-        ul {
-            display: flex;
-            justify-content: space-between;
-            padding-right: 28px;
-
-            li {
-                width: 165px;
-                padding: 24px 0;
-                border-radius: 6px;
-                border: 1px dashed #e1e1e1;
+            .title-box {
+                height: 80px;
+                text-align: center;
+                padding-bottom: 25px;
+                
+                border-bottom: 1px solid #eee;
+                position: relative;
 
                 .title {
-                    font-size: 18px;
-                    line-height: 18px;
+                    font-size: 30px;
+                    line-height: 30px;
                     font-weight: bold;
-                    color: #333333;
-                    margin: 10px 0;
-
-                    &.cur-title {
-                        color: #fc324c;
-                    }
+                    color: #333;
+                    margin-bottom: 8px;
+                    background: url("./images/title-bg.png") no-repeat center;
                 }
 
                 .info {
-                    font-size: 12px;
-                    line-height: 12px;
-                    color: #666;
+                    font-size: 16px;
+                    line-height: 16px;
+                    color: #ccc;
                 }
             }
 
-            .arrow {
+            .process-bottom {
                 display: flex;
-                align-items: center;
+                justify-content: space-between;
+                padding: 22px 32px 0;
+
+                li {
+                    width: 200px;
+                    padding: 42px 0 20px;
+                    background-color: #ff0c31;
+                    border-radius: 6px;
+
+                    .title {
+                        font-size: 18px;
+                        line-height: 18px;
+                        font-weight: bold;
+                        color: #fff;
+                        margin: 26px 0 10px;
+                    }
+
+                    .info {
+                        font-size: 12px;
+                        line-height: 12px;
+                        color: #fff;
+                        margin-bottom: 16px;
+                    }
+
+                    .number {
+                        width: 60px;
+                        height: 60px;
+                        font-size: 30px;
+                        font-weight: bold;
+                        line-height: 60px;
+                        color: #ff0c31;
+                        margin: 0 auto;
+                        background-color: #fff;
+                        border-radius: 50%;
+                    }
+                }
+
+                .arrow {
+                    display: flex;
+                    align-items: center;
+                }
             }
         }
     }

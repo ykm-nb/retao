@@ -104,6 +104,7 @@ export default {
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    border-right: 1px solid #ddd;
 
                     div {
                         text-align: left;
@@ -124,6 +125,10 @@ export default {
                             color: #333333;
                         }
                     }
+                }
+
+                li:last-child {
+                    border: none;
                 }
             }
         }

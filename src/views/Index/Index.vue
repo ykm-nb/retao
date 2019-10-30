@@ -68,8 +68,8 @@
             <p>专注电商，助推企业成长</p>
           </div>
           <div class="btn">
-            <button type="button">请登录</button>
-            <button class="regist" type="button">立即注册</button>
+            <button @click="gotoPage('login', 0)" type="button">请登录</button>
+            <button @click="gotoPage('login', 1)" class="regist" type="button">立即注册</button>
           </div>
           <div class="wx">
             <img src="./components/images/wx.png">
@@ -152,13 +152,13 @@ export default {
     }
   },
   methods: {
-    initSwiper() {
+    initSwiper() { // swiper
       var mySwiper = new Swiper ('.swiper-container', {
         loop: true, // 循环模式选项
         autoplay: {
           delay: 1000,
-          // stopOnLastSlide: false,
-          // disableOnInteraction: true,
+          stopOnLastSlide: false,
+          disableOnInteraction: true,
         },
         
         // 分页器
@@ -172,12 +172,19 @@ export default {
         },
       })
     },
-    goto(value, block = 'center') {
+    goto(value, block = 'center') { // 锚点跳转
       const ele = document.getElementById(value);
       ele.scrollIntoView({
         behavior: 'smooth',
         block
       })
+    },
+    // 跳转页面
+    gotoPage(page, type) {
+      const curPath = this.$route.path.substring(1);
+
+      if(curPath === page) return; // 页面相同
+      this.$router.push(`${page}?type=${type}`)
     },
     keyupEnter() {
       let a = document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset;
@@ -380,13 +387,13 @@ html, body {
           width: 100%;
 
           .slide1 {
-            background: url('./components/images/banner2.png') no-repeat center;
+            background: url('./components/images/banner2.jpg') no-repeat center;
           }
           .slide2 {
-            background: url('./components/images/banner3.png') no-repeat center;
+            background: url('./components/images/banner3.jpg') no-repeat center;
           }
           .slide3 {
-            background: url('./components/images/banner4.png') no-repeat center;
+            background: url('./components/images/banner4.jpg') no-repeat center;
           }
         }
 

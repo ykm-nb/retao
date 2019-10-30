@@ -76,39 +76,39 @@
                                 </ul>
                             </li>
                             <li class="item">
-                                <span>{{ regionIndex === -1 ? '商标分类' : regionList[regionIndex] }}</span>
+                                <span>{{ brandIndex === -1 ? '商标分类' : brandList[brandIndex] }}</span>
                                 <i class="iconfont iconxia"></i>
                                 <ul class="dropdown">
                                     <li 
-                                        v-for="(item, index) in regionList" 
+                                        v-for="(item, index) in brandList" 
                                         :key="index" 
-                                        @click="regionIndex = index"
+                                        @click="brandIndex = index"
                                     >
                                         {{ item }}
                                     </li>
                                 </ul>
                             </li>
                             <li class="item">
-                                <span>{{ regionIndex === -1 ? '当面交易' : regionList[regionIndex] }}</span>
+                                <span>{{ dealIndex === -1 ? '当面交易' : dealList[dealIndex] }}</span>
                                 <i class="iconfont iconxia"></i>
                                 <ul class="dropdown">
                                     <li 
-                                        v-for="(item, index) in regionList" 
+                                        v-for="(item, index) in dealList" 
                                         :key="index" 
-                                        @click="regionIndex = index"
+                                        @click="dealIndex = index"
                                     >
                                         {{ item }}
                                     </li>
                                 </ul>
                             </li>
                             <li class="item">
-                                <span>{{ regionIndex === -1 ? '扣分情况' : regionList[regionIndex] }}</span>
+                                <span>{{ pointIndex === -1 ? '扣分情况' : pointList[pointIndex] }}</span>
                                 <i class="iconfont iconxia"></i>
                                 <ul class="dropdown">
                                     <li 
-                                        v-for="(item, index) in regionList" 
+                                        v-for="(item, index) in pointList" 
                                         :key="index" 
-                                        @click="regionIndex = index"
+                                        @click="pointIndex = index"
                                     >
                                         {{ item }}
                                     </li>
@@ -184,6 +184,10 @@
                         v-for="(item, index) in goodsLists" 
                         :key="index" 
                     >
+
+                        <!-- 标签 -->
+                        <div class="goods-tag">车品及配件</div>
+
                         <!-- 左侧 -->
                         <div class="goods-left">
                             <div class="avatar">
@@ -304,9 +308,19 @@ export default {
             shopList: ['旗舰店', '专营店', '专卖店'],
             priceIndex: -1,
             priceList: ['5万以下', '5-10万', '10-30万', '30-50万', '50万以上'],
-            // 其他
+            // === 其他 ===
+            // 地域
             regionIndex: -1,
-            regionList: ['北京', '上海', '广州'],
+            regionList: ['华东', '华南', '华北', '东北', '华中', '西南', '西北'],
+            // 商标
+            brandIndex: -1,
+            brandList: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15'],
+            // 当面交易
+            dealIndex: -1,
+            dealList: ['是', '否', '不限'],
+            // 扣分情况
+            pointIndex: -1,
+            pointList: ['不限', '无扣分'],
             // 商品
             goodsLists: [
                 {
@@ -544,6 +558,9 @@ export default {
 
                     .item {
                         width: 120px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
                         position: relative;
                         cursor: pointer;
 
@@ -552,17 +569,17 @@ export default {
                         }
 
                         &:hover .dropdown {
-                            max-height: 150px;
+                            max-height: 550px;
                         }
 
                         .dropdown {
                             max-height: 0;
-                            width: 60%;
+                            width: 80%;
                             background-color: #fff;
                             position: absolute;
                             top: 20px;
-                            left: -50%;
-                            transform: translate(75%);
+                            left: 50%;
+                            transform: translate(-50%);
                             transition: .4s;
                             overflow: hidden;
                             z-index: 99;
@@ -679,9 +696,22 @@ export default {
                 margin-bottom: 15px;
                 background-color: #fff;
                 transition: .4s;
+                position: relative;
 
                 &:hover {
                     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                }
+
+                .goods-tag {
+                    font-size: 14px;
+                    line-height: 20px;
+                    color: #fff;
+                    padding: 0 6px;
+                    background-color: #f84549;
+                    border-radius: 0 0 10px 10px;
+                    position: absolute;
+                    top: 0;
+                    left: 20px;
                 }
 
                 .goods-left {

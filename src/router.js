@@ -80,6 +80,22 @@ var router = new Router({
     },
     {
       meta: {
+        title: '一键入驻'
+      },
+      path: '/enter',
+      name: 'enter',
+      component: () => import('@/views/enter.vue')
+    },
+    {
+      meta: {
+        title: '我们的服务'
+      },
+      path: '/service',
+      name: 'service',
+      component: () => import('@/views/service.vue')
+    },
+    {
+      meta: {
         title: '底部说明'
       },
       path: '/explain',

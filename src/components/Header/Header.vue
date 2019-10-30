@@ -1,55 +1,97 @@
 <template>
     <div class="inner-bg header-bg">
         <header class="inner">
-            <p class="header-left">欢迎来到仟呗</p>
+            <div class="header-left">
+                <p>Hi您好，欢迎来到仟呗！</p>
+                <p>
+                    <span @click="gotoPage('login', 0)" class="login">登录</span>
+                    <span class="divide">/</span>
+                    <span @click="gotoPage('login', 1)" class="regist">注册</span>
+                </p>
+            </div>
             <ul class="header-right">
-                <li>我的消息</li>
-                <li>帮助中心</li>
-                <li>投诉建议</li>
-                <li>联系客服</li>
+                <li>
+                    <i class="iconfont iconxiaoxi"></i>
+                    <span>我的消息</span>
+                </li>
+                <li>
+                    <i class="iconfont iconbangzhu"></i>
+                    <span>帮助中心</span>
+                </li>
+                <li>
+                    <i class="iconfont iconsaoma"></i>
+                    <span>投诉建议</span>
+                </li>
+                <li>
+                    <i class="iconfont icontel-fill"></i>
+                    <span>联系客服</span>
+                </li>
             </ul>
         </header>
     </div>
 </template>
 
 <script>
+import "@/assets/font/iconfont.css";
 export default {
     name: "common-header",
-    computed: {
-        time() {
-            let now = new Date().getHours()
-            if(now >=6 && now < 10) {
-                return "早上"
-            } else if(now >= 10 && now < 13) {
-                return "中午"
-            } else if(now >=13 && now < 18) {
-                return "下午"
-            } else {
-                return "晚上"
-            }
-        }
+    methods: {
+        // 跳转页面
+        gotoPage(page, type) {
+            const curPath = this.$route.path.substring(1);
+
+            if(curPath === page) return; // 页面相同
+            this.$router.push(`${page}?type=${type}`)
+        },
     }
 }
 </script>
 
 <style lang="less" scoped>
 .header-bg {
-    background-color: #ddd;
+    background-color: #f6f6f6;
 
     header {
-        font-size: 16px;
         line-height: 36px;
-        color: #323232;
+        color: #b6b6b6;
         display: flex;
         justify-content: space-between;
 
+        .header-left {
+            width: 250px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+
+            .login, .regist {
+                line-height: 36px;
+                cursor: pointer;
+            }
+
+            .login {
+                color: #fb8796;
+            }
+
+            .divide {
+                margin: 0 5px;
+            }
+        }
+
         .header-right {
-            width: 300px;
+            width: 350px;
+            font-size: 14px;
             display: flex;
             justify-content: space-between;
             
             li {
+                display: flex;
+                align-items: center;
                 cursor: pointer;
+                transition: .4s;
+
+                span {
+                    margin-left: 4px;
+                }
 
                 &:hover {
                     color: #e61716;
