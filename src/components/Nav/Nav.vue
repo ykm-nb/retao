@@ -9,8 +9,8 @@
                 </div>
 
                 <div class="search">
-                    <input v-model="searchText" @keyup.enter="handleSearch" type="text" placeholder="请输入店铺关键词进行查找">
-                    <button class="btn1" type="button">查看网店</button>
+                    <input v-model="searchText" @keyup.enter="handleSearch(searchText)" type="text" placeholder="请输入店铺关键词进行查找">
+                    <button @click="handleSearch(searchText)" class="btn1" type="button">查看网店</button>
                     <button class="btn2" type="button">我要卖网店</button>
                     <img class="logo-search" src="./search.png">
                 </div>
@@ -46,7 +46,7 @@
                     <span class="text">天猫入驻</span>
                 </li>
                 <div class="divide"></div>
-                <li @click="gotoPage('service')">
+                <li @click="gotoPage('operation')">
                     <img src="./dai.png">
                     <span class="text">电商代运营</span>
                 </li>
@@ -76,18 +76,21 @@ export default {
             this.$router.push(page)
         },
         handleSearch(text) {
-            // this.$router.push('tmlistpage')
+            const curPath = this.$route.path.substring(1);
+
+            ls.session("rtSearch", {storeName: text})
+            this.$emit("navSearch", text)
+            if(curPath === "tblistpage") return; // 页面相同
+            
+            this.$router.push('tblistpage')
         }
     },
     created() {
-        let route = this.$route.path;
+        let route = this.$route.path,
+            text = ls.session("rtSearch");
 
-        let obj = ls.session.get("rtSearch");
-        if(typeof obj === "object") {
-            this.selectedText = obj.selectedText, this.searchText = obj.searchText;
-        }
-    },
-    mounted() {}
+        if(text) this.searchText = text.storeName;
+    }
 }
 </script>
 

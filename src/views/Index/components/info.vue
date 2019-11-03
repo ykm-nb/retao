@@ -2,7 +2,7 @@
     <div class="inner-bg info-bg">
         <div class="inner info">
             <ul class="top">
-                <li v-for="(item, index) in list1" :key="index">
+                <li @click="$router.push('message')" v-for="(item, index) in list1" :key="index">
                     <img :src="item">
                 </li>
             </ul>

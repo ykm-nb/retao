@@ -1,43 +1,48 @@
 <template>
     <div class="inner-bg shop2-bg">
         <div class="inner shop2">
-
+            
+            <!-- 天猫 -->
             <div class="layer layer1">
                 <div class="layer-left">
                     <img src="./images/shop2-left1.png">
                 </div>
 
                 <ul class="layer-right">
-                    <li class="item" :class="`item${index}`" v-for="(item, index) in shopList1.slice(1)" :key="index">
+                    <li class="item" :class="`item${index}`" v-for="(item, index) in tmList" :key="index">
                         <div class="section1">
                             <img src="./images/tm.png">
                             <div>
                                 <p class="name">{{ item.storeName }}</p>
                                 <p>
-                                    <span>{{ item.firstCategory }}</span>
-                                    <span>{{ item.trademarkCategory }}</span>
-                                    <span>{{ item.brand }}</span>
+                                    <span>{{ item.mainProductName }}</span>
+                                    <span>{{ item.trademarkCategory }}类</span>
+                                    <span>R标</span>
                                 </p>
                             </div>
                         </div>
                         <ul class="tags">
-                            <li v-for="(tag, index1) in item.tagList" :key="index1">{{ tag }}</li>
+                            <li v-show="item.mainProductName">{{ item.mainProductName }}</li>
+                            <li v-show="item.storeType">{{ item.storeType==1?'专营店':'' || item.storeType==2?'旗舰店':'' || item.storeType==3?'专卖店':'' }}</li>
+                            <li>R标</li>
+                            <li>{{ `${item.province==null?'':item.province}${item.city}` }}</li>
                         </ul>
                         <div class="section2">
-                            <p class="new">新品</p>
+                            <p class="new">{{ item.storeProperties==1?'特价':'' ||  item.storeProperties==2?'优质':'' || item.storeProperties==3?'稀缺':'' || item.storeProperties>=4?'普通':''}}</p>
                             <p class="price">{{ item.price }}万</p>
                         </div>
                     </li>
                 </ul>
             </div>
 
+            <!-- 淘宝 -->
             <div class="layer layer2">
                 <div class="layer-left">
                     <img src="./images/shop2-left2.png">
                 </div>
 
                 <ul class="layer-right">
-                    <li class="item" :class="`item${index}`" v-for="(item, index) in shopList1.slice(1)" :key="index">
+                    <li class="item" :class="`item${index}`" v-for="(item, index) in shopList1" :key="index">
                         <div class="section1">
                             <img src="./images/tb.png">
                             <div>
@@ -68,18 +73,18 @@
 import api from '@/api';
 import Swiper from 'swiper';
 export default {
-    name: "index-shop",
+    name: "index-shop2",
+    props: {
+        tmList: {
+            type: Array
+        },
+        tbList: {
+            type: Array
+        }
+    },
     data() {
         return {
             shopList1: [
-                {
-                    imgUrl: require('./images/shop1-goods1.png'),
-                    storeName: '倍纯旗舰店',
-                    firstCategory: '餐饮具类目',
-                    trademarkCategory: '21类',
-                    brand: 'R标',
-                    price: 9.5
-                },
                 {
                     storeName: '质邦旗舰店',
                     firstCategory: '餐饮具类目',
@@ -128,7 +133,7 @@ export default {
                     tagList: ["居家日用", "旗舰店", "R标", "浙江省宁波市"],
                     price: 10.80
                 }
-            ],
+            ]
         }
     },
     methods: {
@@ -146,22 +151,6 @@ export default {
             　　 }
             });
         }
-    },
-    created() {
-        // api.axs('post', "/tmStore/queryForPage", {industry: "住宅家具"}).then(({ data }) => {
-        //     if(data.code === "SUCCESS") {
-        //         this.furnitureList1 = data.data.list;
-        //     } else {
-                
-        //     }
-        // });
-        // api.axs('post', "/tmStore/queryForPage", {industry: "服饰鞋包"}).then(({ data }) => {
-        //     if(data.code === "SUCCESS") {
-        //         this.furnitureList2 = data.data.list;
-        //     } else {
-                
-        //     }
-        // });
     },
     mounted() {
         this.initSwiper();
@@ -241,6 +230,7 @@ export default {
                             li {
                                 font-size: 12px;
                                 line-height: 26px;
+                                white-space: nowrap;
                                 color: #666666;
                                 padding: 0 9px;
                                 background-color: #f8f8f8;

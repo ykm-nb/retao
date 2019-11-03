@@ -32,7 +32,7 @@ export default {
         Goods, Footer
     },
     mounted() {
-        this.$refs.good.getGoodsList();
+        
     }
 }
 </script>

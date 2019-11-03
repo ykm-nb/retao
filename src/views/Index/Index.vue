@@ -2,7 +2,7 @@
   <div class="index">
 
     <!-- 头部 -->
-    <Header id="header"></Header>
+    <Header id="header" :userInfo="userInfo"></Header>
 
     <Nav></Nav>
 
@@ -12,51 +12,14 @@
           <div class="city">
             <p class="title">热门城市</p>
             <ul>
-              <li>北京</li>
-              <li>上海</li>
-              <li>深圳</li>
-              <li>广州</li>
-              <li>杭州</li>
-              <li>金华</li>
-              <li>绍兴</li>
-              <li>温州</li>
-              <li>嘉兴</li>
-              <li>湖州</li>
-              <li>苏州</li>
-              <li>南京</li>
-              <li>武汉</li>
-              <li>长沙</li>
-              <li>成都</li>
-              <li>南昌</li>
-              <li>泉州</li>
-              <li>厦门</li>
+              <li @click="hotStore({})" v-for="(item, index) in hotCity" :key="index">{{ item }}</li>
               <li class="more">更多</li>
             </ul>
           </div>
           <div class="industry">
             <p class="title">热门类目</p>
             <ul>
-              <li>住宅</li>
-              <li>家居</li>
-              <li>办公</li>
-              <li>收纳</li>
-              <li>清洁</li>
-              <li>宠物</li>
-              <li>服饰</li>
-              <li>箱包</li>
-              <li>鞋帽</li>
-              <li>五金</li>
-              <li>建材</li>
-              <li>数码</li>
-              <li>汽车</li>
-              <li>珠宝</li>
-              <li>配饰</li>
-              <li>户外</li>
-              <li>电器</li>
-              <li>美妆</li>
-              <li>母婴</li>
-              <li>图书</li>
-              <li>影音</li>
+              <li @click="hotStore({mainProducts: item.mainProductName})" v-for="(item, index) in hotCategory" :key="index">{{ item.mainProductName }}</li>
               <li class="more">更多</li>
             </ul>
           </div>
@@ -67,7 +30,7 @@
             <img src="./components/images/avatar.png">
             <p>专注电商，助推企业成长</p>
           </div>
-          <div class="btn">
+          <div class="btn" v-if="!userInfo">
             <button @click="gotoPage('login', 0)" type="button">请登录</button>
             <button @click="gotoPage('login', 1)" class="regist" type="button">立即注册</button>
           </div>
@@ -95,11 +58,11 @@
 
     <Info></Info>
 
-    <Shop1 id="shop1"></Shop1>
+    <Shop1 id="shop1" ref="shop1" :tjList="tjList" :yzList="yzList" :xqList="xqList"></Shop1>
 
     <Service id="service"></Service>
 
-    <Shop2 id="shop2"></Shop2>
+    <Shop2 id="shop2" :tmList="tmList" :tbList="tbList"></Shop2>
     
     <Message id="msg"></Message>
 
@@ -127,6 +90,7 @@
 
 <script>
 import ls from "store2";
+import api from "@/api";
 import Header from "@/components/Header/Header.vue";
 import Nav from "@/components/Nav/Nav.vue";
 import Info from "./components/info.vue";
@@ -148,7 +112,17 @@ export default {
   },
   data() {
     return {
-      showAnchor: false
+      userInfo: ls.session('qbuserInfo'),
+      showAnchor: false,
+      // 热门城市，热门类目
+      hotCity: ["北京", "上海", "深圳", "广州", "杭州", "金华", "绍兴", "温州", "嘉兴", "湖州", "苏州", "南京", "武汉", "长沙", "成都", "南昌", "泉州", "厦门"],
+      hotCategory: ["住宅", "家居", "办公", "收纳", "清洁", "宠物", "服饰", "箱包", "鞋帽", "五金", "建材", "数码", "汽车", "珠宝", "配饰", "户外", "电器", "美妆", "母婴", "图书", "影音"],
+      // 店铺
+      tjList: [],
+      yzList: [],
+      xqList: [],
+      tmList: [],
+      tbList: [],
     }
   },
   methods: {
@@ -165,11 +139,6 @@ export default {
         pagination: {
           el: '.swiper-pagination',
         },
-        
-        // 如果需要滚动条
-        scrollbar: {
-          el: '.swiper-scrollbar',
-        },
       })
     },
     goto(value, block = 'center') { // 锚点跳转
@@ -179,21 +148,50 @@ export default {
         block
       })
     },
-    // 跳转页面
-    gotoPage(page, type) {
+    gotoPage(page, type) { // 跳转页面
       const curPath = this.$route.path.substring(1);
 
       if(curPath === page) return; // 页面相同
       this.$router.push(`${page}?type=${type}`)
     },
-    keyupEnter() {
+    keyupEnter() { // 监听滚动
       let a = document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset;
       (a > 400) ? this.showAnchor = true : this.showAnchor = false
-    }
+    },
+    hotStore (obj) {
+      ls.session("tbList", obj)
+      this.$router.push("tblistpage")
+    },
+    getMainProduct () { // 获取主营类目列表
+        api.axs("post", "/mainProduct/queryForList", {}).then(({ data })=>{
+            if (data.code === "SUCCESS") {
+                this.hotCategory = data.data;
+            } else {
+                this.$Message.error(data.remark);
+            };
+        });
+    },
   },
   created() {
-    ls.session.set("rtSearch", "")
+    ls.session.set("rtSearch", "") // 清空搜索
     this.initSwiper()
+    this.getMainProduct()
+    
+    // 获取首页五个店铺信息
+    api.axs('post', "/tmStore/queryHomeStorePages", {}).then(({ data }) => {
+        if(data.code === "SUCCESS") {
+            data.data.tjList.list.forEach((item,index) => {
+              if(item.pictureUrl.length > 70) {
+                data.data.tjList.list[index].pictureUrl = item.pictureUrl.split(',')[0]
+              }
+            })
+            this.tjList = data.data.tjList.list
+            this.yzList = data.data.yzList.list
+            this.xqList = data.data.xqList.list
+            this.tmList = data.data.tmList.list
+            this.tbList = data.data.tbList.list
+        }
+    });
   },
   mounted() {
     window.addEventListener('scroll', this.keyupEnter)
@@ -285,15 +283,14 @@ html, body {
 
             ul {
               display: flex;
+              justify-content: center;
               flex-wrap: wrap;
               margin: 0 22px;
 
               li {
-                width: 43px;
                 font-size: 15px;
-                line-height: 20px;
-                text-align: center;
-                margin-bottom: 20px;
+                line-height: 15px;
+                margin: 0 5px 13px;
                 cursor: pointer;
 
                 &:hover {
@@ -312,7 +309,7 @@ html, body {
           }
 
           .city {
-            margin-bottom: 28px;
+            margin-bottom: 20px;
           }
         }
 
@@ -387,7 +384,7 @@ html, body {
           width: 100%;
 
           .slide1 {
-            background: url('./components/images/banner2.jpg') no-repeat center;
+            background: url('./components/images/banner2.png') no-repeat center;
           }
           .slide2 {
             background: url('./components/images/banner3.jpg') no-repeat center;

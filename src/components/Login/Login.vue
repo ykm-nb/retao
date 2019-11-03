@@ -15,18 +15,14 @@
                         <p @click="type = 1" :class="{'actived': type == 1}">手机号注册</p>
                     </div>
                     <!-- 登录 -->
-                    <div class="form-content" v-show="type==0">
+                    <div class="form-content" v-show="!type">
                         <div class="form-item">
-                            <input v-model="form.account" type="text" placeholder="请输入您的账号或者手机号">
+                            <input v-model="loginForm.account" type="text" placeholder="请输入您的账号或者手机号">
+                            <Alert v-show="showForm.account" type="error">账号不正确</Alert>
                         </div>
                         <div class="form-item">
-                            <input v-model="form.pwd" type="text" placeholder="请输入您的密码">
-                        </div>
-                        <div class="form-item form-captch">
-                            <input v-model="form.captch" type="text" placeholder="输入验证码">
-                            <button type="button">
-                                <img src="./captch.png">
-                            </button>
+                            <input @keyup="handleEnter" v-model="loginForm.pwd" type="text" placeholder="请输入您的密码">
+                            <Alert v-show="showForm.pwd" type="error">密码长度不正确</Alert>
                         </div>
                         <div class="form-item form-check">
                             <i @click="isCheck = !isCheck">
@@ -40,36 +36,30 @@
                         </div>
                         <div class="form-item form-forget">
                             <a href="#">忘记密码？</a>
-                            <p>免费注册</p>
+                            <p @click="type = 1">免费注册</p>
                         </div>
                     </div>
                     <!-- 注册 -->
-                    <div class="form-content" v-show="type==1">
+                    <div class="form-content" v-show="type">
                         <div class="form-item">
-                            <input v-model="form.account" type="text" placeholder="请输入您的账号或者手机号">
+                            <input v-model="registForm.realName" type="text" placeholder="请输入您的昵称">
+                            <Alert v-show="showForm.realName" type="error">昵称未填写</Alert>
                         </div>
                         <div class="form-item">
-                            <input v-model="form.pwd" type="text" placeholder="请输入您的密码">
+                            <input v-model="registForm.account" type="text" placeholder="请输入您的账号或者手机号">
+                            <Alert v-show="showForm.account" type="error">账号不正确</Alert>
                         </div>
-                        <div class="form-item form-captch">
-                            <input v-model="form.captch" type="text" placeholder="输入验证码">
-                            <button type="button">
-                                <img src="./captch.png">
-                            </button>
+                        <div class="form-item">
+                            <input v-model="registForm.password" type="text" placeholder="请输入您的密码">
+                            <Alert v-show="showForm.pwd" type="error">密码不正确</Alert>
                         </div>
-                        <div class="form-item form-check">
-                            <i @click="isCheck = !isCheck">
-                                <img v-show="isCheck" src="./check.png">
-                            </i>
-                            <span>同意并遵守</span>
-                            <a href="#">《XXX条款》</a>
+                        <div class="form-item form-captch" :class="{'captch-error': showForm.telCode}">
+                            <input v-model="registForm.telCode" type="text" placeholder="输入验证码">
+                            <button @click="getCaptch(detectionMobile())" type="button" :class="{'disabled': disabled}" :disabled=disabled>{{ disabled ? `${time}秒后重新发送` : '获取验证码' }}</button>
+                            <Alert v-show="showForm.telCode" type="error">验证码未填写</Alert>
                         </div>
                         <div class="form-item form-btn">
-                            <button @click="handleLogin(detectionMobile(), detectionPwd())" type="button">注册</button>
-                        </div>
-                        <div class="form-item form-forget">
-                            <a href="#">忘记密码？</a>
-                            <p>免费注册</p>
+                            <button @click="handleLogin(detectionName(), detectionMobile(), detectionPwd(), detectionCaptch())" type="button">注册</button>
                         </div>
                     </div>
                 </form>
@@ -86,6 +76,7 @@
 
 <script>
 import api from "@/api";
+import ls from "store2";
 import Header from "@/components/Header/Header.vue";
 import Footer from "@/components/Footer/Footer.vue";
 export default {
@@ -97,49 +88,127 @@ export default {
         return {
             type: 0, // 类型 => 0：登录，1：注册
             isCheck: true,
-            form: {
+            // 登录
+            loginForm: {
                 account: '',
-                pwd: '',
-                captch: ''
+                pwd: ''
+            },
+            // 注册
+            time: 60,
+            disabled: false,
+            registForm: {
+                account: '',
+                password: '',
+                realName: '',
+                telCode: '',
             },
             showForm: {
-                mobile: false,
-                pwd: false
+                account: false,
+                pwd: false,
+                realName: false,
+                telCode: false
             }
         }
     },
     methods: {
+        // 获取验证码
+        getCaptch (value) {
+            if(value) {
+                this.disabled = true; // 禁用按钮
+                var time = setInterval(() => {
+                    this.time -= 1;
+                    if(this.time <= 0) {
+                        this.disabled = false
+                        this.time = 60
+                        clearInterval(time)
+                    }
+                }, 1000)
+
+                api.axs('post', "/phoneValidate", {phone: this.registForm.account, type: 'regist'}).then(({ data }) => {
+                    if(data.code === "SUCCESS") {
+                        this.$Message.success({content: '验证码已发送~'})
+                    } else {
+                        this.$Message.error(data.remark)
+                    }
+                })
+            }
+        },
         // 检测手机号
-        detectionMobile() {
-            let value = this.form.account, showForm = this.showForm,
+        detectionMobile () {
+            let value = "", showForm = this.showForm,
                 reg = /^1(3|4|5|6|7|8|9)\d{9}$/;
-                
-            reg.test(value) ? showForm.mobile = false : showForm.mobile = true;
+
+            this.type === 0 ? (value = this.loginForm.account) : (value = this.registForm.account);
+
+            reg.test(value) ? showForm.account = false : showForm.account = true;
             return reg.test(value);
         },
         // 检测密码是否为空
-        detectionPwd() {
-            let value = this.form.pwd, showForm = this.showForm;
+        detectionPwd () {
+            let value = "", showForm = this.showForm;
+
+            this.type === 0 ? value = this.loginForm.pwd : value = this.registForm.password;
 
             value.length ? showForm.pwd = false : showForm.pwd = true;
             return value.length;
         },
-        // 登录
-        handleLogin(value1, value2) {
-            
-            value1 && value2 &&
-            api.axs('post', "/login", this.form).then(({ data }) => {
-                if(data.code === "SUCCESS") {
-                    this.$Message.success({content: '登录成功~'})
-                    this.$router.push('index')
-                } else {
-                    this.$Message.error(data.remark)
-                }
-            })
+        // 检测昵称
+        detectionName () {
+            let value = this.registForm.realName, showForm = this.showForm;
+
+            value.length ? showForm.realName = false : showForm.realName = true;
+            return value.length;
         },
+        // 检测验证码
+        detectionCaptch () {
+            let value = this.registForm.telCode, showForm = this.showForm;
+
+            value.length ? showForm.telCode = false : showForm.telCode = true;
+            return value.length;
+        },
+        // 登录
+        handleLogin (...arr) {
+            let url = "", form = {};
+            if (this.type === 0) { // 登录
+                url = "/login"
+                form = this.loginForm
+            } else {               // 注册
+                url = "/regist"
+                form = this.registForm
+            }
+
+            const result = arr.every(item => item !== false);
+            if(result) {
+                if(this.type === 0) { // 未阅读条款
+                    if(!this.isCheck) {
+                        this.$Message.warning({content: "请阅读条款"})
+                        return
+                    }
+                }
+
+                api.axs('post', url, form).then(({ data }) => {
+                    if(data.code === "SUCCESS") {
+                        if (this.type === 0) { // 登录
+                            this.$Message.success({content: '登录成功~'})
+                            ls.session("qbuserInfo", data.data.userInfo)
+                            this.$router.push('index')
+                        } else {               // 注册
+                            this.$Message.success({content: '注册成功，赶快登录吧~'})
+                            this.type = 1;
+                        }
+                    } else {
+                        this.$Message.error(data.remark)
+                    }
+                })
+            }
+        },
+        // input 监听回车
+        handleEnter (e) {
+            if(e.keyCode === 13) this.handleLogin(this.detectionMobile(), this.detectionPwd())
+        }
     },
     created () {
-        this.type = this.$route.query.type;
+        this.type = Number(this.$route.query.type)
     }
 }
 </script>
@@ -212,7 +281,9 @@ export default {
                     }
 
                     .form-content {
-                        padding: 65px 45px 42px;
+                        height: 100%;
+                        max-height: 580px;
+                        padding: 60px 45px 40px;
 
                         .form-item {
                             margin-bottom: 20px;
@@ -230,19 +301,35 @@ export default {
                         .form-captch {
                             display: flex;
                             justify-content: space-between;
+                            position: relative;
 
                             input {
                                 width: 310px;
                             }
 
                             button {
+                                width: 110px;
                                 height: 50px;
-                                border: none;
+                                font-size: 14px;
+                                background-color: transparent;
+                                border: 1px solid #e5e5e5;
+                                border-left: none;
                                 cursor: pointer;
 
-                                img {
-                                    height: 50px;
+                                &.disabled {
+                                    cursor: not-allowed;
                                 }
+                            }
+
+                            .ivu-alert {
+                                width: 100%;
+                                position: absolute;
+                                top: 100%;
+                                left: 0;
+                            }
+
+                            &.captch-error {
+                                margin-bottom: 50px;
                             }
                         }
 
@@ -291,6 +378,10 @@ export default {
                             line-height: 14px;
                             display: flex;
                             justify-content: space-between;
+
+                            p {
+                                cursor: pointer;
+                            }
                         }
                     }
                 }
@@ -303,7 +394,6 @@ export default {
             line-height: 100px;
             color: 333;
             background-color: #fff;
-
         }
     }
 </style>

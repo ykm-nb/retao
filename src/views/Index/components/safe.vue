@@ -6,7 +6,7 @@
             <ul class="content">
                 <li v-for="(item, index) in list" 
                     :key="index" 
-                    @click="$router.push('message')"
+                    @click="$router.push('service')"
                 >
                     <img :src="item.imgUrl">
                     <p class="title">{{ item.title }}</p>

@@ -31,19 +31,11 @@ var router = new Router({
     // === 登录，注册 ===
     {
       meta: {
-        title: '热淘网—登录'
+        title: '热淘网—登录/注册'
       },
       path: '/login',
       name: 'login',
       component: () => import('@/components/Login/Login.vue')
-    },
-    {
-      meta: {
-        title: '热淘网—注册'
-      },
-      path: '/regist',
-      name: 'regist',
-      component: () => import('@/components/Regist/Regist.vue')
     },
     // === 列表页 ===
     {
@@ -93,6 +85,14 @@ var router = new Router({
       path: '/service',
       name: 'service',
       component: () => import('@/views/service.vue')
+    },
+    {
+      meta: {
+        title: '代运营'
+      },
+      path: '/operation',
+      name: 'operation',
+      component: () => import('@/views/operation.vue')
     },
     {
       meta: {

@@ -4,7 +4,7 @@
         <Header></Header>
 
         <div class="inner-bg nav-bg">
-            <Nav></Nav>
+            <Nav @navSearch="handleSearch"></Nav>
             <!-- <div class="inner bread-crumb">
                 <span>当前位置：</span>
                 <span class="par-page">天猫商城转让</span>
@@ -31,16 +31,25 @@ export default {
         Header, Nav,
         Goods, Footer
     },
+    data () {
+        return {
+            storeName: ''
+        }
+    },
+    methods: {
+        handleSearch (text) { // 搜索
+            this.$refs.good.storeName = text
+            this.$refs.good.getGoodsList(1)
+        }
+    },
     mounted() {
-        this.$refs.good.getGoodsList();
+        
     }
 }
 </script>
 
 <style lang="less" scoped>
     .tm-listpage {
-        background-color: #f1f1f1;
-
         .nav-bg {
             background-color: #fff;
 

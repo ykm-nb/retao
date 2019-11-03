@@ -63,31 +63,32 @@ export default {
     },
     data() {
         return {
+            id: 0,
+            pageNum: 1,
             goodsList: {}
         }
     },
+    methods: {
+        getStoreDetail (id, pageNum) {
+            api.axs('post', "/tmStore/queryAllProducts", { id, pageNum }).then(({ data }) => {
+                if(data.code === "SUCCESS") {
+                    data.data.list.forEach((item, index) => {
+                        if(item.id === id) this.goodsList = item;
+                    })
+                    console.log(this.goodsList)
+                }
+            });
+        }
+    },
     created() {
-        // this.id = parseInt(this.$route.query.id);
+        Object.assign(this, {
+            id: parseInt(this.$route.query.id),
+            pageNum: this.$route.query.pageNum
+        })
+        this.getStoreDetail(this.id, this.pageNum)
 
         // let obj = ls.session.get('rtSearch'),
         //     url = "";
-
-        // switch (obj.selectedText) {
-        //     case '天猫': url = "/tmStore/queryForPage";
-        //         break;
-        //     case '抖音': url = "/dyStore/queryForPage";
-        //         break;
-        //     case '公众号': url = "/gzhStore/queryForPage";
-        //         break;
-        // }
-
-        // api.axs('post', url, {}).then(({ data }) => {
-        //     if(data.code === "SUCCESS") {
-        //         data.data.list.forEach((item, index) => {
-        //             if(item.id === this.id) this.goodsList = item;
-        //         })
-        //     }
-        // });
     }
 }
 </script>

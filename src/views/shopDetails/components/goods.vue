@@ -17,39 +17,39 @@
                         <div class="layer layer1">
                             <div class="item">
                                 <p>商城类型</p>
-                                <p class="value">{{ goodsList.storeType || '*' }}</p>
+                                <p class="value">{{ goodsList.storeType==1?'专营店':'' || goodsList.storeType==2?'旗舰店':'' || goodsList.storeType==3?'专卖店':'' }}</p>
                             </div>
                             <div class="item">
                                 <p>主营类目</p>
-                                <p class="value">{{ goodsList.category || '*' }}</p>
+                                <p class="value">{{ goodsList.mainProductName || '*' }}</p>
                             </div>
                             <div class="item">
                                 <p>商标类型</p>
-                                <p class="value">{{ goodsList.trademarkCategory	 || '*' }}</p>
+                                <p class="value">{{ goodsList.trademarkCategory	 || '*' }}类</p>
                             </div>
                             <div class="item">
                                 <p>考核情况</p>
-                                <p class="value">{{ goodsList.kpi || '*' }}</p>
+                                <p class="value">未通过考核{{ goodsList.kpi || '*' }}月</p>
                             </div>
                             <div class="item">
                                 <p>支持迁址</p>
-                                <p class="value">{{ goodsList.relocation || '*' }}</p>
+                                <p class="value">{{ goodsList.relocation==1?'是':'否' }}</p>
                             </div>
                             <div class="item">
                                 <p>注册资金</p>
-                                <p class="value">{{ goodsList.price || '*' }}</p>
+                                <p class="value">{{ goodsList.registMoney || '*' }}万</p>
                             </div>
                             <div class="item">
                                 <p>所在地区</p>
-                                <p class="value">{{ goodsList.area || '*' }}</p>
+                                <p class="value">{{ goodsList.area }}地区</p>
                             </div>
                             <div class="item">
                                 <p>纳税类型</p>
-                                <p class="value">{{ goodsList.taxIntelligence || '*' }}</p>
+                                <p class="value">{{ goodsList.taxIntelligence==1?'小规模纳税人':'一般纳税人' }}</p>
                             </div>
                             <div class="item">
                                 <p>一般扣分</p>
-                                <p class="value">{{ goodsList.punishment1 || '*' }}</p>
+                                <p class="value">{{ goodsList.normalPunishment || '*' }}</p>
                             </div>
                             <div class="item">
                                 <p>严重扣分</p>
@@ -61,39 +61,42 @@
                             </div>
                             <div class="item">
                                 <p>是否贷款</p>
-                                <p class="value">{{ goodsList.hasLoan || '*' }}</p>
+                                <p class="value">{{ goodsList.hasLoan==1?'有':'无' }}</p>
                             </div>
                         </div>
                         <div class="layer layer2">
                             <p>
                                 <span class="title">宝贝与描述：</span>
                                 <span class="key">比同行平均水平</span>
-                                <span class="value" :class="goodsList.description == '高' ? 'good' : 'bad'">{{ goodsList.description }}</span>
-                                <img :src="goodsList.description == '高' ? require('./images/good.png') : require('./images/bad.png')">
+                                <span class="value" :class="goodsList.description==='高'?'good':'' || goodsList.description==='低'?'bad':'' ">{{ goodsList.description }}</span>
+                                <img v-if="goodsList.description==='高'" src="./images/good.png">
+                                <img v-if="goodsList.description==='低'" src="./images/bad.png">
                             </p>
                             <p>
                                 <span class="title">卖家的服务：</span>
                                 <span class="key">比同行平均水平</span>
-                                <span class="value" :class="goodsList.service == '高' ? 'good' : 'bad'">{{ goodsList.service }}</span>
-                                <img :src="goodsList.service == '高' ? require('./images/good.png') : require('./images/bad.png')">
+                                <span class="value" :class="goodsList.sellerService==='高'?'good':'' || goodsList.sellerService==='低'?'bad':'' ">{{ goodsList.sellerService }}</span>
+                                <img v-if="goodsList.sellerService==='高'" src="./images/good.png">
+                                <img v-if="goodsList.sellerService==='低'" src="./images/bad.png">
                             </p>
                             <p>
                                 <span class="title">卖家发货速度：</span>
                                 <span class="key">比同行平均水平</span>
-                                <span class="value" :class="goodsList.speed == '高' ? 'good' : 'bad'">{{ goodsList.speed }}</span>
-                                <img :src="goodsList.speed == '高' ? require('./images/good.png') : require('./images/bad.png')">
+                                <span class="value" :class="goodsList.sellerSpeeder==='高'?'good':'' || goodsList.sellerSpeeder==='低'?'bad':'' ">{{ goodsList.sellerSpeeder }}</span>
+                                <img v-if="goodsList.sellerSpeeder==='高'" src="./images/good.png">
+                                <img v-if="goodsList.sellerSpeeder==='低'" src="./images/bad.png">
                             </p>
                         </div>
                         <div class="layer layer3">
                             <p class="title">一级类目：</p>
                             <ul>
-                                <li v-for="(item, index) in goodsList.firstCategory" :key="index">{{ item }}</li>
+                                <li>{{ goodsList.firstCategory }}</li>
                             </ul>
                         </div>
                         <div class="layer layer4">
                             <p class="title">二级类目：</p>
                             <ul>
-                                <li v-for="(item, index) in goodsList.secondCategory" :key="index">{{ item }}</li>
+                                <li>{{ goodsList.secondCategory }}</li>
                             </ul>
                         </div>
                     </div>
@@ -101,19 +104,19 @@
                     <ul class="info-detail">
                         <li>
                             <p class="key">商品编号</p>
-                            <p class="value">{{ goodsList.productNo }}</p>
+                            <p class="value" :title="goodsList.productNo">{{ goodsList.productNo }}</p>
                         </li>
                         <li>
                             <p class="key">店铺状态</p>
-                            <p class="value">{{ goodsList.status }}</p>
+                            <p class="value">{{ goodsList.storeStatus==2?'在售':'下架' }}</p>
                         </li>
                         <li>
                             <p class="key">发布时间</p>
-                            <p class="value">{{ goodsList.time }}</p>
+                            <p class="value">{{ goodsList.followTime || goodsList.updateTime }}</p>
                         </li>
                         <li>
                             <p class="key">交易方式</p>
-                            <p class="value">{{ goodsList.deal }}</p>
+                            <p class="value">仟呗居间</p>
                         </li>
                     </ul>
                     <!-- 广告 -->
@@ -123,23 +126,23 @@
                         <div class="item item1">
                             <p>
                                 <span class="symbol">￥</span>
-                                <span class="price">{{ goodsList.price1.toFixed(2) }}</span>
+                                <span class="price">{{ parseFloat(goodsList.price) }}</span>
                             </p>
                             <button>
                                 <span>今日超值</span>
                                 <img src="./images/zan.png">
                             </button>
                         </div>
-                        <p class="item2">网店出售价格</p>
+                        <p class="item2">网店出售价格（万元）</p>
                         <div class="item3">
                             <p>
                                 <span>消费者保证金：</span>
-                                <span class="value">{{ goodsList.deposit.toFixed(2) }}</span>
+                                <span class="value">50000.00</span>
                                 <span>（需退还）</span>
                             </p>
                             <p>
-                                <span>消费者保证金：</span>
-                                <span class="value">{{ goodsList.skill.toFixed(2) }}</span>
+                                <span>技术年费：</span>
+                                <span class="value">{{ goodsList.skillFee || '*' }}</span>
                                 <span>（需退还）</span>
                             </p>
                         </div>
@@ -275,40 +278,13 @@ import api from '@/api';
 import ls from "store2";
 export default {
     name: "goods",
-    // props: {
-    //     goodsList: {
-    //         type: Object
-    //     }
-    // },
+    props: {
+        goodsList: {
+            type: Object
+        }
+    },
     data() {
         return {
-            goodsList: {
-                title: "华南车品外饰旗舰店 半新店 无扣分 动态全红 名字好听",
-                storeType: "旗舰店",
-                category: "汽车及配件",
-                trademarkCategory: "11类",
-                kpi: "123",
-                relocation: "6000",
-                price: "500万",
-                area: "华南地区",
-                taxIntelligence: "一般纳税人",
-                punishment1: "0分",
-                punishment: "0分",
-                fakePunishment: "0分",
-                hasLoan: "否",
-                description: "高",
-                service: "高",
-                speed: "低",
-                firstCategory: ["汽车用品", "电子", "清洗", "改装"],
-                secondCategory: ["汽车用品", "电子", "清洗"],
-                productNo: "1907061552476529",
-                status: "在售",
-                time: "2019-09-23",
-                deal: "仟呗居间",
-                price1: 230000,
-                deposit: 50000, // 保证金
-                skill: 22500, // 技术年费
-            },
             infoForm: {},
             showDropdown: false
         }
@@ -329,8 +305,7 @@ export default {
             }
             document.body.removeChild(input);
         }
-    },
-    created() {}
+    }
 }
 </script>
 
@@ -448,14 +423,17 @@ export default {
                                     font-size: 18px;
                                     font-weight: bold;
                                     line-height: 18px;
-                                    margin: 0 10px 0 25px;
+                                    margin: 0 10px;
 
                                     &.good {
-                                        color: #00cc56;
-                                    }
-                                    &.bad {
                                         color: #ff0036;
                                     }
+                                    &.bad {
+                                        color: #00cc56;
+                                    }
+                                }
+                                img {
+                                    transform: rotate(180deg);
                                 }
                             }
                         }
@@ -510,9 +488,13 @@ export default {
                             }
 
                             .value {
+                                width: 100%;
                                 font-size: 18px;
                                 font-weight: bold;
                                 line-height: 18px;
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
                                 color: #333;
                             }
                         }

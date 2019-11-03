@@ -8,6 +8,8 @@ CSS Reset
 */
 
 html,body {
+    width: 100%;
+    height: 100%;
     line-height: 1.5;
     /* font: 'PingFang SC','Lantinghei SC','Microsoft YaHei','HanHei SC','Helvetica Neue','Open Sans',Arial,'Hiragino Sans GB','微软雅黑'; */
 }
