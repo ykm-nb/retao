@@ -42,23 +42,27 @@
                 </div>
 
                 <ul class="layer-right">
-                    <li class="item" :class="`item${index}`" v-for="(item, index) in shopList1" :key="index">
+                    <p class="no-data" v-if="tbList.length < 1">暂无数据</p>
+                    <li class="item" :class="`item${index}`" v-for="(item, index) in tbList" :key="index">
                         <div class="section1">
                             <img src="./images/tb.png">
                             <div>
                                 <p class="name">{{ item.storeName }}</p>
                                 <p>
-                                    <span>{{ item.firstCategory }}</span>
-                                    <span>{{ item.trademarkCategory }}</span>
-                                    <span>{{ item.brand }}</span>
+                                    <span>{{ item.mainProductName }}</span>
+                                    <span>{{ item.trademarkCategory }}类</span>
+                                    <span>R标</span>
                                 </p>
                             </div>
                         </div>
                         <ul class="tags">
-                            <li v-for="(tag, index1) in item.tagList" :key="index1">{{ tag }}</li>
+                            <li v-show="item.mainProductName">{{ item.mainProductName }}</li>
+                            <li v-show="item.storeType">{{ item.storeType==1?'专营店':'' || item.storeType==2?'旗舰店':'' || item.storeType==3?'专卖店':'' }}</li>
+                            <li>R标</li>
+                            <li>{{ `${item.province==null?'':item.province}${item.city}` }}</li>
                         </ul>
                         <div class="section2">
-                            <p class="new">新品</p>
+                            <p class="new">{{ item.storeProperties==1?'特价':'' ||  item.storeProperties==2?'优质':'' || item.storeProperties==3?'稀缺':'' || item.storeProperties>=4?'普通':''}}</p>
                             <p class="price">{{ item.price }}万</p>
                         </div>
                     </li>
@@ -185,6 +189,17 @@ export default {
                     flex-wrap: wrap;
                     background-color: #fff;
                     box-sizing: border-box;
+                    position: relative;
+
+                    .no-data {
+                        font-size: 22px;
+                        font-weight: bold;
+                        line-height: 22px;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
 
                     .item {
                         width: 300px;

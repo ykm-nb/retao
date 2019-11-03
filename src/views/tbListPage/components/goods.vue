@@ -178,8 +178,8 @@
 
                         <!-- 左侧 -->
                         <div class="goods-left">
-                            <img :src="item.pictureUrl">
-                            <p v-if="item.pictureUrl === null">暂无图片</p>
+                            <img :src="item.mainProductUrl">
+                            <p v-if="item.mainProductUrl === null">暂无图片</p>
                             <!-- 主营字段 -->
                             <div class="goods-tag">{{ item.mainProductName }}</div>
                         </div>

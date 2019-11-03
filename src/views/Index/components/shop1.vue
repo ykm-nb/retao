@@ -59,52 +59,53 @@
             </div>
 
             <!-- 优质 -->
-            <div class="layer layer2">
+            <div class="layer layer2" v-if="yzList.length">
                 <div class="layer-left">
                     <div class="top">
                         <p class="title">优质店铺</p>
                         <p class="info">品牌商标任您挑</p>
                     </div>
                     <div class="first-shop">
-                        <img :src="shopList2[0].imgUrl">
+                        <img :src="yzList[0].pictureUrl">
                         <p class="item1">
-                            <span class="name">{{ shopList2[0].storeName }}</span>
-                            <span class="price">{{ shopList2[0].price }}万</span>
+                            <span class="name">{{ yzList[0].storeName }}</span>
+                            <span class="price">{{ yzList[0].price }}万</span>
                         </p>
                         <p class="item2">
-                            <span>{{ shopList2[0].firstCategory }}</span>
-                            <span>{{ shopList2[0].trademarkCategory }}</span>
-                            <span>{{ shopList2[0].brand }}</span>
+                            <span>{{ yzList[0].mainProductName }}</span>
+                            <span>{{ yzList[0].trademarkCategory }}类</span>
+                            <span>R标</span>
                         </p>
                     </div>
                 </div>
 
                 <ul class="layer-right">
-                    <li class="item" v-for="(item, index) in shopList2.slice(1)" :key="index">
+                    <p class="no-data" v-if="yzList.length < 2">暂无数据</p>
+                    <li class="item" v-for="(item, index) in yzList.slice(1,4)" :key="index">
                         <div class="time-limit">
                             <span>商标 :</span>
-                            <span>{{ item.sb }}</span>
+                            <span>{{ item.trademark }}</span>
                         </div>
                         <div class="goods-img">
-                            <img :src="item.imgUrl">
+                            <img :src="item.pictureUrl">
                         </div>
                         <div class="section1">
                             <img src="./images/tm.png">
                             <div>
                                 <p class="name">{{ item.storeName }}</p>
                                 <p>
-                                    <span>{{ item.firstCategory }}</span>
-                                    <span>{{ item.trademarkCategory }}</span>
-                                    <span>{{ item.brand }}</span>
+                                    <span>{{ item.mainProductName }}</span>
+                                    <span>{{ item.trademarkCategory }}类</span>
+                                    <span>R标</span>
                                 </p>
                             </div>
                         </div>
                         <div class="section2">
                             <div class="left">
-                                <p class="store-type">{{ item.storeType }}</p>
+                                <p class="store-type">{{ item.mainProductName }} {{ item.storeType==1?'专营店':'' || item.storeType==2?'旗舰店':'' || item.storeType==3?'专卖店':'' }}</p>
                                 <p>
-                                    <span>{{ item.brand }}</span>
-                                    <span>{{ item.city }}</span>
+                                    <span>R标</span>
+                                    <span>{{ `${item.province}${item.city}` }}</span>
                                 </p>
                             </div>
                             <div class="right">
@@ -116,52 +117,53 @@
             </div>
 
             <!-- 稀缺 -->
-            <div class="layer layer3">
+            <div class="layer layer3" v-if="xqList.length">
                 <div class="layer-left">
                     <div class="top">
                         <p class="title">稀缺店铺</p>
                         <p class="info">稀缺类目高价值</p>
                     </div>
                     <div class="first-shop">
-                        <img :src="shopList3[0].imgUrl">
+                        <img :src="xqList[0].pictureUrl">
                         <p class="item1">
-                            <span class="name">{{ shopList3[0].storeName }}</span>
-                            <span class="price">{{ shopList3[0].price }}万</span>
+                            <span class="name">{{ xqList[0].storeName }}</span>
+                            <span class="price">{{ xqList[0].price }}万</span>
                         </p>
                         <p class="item2">
-                            <span>{{ shopList3[0].firstCategory }}</span>
-                            <span>{{ shopList3[0].trademarkCategory }}</span>
-                            <span>{{ shopList3[0].brand }}</span>
+                            <span>{{ xqList[0].mainProductName }}</span>
+                            <span>{{ xqList[0].trademarkCategory }}类</span>
+                            <span>R标</span>
                         </p>
                     </div>
                 </div>
 
                 <ul class="layer-right">
-                    <li class="item" v-for="(item, index) in shopList3.slice(1)" :key="index">
+                    <p class="no-data" v-if="xqList.length < 2">暂无数据</p>
+                    <li class="item" v-for="(item, index) in xqList.slice(1,4)" :key="index">
                         <div class="time-limit">
                             <span>一级类目 :</span>
-                            <span>{{ item.category }}</span>
+                            <span>{{ item.firstCategory }}</span>
                         </div>
                         <div class="goods-img">
-                            <img :src="item.imgUrl">
+                            <img :src="item.pictureUrl">
                         </div>
                         <div class="section1">
                             <img src="./images/tm.png">
                             <div>
                                 <p class="name">{{ item.storeName }}</p>
                                 <p>
-                                    <span>{{ item.firstCategory }}</span>
-                                    <span>{{ item.trademarkCategory }}</span>
-                                    <span>{{ item.brand }}</span>
+                                    <span>{{ item.mainProductName }}</span>
+                                    <span>{{ item.trademarkCategory }}类</span>
+                                    <span>R标</span>
                                 </p>
                             </div>
                         </div>
                         <div class="section2">
                             <div class="left">
-                                <p class="store-type">{{ item.storeType }}</p>
+                                <p class="store-type">{{ item.mainProductName }} {{ item.storeType==1?'专营店':'' || item.storeType==2?'旗舰店':'' || item.storeType==3?'专卖店':'' }}</p>
                                 <p>
-                                    <span>{{ item.brand }}</span>
-                                    <span>{{ item.city }}</span>
+                                    <span>R标</span>
+                                    <span>{{ `${item.province}${item.city}` }}</span>
                                 </p>
                             </div>
                             <div class="right">
@@ -384,12 +386,16 @@ export default {
                             }
                         }
 
-                        .item2 span {
-                            font-size: 14px;
+                        .item2 {
                             line-height: 14px;
-                            color: #999999;
-                            display: inline-block;
-                            margin-right: 4px;
+
+                            span {
+                                font-size: 14px;
+                                line-height: 14px;
+                                color: #999999;
+                                display: inline-block;
+                                margin-right: 4px;
+                            }
                         }
                     }
                 }
@@ -399,6 +405,7 @@ export default {
                     display: flex;
                     background-color: #fff;
                     box-sizing: border-box;
+                    position: relative;
 
                     .item {
                         width: 300px;
@@ -446,19 +453,23 @@ export default {
                                 text-align: left;
                                 margin-left: 10px;
 
+                                p {
+                                    line-height: 14px;
+
+                                    span {
+                                        font-size: 14px;
+                                        line-height: 14px;
+                                        color: #999999;
+                                        display: inline-block;
+                                    }
+                                }
+
                                 .name {
                                     font-size: 18px;
                                     line-height: 18px;
                                     font-weight: bold;
                                     color: #000;
                                     margin-bottom: 5px;
-                                }
-
-                                p span {
-                                    font-size: 14px;
-                                    line-height: 14px;
-                                    color: #999999;
-                                    display: inline-block;
                                 }
                             }
                         }
@@ -500,6 +511,16 @@ export default {
                                 }
                             }
                         }
+                    }
+
+                    .no-data {
+                        font-size: 22px;
+                        font-weight: bold;
+                        line-height: 22px;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
                     }
                 }
             }

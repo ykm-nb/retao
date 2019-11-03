@@ -293,7 +293,7 @@ export default {
                                 height: 50px;
                                 font-size: 14px;
                                 text-indent: 20px;
-                                color: #b8b8b8;
+                                color: #000;
                                 border: 1px solid #e5e5e5;
                             }
                         }

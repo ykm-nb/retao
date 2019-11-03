@@ -22,17 +22,17 @@ function doSucc(res) {
 
 function doError(res) {
     if (res.data.code == "UNAUTHORIZED") {
-        // ls.session('userInfo',{})
-        window.location.href = '/#/index?tologin=1'
+        ls.session('userInfo',{})
+        window.location.href = '/#/login?type=0'
     } else {
         return res
     }
 }
 
 const config = {}
-// config.api = '/liguanjia-svr'
-if (process.env.NODE_ENV == 'development') config.api = 'retao-web'
-else config.api = ''
+config.api = '/retao-web'
+// if (process.env.NODE_ENV == 'development') config.api = '/retao-web'
+// else config.api = ''
 
 export default {
     axs(method, url, data = {}) {
