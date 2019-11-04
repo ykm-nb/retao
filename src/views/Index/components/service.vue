@@ -16,14 +16,12 @@
                     {{ item }}
                 </li>
             </ul>
-
+            
             <div class="content-bg">
                 <ul ref="service" class="content">
-                    <li 
-                        v-for="(item, index) in serviceList" 
-                        :key="index"
-                        v-show="(index >= tagIndex * 4) && (index < (tagIndex * 4) + 4)"
-                        :style="`background: url(${item.imgUrl}) no-repeat 50% -4px`"
+                    <li v-for="(item, index) in serviceList" :key="index" 
+                        v-show="(index >= tagIndex * 4) && (index < (tagIndex * 4) + 4)" 
+                        :style="getBackground(item.imgUrl)"
                     >
                         <div class="info">
                             <span class="name">{{ item.name }}</span>
@@ -160,36 +158,17 @@ export default {
                   tagIndex = this.tagIndex,
                   length = this.tagList.length;
 
+            Object.assign(service, {
+                opacity: 0
+            })
+
+            var time = setTimeout(() => {
+                Object.assign(service, {
+                    opacity: 1
+                })
+            }, 400)
+
             if(index === tagIndex) return;
-
-            let obj = {
-                transform: "translate(-1200px)", 
-                opacity: "0"
-            }
-
-            if(index > tagIndex) { // next
-                Object.assign(service, obj)
-                setTimeout(() => {
-                    obj.transform = "translate(1200px)"
-                    Object.assign(service, obj)
-                }, 400)
-                setTimeout(() => {
-                    obj = {transform: "translate(0)", opacity: "1"}
-                    Object.assign(service, obj)
-                }, 800)
-            } else { // prev
-                obj.transform = "translate(1200px)";
-                Object.assign(service, obj)
-                setTimeout(() => {
-                    obj.transform = "translate(-1200px)"
-                    Object.assign(service, obj)
-                }, 400)
-                setTimeout(() => {
-                    obj = {transform: "translate(0)", opacity: "1"}
-                    Object.assign(service, obj)
-                }, 800)
-            }
-            
             this.tagIndex = index;
             (index < 0) && (this.tagIndex = length - 1);
             (index > length - 1) && (this.tagIndex = 0);
@@ -197,6 +176,9 @@ export default {
         consultQQ() {
             var qq = '243910661';
             window.open("http://wpa.qq.com/msgrd?v=3&uin="+qq+"&site=qq&menu=yes",'',"width=644,height=544,toolbar=no,scrollbars=no,menubar=no,status=no");
+        },
+        getBackground (imgUrl) {
+            return `background: url(${imgUrl}) no-repeat 50% -4px`
         }
     }
 }

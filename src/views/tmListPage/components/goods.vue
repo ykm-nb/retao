@@ -76,15 +76,14 @@
                                 </ul>
                             </li>
                             <li class="item">
-                                <span>{{ brandList[brandIndex] || '商标分类' }}</span>
+                                <span>{{ brandList[brandIndex].text == '不限' ? '商标分类' : brandList[brandIndex].text }}</span>
                                 <i class="iconfont iconxia"></i>
-                                <ul class="dropdown">
-                                    <li 
-                                        v-for="(item, index) in brandList" 
-                                        :key="index" 
+                                <ul class="trademark">
+                                    <li v-for="(item, index) in brandList" :key="index" 
                                         @click="handleMore('brandIndex', index, 'trademarkCategory')"
                                     >
-                                        {{ item || '不限' }}
+                                        <span class="key">{{ item.key }}</span>
+                                        <span class="value">{{ item.text }}</span>
                                     </li>
                                 </ul>
                             </li>
@@ -244,9 +243,9 @@
                         @on-change="getGoodsList"
                     />
                     <p class="msg">
-                        <span>当前第<b>{{ pageForm.pageNum }}</b>页</span>
-                        <span class="divide">/</span>
                         <span>共{{ Math.ceil(pageForm.total / 10) }}页</span>
+                        <span class="divide">/</span>
+                        <span>当前第<b>{{ pageForm.pageNum }}</b>页</span>
                     </p>
                 </div>
             </div>
@@ -310,7 +309,238 @@ export default {
             regionList: ['', '华东', '华南', '华北', '东北', '华中', '西南', '西北'],
             // 商标
             brandIndex: 0,
-            brandList: ['', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15'],
+            brandList: [
+                {
+                    key: '不限',
+                    value: '',
+                    text: '不限'
+                },
+                {
+                    key: '01类',
+                    value: '1',
+                    text: '化工原料'
+                },
+                {
+                    key: '02类',
+                    value: '2',
+                    text: '颜料油漆'
+                },
+                {
+                    key: '03类',
+                    value: '3',
+                    text: '日化用品'
+                },
+                {
+                    key: '04类',
+                    value: '4',
+                    text: '燃料油脂'
+                },
+                {
+                    key: '05类',
+                    value: '5',
+                    text: '医药用品'
+                },
+                {
+                    key: '06类',
+                    value: '6',
+                    text: '金属材料'
+                },
+                {
+                    key: '07类',
+                    value: '7',
+                    text: '机械设备'
+                },
+                {
+                    key: '08类',
+                    value: '8',
+                    text: '手工器械'
+                },
+                {
+                    key: '09类',
+                    value: '9',
+                    text: '科学仪器'
+                },
+                {
+                    key: '10类',
+                    value: '10',
+                    text: '医疗器械'
+                },
+                {
+                    key: '11类',
+                    value: '11',
+                    text: '灯具空调'
+                },
+                {
+                    key: '12类',
+                    value: '12',
+                    text: '运输工具'
+                },
+                {
+                    key: '13类',
+                    value: '13',
+                    text: '军火烟火'
+                },
+                {
+                    key: '14类',
+                    value: '14',
+                    text: '珠宝钟表'
+                },
+                {
+                    key: '15类',
+                    value: '15',
+                    text: '乐器'
+                },
+                {
+                    key: '16类',
+                    value: '16',
+                    text: '办公用品'
+                },
+                {
+                    key: '17类',
+                    value: '17',
+                    text: '橡胶制品'
+                },
+                {
+                    key: '18类',
+                    value: '18',
+                    text: '皮革皮具'
+                },
+                {
+                    key: '19类',
+                    value: '19',
+                    text: '建筑材料'
+                },
+                {
+                    key: '20类',
+                    value: '20',
+                    text: '家具用品'
+                },
+                {
+                    key: '21类',
+                    value: '21',
+                    text: '厨房洁具'
+                },
+                {
+                    key: '22类',
+                    value: '22',
+                    text: '绳网袋篷'
+                },
+                {
+                    key: '23类',
+                    value: '23',
+                    text: '纱线丝'
+                },
+                {
+                    key: '24类',
+                    value: '24',
+                    text: '布料床单'
+                },
+                {
+                    key: '25类',
+                    value: '25',
+                    text: '服装鞋帽'
+                },
+                {
+                    key: '26类',
+                    value: '26',
+                    text: '钮扣拉链'
+                },
+                {
+                    key: '27类',
+                    value: '27',
+                    text: '地毯席垫'
+                },
+                {
+                    key: '28类',
+                    value: '28',
+                    text: '健身器材'
+                },
+                {
+                    key: '29类',
+                    value: '29',
+                    text: '食品'
+                },
+                {
+                    key: '30类',
+                    value: '30',
+                    text: '方便食品'
+                },
+                {
+                    key: '31类',
+                    value: '31',
+                    text: '饲料种籽'
+                },
+                {
+                    key: '32类',
+                    value: '32',
+                    text: '啤酒饮料'
+                },
+                {
+                    key: '33类',
+                    value: '33',
+                    text: '酒精饮品'
+                },
+                {
+                    key: '34类',
+                    value: '34',
+                    text: '烟草烟具'
+                },
+                {
+                    key: '35类',
+                    value: '35',
+                    text: '广告销售'
+                },
+                {
+                    key: '36类',
+                    value: '36',
+                    text: '金融物管'
+                },
+                {
+                    key: '37类',
+                    value: '37',
+                    text: '建筑修理'
+                },
+                {
+                    key: '38类',
+                    value: '38',
+                    text: '通讯服务'
+                },
+                {
+                    key: '39类',
+                    value: '39',
+                    text: '运输贮藏'
+                },
+                {
+                    key: '40类',
+                    value: '40',
+                    text: '材料加工'
+                },
+                {
+                    key: '41类',
+                    value: '41',
+                    text: '教育娱乐'
+                },
+                {
+                    key: '42类',
+                    value: '42',
+                    text: '网站服务'
+                },
+                {
+                    key: '43类',
+                    value: '43',
+                    text: '餐饮住宿'
+                },
+                {
+                    key: '44类',
+                    value: '44',
+                    text: '医疗园艺'
+                },
+                {
+                    key: '45类',
+                    value: '45',
+                    text: '社会服务'
+                }
+            ],
             // 当面交易
             dealIndex: 0,
             dealList: ['', '是', '否'],
@@ -386,7 +616,7 @@ export default {
             switch (type) {
                 case 'regionIndex': form[key] = this.regionList[index]
                     break;
-                case 'brandIndex': form[key] = this.brandList[index]
+                case 'brandIndex': form[key] = this.brandList[index].value
                     break;
                 case 'dealIndex': form[key] = this.dealList[index]
                     break;
@@ -429,6 +659,11 @@ export default {
         // 筛选
         .filter {
             padding: 0 10px;
+            box-shadow: 0 3px 6px 0 rgba(202, 202, 202, 0.8);
+            position: sticky;
+            top: 0;
+            left: 0;
+            z-index: 99;
 
             .layer {
                 font-size: 14px;
@@ -559,19 +794,21 @@ export default {
                             margin-right: 4px;
                         }
 
-                        &:hover .dropdown {
-                            max-height: 550px;
+                        &:hover .dropdown, &:hover .trademark {
+                            max-height: 450px;
                         }
 
+                        // 下拉
                         .dropdown {
                             max-height: 0;
                             width: 80%;
                             background-color: #fff;
+                            box-shadow: 0 3px 6px 0 rgba(202, 202, 202, 0.8);
                             position: absolute;
-                            top: 20px;
+                            top: 25px;
                             left: 50%;
                             transform: translate(-50%);
-                            transition: .4s;
+                            transition: 1s;
                             overflow: hidden;
                             z-index: 99;
 
@@ -586,6 +823,57 @@ export default {
                                 &:hover {
                                     color: #fff;
                                     background-color: #f74549;
+                                }
+                            }
+                        }
+                        // 商标下拉
+                        .trademark {
+                            max-height: 0;
+                            width: 650px;
+                            display: flex;
+                            flex-wrap: wrap;
+                            padding: 0 20px;
+                            background-color: #fff;
+                            box-shadow: 0 3px 6px 0 rgba(202, 202, 202, 0.8);
+                            position: absolute;
+                            top: 25px;
+                            left: 18%;
+                            transition: 1s;
+                            overflow: hidden;
+                            z-index: 99;
+
+                            li {
+                                width: 120px;
+                                height: 30px;
+                                font-size: 14px;
+                                line-height: 30px;
+                                transition: .4s;
+
+                                .key {
+                                    width: 30%;
+                                    text-align: right;
+                                    line-height: 30px;
+                                    color: #c1c1c1;
+                                    display: inline-block;
+                                    margin-right: 10px;
+                                    transition: .4s;
+                                }
+                                .value {
+                                    text-align: left;
+                                    line-height: 30px;
+                                    color: #333;
+                                    transition: .4s;
+                                }
+
+                                &:hover {
+                                    background-color: #f74549;
+
+                                    .key {
+                                        color: #333;
+                                    }
+                                    .value {
+                                        color: #fff;
+                                    }
                                 }
                             }
                         }
@@ -614,6 +902,7 @@ export default {
             display: flex;
             justify-content: space-between;
             padding: 0 90px 0 20px;
+            box-shadow: 0 3px 6px 0 rgba(202, 202, 202, 0.8);
 
             .flex {
                 display: flex;
@@ -690,7 +979,7 @@ export default {
                 transition: .4s;
 
                 &:hover {
-                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                    box-shadow: 0 3px 6px 0 rgba(202, 202, 202, 0.8);
                 }
 
                 .goods-left {
@@ -926,17 +1215,24 @@ export default {
             padding: 35px 140px 45px 142px;
             margin-bottom: 30px;
             background-color: #fff;
+            box-shadow: 0 3px 6px 0 rgba(202, 202, 202, 0.8);
             border-radius: 5px;
 
             /deep/ .ivu-page {
                 font-size: 12px;
                 margin-right: 24px;
 
+                .ivu-icon {
+                    line-height: 12px;
+                }
+
                 .ivu-page-item {
                     &:hover {
                         border: 1px solid #ec3337;
 
                         a {
+                            font-size: 12px;
+                            line-height: 12px;
                             color: #ec3337;
                         }
                     }
@@ -946,42 +1242,59 @@ export default {
                         border: none;
 
                         a {
+                            font-size: 12px;
+                            line-height: 12px;
                             color: #fff;
                         }
                     }
                 }
 
+                // 前进后退
                 .ivu-page-next, .ivu-page-prev {
                     &:hover {
                         border: 1px solid #ec3337;
 
                         a {
+                            line-height: 12px;
                             color: #ec3337;
                         }
                     }
                 }
 
-                .ivu-page-options-elevator input {
-                    &:hover {
-                        border: 1px solid #ec3337;
-                    }
+                .ivu-page-options-elevator {
+                    font-size: 12px;
+                    line-height: 12px;
 
-                    &:focus {
-                        border: 1px solid #ec3337;
-                        box-shadow: none;
+                    input {
+                        &:hover {
+                            border: 1px solid #ec3337;
+                        }
+
+                        &:focus {
+                            border: 1px solid #ec3337;
+                            box-shadow: none;
+                        }
                     }
                 }
             }
 
             .msg {
+                height: 32px;
                 font-size: 14px;
+                line-height: 32px;
+                display: flex;
+                align-items: center;
+
+                span {
+                    line-height: 14px;
+
+                    b {
+                        color: #ec3337;
+                    }
+                }
 
                 .divide {
                     margin: 0 4px;
-                }
-
-                span b {
-                    color: #ec3337;
                 }
             }
         }
@@ -992,7 +1305,12 @@ export default {
             height: 428px;
             padding-top: 120px;
             background: #fff url("./right-bg.png") no-repeat 0 0;
+            box-shadow: 0 3px 6px 0 rgba(202, 202, 202, 0.8);
             border-radius: 8px;
+            position: sticky;
+            top: 0;
+            left: 0;
+            z-index: 99;
 
             .title {
                 font-size: 16px;
