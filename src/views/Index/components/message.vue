@@ -2,9 +2,8 @@
     <div class="inner-bg message-bg">
         <div class="inner message">
             <div class="title-box">
-                <p class="title">行业资讯</p>
+                <p class="title">仟呗头条</p>
                 <p class="info">NEWS</p>
-                <button class="help" type="button">帮助中心</button>
             </div>
 
             <ul class="imgs">
@@ -188,7 +187,6 @@ export default {
 
             .title-box {
                 background: url('./images/msg-title.png') no-repeat center;
-                position: relative;
 
                 .title {
                     font-size: 30px;
@@ -202,21 +200,6 @@ export default {
                     line-height: 16px;
                     color: #ccc;
                     margin-top: 6px;
-                }
-
-                .help {
-                    width: 120px;
-                    height: 36px;
-                    line-height: 36px;
-                    font-size: 16px;
-                    color: #fff;
-                    background-color: #ff0036;
-                    border: none;
-                    border-radius: 50px;
-                    cursor: pointer;
-                    position: absolute;
-                    right: 0;
-                    top: 2px;
                 }
             }
 

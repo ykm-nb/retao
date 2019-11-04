@@ -28,17 +28,20 @@
                 <div class="divide"></div>
                 <li @click="gotoPage('tmlistpage')">
                     <img src="./tm.png">
-                    <span class="text">天猫新店</span>
+                    <span class="text">天猫店铺</span>
+                    <i class="hot"></i>
                 </li>
                 <div class="divide"></div>
                 <li @click="gotoPage('tmlistpage')">
                     <img src="./du.png">
-                    <span class="text">独家店铺</span>
+                    <span class="text">特价新店</span>
+                    <i class="new"></i>
                 </li>
                 <div class="divide"></div>
                 <li @click="gotoPage('tblistpage')">
                     <img src="./tao.png">
                     <span class="text">淘宝店铺</span>
+                    <i class="hot"></i>
                 </li>
                 <div class="divide"></div>
                 <li @click="gotoPage('enter')">
@@ -48,7 +51,8 @@
                 <div class="divide"></div>
                 <li @click="gotoPage('operation')">
                     <img src="./dai.png">
-                    <span class="text">电商代运营</span>
+                    <span class="text">电商运营</span>
+                    <i class="hot"></i>
                 </li>
                 <div class="divide"></div>
             </ul>
@@ -181,11 +185,34 @@ export default {
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
+                position: relative;
 
                 .text {
                     font-size: 16px;
                     line-height: 42px;
                     margin-left: 10px;
+                }
+
+                .hot, .new {
+                    width: 28px;
+                    height: 20px;
+                    animation: hot 2s infinite;
+                    position: absolute;
+                    left: 50%;
+                    bottom: 90%;
+                }
+
+                .new {
+                    background: url("./new.png") no-repeat center;
+                }
+                .hot {
+                    background: url("./hot.png") no-repeat center;
+                }
+
+                @keyframes hot {
+                    0% { bottom: 90%; }
+                    50% { bottom: 80%; }
+                    100% { bottom: 90%; }
                 }
             }
 

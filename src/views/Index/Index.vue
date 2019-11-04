@@ -19,7 +19,7 @@
           <div class="industry">
             <p class="title">热门类目</p>
             <ul>
-              <li @click="hotStore({mainProducts: item.mainProductName})" v-for="(item, index) in hotCategory" :key="index">{{ item.mainProductName }}</li>
+              <li @click="hotStore({title: item})" v-for="(item, index) in hotCategory" :key="index">{{ item }}</li>
               <li class="more">更多</li>
             </ul>
           </div>
@@ -73,13 +73,13 @@
 
     <!-- 锚点 -->
     <ul class="anchor" :class="{'show-anchor': showAnchor}">
-      <li @click="goto('service')" class="item">客服中心</li>
+      <li @click="goto('service')" class="item service">客服中心</li>
       <li @click="goto('shop1', 'start')" class="item">特惠店铺</li>
       <li @click="goto('shop1')" class="item">优质店铺</li>
       <li @click="goto('shop1', 'end')" class="item">稀缺店铺</li>
       <li @click="goto('shop2')" class="item">天猫转让</li>
       <li @click="goto('shop2')" class="item">淘宝过户</li>
-      <li @click="goto('msg', 'start')" class="item">行业资讯</li>
+      <li @click="goto('msg', 'start')" class="item no-border">行业资讯</li>
       <li class="top" @click="goto('header')">
         <p>返回</p>
       </li>
@@ -127,17 +127,14 @@ export default {
   },
   methods: {
     initSwiper() { // swiper
-      var mySwiper = new Swiper ('.swiper-container', {
-        loop: true, // 循环模式选项
+      var mySwiper = new Swiper('.swiper-container', {
         autoplay: {
-          delay: 1000,
-          stopOnLastSlide: false,
-          disableOnInteraction: true,
+            delay: 2000,
+            // 用户操作swiper之后，是否禁止autoplay。默认为true：停止。
+            disableOnInteraction: false,
         },
-        
-        // 分页器
         pagination: {
-          el: '.swiper-pagination',
+          el: ".swiper-pagination"
         },
       })
     },
@@ -162,20 +159,10 @@ export default {
       ls.session("tbList", obj)
       this.$router.push("tblistpage")
     },
-    getMainProduct () { // 获取主营类目列表
-        api.axs("post", "/mainProduct/queryForList", {}).then(({ data })=>{
-            if (data.code === "SUCCESS") {
-                this.hotCategory = data.data;
-            } else {
-                this.$Message.error(data.remark);
-            };
-        });
-    },
   },
   created() {
     ls.session.set("rtSearch", "") // 清空搜索
-    this.initSwiper()
-    this.getMainProduct()
+    ls.session.set("tbList", null)
     
     // 获取首页五个店铺信息
     api.axs('post', "/tmStore/queryHomeStorePages", {}).then(({ data }) => {
@@ -194,6 +181,7 @@ export default {
     });
   },
   mounted() {
+    this.initSwiper() // swiper初始化必须在mounted，因为此时dom元素已经渲染完
     window.addEventListener('scroll', this.keyupEnter)
   },
   beforeDestroy() {
@@ -237,10 +225,19 @@ html, body {
         border-bottom: 1px dashed #dfdfdf;
         transition: .4s;
 
-        &:hover {
-          color: #fff;
+        &.service { // 客服中心
+          color: rgba(255,255,255,.9);
           background-color: #ff0036;
         }
+
+        &.no-border {
+          border: none;
+        }
+
+        // &:hover {
+          // color: #fff;
+          // background-color: #ff0036;
+        // }
       }
 
       .top {
@@ -250,7 +247,8 @@ html, body {
 
         p {
           font-size: 14px;
-          color: #fff;
+          line-height: 18px;
+          color: rgba(255,255,255,.9);
         }
       }
   }
@@ -277,20 +275,20 @@ html, body {
             .title {
               font-size: 18px;
               line-height: 18px;
-              margin-bottom: 20px;
+              margin-bottom: 28px;
               background: url("./components/images/banner-title.png") no-repeat center;
             }
 
             ul {
               display: flex;
-              justify-content: center;
+              // justify-content: center;
               flex-wrap: wrap;
               margin: 0 22px;
 
               li {
                 font-size: 15px;
                 line-height: 15px;
-                margin: 0 5px 13px;
+                margin: 0 6px 18px;
                 cursor: pointer;
 
                 &:hover {
@@ -309,7 +307,7 @@ html, body {
           }
 
           .city {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
           }
         }
 
@@ -381,6 +379,7 @@ html, body {
         top: 0;
         
         .swiper-wrapper {
+          height: 100%;
           width: 100%;
 
           .slide1 {
@@ -401,9 +400,10 @@ html, body {
             margin: 0 5px;
             background-color: #fff;
           }
-
+          
           .swiper-pagination-bullet-active {
             width: 32px;
+            background-color: #fff;
             border-radius: 20px;
           }
         }

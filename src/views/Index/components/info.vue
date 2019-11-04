@@ -34,19 +34,19 @@ export default {
                     imgUrl: require('./images/info4.png'),
                     text: '成交网店数量/个',
                     value1: 0,
-                    value2: 2736
+                    value2: 1895
                 },
                 {
                     imgUrl: require('./images/info5.png'),
                     text: '成交店铺金额/万',
                     value1: 0,
-                    value2: 27858
+                    value2: 19568
                 },
                 {
                     imgUrl: require('./images/info6.png'),
                     text: '累计服务用户/位',
                     value1: 0,
-                    value2: 4976
+                    value2: 3260
                 }
                 
             ]

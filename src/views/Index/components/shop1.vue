@@ -9,7 +9,7 @@
                         <p class="info">活动店铺限时购</p>
                     </div>
                     <div class="first-shop">
-                        <img :src="tjList[0].pictureUrl">
+                        <img :src="tjList[0].mainProductUrl">
                         <p class="item1">
                             <span class="name">{{ tjList[0].storeName }}</span>
                             <span class="price">{{ tjList[0].price }}万</span>
@@ -66,7 +66,7 @@
                         <p class="info">品牌商标任您挑</p>
                     </div>
                     <div class="first-shop">
-                        <img :src="yzList[0].pictureUrl">
+                        <img :src="yzList[0].mainProductUrl">
                         <p class="item1">
                             <span class="name">{{ yzList[0].storeName }}</span>
                             <span class="price">{{ yzList[0].price }}万</span>
@@ -124,7 +124,7 @@
                         <p class="info">稀缺类目高价值</p>
                     </div>
                     <div class="first-shop">
-                        <img :src="xqList[0].pictureUrl">
+                        <img :src="xqList[0].mainProductUrl">
                         <p class="item1">
                             <span class="name">{{ xqList[0].storeName }}</span>
                             <span class="price">{{ xqList[0].price }}万</span>

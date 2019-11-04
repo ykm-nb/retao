@@ -69,9 +69,7 @@
                                 <span>{{ regionList[regionIndex] || '地域选择' }}</span>
                                 <i class="iconfont iconxia"></i>
                                 <ul class="dropdown">
-                                    <li 
-                                        v-for="(item, index) in regionList" 
-                                        :key="index" 
+                                    <li v-for="(item, index) in regionList" :key="index" 
                                         @click="handleMore('regionIndex', index, 'area')"
                                     >
                                         {{ item || '不限' }}
@@ -81,13 +79,12 @@
                             <li class="item">
                                 <span>{{ brandList[brandIndex] || '商标分类' }}</span>
                                 <i class="iconfont iconxia"></i>
-                                <ul class="dropdown">
-                                    <li 
-                                        v-for="(item, index) in brandList" 
-                                        :key="index" 
+                                <ul class="trademark">
+                                    <li v-for="(item, index) in brandList" :key="index" 
                                         @click="handleMore('brandIndex', index, 'trademarkCategory')"
                                     >
-                                        {{ item || '不限' }}
+                                        <span class="key">{{ item ? `${item}类` : '不限' }}</span>
+                                        <span class="value">{{ item || '不限' }}</span>
                                     </li>
                                 </ul>
                             </li>
@@ -95,9 +92,7 @@
                                 <span>{{ dealList[dealIndex] || '当面交易' }}</span>
                                 <i class="iconfont iconxia"></i>
                                 <ul class="dropdown">
-                                    <li 
-                                        v-for="(item, index) in dealList" 
-                                        :key="index" 
+                                    <li v-for="(item, index) in dealList" :key="index" 
                                         @click="handleMore('dealIndex', index, 'isEscort')"
                                     >
                                         {{ item || '不限' }}
@@ -108,9 +103,7 @@
                                 <span>{{ pointList[pointIndex]===1?'扣分情况':'无扣分' }}</span>
                                 <i class="iconfont iconxia"></i>
                                 <ul class="dropdown">
-                                    <li 
-                                        v-for="(item, index) in pointList" 
-                                        :key="index" 
+                                    <li v-for="(item, index) in pointList" :key="index" 
                                         @click="handleMore('pointIndex', index, 'deductPoints')"
                                     >
                                         {{ item===1?'不限':'无扣分' }}
@@ -314,7 +307,38 @@ export default {
             regionList: ['', '华东', '华南', '华北', '东北', '华中', '西南', '西北'],
             // 商标
             brandIndex: 0,
-            brandList: ['', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15'],
+            brandList: [
+                {
+                    key: '不限',
+                    value: '',
+                    text: ''
+                },
+                {
+                    key: '01类',
+                    value: '1',
+                    text: '化工原料'
+                },
+                {
+                    key: '02类',
+                    value: '2',
+                    text: '颜料油漆'
+                },
+                {
+                    key: '03类',
+                    value: '3',
+                    text: '日化用品'
+                },
+                {
+                    key: '04类',
+                    value: '4',
+                    text: '燃料油脂'
+                },
+                {
+                    key: '05类',
+                    value: '5',
+                    text: ''
+                },
+            ],
             // 当面交易
             dealIndex: 0,
             dealList: ['', '是', '否'],
@@ -412,14 +436,7 @@ export default {
 
         this.storeName = rtSearch.storeName;
 
-        if(tbList != null) {
-            let { mainProducts } = tbList;
-
-            Object.assign(this.form, tbList)
-            this.goodsList.forEach((item, index) => {
-                if (item === mainProducts) this.goodsIndex = index
-            })
-        }
+        if(tbList != null) Object.assign(this.form, tbList)
 
         this.getGoodsList()
     }
@@ -443,6 +460,10 @@ export default {
         // 筛选
         .filter {
             padding: 0 10px;
+            position: sticky;
+            top: 0;
+            left: 0;
+            z-index: 99;
 
             .layer {
                 font-size: 14px;
@@ -636,15 +657,16 @@ export default {
                             max-height: 550px;
                         }
 
+                        // 下拉
                         .dropdown {
                             max-height: 0;
                             width: 80%;
                             background-color: #fff;
                             position: absolute;
-                            top: 20px;
+                            top: 25px;
                             left: 50%;
                             transform: translate(-50%);
-                            transition: .4s;
+                            transition: 1s;
                             overflow: hidden;
                             z-index: 99;
 
@@ -655,6 +677,45 @@ export default {
                                 line-height: 30px;
                                 text-align: center;
                                 transition: .4s;
+
+                                &:hover {
+                                    color: #fff;
+                                    background-color: #f74549;
+                                }
+                            }
+                        }
+                        // 商标下拉
+                        .trademark {
+                            max-height: 500px;
+                            width: 700px;
+                            display: flex;
+                            flex-wrap: wrap;
+                            padding: 10px 0;
+                            background-color: #fff;
+                            box-shadow: 0 3px 6px 0 rgba(202, 202, 202, 0.8);
+                            position: absolute;
+                            top: 20px;
+                            left: 18%;
+                            transition: 1s;
+                            overflow: hidden;
+                            z-index: 99;
+
+                            li {
+                                width: 100px;
+                                height: 30px;
+                                font-size: 14px;
+                                line-height: 30px;
+                                transition: .4s;
+
+                                .key {
+                                    width: 40%;
+                                    text-align: right;
+                                    color: #c1c1c1;
+                                    display: inline-block;
+                                }
+                                .value {
+                                    color: #333;
+                                }
 
                                 &:hover {
                                     color: #fff;
@@ -1066,6 +1127,10 @@ export default {
             padding-top: 120px;
             background: #fff url("./right-bg.png") no-repeat 0 0;
             border-radius: 8px;
+            position: sticky;
+            top: 0;
+            right: 0;
+            z-index: 99;
 
             .title {
                 font-size: 16px;

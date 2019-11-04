@@ -21,21 +21,22 @@
                 </p>
             </div>
             <ul class="header-right">
-                <li>
+                <!-- <li>
                     <i class="iconfont iconxiaoxi"></i>
                     <span>我的消息</span>
-                </li>
+                </li> -->
                 <li>
                     <i class="iconfont iconbangzhu"></i>
                     <span>帮助中心</span>
                 </li>
-                <li>
+                <!-- <li>
                     <i class="iconfont iconsaoma"></i>
                     <span>投诉建议</span>
-                </li>
-                <li>
+                </li> -->
+                <li class="service">
                     <i class="iconfont icontel-fill"></i>
                     <span>联系客服</span>
+                    <p class="phone">热线：+086-177 8855 7963</p>
                 </li>
             </ul>
         </header>
@@ -148,23 +149,43 @@ export default {
         }
 
         .header-right {
-            width: 350px;
+            width: 320px;
             font-size: 14px;
             display: flex;
-            justify-content: space-between;
             
             li {
                 display: flex;
                 align-items: center;
+                margin-right: 10px;
                 cursor: pointer;
                 transition: .4s;
+                position: relative;
 
                 span {
+                    line-height: 36px;
                     margin-left: 4px;
                 }
 
                 &:hover {
                     color: #e61716;
+                }
+
+                &.service {
+                    .phone {
+                        font-size: 14px;
+                        opacity: 0;
+                        white-space: nowrap;
+                        color: #e61716;
+                        transition: .5s;
+                        position: absolute;
+                        top: 50%;
+                        right: 0;
+                        transform: translate(105%,-50%);
+                    }
+
+                    &:hover .phone {
+                        opacity: 1;
+                    }
                 }
             }
         }
