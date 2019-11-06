@@ -22,7 +22,7 @@
     <ScreenShot></ScreenShot>
 
     <!-- 费用估计 -->
-    <Money></Money>
+    <Money v-if='showChild' :goodsList="goodsList" :allPrice="allPrice"></Money>
 
     <!-- 购买流程 -->
     <Process></Process>
@@ -63,14 +63,22 @@ export default {
     },
     data() {
         return {
+            showChild: false,
             id: 0,
-            goodsList: {}
+            goodsList: {},
+            allPrice: 0
         }
     },
     methods: {
         getStoreDetail (id) {
             api.axs('post', "/tmStore/queryCommonStorePages", { id }).then(({ data }) => {
-                if(data.code === "SUCCESS") this.goodsList = data.data.list[0]
+                var lists = data.data.list[0]
+                if(data.code === "SUCCESS") {
+                    this.goodsList = lists
+                    if(lists) this.allPrice = lists.skillFee + lists.yearFee + lists.price
+                    this.showChild = true
+                }
+                
             });
         }
     },

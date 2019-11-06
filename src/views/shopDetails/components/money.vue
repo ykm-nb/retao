@@ -7,31 +7,31 @@
                 <p class="info">screenshot</p>
             </div>
 
-            <ul class="money-bottom">
+            <ul class="money-bottom" v-if='goodsList'>
                 <li v-for="(item, index) in list" :key="index">
                     <!-- <img :src="item.imgUrl"> -->
                     <template v-if='index===0'>
-                        <i-circle :size="150" :trail-width="10" :stroke-width="10" :percent="80" stroke-color="#ff3b1f">
-                            <strong class="demo-Circle-inner" style="font-size:30px;color:#ff3b1f">80%</strong>
+                        <i-circle :size="150" :trail-width="10" :stroke-width="10" :percent="100" stroke-color="#ff3b1f">
+                            <strong class="demo-Circle-inner" style="font-size:28px;color:#ff3b1f">100%</strong>
                         </i-circle>
                     </template>
                     <template v-else-if='index===1'>
-                        <i-circle :size="150" :trail-width="10" :stroke-width="10" :percent="80" stroke-color="#fcd72b">
-                            <strong class="demo-Circle-inner" style="font-size:30px;color:#fcd72b">80%</strong>
+                        <i-circle :size="150" :trail-width="10" :stroke-width="10" :percent=item.perc stroke-color="#fcd72b">
+                            <strong class="demo-Circle-inner" style="font-size:28px;color:#fcd72b">{{item.percents + '%'}}</strong>
                         </i-circle>
                     </template>
                     <template v-else-if='index===2'>
-                        <i-circle :size="150" :trail-width="10" :stroke-width="10" :percent="80" stroke-color="#24b3fc">
-                            <strong class="demo-Circle-inner" style="font-size:30px;color:#24b3fc">80%</strong>
+                        <i-circle :size="150" :trail-width="10" :stroke-width="10" :percent=item.perc stroke-color="#24b3fc">
+                            <strong class="demo-Circle-inner" style="font-size:28px;color:#24b3fc">{{item.percents + '%'}}</strong>
                         </i-circle>
                     </template>
                     <template v-else-if='index===3'>
-                        <i-circle :size="150" :trail-width="10" :stroke-width="10" :percent="80" stroke-color="#2ae2df">
-                            <strong class="demo-Circle-inner" style="font-size:30px;color:#2ae2df">80%</strong>
+                        <i-circle :size="150" :trail-width="10" :stroke-width="10" :percent=item.perc stroke-color="#2ae2df">
+                            <strong class="demo-Circle-inner" style="font-size:28px;color:#2ae2df">{{item.percents + '%'}}</strong>
                         </i-circle>
                     </template>
                     <p class="text">{{ item.text }}</p>
-                    <p class="price">{{ item.price.toFixed(2) }}</p>
+                    <p class="price">{{ (item.price*10000).toFixed(2) }}</p>
                 </li>
             </ul>
         </div>
@@ -42,28 +42,40 @@
 <script>
 export default {
     name: "help",
+    props: {
+        goodsList: {
+            type: Object
+        },
+        allPrice: {}
+    },
     data() {
         return {
             list: [
                 {
                     imgUrl: require("./images/money1.png"),
                     text: '总计费用',
-                    price: 302500
+                    price: this.allPrice
                 },
                 {
                     imgUrl: require("./images/money2.png"),
                     text: '网店销售',
-                    price: 230000
+                    price: this.goodsList.price,
+                    perc: JSON.parse(((this.goodsList.price*100/this.allPrice)).toFixed(0)),
+                    percents: ((this.goodsList.price/this.allPrice)*100).toFixed(2)
                 },
                 {
                     imgUrl: require("./images/money3.png"),
                     text: '消保金',
-                    price: 50000
+                    price: this.goodsList.yearFee,
+                    perc: JSON.parse(((this.goodsList.yearFee*100/this.allPrice)).toFixed(0)),
+                    percents: ((this.goodsList.yearFee/this.allPrice)*100).toFixed(2)
                 },
                 {
                     imgUrl: require("./images/money4.png"),
                     text: '技术年费',
-                    price: 22500
+                    price: this.goodsList.skillFee,
+                    perc: JSON.parse(((this.goodsList.skillFee*100/this.allPrice)).toFixed(0)),
+                    percents: ((this.goodsList.skillFee/this.allPrice)*100).toFixed(2)
                 },
             ]
         }
