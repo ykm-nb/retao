@@ -228,7 +228,7 @@
                                 <span @click="consult">联系客服</span>
                             </button>
                             <p class="number" :title="item.productNo">编号：{{ item.productNo }}</p>
-                            <p class="time" :title="item.updateTime">更新时间：{{ item.updateTime }}</p>
+                            <p class="time" :title="item.followTime || item.updateTime">更新时间：{{ item.followTime || item.updateTime }}</p>
                         </div>
                     </div>
                     <div v-show="goodsLists.length === 0" class="no-data">暂无数据</div>
@@ -1077,6 +1077,7 @@ export default {
                         .title {
                             font-size: 14px;
                             line-height: 20px;
+                            white-space: nowrap;
                             color: #999999; 
                         }
 
@@ -1086,6 +1087,7 @@ export default {
                             .tag {
                                 font-size: 14px;
                                 line-height: 20px;
+                                white-space: nowrap;
                                 padding: 0 20px;
                                 margin-right: 10px;
                                 border-radius: 6px 6px 2px 2px;

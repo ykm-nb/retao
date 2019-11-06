@@ -82,6 +82,9 @@
       </li>
     </ul>
 
+    <!-- 联系客服 -->
+    <Consult></Consult>
+
   </div>
 </template>
 
@@ -90,6 +93,7 @@ import ls from "store2";
 import api from "@/api";
 const Header = () => import ('@/components/Header/Header')
 const Nav = () => import ('@/components/Nav/Nav')
+const Consult = () => import ('@/components/Consult/Consult')
 const Footer = () => import ('@/components/Footer/Footer')
 const Info = () => import ('./components/info')
 const Shop1 = () => import ('./components/shop1')
@@ -103,7 +107,8 @@ export default {
   name: 'index',
   components: {
     Footer, Header,
-    Nav, Shop1, Shop2,
+    Consult, Nav, 
+    Shop1, Shop2,
     Safe, Service,
     Message, Info
   },
