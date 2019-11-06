@@ -9,7 +9,27 @@
 
             <ul class="money-bottom">
                 <li v-for="(item, index) in list" :key="index">
-                    <img :src="item.imgUrl">
+                    <!-- <img :src="item.imgUrl"> -->
+                    <template v-if='index===0'>
+                        <i-circle :size="150" :trail-width="10" :stroke-width="10" :percent="80" stroke-color="#ff3b1f">
+                            <strong class="demo-Circle-inner" style="font-size:30px;color:#ff3b1f">80%</strong>
+                        </i-circle>
+                    </template>
+                    <template v-else-if='index===1'>
+                        <i-circle :size="150" :trail-width="10" :stroke-width="10" :percent="80" stroke-color="#fcd72b">
+                            <strong class="demo-Circle-inner" style="font-size:30px;color:#fcd72b">80%</strong>
+                        </i-circle>
+                    </template>
+                    <template v-else-if='index===2'>
+                        <i-circle :size="150" :trail-width="10" :stroke-width="10" :percent="80" stroke-color="#24b3fc">
+                            <strong class="demo-Circle-inner" style="font-size:30px;color:#24b3fc">80%</strong>
+                        </i-circle>
+                    </template>
+                    <template v-else-if='index===3'>
+                        <i-circle :size="150" :trail-width="10" :stroke-width="10" :percent="80" stroke-color="#2ae2df">
+                            <strong class="demo-Circle-inner" style="font-size:30px;color:#2ae2df">80%</strong>
+                        </i-circle>
+                    </template>
                     <p class="text">{{ item.text }}</p>
                     <p class="price">{{ item.price.toFixed(2) }}</p>
                 </li>

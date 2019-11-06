@@ -8,13 +8,13 @@
             </div>
 
             <ul class="imgs">
-                <li class="item" v-for="(item, index) in list" :key="index">
+                <li class="item" v-for="(item, index) in lists" :key="index">
                     <div class="time-limit">
                         <span>商标 :</span>
-                        <span>{{ item.sb }}</span>
+                        <span>{{ item.mainProductName }}</span>
                     </div>
                     <div class="goods-img">
-                        <img :src="item.imgUrl">
+                        <img :src="item.mainProductUrl">
                     </div>
                     <div class="section1">
                         <img src="./images/tm1.png">
@@ -46,45 +46,12 @@
 </template>
 
 <script>
+import ls from "store2";
 export default {
     name: "more",
     data() {
         return {
-            list: [
-                {
-                    sb: '巧暖旗舰店',
-                    imgUrl: require('./images/more-goods1.png'),
-                    storeName: '质邦旗舰店',
-                    firstCategory: '餐饮具类目',
-                    trademarkCategory: '21类',
-                    brand: 'R标',
-                    storeType: '居家日用旗舰店',
-                    city: '浙江省宁波市',
-                    price: 10.80
-                },
-                {
-                    sb: '巧暖旗舰店',
-                    imgUrl: require('./images/more-goods1.png'),
-                    storeName: '质邦旗舰店',
-                    firstCategory: '餐饮具类目',
-                    trademarkCategory: '21类',
-                    brand: 'R标',
-                    storeType: '居家日用旗舰店',
-                    city: '浙江省宁波市',
-                    price: 10.80
-                },
-                {
-                    sb: '巧暖旗舰店',
-                    imgUrl: require('./images/more-goods1.png'),
-                    storeName: '质邦旗舰店',
-                    firstCategory: '餐饮具类目',
-                    trademarkCategory: '21类',
-                    brand: 'R标',
-                    storeType: '居家日用旗舰店',
-                    city: '浙江省宁波市',
-                    price: 10.80
-                }
-            ],
+            lists: ls.session.get('firstLists') //首页特价/优质/稀缺模块第一条
         }
     }
 }

@@ -134,7 +134,7 @@
                                 <img src="./images/zan.png">
                             </button>
                         </div>
-                        <p class="item2">网店出售价格（万元）</p>
+                        <p class="item2">网店出售价格</p>
                         <div class="item3">
                             <p>
                                 <span>消费者保证金：</span>
@@ -187,15 +187,15 @@
                 <li class="item">
                     <p class="title">咨询顾问</p>
                     <div class="avatar">
-                        <img src="./images/service1.png">
+                        <img :src="serviceList[0].imgUrl">
                     </div>
                     <p class="name">
                         <span>专业顾问：</span>
-                        <span class="value">张文豪</span>
+                        <span class="value">{{serviceList[0].name}}</span>
                     </p>
                     <p class="phone">
                         <span>联系电话：</span>
-                        <span class="value">17342065160</span>
+                        <span class="value">{{serviceList[0].phone}}</span>
                     </p>
                     <div class="btn">
                         <button @click="consult" class="qq" type="button">QQ咨询</button>
@@ -210,15 +210,15 @@
                 <li class="item">
                     <p class="title">咨询顾问</p>
                     <div class="avatar">
-                        <img src="./images/service1.png">
+                        <img :src="serviceList[1].imgUrl">
                     </div>
                     <p class="name">
                         <span>专业顾问：</span>
-                        <span class="value">张文豪</span>
+                        <span class="value">{{serviceList[1].name}}</span>
                     </p>
                     <p class="phone">
                         <span>联系电话：</span>
-                        <span class="value">17342063807</span>
+                        <span class="value">{{serviceList[1].phone}}</span>
                     </p>
                     <div class="btn">
                         <button @click="consult" class="qq" type="button">QQ咨询</button>
@@ -233,15 +233,15 @@
                 <li class="item">
                     <p class="title">咨询顾问</p>
                     <div class="avatar">
-                        <img src="./images/service1.png">
+                        <img :src="serviceList[2].imgUrl">
                     </div>
                     <p class="name">
                         <span>专业顾问：</span>
-                        <span class="value">张文豪</span>
+                        <span class="value">{{serviceList[2].name}}</span>
                     </p>
                     <p class="phone">
                         <span>联系电话：</span>
-                        <span class="value">17788557963</span>
+                        <span class="value">{{serviceList[2].phone}}</span>
                     </p>
                     <div class="btn">
                         <button @click="consult" class="qq" type="button">QQ咨询</button>
@@ -256,7 +256,7 @@
                     class="dropdown" :class="{'dropdown-open':showDropdown}" 
                     :style="{top: (dropdownIndex * 440) + 'px'}"
                 >
-                    <img src="./images/wxcode.png">
+                    <img :src="serviceList[dropdownIndex].wxUrl">
                 </div>
             </ul>
         </div>
@@ -278,7 +278,31 @@ export default {
         return {
             infoForm: {},
             showDropdown: false,
-            dropdownIndex: 0
+            dropdownIndex: 0,
+            serviceList: [
+                
+                {
+                    imgUrl: require('./images/service4.png'),
+                    name: '高奕豪',
+                    description: '6年从业经验',
+                    phone: 17342065160,
+                    wxUrl: require('./images/wxcode4.png')
+                },
+                {
+                    imgUrl: require('./images/service5.png'),
+                    name: '郑梦琳',
+                    description: '5年从业经验',
+                    phone: 17342063807,
+                    wxUrl: require('./images/wxcode5.png')
+                },
+                {
+                    imgUrl: require('./images/service7.png'),
+                    name: '张凯莉',
+                    description: '4年从业经验',
+                    phone: 17788557963,
+                    wxUrl: require('./images/wxcode7.png')
+                }
+            ]
         }
     },
     methods: {
@@ -667,6 +691,9 @@ export default {
                         margin: 15px 15px 25px;
                         border-radius: 5px;
                         overflow: hidden;
+                        img {
+                            width: 100%;
+                        }
                     }
 
                     .name span {

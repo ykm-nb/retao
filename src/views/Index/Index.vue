@@ -119,7 +119,7 @@ export default {
       yzList: [],
       xqList: [],
       tmList: [],
-      tbList: [],
+      tbList: []
     }
   },
   methods: {
@@ -164,16 +164,25 @@ export default {
     // 获取首页五个店铺信息
     api.axs('post', "/tmStore/queryHomeStorePages", {}).then(({ data }) => {
         if(data.code === "SUCCESS") {
-            data.data.tjList.list.forEach((item,index) => {
+          var datas = data.data
+            datas.tjList.list.forEach((item,index) => {
               if(item.pictureUrl.length > 70) {
-                data.data.tjList.list[index].pictureUrl = item.pictureUrl.split(',')[0]
+                datas.tjList.list[index].pictureUrl = item.pictureUrl.split(',')[0]
               }
             })
-            this.tjList = data.data.tjList.list
-            this.yzList = data.data.yzList.list
-            this.xqList = data.data.xqList.list
-            this.tmList = data.data.tmList.list
-            this.tbList = data.data.tbList.list
+            this.tjList = datas.tjList.list
+            this.yzList = datas.yzList.list
+            this.xqList = datas.xqList.list
+            this.tmList = datas.tmList.list
+            this.tbList = datas.tbList.list
+
+            //详情页-猜你喜欢 的数据来源
+            var firstLists = []
+            if (datas.tjList.list.length) firstLists.push(datas.tjList.list[0])
+            if (datas.yzList.list.length) firstLists.push(datas.yzList.list[0])
+            if (datas.xqList.list.length) firstLists.push(datas.xqList.list[0])
+            ls.session('firstLists',firstLists)
+
         }
     });
   },
