@@ -66,16 +66,16 @@ export default {
                 {
                     imgUrl: require("./images/money3.png"),
                     text: '消保金',
-                    price: this.goodsList.yearFee,
-                    perc: JSON.parse(((this.goodsList.yearFee*100/this.allPrice)).toFixed(0)),
-                    percents: ((this.goodsList.yearFee/this.allPrice)*100).toFixed(2)
+                    price: this.goodsList.skillFee,
+                    perc: JSON.parse(((this.goodsList.skillFee*100/this.allPrice)).toFixed(0)),
+                    percents: ((this.goodsList.skillFee/this.allPrice)*100).toFixed(2)
                 },
                 {
                     imgUrl: require("./images/money4.png"),
                     text: '技术年费',
-                    price: this.goodsList.skillFee,
-                    perc: JSON.parse(((this.goodsList.skillFee*100/this.allPrice)).toFixed(0)),
-                    percents: ((this.goodsList.skillFee/this.allPrice)*100).toFixed(2)
+                    price: this.goodsList.yearFee,
+                    perc: JSON.parse(((this.goodsList.yearFee*100/this.allPrice)).toFixed(0)),
+                    percents: ((this.goodsList.yearFee/this.allPrice)*100).toFixed(2)
                 },
             ]
         }

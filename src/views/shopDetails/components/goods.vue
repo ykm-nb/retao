@@ -127,7 +127,7 @@
                         <div class="item item1">
                             <p>
                                 <span class="symbol">￥</span>
-                                <span class="price">{{ Number(goodsList.price).toFixed(2) }}</span>
+                                <span class="price">{{ Number(goodsList.price*10000).toFixed(2) }}</span>
                             </p>
                             <button>
                                 <span>今日超值</span>
@@ -138,12 +138,12 @@
                         <div class="item3">
                             <p>
                                 <span>消费者保证金：</span>
-                                <span class="value">{{ Number(goodsList.yearFee).toFixed(2) || 0 }}</span>
+                                <span class="value">{{ Number(goodsList.skillFee*10000).toFixed(2) || 0 }}</span>
                                 <span>（需退还）</span>
                             </p>
                             <p>
                                 <span>技术年费：</span>
-                                <span class="value">{{ Number(goodsList.skillFee).toFixed(2) || 0 }}</span>
+                                <span class="value">{{ Number(goodsList.yearFee*10000).toFixed(2) || 0 }}</span>
                                 <span>（需退还）</span>
                             </p>
                         </div>
