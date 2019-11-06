@@ -21,15 +21,15 @@
                             </div>
                             <div class="item">
                                 <p>主营类目</p>
-                                <p class="value">{{ goodsList.mainProductName || '*' }}</p>
+                                <p class="value">{{ goodsList.mainProductName || 0 }}</p>
                             </div>
                             <div class="item">
                                 <p>商标类型</p>
-                                <p class="value">{{ goodsList.trademarkCategory	 || '*' }}类</p>
+                                <p class="value">{{ goodsList.trademarkCategory	 || 0 }}类</p>
                             </div>
                             <div class="item">
                                 <p>考核情况</p>
-                                <p class="value">未通过考核{{ goodsList.kpi || '*' }}月</p>
+                                <p class="value">未通过{{ goodsList.kpi || 0 }}月</p>
                             </div>
                             <div class="item">
                                 <p>支持迁址</p>
@@ -37,7 +37,7 @@
                             </div>
                             <div class="item">
                                 <p>注册资金</p>
-                                <p class="value">{{ goodsList.registMoney || '*' }}万</p>
+                                <p class="value">{{ goodsList.registMoney || 0 }}万</p>
                             </div>
                             <div class="item">
                                 <p>所在地区</p>
@@ -49,15 +49,15 @@
                             </div>
                             <div class="item">
                                 <p>一般扣分</p>
-                                <p class="value">{{ goodsList.normalPunishment || '*' }}</p>
+                                <p class="value">{{ goodsList.normalPunishment || 0 }}</p>
                             </div>
                             <div class="item">
                                 <p>严重扣分</p>
-                                <p class="value">{{ goodsList.punishment || '*' }}</p>
+                                <p class="value">{{ goodsList.punishment || 0 }}</p>
                             </div>
                             <div class="item">
                                 <p>售假扣分</p>
-                                <p class="value">{{ goodsList.fakePunishment || '*' }}</p>
+                                <p class="value">{{ goodsList.fakePunishment || 0 }}</p>
                             </div>
                             <div class="item">
                                 <p>是否贷款</p>
@@ -108,11 +108,12 @@
                         </li>
                         <li>
                             <p class="key">店铺状态</p>
-                            <p class="value">{{ goodsList.storeStatus==2?'在售':'下架' }}</p>
+                            <p class="value">{{ goodsList.isGrounding==1?'上架':'下架' }}</p>
                         </li>
                         <li>
                             <p class="key">发布时间</p>
-                            <p class="value">{{ goodsList.followTime || goodsList.updateTime }}</p>
+                            <p v-if="goodsList.followTime" class="value">{{ goodsList.followTime.substring(0,10) }}</p>
+                            <p v-if="goodsList.updateTime && !goodsList.followTime" class="value">{{ goodsList.updateTime.substring(0,10) }}</p>
                         </li>
                         <li>
                             <p class="key">交易方式</p>
@@ -126,7 +127,7 @@
                         <div class="item item1">
                             <p>
                                 <span class="symbol">￥</span>
-                                <span class="price">{{ parseFloat(goodsList.price) }}</span>
+                                <span class="price">{{ Number(goodsList.price).toFixed(2) }}</span>
                             </p>
                             <button>
                                 <span>今日超值</span>
@@ -137,12 +138,12 @@
                         <div class="item3">
                             <p>
                                 <span>消费者保证金：</span>
-                                <span class="value">50000.00</span>
+                                <span class="value">{{ Number(goodsList.yearFee).toFixed(2) || 0 }}</span>
                                 <span>（需退还）</span>
                             </p>
                             <p>
                                 <span>技术年费：</span>
-                                <span class="value">{{ goodsList.skillFee || '*' }}</span>
+                                <span class="value">{{ Number(goodsList.skillFee).toFixed(2) || 0 }}</span>
                                 <span>（需退还）</span>
                             </p>
                         </div>
@@ -150,7 +151,7 @@
                     <!-- 按钮 -->
                     <div class="info-btn">
                         <button class="buy" type="button">立即购买</button>
-                        <button class="consult" type="button">咨询顾问</button>
+                        <button @click="consult" class="consult" type="button">咨询顾问</button>
                     </div>
                     <!-- 底部 -->
                     <ul class="info-bottom">
@@ -194,12 +195,12 @@
                     </p>
                     <p class="phone">
                         <span>联系电话：</span>
-                        <span class="value">18164584012</span>
+                        <span class="value">17342065160</span>
                     </p>
                     <div class="btn">
-                        <button class="qq" type="button">QQ咨询</button>
+                        <button @click="consult" class="qq" type="button">QQ咨询</button>
                         <button 
-                            @mouseenter="showDropdown = true" 
+                            @mouseenter="dropdown(0)" 
                             @mouseleave="showDropdown = false" 
                             class="wechat" 
                             type="button"
@@ -217,12 +218,12 @@
                     </p>
                     <p class="phone">
                         <span>联系电话：</span>
-                        <span class="value">18164584012</span>
+                        <span class="value">17342063807</span>
                     </p>
                     <div class="btn">
-                        <button class="qq" type="button">QQ咨询</button>
+                        <button @click="consult" class="qq" type="button">QQ咨询</button>
                         <button 
-                            @mouseenter="showDropdown = true" 
+                            @mouseenter="dropdown(1)" 
                             @mouseleave="showDropdown = false" 
                             class="wechat" 
                             type="button"
@@ -240,33 +241,23 @@
                     </p>
                     <p class="phone">
                         <span>联系电话：</span>
-                        <span class="value">18164584012</span>
+                        <span class="value">17788557963</span>
                     </p>
                     <div class="btn">
-                        <button class="qq" type="button">QQ咨询</button>
+                        <button @click="consult" class="qq" type="button">QQ咨询</button>
                         <button 
-                            @mouseenter="showDropdown = true" 
-                            @mouseleave="showDropdown = false" 
-                            class="wechat" 
-                            type="button"
+                            @mouseenter="dropdown(2)" @mouseleave="showDropdown = false" 
+                            class="wechat" type="button"
                         >微信咨询</button>
                     </div>
                 </li>
                 
-                
-                <!-- <div class="div" @mouseenter="showDropdown = true" @mouseleave="showDropdown = false"></div>
-                <div 
-                    @mouseenter="showDropdown = true" 
-                    @mouseleave="showDropdown = false" 
-                    class="dropdown" 
-                    :class="{'dropdown-open':showDropdown}"
+                <div @mouseenter="showDropdown = true" @mouseleave="showDropdown = false" 
+                    class="dropdown" :class="{'dropdown-open':showDropdown}" 
+                    :style="{top: (dropdownIndex * 440) + 'px'}"
                 >
-                    <img src="./images/code.png">
-                    <p class="title">微信号</p>
-                    <p class="phone" ref="wechatNum">15242325462313</p>
-                    <button @click="clickCopy" type="button">复制微信号</button>
-                    <p class="tip">扫一扫或复制微信号，添加好友咨询</p>
-                </div> -->
+                    <img src="./images/wxcode.png">
+                </div>
             </ul>
         </div>
 
@@ -286,12 +277,12 @@ export default {
     data() {
         return {
             infoForm: {},
-            showDropdown: false
+            showDropdown: false,
+            dropdownIndex: 0
         }
     },
     methods: {
-        // 复制微信号
-        clickCopy() {
+        clickCopy() { // 复制微信号
             const num = this.$refs.wechatNum,
                   input = document.createElement('input');
 
@@ -304,6 +295,13 @@ export default {
                 this.$Message.success({content: "复制成功~"})
             }
             document.body.removeChild(input);
+        },
+        consult() { // 联系客服
+            window.open("https://url.cn/5iD2Ua8?_type=wpa&qidian=true");
+        },
+        dropdown (index) {
+            this.showDropdown = true
+            this.dropdownIndex = index
         }
     }
 }
@@ -718,83 +716,42 @@ export default {
                     }
                 }
 
+                .dropdown {
+                    width: 100%;
+                    max-height: 0;
+                    background-color: #fff;
+                    box-shadow: 0 10px 30px rgba(0,0,0,.1);
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    transform: translate(-100%);
+                    transition: .6s;
+                    opacity: 0;
+                    overflow: hidden;
+                    z-index: 99;
 
-                // .div {
-                //     content: "";
-                //     width: 100%;
-                //     height: 32px;
-                //     background-color: transparent;
-                //     position: absolute;
-                //     bottom: -7px;
-                //     left: 0;
-                // }
+                    img {
+                        display: block;
+                        margin: 26px auto 0;
+                    }
 
-                // .dropdown {
-                //     width: 100%;
-                //     max-height: 0;
-                //     background-color: #fff;
-                //     box-shadow: 0 10px 30px rgba(0,0,0,.1);
-                //     position: absolute;
-                //     left: 0;
-                //     bottom: 0;
-                //     transform: translate(0,102%);
-                //     transition: .6s;
-                //     opacity: 0;
-                //     overflow: hidden;
-                //     z-index: 99;
-
-                //     img {
-                //         display: block;
-                //         margin: 26px auto 0;
-                //     }
-
-                //     .title {
-                //         margin: 15px 0;
-                //     }
-
-                //     .phone {
-                //         font-size: 14px;
-                //         line-height: 14px;
-                //         font-weight: bold;
-                //         color: #333333;
-                //         margin: 0;
-                //     }
-
-                //     button {
-                //         width: 80px;
-                //         height: 24px;
-                //         color: #fff;
-                //         margin: 16px 0;
-                //         background-color: #49c019;
-                //         border-radius: 3px;
-                //         border: none;
-                //         cursor: pointer;
-                //     }
-
-                //     .tip {
-                //         font-size: 14px;
-                //         line-height: 14px;
-                //         color: #999999;
-                //         margin-bottom: 30px;
-                //     }
-
-                //     &:after {
-                //         content: "";
-                //         width: 0;
-                //         height: 0;
-                //         border-top: 15px solid #f1f1f1;
-                //         border-left: 15px solid transparent;
-                //         border-right: 15px solid transparent;
-                //         position: absolute;
-                //         top: 0;
-                //         left: 50%;
-                //         transform: translate(-50%);
-                //     }
-                // }
-                // .dropdown-open {
-                //     max-height: 100%;
-                //     opacity: 1;
-                // }
+                    &:after {
+                        content: "";
+                        width: 0;
+                        height: 0;
+                        border-top: 15px solid #f1f1f1;
+                        border-left: 15px solid transparent;
+                        border-right: 15px solid transparent;
+                        position: absolute;
+                        top: 0;
+                        left: 50%;
+                        transform: translate(-50%);
+                    }
+                }
+                .dropdown-open {
+                    max-height: 100%;
+                    opacity: 1;
+                }
             }
         }
     }

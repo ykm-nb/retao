@@ -159,9 +159,9 @@
                         </div>
                     </div>
                     <div class="sort-right">
-                        <img src="./shop1.png">
-                        <img src="./shop2.png">
-                        <img src="./shop3.png">
+                        <img @click="form.storeProperties='1', getGoodsList()" src="./shop1.png">
+                        <img @click="form.storeProperties='2', getGoodsList()" src="./shop2.png">
+                        <img @click="form.storeProperties='3', getGoodsList()" src="./shop3.png">
                     </div>
                 </div>
 
@@ -225,7 +225,7 @@
                             </div>
                             <button type="button">
                                 <img src="./phone.png">
-                                <span>联系客服</span>
+                                <span @click="consult">联系客服</span>
                             </button>
                             <p class="number" :title="item.productNo">编号：{{ item.productNo }}</p>
                             <p class="time" :title="item.updateTime">更新时间：{{ item.updateTime }}</p>
@@ -258,7 +258,7 @@
                 <div class="item">
                     <input type="text" placeholder="请输入您的手机号">
                 </div>
-                <div class="item">
+                <div class="item item-textarea">
                     <textarea placeholder="请简单描述您的需求"></textarea>
                 </div>
                 <button class="btn" type="button">
@@ -283,6 +283,7 @@ export default {
                 total: 1
             },
             form: {
+                storeProperties: '',// 店铺属性
                 mainProducts: '', // 主营
                 storeType: '',
                 // 价格
@@ -629,12 +630,12 @@ export default {
         gotoDetail(id) { // 跳转详情
             this.$router.push({ 
                 path: 'shopdetails',
-                query: { 
-                    id: parseInt(id),
-                    pageNum: this.pageForm.pageNum
-                }
+                query: { id: parseInt(id) }
             })
-        }
+        },
+        consult() { // 联系客服
+            window.open("https://url.cn/5iD2Ua8?_type=wpa&qidian=true");
+        },
     },
     created() {
         this.getGoodsList()
@@ -660,10 +661,6 @@ export default {
         .filter {
             padding: 0 10px;
             box-shadow: 0 3px 6px 0 rgba(202, 202, 202, 0.8);
-            position: sticky;
-            top: 0;
-            left: 0;
-            z-index: 99;
 
             .layer {
                 font-size: 14px;
@@ -713,6 +710,7 @@ export default {
                     li {
                         width: 110px;
                         text-align: left;
+                        line-height: 26px;
                         margin-bottom: 6px;
 
                         p {
@@ -963,6 +961,10 @@ export default {
             .sort-right {
                 width: 380px;
                 .flex();
+
+                img {
+                    cursor: pointer;
+                }
             }
         }
 
@@ -988,10 +990,10 @@ export default {
                     display: flex;
                     align-items: center;
                     position: relative;
+                    overflow: hidden;
 
                     img {
                         width: 100%;
-                        height: 100%;
                     }
 
                     p {
@@ -1309,7 +1311,7 @@ export default {
             border-radius: 8px;
             position: sticky;
             top: 0;
-            left: 0;
+            right: 0;
             z-index: 99;
 
             .title {
@@ -1321,6 +1323,7 @@ export default {
             }
 
             .item {
+                height: 42px;
                 width: 172px;
                 margin: 0 auto 15px;
 
@@ -1331,6 +1334,7 @@ export default {
                     line-height: 42px;
                     text-align: center;
                     color: #000;
+                    display: block;
                     border: 1px solid #e6e6e6;
                 }
 
@@ -1343,6 +1347,9 @@ export default {
                     border: 1px solid #e6e6e6;
                     resize: none;
                 }
+            }
+            .item-textarea {
+                height: 65px;
             }
 
             .btn {

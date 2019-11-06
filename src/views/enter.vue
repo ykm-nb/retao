@@ -9,7 +9,7 @@
         <!-- banner -->
         <div class="inner-bg banner-bg"></div>
 
-        <div class="inner-bg layer-bg">
+        <div class="inner-bg layer-bg" @click="showDropdown = false">
             <div class="inner">
                 <!-- 店铺类型 -->
                 <div class="shop">
@@ -17,12 +17,12 @@
                         <p class="title">店铺类型</p>
                     </div>
                     <div class="content">
-                        <input type="text" value="旗舰店">
-                        <img class="xia" src="@/assets/images/xia.png">
-                        <ul class="dropdown">
-                            <li>旗舰店</li>
-                            <li>专卖店</li>
-                            <li>专营店</li>
+                        <input v-model="selectedText" type="text">
+                        <img @click.stop="showDropdown = !showDropdown" class="xia" src="@/assets/images/xia.png">
+                        <ul class="dropdown" :class="{'dropdown-show': showDropdown}">
+                            <li @click="selectedText = '旗舰店'">旗舰店</li>
+                            <li @click="selectedText = '专卖店'">专卖店</li>
+                            <li @click="selectedText = '专营店'">专营店</li>
                         </ul>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                     </div>
                     <div class="content">
                         <ul class="left">
-                            <li @mouseover="goodIndex = index" v-for="(item, index) in goodList" :key="index">
+                            <li @click="goodIndex = index" v-for="(item, index) in goodList" :key="index">
                                 <p>{{ item.title }}</p>
                                 <img src="@/assets/images/right.png">
                             </li>
@@ -42,14 +42,27 @@
                                 <img src="@/assets/images/good-top.png">
                             </div>
                         </ul>
-                        <ul class="right">
+                        <ul class="middle">
                             <li class="item" v-show="goodIndex === index1" v-for="(good, index1) in goodList" :key="index1">
-                                <div class="item-content" :class="{'actived': radioIndex === index2}" v-for="(item, index2) in good.content" :key="index2">
-                                    <div @click="radioIndex = index2" class="radio"></div>
-                                    <p @click="radioIndex = index2">{{ item }}</p>
+                                <div class="item-content" :class="{'actived': item.isCheck}" 
+                                    v-for="(item, index2) in good.content" :key="index2" 
+                                    @click="checkThis(index1, index2)"
+                                >
+                                    <div class="radio"></div>
+                                    <p>{{ item.text }}</p>
                                 </div>
                             </li>
                         </ul>
+                        <div class="right">
+                            <p class="title">已选类目</p>
+                            <ul>
+                                <li class="item" v-for="(item, index) in checkList" :key="index">
+                                    <p class="item-title">{{ item.title }}：</p>
+                                    <p class="item-text">{{ item.obj.text }}</p>
+                                </li>
+                            </ul>
+                            <button class="clear" @click="checkList = []" type="button">全部清除</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -112,75 +125,670 @@ export default {
     },
     data() {
         return {
+            // 店铺类型
+            selectedText: '旗舰店',
+            showDropdown: false, // 显示下拉
             // 商品类目
             goodIndex: 0,
-            radioIndex: 0,
             goodList: [
                 {
                     title: "服饰鞋包",
-                    content: ["户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具"]
+                    content: [
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品1"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        }
+                    ]
                 },
                 {
                     title: "美容护理",
-                    content: ["户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具"]
+                    content: [
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品1"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        }
+                    ]
                 },
                 {
                     title: "数码电器",
-                    content: ["户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具"]
+                    content: [
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品2"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        }
+                    ]
                 },
                 {
                     title: "运动户外",
-                    content: ["户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具"]
+                    content: [
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品3"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        }
+                    ]
                 },
                 {
                     title: "家装家饰",
-                    content: ["户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具"]
+                    content: [
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品4"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        }
+                    ]
                 },
                 {
                     title: "汽车配件",
-                    content: ["户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具"]
+                    content: [
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品5"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        }
+                    ]
                 },
                 {
                     title: "书籍音像",
-                    content: ["户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具"]
+                    content: [
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品6"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        }
+                    ]
                 },
                 {
                     title: "手机",
-                    content: ["户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具"]
+                    content: [
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品7"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        }
+                    ]
                 },
                 {
                     title: "母婴",
-                    content: ["户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具"]
+                    content: [
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品8"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        }
+                    ]
                 },
                 {
                     title: "生活服务",
-                    content: ["户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具"]
+                    content: [
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品9"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        }
+                    ]
                 },
                 {
                     title: "食品/保健",
-                    content: ["户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具"]
+                    content: [
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品10"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        }
+                    ]
                 },
                 {
                     title: "家用电器",
-                    content: ["户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具"]
+                    content: [
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品11"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        }
+                    ]
                 },
                 {
                     title: "游戏/话费",
-                    content: ["户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具"]
+                    content: [
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品12"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        }
+                    ]
                 },
                 {
                     title: "家具用品",
-                    content: ["户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具"]
+                    content: [
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品13"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        }
+                    ]
                 },
                 {
                     title: "珠宝配饰",
-                    content: ["户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具"]
+                    content: [
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品14"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        }
+                    ]
                 },
                 {
                     title: "乐器",
-                    content: ["户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具", "运动鞋new", "运动鞋new", "运动鞋new","户外/登山/野营/旅行用品", "户外/登山/野营/", "户外/登山/野营/旅行用品", "电动车/配件/交通工具", "电动车/配件/交通工具", "电动车/配件/交通工具"]
+                    content: [
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品15"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/"
+                        },
+                        {
+                            isCheck: false,
+                            text: "户外/登山/野营/旅行用品"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电动车/配件/交通工具"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动鞋new"
+                        }
+                    ]
                 },
             ],
+            checkList: [], // 已选类目列表
             // 服务类型
             serviceIndex: 0,
             serviceList: [
@@ -200,7 +808,29 @@ export default {
                     title: "钻石入驻服务",
                     tags: ["便捷易用，简单高效", "递交迅速，反馈及时", "全流程掌握，随时查看进度"]
                 }
-            ]
+            ],
+            
+        }
+    },
+    methods: {
+        checkThis (index1, index2) {
+            const obj = this.goodList[index1].content[index2];
+            obj.isCheck = !obj.isCheck;
+
+            if(obj.isCheck) {
+                if (!obj.id) {
+                    obj.id = `${index1}${obj.text}${index2}`;
+                    this.checkList.push({
+                        title: this.goodList[index1].title,
+                        obj: obj
+                    })
+                }
+            } else {
+                this.checkList.filter(item => {
+                    return item.obj.id != `${index1}${obj.text}${index2}`
+                })
+                obj.id = ''
+            }
         }
     }
 }
@@ -256,13 +886,11 @@ export default {
                         transform: translate(0,-50%);
                     }
 
-                    .xia:active ~ .dropdown{
-                        display: block;
-                    }
-
                     .dropdown {
                         width: 100%;
                         display: none;
+                        background-color: #fff;
+                        box-shadow: 0 3px 6px 0 rgba(202, 202, 202, 0.8);
                         position: absolute;
                         left: 0;
                         top: 100%;
@@ -282,6 +910,9 @@ export default {
                             }
                         }
                     }
+                    .dropdown-show {
+                        display: block;
+                    }
                 }
             }
 
@@ -289,9 +920,10 @@ export default {
                 .content {
                     display: flex;
                     margin-top: 55px;
+                    box-shadow: 0 3px 6px 0 rgba(202, 202, 202, 0.8);
 
                     .left {
-                        width: 235px;
+                        width: 160px;
                         color: #fff;
                         padding: 18px 0 0 0;
                         background-color: #ffc9cd;
@@ -326,8 +958,8 @@ export default {
                         }
                     }
 
-                    .right {
-                        width: calc(100% - 235px);
+                    .middle {
+                        width: calc((100% - 160px) * 0.75);
                         padding-top: 26px;
                         background-color: #fff;
 
@@ -340,10 +972,27 @@ export default {
                                 width: calc(100% / 3);
                                 display: flex;
                                 align-items: center;
-                                padding-left: 60px;
+                                padding-left: 20px;
                                 margin-bottom: 65px;
+                                cursor: pointer;
 
-                                // 点击
+                                .radio {
+                                    width: 18px;
+                                    height: 18px;
+                                    margin-right: 20px;
+                                    background-color: #fff;
+                                    border: 1px solid #d0d0d0;
+                                    border-radius: 100%;
+                                    position: relative;
+                                }
+
+                                p {
+                                    font-size: 16px;
+                                    line-height: 16px;
+                                    color: #333;
+                                }
+
+                                // 选中状态的类名
                                 &.actived {
                                     .radio {
                                         &:after {
@@ -363,25 +1012,59 @@ export default {
                                         color: #ff0036;
                                     }
                                 }
+                            }
+                        }
+                    }
 
-                                .radio {
-                                    width: 18px;
-                                    height: 18px;
-                                    margin-right: 20px;
-                                    background-color: #fff;
-                                    border: 1px solid #d0d0d0;
-                                    border-radius: 100%;
-                                    position: relative;
-                                    cursor: pointer;
+                    .right {
+                        width: calc((100% - 160px) * 0.25);
+                        background-color: #fff;
+                        border-left: 1px solid #333;
+
+                        .title {
+                            font-size: 16px;
+                            line-height: 60px;
+                            color: #333;
+                            border-bottom: 1px solid #333;
+                        }
+
+                        ul {
+                            height: calc(100% - 120px);
+                            padding: 10px;
+
+                            .item {
+                                line-height: 14px;
+                                display: flex;
+                                margin-bottom: 10px;
+
+                                .item-title {
+                                    font-size: 14px;
+                                    font-weight: bold;
+                                    line-height: 14px;
+                                    white-space: nowrap;
+                                    color: #333;
+                                    margin-right: 5px;
                                 }
 
-                                p {
-                                    font-size: 16px;
-                                    line-height: 16px;
+                                .item-text {
+                                    font-size: 14px;
+                                    line-height: 14px;
+                                    white-space: nowrap;
                                     color: #333;
-                                    cursor: pointer;
                                 }
                             }
+                        }
+
+                        .clear {
+                            height: 60px;
+                            width: 100%;
+                            font-size: 16px;
+                            line-height: 60px;
+                            color: #333;
+                            background-color: transparent;
+                            border: none;
+                            border-top: 1px solid #333;
+                            cursor: pointer;
                         }
                     }
                 }

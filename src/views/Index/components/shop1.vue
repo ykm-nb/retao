@@ -11,7 +11,7 @@
                     <div class="first-shop">
                         <img :src="tjList[0].mainProductUrl">
                         <p class="item1">
-                            <span class="name">{{ tjList[0].storeName }}</span>
+                            <span class="name">{{ tjList[0].mainProductName }}</span>
                             <span class="price">{{ tjList[0].price }}万</span>
                         </p>
                         <p class="item2">
@@ -26,10 +26,10 @@
                     <li class="item" v-for="(item, index) in tjList.slice(1,4)" :key="index">
                         <div class="time-limit">
                             <img src="./images/shop1-limit.png">
-                            <span>{{ `${day}天${hour}时${minute}分${second}秒` }}</span>
+                            <span>{{ index==0?`${day1}天${hour1}时${minute1}分${second1}秒`:'' || index==1?`${day2}天${hour2}时${minute2}分${second2}秒`:'' || index==2?`${day3}天${hour3}时${minute3}分${second3}秒`:'' }}</span>
                         </div>
                         <div class="goods-img">
-                            <img :src="item.pictureUrl">
+                            <img :src="item.mainProductUrl">
                         </div>
                         <div class="section1">
                             <img src="./images/tm.png">
@@ -68,7 +68,7 @@
                     <div class="first-shop">
                         <img :src="yzList[0].mainProductUrl">
                         <p class="item1">
-                            <span class="name">{{ yzList[0].storeName }}</span>
+                            <span class="name">{{ yzList[0].mainProductName }}</span>
                             <span class="price">{{ yzList[0].price }}万</span>
                         </p>
                         <p class="item2">
@@ -87,7 +87,7 @@
                             <span>{{ item.trademark }}</span>
                         </div>
                         <div class="goods-img">
-                            <img :src="item.pictureUrl">
+                            <img :src="item.mainProductUrl">
                         </div>
                         <div class="section1">
                             <img src="./images/tm.png">
@@ -126,7 +126,7 @@
                     <div class="first-shop">
                         <img :src="xqList[0].mainProductUrl">
                         <p class="item1">
-                            <span class="name">{{ xqList[0].storeName }}</span>
+                            <span class="name">{{ xqList[0].mainProductName }}</span>
                             <span class="price">{{ xqList[0].price }}万</span>
                         </p>
                         <p class="item2">
@@ -145,7 +145,7 @@
                             <span>{{ item.firstCategory }}</span>
                         </div>
                         <div class="goods-img">
-                            <img :src="item.pictureUrl">
+                            <img :src="item.mainProductUrl">
                         </div>
                         <div class="section1">
                             <img src="./images/tm.png">
@@ -186,114 +186,36 @@ export default {
         tjList: { // 特价店铺
             type: Array
         },
-        yzList: {
+        yzList: { // 优质店铺
             type: Array
         },
-        xqList: {
+        xqList: { // 稀缺店铺
             type: Array
         }
     },
     data() {
         return {
-            // 优质店铺
-            shopList2: [
-                {
-                    imgUrl: require('./images/shop1-goods1.png'),
-                    storeName: '倍纯旗舰店',
-                    firstCategory: '餐饮具类目',
-                    trademarkCategory: '21类',
-                    brand: 'R标',
-                    price: 9.5
-                },
-                {
-                    sb: '2字中文',
-                    imgUrl: require('./images/shop1-goods6.png'),
-                    storeName: '质邦旗舰店',
-                    firstCategory: '餐饮具类目',
-                    trademarkCategory: '21类',
-                    brand: 'R标',
-                    storeType: '居家日用旗舰店',
-                    city: '浙江省宁波市',
-                    price: 10.80
-                },
-                {
-                    sb: '英文',
-                    imgUrl: require('./images/shop1-goods7.png'),
-                    storeName: '质邦旗舰店',
-                    firstCategory: '餐饮具类目',
-                    trademarkCategory: '21类',
-                    brand: 'R标',
-                    storeType: '居家日用旗舰店',
-                    city: '浙江省宁波市',
-                    price: 10.80
-                },
-                {
-                    sb: '中英文',
-                    imgUrl: require('./images/shop1-goods8.png'),
-                    storeName: '质邦旗舰店',
-                    firstCategory: '餐饮具类目',
-                    trademarkCategory: '21类',
-                    brand: 'R标',
-                    storeType: '居家日用旗舰店',
-                    city: '浙江省宁波市',
-                    price: 10.80
-                }
-            ],
-            // 稀缺店铺
-            shopList3: [
-                {
-                    imgUrl: require('./images/shop1-goods1.png'),
-                    storeName: '倍纯旗舰店',
-                    firstCategory: '餐饮具类目',
-                    trademarkCategory: '21类',
-                    brand: 'R标',
-                    price: 9.5
-                },
-                {
-                    category: '节庆用品/礼品',
-                    imgUrl: require('./images/shop1-goods2.png'),
-                    storeName: '质邦旗舰店',
-                    firstCategory: '餐饮具类目',
-                    trademarkCategory: '21类',
-                    brand: 'R标',
-                    storeType: '居家日用旗舰店',
-                    city: '浙江省宁波市',
-                    price: 10.80
-                },
-                {
-                    category: '节庆用品/礼品',
-                    imgUrl: require('./images/shop1-goods3.png'),
-                    storeName: '质邦旗舰店',
-                    firstCategory: '餐饮具类目',
-                    trademarkCategory: '21类',
-                    brand: 'R标',
-                    storeType: '居家日用旗舰店',
-                    city: '浙江省宁波市',
-                    price: 10.80
-                },
-                {
-                    category: '节庆用品/礼品',
-                    imgUrl: require('./images/shop1-goods4.png'),
-                    storeName: '质邦旗舰店',
-                    firstCategory: '餐饮具类目',
-                    trademarkCategory: '21类',
-                    brand: 'R标',
-                    storeType: '居家日用旗舰店',
-                    city: '浙江省宁波市',
-                    price: 10.80
-                }
-            ],
             // 倒计时
-            day: 0,
-            hour: 0,
-            minute: 0,
-            second: 0
+            day1: 0,
+            hour1: 0,
+            minute1: 0,
+            second1: 0,
+
+            day2: 0,
+            hour2: 0,
+            minute2: 0,
+            second2: 0,
+
+            day3: 0,
+            hour3: 0,
+            minute3: 0,
+            second3: 0,
         }
     },
     methods: {
-        countDown () { // 倒计时
-            const stopTime = new Date('2019-11-05 00:00:00'); // 结束的时间
-        
+        countDown (bargainPriceTime, index) { // 倒计时
+            const stopTime = new Date(bargainPriceTime); // 结束的时间
+
             var interval = setInterval(() => {
                 let today = new Date(), // 开始时间
                     shenyu = stopTime.getTime() - today.getTime(), //倒计时毫秒数
@@ -304,17 +226,22 @@ export default {
                     shenyuM = parseInt(H / 1000 / 60), // 剩余分钟
                     M = parseInt(H) - parseInt(shenyuM * 60 * 1000), //除去天、小时、分钟的毫秒数
                     shenyuS = parseInt(M / 1000); // 剩余秒
-                    
-                if(shenyuDay > 0) this.day = '0' + shenyuDay;
-                (shenyuH < 10) ? (this.hour = '0' + shenyuH) : (this.hour = shenyuH);
-                (shenyuM < 10) ? (this.minute = '0' + shenyuM) : (this.minute = shenyuM);
-                (shenyuS < 10) ? (this.second = '0' + shenyuS) : (this.second = shenyuS);
-                if(shenyuDay <= 0) clearInterval(interval) // 超过三天清除定时器
+                if(shenyu <= 0) { // 超过三天清除定时器
+                    clearInterval(interval) 
+                    return
+                }
+                
+                if(shenyuDay > 0) this['day'+index] = '0' + shenyuDay;
+                (shenyuH < 10) ? (this['hour'+index] = '0' + shenyuH) : (this['hour'+index] = shenyuH);
+                (shenyuM < 10) ? (this['minute'+index] = '0' + shenyuM) : (this['minute'+index] = shenyuM);
+                (shenyuS < 10) ? (this['second'+index] = '0' + shenyuS) : (this['second'+index] = shenyuS);
             }, 1000)
         }
     },
-    created () {
-        this.countDown()
+    updated () {
+        this.tjList.slice(1,4).forEach((item, index) => {
+            this.countDown(item.bargainPriceTime, index+1)
+        })
     }
 }
 </script>
@@ -356,15 +283,15 @@ export default {
                     .first-shop {
                         width: 210px;
                         height: 226px;
-                        padding: 15px 18px 0 15px;
+                        padding: 0 18px 0 15px;
                         margin: 0 auto;
                         background-color: #fff;
                         border-radius: 8px;
                         overflow: hidden;
 
                         img {
-                            width: 138px;
-                            height: 145px;
+                            max-width: 165px;
+                            max-height: 165px;
                             display: block;
                             margin: 0 auto 10px;
                         }
@@ -438,8 +365,8 @@ export default {
                             overflow: hidden;
 
                             img {
-                                max-width: 160px;
-                                max-height: 200px;
+                                max-width: 230px;
+                                max-height: 230px;
                             }
                         }
 

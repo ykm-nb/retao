@@ -31,6 +31,7 @@
                         <div class="btn">
                             <button class="qq" type="button" @click="consultQQ">QQ咨询</button>
                             <button class="wechat" type="button">微信咨询</button>
+                            <img class="img-wx" :src="item.wxUrl">
                         </div>
                     </li>
                 </ul>
@@ -51,134 +52,147 @@ export default {
             serviceList: [
                 {
                     imgUrl: require('./images/service1.png'),
-                    name: '张文豪',
-                    description: '3年从业经验'
+                    name: '竺金晶',
+                    description: '6年从业经验',
+                    wxUrl: require('./images/wxcode1.png')
                 },
                 {
                     imgUrl: require('./images/service2.png'),
-                    name: '张文豪',
-                    description: '3年从业经验'
+                    name: '赵峰',
+                    description: '5年从业经验',
+                    wxUrl: require('./images/wxcode2.png')
                 },
                 {
                     imgUrl: require('./images/service3.png'),
-                    name: '张文豪',
-                    description: '3年从业经验'
+                    name: '傅心玉',
+                    description: '3年从业经验',
+                    wxUrl: require('./images/wxcode3.png')
                 },
                 {
                     imgUrl: require('./images/service4.png'),
-                    name: '张文豪',
-                    description: '3年从业经验'
+                    name: '高奕豪',
+                    description: '6年从业经验',
+                    wxUrl: require('./images/wxcode4.png')
+                },
+                {
+                    imgUrl: require('./images/service5.png'),
+                    name: '郑梦琳',
+                    description: '5年从业经验',
+                    wxUrl: require('./images/wxcode5.png')
+                },
+                {
+                    imgUrl: require('./images/service6.png'),
+                    name: '史媛',
+                    description: '3年从业经验',
+                    wxUrl: require('./images/wxcode6.png')
+                },
+                {
+                    imgUrl: require('./images/service7.png'),
+                    name: '张凯莉',
+                    description: '4年从业经验',
+                    wxUrl: require('./images/wxcode7.png')
+                },
+                {
+                    imgUrl: require('./images/service8.png'),
+                    name: '盛炎明',
+                    description: '5年从业经验',
+                    wxUrl: require('./images/wxcode8.png')
+                },
+                {
+                    imgUrl: require('./images/service9.png'),
+                    name: '张杭峰',
+                    description: '3年从业经验',
+                    wxUrl: require('./images/wxcode9.png')
                 },
                 {
                     imgUrl: require('./images/service1.png'),
-                    name: '张文豪',
-                    description: '3年从业经验'
+                    name: '竺金晶',
+                    description: '6年从业经验',
+                    wxUrl: require('./images/wxcode1.png')
                 },
                 {
                     imgUrl: require('./images/service2.png'),
-                    name: '张文豪',
-                    description: '3年从业经验'
+                    name: '赵峰',
+                    description: '5年从业经验',
+                    wxUrl: require('./images/wxcode2.png')
                 },
                 {
                     imgUrl: require('./images/service3.png'),
-                    name: '张文豪',
-                    description: '3年从业经验'
+                    name: '傅心玉',
+                    description: '3年从业经验',
+                    wxUrl: require('./images/wxcode3.png')
                 },
                 {
                     imgUrl: require('./images/service4.png'),
-                    name: '张文豪',
-                    description: '3年从业经验'
+                    name: '高奕豪',
+                    description: '6年从业经验',
+                    wxUrl: require('./images/wxcode4.png')
+                },
+                {
+                    imgUrl: require('./images/service5.png'),
+                    name: '郑梦琳',
+                    description: '5年从业经验',
+                    wxUrl: require('./images/wxcode5.png')
+                },
+                {
+                    imgUrl: require('./images/service6.png'),
+                    name: '史媛',
+                    description: '3年从业经验',
+                    wxUrl: require('./images/wxcode6.png')
+                },
+                {
+                    imgUrl: require('./images/service7.png'),
+                    name: '张凯莉',
+                    description: '4年从业经验',
+                    wxUrl: require('./images/wxcode7.png')
+                },
+                {
+                    imgUrl: require('./images/service8.png'),
+                    name: '盛炎明',
+                    description: '5年从业经验',
+                    wxUrl: require('./images/wxcode8.png')
+                },
+                {
+                    imgUrl: require('./images/service9.png'),
+                    name: '张杭峰',
+                    description: '3年从业经验',
+                    wxUrl: require('./images/wxcode9.png')
                 },
                 {
                     imgUrl: require('./images/service1.png'),
-                    name: '张文豪',
-                    description: '3年从业经验'
+                    name: '竺金晶',
+                    description: '6年从业经验',
+                    wxUrl: require('./images/wxcode1.png')
                 },
                 {
                     imgUrl: require('./images/service2.png'),
-                    name: '张文豪',
-                    description: '3年从业经验'
-                },
-                {
-                    imgUrl: require('./images/service3.png'),
-                    name: '张文豪',
-                    description: '3年从业经验'
-                },
-                {
-                    imgUrl: require('./images/service4.png'),
-                    name: '张文豪',
-                    description: '3年从业经验'
-                },
-                {
-                    imgUrl: require('./images/service1.png'),
-                    name: '张文豪',
-                    description: '3年从业经验'
-                },
-                {
-                    imgUrl: require('./images/service2.png'),
-                    name: '张文豪',
-                    description: '3年从业经验'
-                },
-                {
-                    imgUrl: require('./images/service3.png'),
-                    name: '张文豪',
-                    description: '3年从业经验'
-                },
-                {
-                    imgUrl: require('./images/service4.png'),
-                    name: '张文豪',
-                    description: '3年从业经验'
-                },
-                {
-                    imgUrl: require('./images/service1.png'),
-                    name: '张文豪',
-                    description: '3年从业经验'
-                },
-                {
-                    imgUrl: require('./images/service2.png'),
-                    name: '张文豪',
-                    description: '3年从业经验'
-                },
-                {
-                    imgUrl: require('./images/service3.png'),
-                    name: '张文豪',
-                    description: '3年从业经验'
-                },
-                {
-                    imgUrl: require('./images/service4.png'),
-                    name: '张文豪',
-                    description: '3年从业经验'
+                    name: '赵峰',
+                    description: '5年从业经验',
+                    wxUrl: require('./images/wxcode2.png')
                 },
             ]
         }
     },
     methods: {
-        changeIndex(index) {
+        changeIndex(index) { // 点击切换客户
             const service = this.$refs.service.style,
                   tagIndex = this.tagIndex,
                   length = this.tagList.length;
-
-            Object.assign(service, {
-                opacity: 0
-            })
-
-            var time = setTimeout(() => {
-                Object.assign(service, {
-                    opacity: 1
-                })
-            }, 400)
 
             if(index === tagIndex) return;
             this.tagIndex = index;
             (index < 0) && (this.tagIndex = length - 1);
             (index > length - 1) && (this.tagIndex = 0);
         },
-        consultQQ() {
-            var qq = '243910661';
-            window.open("http://wpa.qq.com/msgrd?v=3&uin="+qq+"&site=qq&menu=yes",'',"width=644,height=544,toolbar=no,scrollbars=no,menubar=no,status=no");
+        consultQQ() { // qq咨询
+            // let arr = ['3007628391', '3007628389'], qq = '';
+            // Math.random() > 0.5 ? qq = arr[0] : qq = arr[1];
+            // window.open("http://wpa.qq.com/msgrd?v=3&uin="+qq+"&site=qq&menu=yes",'',"width=644,height=544,toolbar=no,scrollbars=no,menubar=no,status=no");
+            
+            window.open("https://url.cn/5iD2Ua8?_type=wpa&qidian=true");
         },
-        getBackground (imgUrl) {
-            return `background: url(${imgUrl}) no-repeat 50% -4px`
+        getBackground (imgUrl) { // 获取背景图
+            return `background: url(${imgUrl}) no-repeat 50% 0; background-size: cover`
         }
     }
 }
@@ -283,6 +297,7 @@ export default {
                             justify-content: center;
                             align-items: center;
                             margin-top: 18px;
+                            position: relative;
 
                             button {
                                 width: 100px;
@@ -309,6 +324,20 @@ export default {
                             .wechat:hover {
                                 background-color: #22af17;
                                 border: 1px solid #22af17;
+                            }
+                            .wechat:hover ~ .img-wx {
+                                max-height: 100px;
+                                opacity: 1;
+                            }
+
+                            .img-wx {
+                                width: 100px;
+                                max-height: 0;
+                                opacity: 0;
+                                transition: .6s;
+                                position: absolute;
+                                right: 18px;
+                                bottom: 100%;
                             }
                         }
                     }

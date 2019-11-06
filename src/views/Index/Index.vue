@@ -12,7 +12,7 @@
           <div class="city">
             <p class="title">热门城市</p>
             <ul>
-              <li @click="hotStore({})" v-for="(item, index) in hotCity" :key="index">{{ item }}</li>
+              <li @click="hotStore({title: item})" v-for="(item, index) in hotCity" :key="index">{{ item }}</li>
               <li class="more">更多</li>
             </ul>
           </div>
@@ -43,12 +43,9 @@
 
       <div class="swiper-container">
         <div class="swiper-wrapper">
-          <div class="swiper-slide slide1">
-          </div>
-          <div class="swiper-slide slide2">
-          </div>
-          <div class="swiper-slide slide3">
-          </div>
+          <div class="swiper-slide slide1"></div>
+          <div class="swiper-slide slide2"></div>
+          <div class="swiper-slide slide3"></div>
         </div>
 
         <!-- 分页器 -->
@@ -91,15 +88,15 @@
 <script>
 import ls from "store2";
 import api from "@/api";
-import Header from "@/components/Header/Header.vue";
-import Nav from "@/components/Nav/Nav.vue";
-import Info from "./components/info.vue";
-import Shop1 from "./components/shop1.vue";
-import Shop2 from "./components/shop2.vue";
-import Safe from "./components/safe.vue";
-import Service from "./components/service.vue";
-import Message from "./components/message.vue";
-import Footer from "@/components/Footer/Footer.vue";
+const Header = () => import ('@/components/Header/Header')
+const Nav = () => import ('@/components/Nav/Nav')
+const Footer = () => import ('@/components/Footer/Footer')
+const Info = () => import ('./components/info')
+const Shop1 = () => import ('./components/shop1')
+const Shop2 = () => import ('./components/shop2')
+const Safe = () => import ('./components/safe')
+const Service = () => import ('./components/service')
+const Message = () => import ('./components/message')
 // Swiper
 import Swiper from 'swiper';
 export default {
@@ -129,7 +126,7 @@ export default {
     initSwiper() { // swiper
       var mySwiper = new Swiper('.swiper-container', {
         autoplay: {
-            delay: 2000,
+            delay: 200000,
             // 用户操作swiper之后，是否禁止autoplay。默认为true：停止。
             disableOnInteraction: false,
         },
@@ -157,7 +154,7 @@ export default {
     },
     hotStore (obj) {
       ls.session("tbList", obj)
-      this.$router.push("tblistpage")
+      this.$router.push("tmlistpage")
     },
   },
   created() {
@@ -255,6 +252,7 @@ html, body {
 
   .banner-bg {
       height: 515px;
+      width: 100%;
       position: relative;
 
       .banner {
@@ -382,14 +380,19 @@ html, body {
           height: 100%;
           width: 100%;
 
+          .swiper-slide {
+            height: 100%;
+            width: 100%;
+          }
+
           .slide1 {
             background: url('./components/images/banner2.png') no-repeat center;
           }
           .slide2 {
-            background: url('./components/images/banner3.jpg') no-repeat center;
+            background: url('./components/images/banner3.png') no-repeat center;
           }
           .slide3 {
-            background: url('./components/images/banner4.jpg') no-repeat center;
+            background: url('./components/images/banner4.png') no-repeat center;
           }
         }
 

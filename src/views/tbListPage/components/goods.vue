@@ -30,7 +30,7 @@
                         <div class="right">
                             <div class="right-left">
                                 <ul class="slider">
-                                    <button class="btn-left" :style="{'left': (sliderIndex * 42) + 'px'}">{{ sliderList[sliderIndex] }}</button>
+                                    <button @mousedown="btnMove" class="btn-left" :style="{'left': (sliderIndex * 42) + 'px'}">{{ sliderList[sliderIndex] }}</button>
                                     <li @click="handleType('sliderIndex', index)" v-for="(item, index) in sliderList" :key="index"></li>
                                 </ul>
                                 <img src="./type2.png">
@@ -156,9 +156,9 @@
                         </div>
                     </div>
                     <div class="sort-right">
-                        <img src="./shop1.png">
-                        <img src="./shop2.png">
-                        <img src="./shop3.png">
+                        <img @click="form.storeProperties='1', getGoodsList()" src="./shop1.png">
+                        <img @click="form.storeProperties='2', getGoodsList()" src="./shop2.png">
+                        <img @click="form.storeProperties='3', getGoodsList()" src="./shop3.png">
                     </div>
                 </div>
 
@@ -222,7 +222,7 @@
                             </div>
                             <button type="button">
                                 <img src="./phone.png">
-                                <span>联系客服</span>
+                                <span @click="consult">联系客服</span>
                             </button>
                             <p class="number" :title="item.productNo">编号：{{ item.productNo }}</p>
                             <p class="time" :title="item.updateTime">更新时间：{{ item.updateTime }}</p>
@@ -254,7 +254,7 @@
                 <div class="item">
                     <input type="text" placeholder="请输入您的手机号">
                 </div>
-                <div class="item">
+                <div class="item item-textarea">
                     <textarea placeholder="请简单描述您的需求"></textarea>
                 </div>
                 <button class="btn" type="button">
@@ -280,6 +280,7 @@ export default {
                 total: 1
             },
             form: {
+                storeProperties: '',// 店铺属性
                 mainProducts: '', // 主营
                 secondCategory: '',
                 // 价格
@@ -619,15 +620,49 @@ export default {
 
             this.getGoodsList();
         },
+        btnMove (e) { // 滑块滑动
+            var oDiv = document.getElementsByClassName("btn-left")[0];
+            var e = e || window.event;
+
+            const oDivLeft = oDiv.offsetLeft; // oDiv到父级左边的距离
+            /*鼠标点击的位置距离DIV左侧的距离 */
+            var disX = e.clientX - oDivLeft;
+            
+            document.onmousemove = (e) => {
+                var e = e || window.event;
+                // 横轴坐标
+                let leftX = e.clientX - disX;
+
+                if( leftX < 0 ) leftX = 0;
+                if (leftX > 630 - oDiv.offsetWidth) leftX = 630 - oDiv.offsetWidth;
+
+                oDiv.style.left = leftX + "px";
+
+                let index = (leftX / 42).toFixed(2); // 所对应的索引值
+                if(index > (parseInt(index) + 0.5)) {
+                    this.sliderIndex = Math.ceil(index)
+                } else {
+                    this.sliderIndex = Math.floor(index)
+                }
+            }
+
+            document.onmouseup = () => {
+                document.onmousemove = null;
+                document.onmouseup = null;
+
+                this.form.secondCategory = this.sliderList[this.sliderIndex]
+                this.getGoodsList(1)
+            }
+        },
         gotoDetail(id) { // 跳转详情
             this.$router.push({ 
                 path: 'shopdetails',
-                query: { 
-                    id: parseInt(id),
-                    pageNum: this.pageForm.pageNum
-                }
+                query: { id: parseInt(id) }
             })
-        }
+        },
+        consult() { // 联系客服
+            window.open("https://url.cn/5iD2Ua8?_type=wpa&qidian=true");
+        },
     },
     created() {
         const tbList = ls.session("tbList"),
@@ -660,10 +695,6 @@ export default {
         .filter {
             padding: 0 10px;
             box-shadow: 0 3px 6px 0 rgba(202, 202, 202, 0.8);
-            position: sticky;
-            top: 0;
-            left: 0;
-            z-index: 99;
 
             .layer {
                 font-size: 14px;
@@ -713,6 +744,7 @@ export default {
                     li {
                         width: 110px;
                         text-align: left;
+                        line-height: 26px;
                         margin-bottom: 6px;
 
                         p {
@@ -1022,6 +1054,10 @@ export default {
             .sort-right {
                 width: 380px;
                 .flex();
+
+                img {
+                    cursor: pointer;
+                }
             }
         }
 
@@ -1047,10 +1083,10 @@ export default {
                     display: flex;
                     align-items: center;
                     position: relative;
+                    overflow: hidden;
 
                     img {
                         width: 100%;
-                        height: 100%;
                     }
 
                     p {
@@ -1380,6 +1416,7 @@ export default {
             }
 
             .item {
+                height: 42px;
                 width: 172px;
                 margin: 0 auto 15px;
 
@@ -1390,6 +1427,7 @@ export default {
                     line-height: 42px;
                     text-align: center;
                     color: #000;
+                    display: block;
                     border: 1px solid #e6e6e6;
                 }
 
@@ -1402,6 +1440,9 @@ export default {
                     border: 1px solid #e6e6e6;
                     resize: none;
                 }
+            }
+            .item-textarea {
+                height: 65px;
             }
 
             .btn {

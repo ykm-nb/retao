@@ -32,7 +32,7 @@
                     <i class="hot"></i>
                 </li>
                 <div class="divide"></div>
-                <li @click="gotoPage('tmlistpage')">
+                <li @click="gotoPage('tblistpage')">
                     <img src="./du.png">
                     <span class="text">特价新店</span>
                     <i class="new"></i>

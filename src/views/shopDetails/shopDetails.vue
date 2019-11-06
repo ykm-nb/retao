@@ -8,7 +8,7 @@
     <div class="inner-bg nav-bg">
         <div class="inner bread-crumb">
             <span>所在位置：</span>
-            <span class="page page-index">猫元素</span>
+            <span class="page page-index">仟呗</span>
             <span class="arrow">>></span>
             <span class="page page-transfer">天猫店转让</span>
             <span class="arrow">>></span>
@@ -64,28 +64,19 @@ export default {
     data() {
         return {
             id: 0,
-            pageNum: 1,
             goodsList: {}
         }
     },
     methods: {
-        getStoreDetail (id, pageNum) {
-            api.axs('post', "/tmStore/queryAllProducts", { id, pageNum }).then(({ data }) => {
-                if(data.code === "SUCCESS") {
-                    data.data.list.forEach((item, index) => {
-                        if(item.id === id) this.goodsList = item;
-                    })
-                    console.log(this.goodsList)
-                }
+        getStoreDetail (id) {
+            api.axs('post', "/tmStore/queryCommonStorePages", { id }).then(({ data }) => {
+                if(data.code === "SUCCESS") this.goodsList = data.data.list[0]
             });
         }
     },
     created() {
-        Object.assign(this, {
-            id: parseInt(this.$route.query.id),
-            pageNum: this.$route.query.pageNum
-        })
-        this.getStoreDetail(this.id, this.pageNum)
+        Object.assign(this, { id: parseInt(this.$route.query.id) })
+        this.getStoreDetail(this.id)
 
         // let obj = ls.session.get('rtSearch'),
         //     url = "";

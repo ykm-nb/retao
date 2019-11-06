@@ -21,7 +21,7 @@
                             <Alert v-show="showForm.account" type="error">账号不正确</Alert>
                         </div>
                         <div class="form-item">
-                            <input @keyup="handleEnter" v-model="loginForm.pwd" type="text" placeholder="请输入您的密码">
+                            <input @keyup="handleEnter" v-model="loginForm.pwd" type="password" placeholder="请输入您的密码">
                             <Alert v-show="showForm.pwd" type="error">密码长度不正确</Alert>
                         </div>
                         <div class="form-item form-check">
