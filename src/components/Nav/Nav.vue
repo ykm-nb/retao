@@ -91,7 +91,7 @@ export default {
     },
     created() {
         let route = this.$route.path,
-            text = ls.session("rtSearch");
+            text = ls.session.get("rtSearch");
 
         if(text) this.searchText = text.storeName;
     }

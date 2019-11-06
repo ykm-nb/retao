@@ -665,8 +665,8 @@ export default {
         },
     },
     created() {
-        const tbList = ls.session("tbList"),
-              rtSearch = ls.session("rtSearch");
+        const tbList = ls.session.get("tbList"),
+              rtSearch = ls.session.get("rtSearch");
 
         this.storeName = rtSearch.storeName;
 

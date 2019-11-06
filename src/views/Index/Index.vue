@@ -109,7 +109,7 @@ export default {
   },
   data() {
     return {
-      userInfo: ls.session('qbuserInfo'),
+      userInfo: ls.session.get('qbuserInfo'),
       showAnchor: false,
       // 热门城市，热门类目
       hotCity: ["北京", "上海", "深圳", "广州", "杭州", "金华", "绍兴", "温州", "嘉兴", "湖州", "苏州", "南京", "武汉", "长沙", "成都", "南昌", "泉州", "厦门"],
@@ -158,8 +158,8 @@ export default {
     },
   },
   created() {
-    ls.session.set("rtSearch", "") // 清空搜索
-    ls.session.set("tbList", null)
+    ls.session("rtSearch", "") // 清空搜索
+    ls.session("tbList", null)
     
     // 获取首页五个店铺信息
     api.axs('post', "/tmStore/queryHomeStorePages", {}).then(({ data }) => {

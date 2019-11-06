@@ -638,6 +638,13 @@ export default {
         },
     },
     created() {
+        const tbList = ls.session.get("tbList"),
+              rtSearch = ls.session.get("rtSearch");
+
+        this.storeName = rtSearch.storeName;
+
+        if(tbList != null) Object.assign(this.form, tbList)
+        
         this.getGoodsList()
     }
 }
