@@ -228,7 +228,7 @@
                                 <span @click="consult">联系客服</span>
                             </button>
                             <p class="number" :title="item.productNo">编号：{{ item.productNo }}</p>
-                            <p class="time" :title="item.followTime || item.updateTime">更新时间：{{ item.followTime || item.updateTime }}</p>
+                            <p class="time" :title="item.followTime">更新时间：{{ item.followTime }}</p>
                         </div>
                     </div>
                     <div v-show="goodsLists.length === 0" class="no-data">暂无数据</div>
@@ -284,7 +284,7 @@ export default {
             },
             form: {
                 storeProperties: '',// 店铺属性
-                mainProducts: '', // 主营
+                mainPriductId: '', // 主营
                 storeType: '',
                 // 价格
                 startPrice: '',
@@ -590,7 +590,7 @@ export default {
             this[type] = index;
             switch (type) {
                 case 'goodsIndex': (index === -1) ?
-                    form.mainProducts = '' : form.mainProducts = this.goodsList[index];
+                    form.mainPriductId = '' : form.mainPriductId = this.goodsList[index];
                     break;
                 case 'shopIndex': 
                     if(index === -1) form.storeType = ''

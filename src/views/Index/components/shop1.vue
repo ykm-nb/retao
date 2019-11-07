@@ -84,7 +84,7 @@
                     <li class="item" v-for="(item, index) in yzList.slice(1,4)" :key="index">
                         <div class="time-limit">
                             <span>商标 :</span>
-                            <span>{{ item.trademark }}</span>
+                            <span>{{ item.storeMark }}</span>
                         </div>
                         <div class="goods-img">
                             <img :src="item.mainProductUrl">
