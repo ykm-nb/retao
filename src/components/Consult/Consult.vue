@@ -1,24 +1,26 @@
 <template>
     <!-- 联系客服 -->
-    <div class="inner-bg consult-bg">
-        <div class="inner consult">
-            <img @click="showConsult = true" v-show="!showConsult" class="consult-side" src="./consult.png">
-            <div v-show="showConsult" class="consult-box">
-                <img class="img-bg" src="./consult-box.png">
-                <ul>
-                    <li class="item" :class="`item${index + 1}`"
-                        v-for="(item, index) in list" :key="index"
-                    >
-                        <div class="avatar" :style="{background: `url('${item.imgUrl}') no-repeat 50% -4px`}"></div>    
-                        <p class="position">{{ item.position }}</p>
-                        <p class="name">{{ item.name }}</p>
-                        <button @click="consult" type="button">联系TA</button>
-                    </li>
-                </ul>
-                <button class="btn" type="button">网店限时免佣金</button>
-                <img @click="showConsult = false" class="close" src="./close.png">
+    <div class="contact-wrap">
+        <img @click="showConsult = true" v-if="!showConsult" class="consult-side" src="./consult.png">
+        <div class="inner-bg consult-bg" v-if="showConsult">
+            <div class="inner consult">
+                <div class="consult-box">
+                    <img class="img-bg" src="./consult-box.png">
+                    <ul>
+                        <li class="item" :class="`item${index + 1}`"
+                            v-for="(item, index) in list" :key="index"
+                        >
+                            <div class="avatar" :style="{background: `url(${item.imgUrl}) no-repeat 50% top`,backgroundSize:'130%'}"></div>    
+                            <p class="position">{{ item.position }}</p>
+                            <p class="name">{{ item.name }}</p>
+                            <button @click="consult" type="button">联系TA</button>
+                        </li>
+                    </ul>
+                    <button class="btn" type="button">网店限时免佣金</button>
+                    <img @click="showConsult = false" class="close" src="./close.png">
+                </div>
+                <div class="meng-layer" @click="showConsult = false"></div>
             </div>
-            <div v-show="showConsult" class="meng-layer"></div>
         </div>
     </div>
 </template>
@@ -80,13 +82,21 @@ export default {
     },
     created () {
         var time = setInterval(() => {
-            (this.showConsult) ? '' : this.showConsult = true
-        }, 10000)
+            (this.showConsult) ? this.showConsult = false : this.showConsult = true
+        }, 10000000)
     }
 }
 </script>
 
 <style lang="less" scoped>
+    .consult-side {
+        width: 100px;
+        position: fixed;
+        left: 5%;
+        bottom: 5%;
+        cursor: pointer;
+        z-index: 1002;
+    }
     .consult-bg {
         width: 100%;
         height: 100%;
@@ -95,18 +105,10 @@ export default {
         top: 0;
         z-index: 1000;
 
-        .consult-side {
-            position: fixed;
-            left: 5%;
-            bottom: 5%;
-            cursor: pointer;
-            z-index: 1002;
-        }
-
         .consult-box {
-            width: 850px;
-            min-height: 760px;
-            height: 80%;
+            width: 620px;
+            // min-height: 760px;
+            // height: 80%;
             padding: 70px 80px 0;
             position: absolute;
             left: 50%;
@@ -119,15 +121,16 @@ export default {
                 flex-wrap: wrap;
                 justify-content: space-around;
                 position: relative;
+                top: -6px;
                 z-index: 1003;
 
                 .item {
                     width: 25%;
-                    margin-bottom: 25px;
+                    margin-bottom: 20px;
 
                     .avatar {
-                        width: 85px;
-                        height: 85px;
+                        width: 60px;
+                        height: 60px;
                         display: block;
                         margin: 0 auto;
                         border-radius: 50%;
@@ -135,27 +138,27 @@ export default {
                     }
 
                     .position {
-                        font-size: 18px;
-                        line-height: 18px;
+                        font-size: 12px;
+                        line-height: 12px;
                         align-items: center;
                         color: #ff0036;
                         margin: 10px 0;
                     }
 
                     .name {
-                        font-size: 20px;
+                        font-size: 14px;
                         font-weight: bold;
-                        line-height: 20px;
+                        line-height: 14px;
                         align-items: center;
                         color: #ff0036;
-                        margin-bottom: 10px;
+                        // margin-bottom: 10px;
                     }
 
                     button {
-                        width: 98px;
-                        height: 35px;
-                        font-size: 16px;
-                        line-height: 35px;
+                        width: 80px;
+                        height: 24px;
+                        font-size: 12px;
+                        line-height: 24px;
                         align-items: center;
                         color: #fff;
                         background-color: #ff0036;
@@ -168,7 +171,7 @@ export default {
 
             .img-bg {
                 width: 100%;
-                height: 100%;
+                // height: 100%;
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -188,7 +191,7 @@ export default {
                 border: none;
                 position: absolute;
                 left: 50%;
-                top: 100%;
+                bottom: -230px;
                 transform: translate(-50%, -50%);
                 cursor: pointer;
             }
@@ -198,7 +201,7 @@ export default {
                 height: 50px;
                 position: absolute;
                 left: 50%;
-                top: 100%;
+                bottom: -230px;
                 transform: translate(-50%, 48px);
                 cursor: pointer;
             }

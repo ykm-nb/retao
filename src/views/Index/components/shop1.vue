@@ -84,7 +84,7 @@
                     <li class="item" v-for="(item, index) in yzList.slice(1,4)" :key="index">
                         <div class="time-limit">
                             <span>商标 :</span>
-                            <span>{{ item.storeMark }}</span>
+                            <span>{{ item.trademark | shortWr}}</span>
                         </div>
                         <div class="goods-img">
                             <img :src="item.mainProductUrl">
@@ -242,6 +242,13 @@ export default {
         this.tjList.slice(1,4).forEach((item, index) => {
             this.countDown(item.bargainPriceTime, index+1)
         })
+    },
+    filters: {
+        'shortWr'(val) {
+            if (val && val.length > 5) return val.substr(0,5) + '...'
+            else if (val) return val
+            else return '--'
+        }
     }
 }
 </script>

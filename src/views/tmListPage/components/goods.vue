@@ -127,33 +127,33 @@
                         <div class="item">
                             <p class="title">默认排序</p>
                             <p class="btn">
-                                <i @click="form.defaultOrderBy = 1, getGoodsList()" 
-                                    class="goup" :class="{'active': form.defaultOrderBy === 1}"
+                                <i @click="form.defaultSorting = 1, getGoodsList()" 
+                                    class="goup" :class="{'active': form.defaultSorting === 1}"
                                 ></i>
-                                <i @click="form.defaultOrderBy = 2, getGoodsList()" 
-                                    class="drop" :class="{'active': form.defaultOrderBy === 2}"
+                                <i @click="form.defaultSorting = 2, getGoodsList()" 
+                                    class="drop" :class="{'active': form.defaultSorting === 2}"
                                 ></i>
                             </p>
                         </div>
                         <div class="item">
                             <p class="title">出售价格</p>
                             <p class="btn">
-                                <i @click="form.priceOrderBy = 1, getGoodsList()" 
-                                    class="goup" :class="{'active': form.priceOrderBy === 1}"
+                                <i @click="form.priceSorting = 1, getGoodsList()" 
+                                    class="goup" :class="{'active': form.priceSorting === 1}"
                                 ></i>
-                                <i @click="form.priceOrderBy = 2, getGoodsList()" 
-                                    class="drop" :class="{'active': form.priceOrderBy === 2}"
+                                <i @click="form.priceSorting = 2, getGoodsList()" 
+                                    class="drop" :class="{'active': form.priceSorting === 2}"
                                 ></i>
                             </p>
                         </div>
                         <div class="item">
                             <p class="title">上传时间</p>
                             <p class="btn">
-                                <i @click="form.followTimeOrderBy = 1, getGoodsList()" 
-                                    class="goup" :class="{'active': form.followTimeOrderBy === 1}"
+                                <i @click="form.followTimeSorting = 1, getGoodsList()" 
+                                    class="goup" :class="{'active': form.followTimeSorting === 1}"
                                 ></i>
-                                <i @click="form.followTimeOrderBy = 2, getGoodsList()" 
-                                    class="drop" :class="{'active': form.followTimeOrderBy === 2}"
+                                <i @click="form.followTimeSorting = 2, getGoodsList()" 
+                                    class="drop" :class="{'active': form.followTimeSorting === 2}"
                                 ></i>
                             </p>
                         </div>
@@ -294,9 +294,9 @@ export default {
                 isEscort: '',
                 deductPoints: '',
                 // 排序
-                defaultOrderBy: 2,
-                priceOrderBy: 2,
-                followTimeOrderBy: 2
+                defaultSorting: 2,
+                priceSorting: 2,
+                followTimeSorting: 2
             },
             goodsIndex: -1,
             goodsList: ['服饰', '鞋类箱包', '居家日用', '家装家具家纺', '化妆品', '母婴', '3C数码', '运动户外', '保健/医药', '食品', '乐器', '网游及QQ', '话费通信', '其他行业', '汽车及配件', '图书音像', '珠宝配饰', '服务大类', '家用电器'],
@@ -579,7 +579,7 @@ export default {
             const form = this.form;
             for(let i in form) {
                 form[i] = '';
-                form['defaultOrderBy'] = form['priceOrderBy'] = form['followTimeOrderBy'] = 2;
+                form['defaultSorting'] = form['priceSorting'] = form['followTimeSorting'] = 2;
                 this.goodsIndex = this.shopIndex = this.priceIndex = -1;
                 this.regionIndex = this.brandIndex = this.dealIndex = this.pointIndex = 0;
             }
