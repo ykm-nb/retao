@@ -30,7 +30,7 @@ export default {
     name: "consult",
     data () {
         return {
-            showConsult: true,
+            showConsult: false,
             list: [
                 {
                     imgUrl: require('./service1.png'),
@@ -84,6 +84,11 @@ export default {
         var time = setInterval(() => {
             (this.showConsult) ? this.showConsult = false : this.showConsult = true
         }, 10000000)
+    },
+    mounted() {
+        setTimeout(() => {
+            this.showConsult = true
+        }, 1000);
     }
 }
 </script>
@@ -126,7 +131,7 @@ export default {
 
                 .item {
                     width: 25%;
-                    margin-bottom: 20px;
+                    margin-bottom: 16px;
 
                     .avatar {
                         width: 60px;
@@ -151,10 +156,13 @@ export default {
                         line-height: 14px;
                         align-items: center;
                         color: #ff0036;
+                        // margin: 8px 0 10px;
                         // margin-bottom: 10px;
                     }
 
                     button {
+                        position: relative;
+                        top: -10px;
                         width: 80px;
                         height: 24px;
                         font-size: 12px;

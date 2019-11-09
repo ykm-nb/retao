@@ -131,7 +131,7 @@ export default {
     initSwiper() { // swiper
       var mySwiper = new Swiper('.swiper-container', {
         autoplay: {
-            delay: 200000,
+            delay: 4000,
             // 用户操作swiper之后，是否禁止autoplay。默认为true：停止。
             disableOnInteraction: false,
         },
@@ -171,8 +171,8 @@ export default {
         if(data.code === "SUCCESS") {
           var datas = data.data
             datas.tjList.list.forEach((item,index) => {
-              if(item.pictureUrl.length > 70) {
-                datas.tjList.list[index].pictureUrl = item.pictureUrl.split(',')[0]
+              if(item.mainProductUrl.length > 70) {
+                datas.tjList.list[index].mainProductUrl = item.mainProductUrl.split(',')[0]
               }
             })
             this.tjList = datas.tjList.list

@@ -127,10 +127,10 @@
                         <div class="item">
                             <p class="title">默认排序</p>
                             <p class="btn">
-                                <i @click="form.defaultSorting = 1, getGoodsList()" 
+                                <i @click="form.defaultSorting = 1, form.priceSorting = 0, form.followTimeSorting = 0, getGoodsList()" 
                                     class="goup" :class="{'active': form.defaultSorting === 1}"
                                 ></i>
-                                <i @click="form.defaultSorting = 2, getGoodsList()" 
+                                <i @click="form.defaultSorting = 2, form.priceSorting = 0, form.followTimeSorting = 0, getGoodsList()" 
                                     class="drop" :class="{'active': form.defaultSorting === 2}"
                                 ></i>
                             </p>
@@ -138,10 +138,10 @@
                         <div class="item">
                             <p class="title">出售价格</p>
                             <p class="btn">
-                                <i @click="form.priceSorting = 1, getGoodsList()" 
+                                <i @click="form.defaultSorting = 0, form.priceSorting = 1, form.followTimeSorting = 0, getGoodsList()" 
                                     class="goup" :class="{'active': form.priceSorting === 1}"
                                 ></i>
-                                <i @click="form.priceSorting = 2, getGoodsList()" 
+                                <i @click="form.defaultSorting = 0, form.priceSorting = 2, form.followTimeSorting = 0, getGoodsList()" 
                                     class="drop" :class="{'active': form.priceSorting === 2}"
                                 ></i>
                             </p>
@@ -149,10 +149,10 @@
                         <div class="item">
                             <p class="title">上传时间</p>
                             <p class="btn">
-                                <i @click="form.followTimeSorting = 1, getGoodsList()" 
+                                <i @click="form.defaultSorting = 0, form.priceSorting = 0, form.followTimeSorting = 1, getGoodsList()" 
                                     class="goup" :class="{'active': form.followTimeSorting === 1}"
                                 ></i>
-                                <i @click="form.followTimeSorting = 2, getGoodsList()" 
+                                <i @click="form.defaultSorting = 0, form.priceSorting = 0, form.followTimeSorting = 2, getGoodsList()" 
                                     class="drop" :class="{'active': form.followTimeSorting === 2}"
                                 ></i>
                             </p>
@@ -263,7 +263,7 @@
                 </div>
                 <button class="btn" type="button">
                     <img src="./search.png">
-                    <span>免费看店</span>
+                    <span @click='consult'>免费看店</span>
                 </button>
             </div>
         </div>

@@ -38,7 +38,7 @@
                     <i class="new"></i>
                 </li>
                 <div class="divide"></div>
-                <li @click="gotoPage('tblistpage')">
+                <li @click="consult()">
                     <img src="./tao.png">
                     <span class="text">淘宝店铺</span>
                     <i class="hot"></i>
@@ -87,7 +87,10 @@ export default {
             if(curPath === "tblistpage") return; // 页面相同
             
             this.$router.push('tblistpage')
-        }
+        },
+        consult () { // 联系客服
+            window.open("https://url.cn/5iD2Ua8?_type=wpa&qidian=true");
+        },
     },
     created() {
         let route = this.$route.path,
