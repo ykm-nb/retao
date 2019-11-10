@@ -220,7 +220,7 @@
                                 <span class="price" :title="item.price">{{ item.price }}</span>
                                 <span class="unit">万</span>
                                 <div class="tag" v-if="item.storeProperties">
-                                    <p>{{ item.storeProperties==1?'特价':'' || item.storeProperties==2?'优质':'' || item.storeProperties==3?'稀缺':'' || item.storeProperties>=4?'普通':'' }}</p>
+                                    <p>{{ item.storeProperties==1?'特价':'' || item.storeProperties==2?'优质':'' || item.storeProperties==3?'稀缺':'' || item.storeProperties>=4?'可议':'' }}</p>
                                 </div>
                             </div>
                             <button type="button">
