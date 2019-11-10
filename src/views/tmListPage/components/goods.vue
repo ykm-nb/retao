@@ -16,7 +16,7 @@
                                 :key="index" 
                                 @click="handleType('goodsIndex', index)" 
                             >
-                                <p :class="{'active': goodsIndex === index}">{{ item }}</p>
+                                <p :class="{'active': goodsIndex === index}">{{ item.mainProductName }}</p>
                             </li>
                         </ul>
                     </div>
@@ -88,7 +88,7 @@
                                 </ul>
                             </li>
                             <li class="item">
-                                <span>{{ dealList[dealIndex] || '当面交易' }}</span>
+                                <span>{{ dealList[dealIndex] || '是否陪同' }}</span>
                                 <i class="iconfont iconxia"></i>
                                 <ul class="dropdown">
                                     <li 
@@ -283,6 +283,7 @@ export default {
                 total: 1
             },
             form: {
+                title: '',
                 storeProperties: '',// 店铺属性
                 mainPriductId: '', // 主营
                 storeType: '',
@@ -554,8 +555,7 @@ export default {
     },
     methods: {
         getGoodsList(pageNum = 1) { // 获取列表数据
-            let obj = ls.session.get("rtSearch"), // 暂时没用到
-                pageForm = this.pageForm, form = this.form;
+            let pageForm = this.pageForm, form = this.form;
 
             pageForm.pageNum = pageNum;
             
@@ -590,7 +590,7 @@ export default {
             this[type] = index;
             switch (type) {
                 case 'goodsIndex': (index === -1) ?
-                    form.mainPriductId = '' : form.mainPriductId = this.goodsList[index];
+                    form.mainPriductId = '' : form.mainPriductId = this.goodsList[index].id;
                     break;
                 case 'shopIndex': 
                     if(index === -1) form.storeType = ''
@@ -636,13 +636,20 @@ export default {
         consult() { // 联系客服
             window.open("https://url.cn/5iD2Ua8?_type=wpa&qidian=true");
         },
+        getMainProductLists () {
+            api.axs('post', "/mainProduct/queryForList", {}).then(({ data }) => {
+                if(data.code === "SUCCESS") {
+                    this.goodsList = data.data
+                }
+            });
+        }
     },
     created() {
         const tbList = ls.session.get("tbList"),
               rtSearch = ls.session.get("rtSearch");
 
-        this.storeName = rtSearch.storeName;
-
+        this.getMainProductLists() // 获取主营列表
+        if(rtSearch) this.form.title = rtSearch.title;
         if(tbList != null) Object.assign(this.form, tbList)
         
         this.getGoodsList()
@@ -997,7 +1004,6 @@ export default {
                     display: flex;
                     align-items: center;
                     position: relative;
-                    overflow: hidden;
 
                     img {
                         width: 100%;
@@ -1049,16 +1055,21 @@ export default {
                     }
 
                     .layer2 {
+                        height: 14px;
+                        line-height: 14px;
                         display: flex;
                         margin-bottom: 20px;
 
                         li {
+                            height: 14px;
+                            line-height: 14px;
                             margin-right: 25px;
 
                             span {
                                 font-size: 14px;
                                 line-height: 14px;
                                 color: #999999;
+                                display: inline-block;
                                 margin-bottom: 12px;
                             }
 

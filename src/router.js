@@ -48,6 +48,14 @@ var router = new Router({
     },
     {
       meta: {
+        title: '天猫特价列表页'
+      },
+      path: '/tmtjlistpage',
+      name: 'tmtjlistpage',
+      component: () => import('@/views/tmTJListPage/index.vue')
+    },
+    {
+      meta: {
         title: '淘宝列表页'
       },
       path: '/tblistpage',

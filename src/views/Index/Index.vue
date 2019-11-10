@@ -13,14 +13,14 @@
             <p class="title">热门城市</p>
             <ul>
               <li @click="hotStore({title: item})" v-for="(item, index) in hotCity" :key="index">{{ item }}</li>
-              <li class="more">更多</li>
+              <li @click="$router.push('tmlistpage')" class="more">更多</li>
             </ul>
           </div>
           <div class="industry">
             <p class="title">热门类目</p>
             <ul>
               <li @click="hotStore({title: item})" v-for="(item, index) in hotCategory" :key="index">{{ item }}</li>
-              <li class="more">更多</li>
+              <li @click="$router.push('tmlistpage')" class="more">更多</li>
             </ul>
           </div>
         </div>
@@ -83,7 +83,7 @@
     </ul>
 
     <!-- 联系客服 -->
-    <Consult></Consult>
+    <Consult ref="consult"></Consult>
 
   </div>
 </template>
@@ -160,7 +160,7 @@ export default {
     hotStore (obj) {
       ls.session("tbList", obj)
       this.$router.push("tmlistpage")
-    },
+    }
   },
   created() {
     ls.session("rtSearch", "") // 清空搜索
@@ -169,12 +169,7 @@ export default {
     // 获取首页五个店铺信息
     api.axs('post', "/tmStore/queryHomeStorePages", {}).then(({ data }) => {
         if(data.code === "SUCCESS") {
-          var datas = data.data
-            datas.tjList.list.forEach((item,index) => {
-              if(item.mainProductUrl.length > 70) {
-                datas.tjList.list[index].mainProductUrl = item.mainProductUrl.split(',')[0]
-              }
-            })
+            var datas = data.data;
             this.tjList = datas.tjList.list
             this.yzList = datas.yzList.list
             this.xqList = datas.xqList.list

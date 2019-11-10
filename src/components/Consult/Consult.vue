@@ -1,27 +1,25 @@
 <template>
     <!-- 联系客服 -->
-    <div class="contact-wrap">
-        <img @click="showConsult = true" v-if="!showConsult" class="consult-side" src="./consult.png">
-        <div class="inner-bg consult-bg" v-if="showConsult">
-            <div class="inner consult">
-                <div class="consult-box">
-                    <img class="img-bg" src="./consult-box.png">
-                    <ul>
-                        <li class="item" :class="`item${index + 1}`"
-                            v-for="(item, index) in list" :key="index"
-                        >
-                            <div class="avatar" :style="{background: `url(${item.imgUrl}) no-repeat 50% top`,backgroundSize:'130%'}"></div>    
-                            <p class="position">{{ item.position }}</p>
-                            <p class="name">{{ item.name }}</p>
-                            <button @click="consult" type="button">联系TA</button>
-                        </li>
-                    </ul>
-                    <button class="btn" type="button">网店限时免佣金</button>
-                    <img @click="showConsult = false" class="close" src="./close.png">
-                </div>
-                <div class="meng-layer" @click="showConsult = false"></div>
+    <div class="inner-bg consult-bg" :class="{'consult-99':!showConsult}">
+        <div class="inner consult">
+            <img @click="showConsult = true" v-show="!showConsult" class="consult-side" src="./consult.png">
+            <div v-show="showConsult" class="consult-box">
+                <img class="img-bg" src="./consult-box.png">
+                <ul>
+                    <li class="item" :class="`item${index + 1}`"
+                        v-for="(item, index) in list" :key="index"
+                    >
+                        <div class="avatar" :style="{background: `url('${item.imgUrl}') no-repeat 50% -4px`}"></div>    
+                        <p class="position">{{ item.position }}</p>
+                        <p class="name">{{ item.name }}</p>
+                        <button @click="consult" type="button">联系TA</button>
+                    </li>
+                </ul>
+                <button class="btn" type="button">网店限时免佣金</button>
+                <img @click="close" class="close" src="./close.png">
             </div>
         </div>
+        <div @click="close" class="meng-layer" v-show="showConsult"></div>
     </div>
 </template>
 
@@ -79,11 +77,12 @@ export default {
         consult () { // 联系客服
             window.open("https://url.cn/5iD2Ua8?_type=wpa&qidian=true");
         },
-    },
-    created () {
-        var time = setInterval(() => {
-            (this.showConsult) ? this.showConsult = false : this.showConsult = true
-        }, 10000000)
+        close () {
+            this.showConsult = false
+            setTimeout(() => {
+                this.showConsult = true
+            }, 10000);
+        }
     },
     mounted() {
         setTimeout(() => {
@@ -109,6 +108,19 @@ export default {
         left: 0;
         top: 0;
         z-index: 1000;
+
+        &.consult-99 {
+            width: 0;
+            height: 0;
+        }
+
+        .consult-side {
+            position: fixed;
+            left: 5%;
+            bottom: 5%;
+            cursor: pointer;
+            z-index: 1002;
+        }
 
         .consult-box {
             width: 620px;

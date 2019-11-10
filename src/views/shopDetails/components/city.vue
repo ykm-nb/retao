@@ -1,6 +1,6 @@
 <template>
     <!-- 购买流程 -->
-    <div class="inner-bg city-bg">
+    <div class="inner-bg city-bg" :class="((tagIndex + 1) % 2) === 0 ? 'city-bg1' : 'city-bg2'">
         <div class="inner city">
             <div class="title-box">
                 <p class="title">陪同过户城市</p>
@@ -8,11 +8,14 @@
             </div>
 
             <ul class="city-tag">
-                <li class="prev">
+                <li class="prev" @click="switchIndex('prev')">
                     <img src="./images/prev.png">
                 </li>
-                <li class="item" :class="{'actived':index===tagIndex}" v-for="(item, index) in list" :key="index">{{ item }}</li>
-                <li class="next">
+                <li class="item" :class="{'actived':index===tagIndex}" 
+                    v-for="(item, index) in list" :key="index"
+                    @click="tagIndex = index"
+                >{{ item }}</li>
+                <li class="next" @click="switchIndex('next')">
                     <img src="./images/next.png">
                 </li>
             </ul>
@@ -38,7 +41,19 @@ export default {
     data() {
         return {
             tagIndex: 0,
+            bgLists: [],
             list: ["北京", "上海", "广州", "南京", "深圳", "厦门", "上海", "广州", "南京", "深圳"]
+        }
+    },
+    methods: {
+        switchIndex (value) {
+            if (value === 'prev') {
+                this.tagIndex -= 1
+                if(this.tagIndex < 0) this.tagIndex = this.list.length - 1
+            } else {
+                this.tagIndex += 1
+                if(this.tagIndex === this.list.length) this.tagIndex = 0
+            }
         }
     }
 }
@@ -47,7 +62,13 @@ export default {
 <style lang="less" scoped>
     .city-bg {
         height: 655px;
-        background: url('./images/city-bg.png') no-repeat center;
+
+        &.city-bg1 {
+            background: url('./images/city-bg.png') no-repeat center;
+        }
+        &.city-bg2 {
+            background: url('./images/city-bg1.png') no-repeat center;
+        }
 
         .city {
             height: 100%;

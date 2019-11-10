@@ -142,7 +142,7 @@
                     <li class="item" v-for="(item, index) in xqList.slice(1,4)" :key="index">
                         <div class="time-limit">
                             <span>一级类目 :</span>
-                            <span>{{ item.firstCategory }}</span>
+                            <span :title="item.firstCategory">{{ item.firstCategory }}</span>
                         </div>
                         <div class="goods-img">
                             <img :src="item.mainProductUrl">
@@ -359,7 +359,15 @@ export default {
                                 font-size: 14px;
                                 line-height: 38px;
                                 color: #ff0036;
+                                text-align: left;
                                 margin-left: 8px;
+                            }
+
+                            span:last-child {
+                                width: calc(100% - 80px);
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
                             }
                         }
 
@@ -395,6 +403,14 @@ export default {
                                         line-height: 14px;
                                         color: #999999;
                                         display: inline-block;
+                                        margin: 0 2px;
+                                    }
+
+                                    span:first-child {
+                                        font-size: 16px;
+                                        line-height: 16px;
+                                        font-weight: bold;
+                                        color: #222;
                                     }
                                 }
 

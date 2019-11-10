@@ -19,7 +19,7 @@
     <Goods :goodsList="goodsList"></Goods>
 
     <!-- 店铺截图 -->
-    <ScreenShot></ScreenShot>
+    <ScreenShot v-if='showChild' :picture="goodsList.pictureUrl"></ScreenShot>
 
     <!-- 费用估计 -->
     <Money v-if='showChild' :goodsList="goodsList" :allPrice="allPrice"></Money>
@@ -85,9 +85,6 @@ export default {
     created() {
         Object.assign(this, { id: parseInt(this.$route.query.id) })
         this.getStoreDetail(this.id)
-
-        // let obj = ls.session.get('rtSearch'),
-        //     url = "";
     }
 }
 </script>

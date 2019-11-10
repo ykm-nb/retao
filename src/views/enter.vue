@@ -34,7 +34,8 @@
                     </div>
                     <div class="content">
                         <ul class="left">
-                            <li @click="goodIndex = index" v-for="(item, index) in goodList" :key="index">
+                            <li @click="goodIndex = index" :class="{'actived': goodIndex === index}"
+                                v-for="(item, index) in goodList" :key="index">
                                 <p>{{ item.title }}</p>
                                 <img src="@/assets/images/right.png">
                             </li>
@@ -49,7 +50,7 @@
                                     @click="checkThis(index1, index2)"
                                 >
                                     <div class="radio"></div>
-                                    <p>{{ item.text }}</p>
+                                    <p :title="item.text">{{ item.text }}</p>
                                 </div>
                             </li>
                         </ul>
@@ -58,10 +59,10 @@
                             <ul>
                                 <li class="item" v-for="(item, index) in checkList" :key="index">
                                     <p class="item-title">{{ item.title }}：</p>
-                                    <p class="item-text">{{ item.obj.text }}</p>
+                                    <p class="item-text" :title="item.obj.text">{{ item.obj.text }}</p>
                                 </li>
                             </ul>
-                            <button class="clear" @click="checkList = []" type="button">全部清除</button>
+                            <button class="clear" @click="clear" type="button">全部清除</button>
                         </div>
                     </div>
                 </div>
@@ -136,40 +137,32 @@ export default {
                     content: [
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品1"
+                            text: "男装"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/"
+                            text: "流行男鞋"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品"
+                            text: "女装/女士精品"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "女鞋"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "女士内衣/男士内衣/家居服"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "箱包皮具/热销女包/男包"
                         },
                         {
                             isCheck: false,
-                            text: "运动鞋new"
+                            text: "服饰配件/皮带/帽子/围巾"
                         },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        }
                     ]
                 },
                 {
@@ -177,40 +170,20 @@ export default {
                     content: [
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品1"
+                            text: "彩妆/香水/美妆工具"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/"
+                            text: "美容护肤/美体/精油"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品"
+                            text: "美发护发/假发"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "美容美体仪器"
                         },
-                        {
-                            isCheck: false,
-                            text: "电动车/配件/交通工具"
-                        },
-                        {
-                            isCheck: false,
-                            text: "电动车/配件/交通工具"
-                        },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        }
                     ]
                 },
                 {
@@ -218,40 +191,68 @@ export default {
                     content: [
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品2"
+                            text: "办公设备/耗材/相关服务"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/"
+                            text: "3C数码配件"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品"
+                            text: "DIY电脑"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "品牌台机/品牌一体机/服务器"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "电子元器件市场"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "数码相机/单反相机/摄像机"
                         },
                         {
                             isCheck: false,
-                            text: "运动鞋new"
+                            text: "闪存卡/U盘/存储/移动硬盘"
                         },
                         {
                             isCheck: false,
-                            text: "运动鞋new"
+                            text: "智能设备"
                         },
                         {
                             isCheck: false,
-                            text: "运动鞋new"
-                        }
+                            text: "电脑硬件/显示器/电脑周边"
+                        },
+                        {
+                            isCheck: false,
+                            text: "电玩/配件/游戏攻略"
+                        },
+                        {
+                            isCheck: false,
+                            text: "平板电脑/MID"
+                        },
+                        {
+                            isCheck: false,
+                            text: "MP3/MP4/iPod/录音笔"
+                        },
+                        {
+                            isCheck: false,
+                            text: "笔记本电脑"
+                        },
+                        {
+                            isCheck: false,
+                            text: "文具电教/文化用品/行政商务用品"
+                        },
+                        {
+                            isCheck: false,
+                            text: "包装"
+                        },
+                        {
+                            isCheck: false,
+                            text: "国货精品数码"
+                        },
                     ]
                 },
                 {
@@ -259,14 +260,6 @@ export default {
                     content: [
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品3"
-                        },
-                        {
-                            isCheck: false,
-                            text: "户外/登山/野营/"
-                        },
-                        {
-                            isCheck: false,
                             text: "户外/登山/野营/旅行用品"
                         },
                         {
@@ -275,24 +268,24 @@ export default {
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
-                        },
-                        {
-                            isCheck: false,
-                            text: "电动车/配件/交通工具"
-                        },
-                        {
-                            isCheck: false,
                             text: "运动鞋new"
                         },
                         {
                             isCheck: false,
-                            text: "运动鞋new"
+                            text: "运动/瑜伽/健身/球迷用品"
                         },
                         {
                             isCheck: false,
-                            text: "运动鞋new"
-                        }
+                            text: "运动包/户外包/配件"
+                        },
+                        {
+                            isCheck: false,
+                            text: "运动服/休闲服装"
+                        },
+                        {
+                            isCheck: false,
+                            text: "自行车/骑行装备/零配件"
+                        },
                     ]
                 },
                 {
@@ -300,40 +293,56 @@ export default {
                     content: [
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品4"
+                            text: "家居饰品"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/"
+                            text: "电子/电工"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品"
+                            text: "鲜花速递/花卉仿真/绿植园艺"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "床上用品"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "特色手工艺"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "商业/办公家具"
                         },
                         {
                             isCheck: false,
-                            text: "运动鞋new"
+                            text: "住宅家具"
                         },
                         {
                             isCheck: false,
-                            text: "运动鞋new"
+                            text: "五金/工具"
                         },
                         {
                             isCheck: false,
-                            text: "运动鞋new"
-                        }
+                            text: "居家布艺"
+                        },
+                        {
+                            isCheck: false,
+                            text: "全屋定制"
+                        },
+                        {
+                            isCheck: false,
+                            text: "基础建材"
+                        },
+                        {
+                            isCheck: false,
+                            text: "家装主材"
+                        },
+                        {
+                            isCheck: false,
+                            text: "家装灯饰光源"
+                        },
                     ]
                 },
                 {
@@ -341,40 +350,44 @@ export default {
                     content: [
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品5"
+                            text: "汽车用品/电子/清洗/改装"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/"
+                            text: "车用清洗用品/清洗工具"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品"
+                            text: "汽车用品/内饰品"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "汽车儿童安全座椅"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "汽车外饰品/加装装潢/防护"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "汽车影音/车用电子/电器"
                         },
                         {
                             isCheck: false,
-                            text: "运动鞋new"
+                            text: "汽车GPS导航仪及配件"
                         },
                         {
                             isCheck: false,
-                            text: "运动鞋new"
+                            text: "汽车美容/保养/维修"
                         },
                         {
                             isCheck: false,
-                            text: "运动鞋new"
-                        }
+                            text: "摩托车/装备/配件"
+                        },
+                        {
+                            isCheck: false,
+                            text: "整车(经销商)"
+                        },
                     ]
                 },
                 {
@@ -382,40 +395,16 @@ export default {
                     content: [
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品6"
+                            text: "书籍/杂志/报纸"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/"
+                            text: "音乐/影视/明星/音像"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品"
+                            text: "古董/邮币/字画/收藏"
                         },
-                        {
-                            isCheck: false,
-                            text: "电动车/配件/交通工具"
-                        },
-                        {
-                            isCheck: false,
-                            text: "电动车/配件/交通工具"
-                        },
-                        {
-                            isCheck: false,
-                            text: "电动车/配件/交通工具"
-                        },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        }
                     ]
                 },
                 {
@@ -423,40 +412,8 @@ export default {
                     content: [
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品7"
+                            text: "合约机"
                         },
-                        {
-                            isCheck: false,
-                            text: "户外/登山/野营/"
-                        },
-                        {
-                            isCheck: false,
-                            text: "户外/登山/野营/旅行用品"
-                        },
-                        {
-                            isCheck: false,
-                            text: "电动车/配件/交通工具"
-                        },
-                        {
-                            isCheck: false,
-                            text: "电动车/配件/交通工具"
-                        },
-                        {
-                            isCheck: false,
-                            text: "电动车/配件/交通工具"
-                        },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        }
                     ]
                 },
                 {
@@ -464,40 +421,32 @@ export default {
                     content: [
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品8"
+                            text: "奶粉辅食营养品零食"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/"
+                            text: "玩具/童车/益智/积木/模型"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品"
+                            text: "童装/婴儿装/亲子装"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "童鞋/婴儿鞋/亲子鞋"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "尿片/洗护/喂哺/推车床"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "模玩/动漫/周边/cos/桌游"
                         },
                         {
                             isCheck: false,
-                            text: "运动鞋new"
+                            text: "孕妇装/孕产妇用品/营养"
                         },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        }
                     ]
                 },
                 {
@@ -505,40 +454,96 @@ export default {
                     content: [
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品9"
+                            text: "餐饮美食卡券"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/"
+                            text: "室内设计师"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品"
+                            text: "电子凭证"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "婚庆/摄像/摄像服务"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "景点门票/演艺演出/周边游"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "个性定制/设计服务DIY"
                         },
                         {
                             isCheck: false,
-                            text: "运动鞋new"
+                            text: "电影/演出/体育赛事"
                         },
                         {
                             isCheck: false,
-                            text: "运动鞋new"
+                            text: "医疗及健康服务"
                         },
                         {
                             isCheck: false,
-                            text: "运动鞋new"
-                        }
+                            text: "网店/网络服务/软件"
+                        },
+                        {
+                            isCheck: false,
+                            text: "消费卡"
+                        },
+                        {
+                            isCheck: false,
+                            text: "度假线路/签证送关/旅游服务"
+                        },
+                        {
+                            isCheck: false,
+                            text: "外卖/外送/订餐"
+                        },
+                        {
+                            isCheck: false,
+                            text: "本地化生活服务"
+                        },
+                        {
+                            isCheck: false,
+                            text: "生活娱乐充值"
+                        },
+                        {
+                            isCheck: false,
+                            text: "装修设计/施工/监理"
+                        },
+                        {
+                            isCheck: false,
+                            text: "特价酒店"
+                        },
+                        {
+                            isCheck: false,
+                            text: "网络店铺代金/优惠券"
+                        },
+                        {
+                            isCheck: false,
+                            text: "交通票"
+                        },
+                        {
+                            isCheck: false,
+                            text: "购物提货券"
+                        },
+                        {
+                            isCheck: false,
+                            text: "超市卡/商场购物卡"
+                        },
+                        {
+                            isCheck: false,
+                            text: "教育特训"
+                        },
+                        {
+                            isCheck: false,
+                            text: "特价酒店/特色客栈/公寓旅馆"
+                        },
+                        {
+                            isCheck: false,
+                            text: "房产/租房/新房/二手房/委托服务"
+                        },
                     ]
                 },
                 {
@@ -546,40 +551,52 @@ export default {
                     content: [
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品10"
+                            text: "零食/坚果/特产"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/"
+                            text: "酒类"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品"
+                            text: "保健食品/膳食营养补充食品"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "粮油米面/南北干货/调味品"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "茶"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "隐形眼镜/护理液"
                         },
                         {
                             isCheck: false,
-                            text: "运动鞋new"
+                            text: "咖啡/麦片/冲饮"
                         },
                         {
                             isCheck: false,
-                            text: "运动鞋new"
+                            text: "OTC药品/医疗器械/计生用品"
                         },
                         {
                             isCheck: false,
-                            text: "运动鞋new"
-                        }
+                            text: "传统滋补营养品"
+                        },
+                        {
+                            isCheck: false,
+                            text: "水产肉类/新鲜蔬果/熟食"
+                        },
+                        {
+                            isCheck: false,
+                            text: "成人用品/情趣用品"
+                        },
+                        {
+                            isCheck: false,
+                            text: "精致中药材"
+                        },
                     ]
                 },
                 {
@@ -587,40 +604,28 @@ export default {
                     content: [
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品11"
+                            text: "影音电器"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/"
+                            text: "大家电"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品"
+                            text: "厨房电器"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "家庭保健"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "生活电器"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "个人护理/保健/按摩器材"
                         },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        }
                     ]
                 },
                 {
@@ -628,40 +633,28 @@ export default {
                     content: [
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品12"
+                            text: "网游装备/游戏币/账号/代练"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/"
+                            text: "手机号码/套餐/增值业务"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品"
+                            text: "网络游戏点卡"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "游戏物品交易平台"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "腾讯QQ专区"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "移动/联通/电信充值中心"
                         },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        }
                     ]
                 },
                 {
@@ -669,40 +662,36 @@ export default {
                     content: [
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品13"
+                            text: "居家日用"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/"
+                            text: "洗护清洁剂/卫生巾/纸/香薰"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品"
+                            text: "宠物/宠物食品及用品"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "节庆用品/礼品"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "厨房/烹饪用具"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "餐饮具"
                         },
                         {
                             isCheck: false,
-                            text: "运动鞋new"
+                            text: "家庭/个人清洁工具"
                         },
                         {
                             isCheck: false,
-                            text: "运动鞋new"
+                            text: "收纳整理"
                         },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        }
                     ]
                 },
                 {
@@ -710,40 +699,20 @@ export default {
                     content: [
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品14"
+                            text: "ZIPPO/瑞士军刀/眼镜"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/"
+                            text: "饰品/流行首饰/时尚饰品新"
                         },
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品"
+                            text: "珠宝/钻石/翡翠/黄金"
                         },
                         {
                             isCheck: false,
-                            text: "电动车/配件/交通工具"
+                            text: "手表"
                         },
-                        {
-                            isCheck: false,
-                            text: "电动车/配件/交通工具"
-                        },
-                        {
-                            isCheck: false,
-                            text: "电动车/配件/交通工具"
-                        },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        }
                     ]
                 },
                 {
@@ -751,44 +720,13 @@ export default {
                     content: [
                         {
                             isCheck: false,
-                            text: "户外/登山/野营/旅行用品15"
+                            text: "乐器/吉他/钢琴/配件"
                         },
-                        {
-                            isCheck: false,
-                            text: "户外/登山/野营/"
-                        },
-                        {
-                            isCheck: false,
-                            text: "户外/登山/野营/旅行用品"
-                        },
-                        {
-                            isCheck: false,
-                            text: "电动车/配件/交通工具"
-                        },
-                        {
-                            isCheck: false,
-                            text: "电动车/配件/交通工具"
-                        },
-                        {
-                            isCheck: false,
-                            text: "电动车/配件/交通工具"
-                        },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        },
-                        {
-                            isCheck: false,
-                            text: "运动鞋new"
-                        }
                     ]
                 },
             ],
             checkList: [], // 已选类目列表
+            map: new Map(),
             // 服务类型
             serviceIndex: 0,
             serviceList: [
@@ -809,28 +747,32 @@ export default {
                     tags: ["便捷易用，简单高效", "递交迅速，反馈及时", "全流程掌握，随时查看进度"]
                 }
             ],
-            
         }
     },
     methods: {
         checkThis (index1, index2) {
-            const obj = this.goodList[index1].content[index2];
+            const obj = this.goodList[index1].content[index2], map = this.map;
             obj.isCheck = !obj.isCheck;
 
-            if(obj.isCheck) {
-                if (!obj.id) {
-                    obj.id = `${index1}${obj.text}${index2}`;
-                    this.checkList.push({
-                        title: this.goodList[index1].title,
-                        obj: obj
-                    })
-                }
-            } else {
-                this.checkList.filter(item => {
-                    return item.obj.id != `${index1}${obj.text}${index2}`
+            if (obj.isCheck) {
+                map.set(index1 + '' + index2, index1 + '' + index2)
+                this.checkList.push({
+                    id: index1 + '' + index2,
+                    title: this.goodList[index1].title,
+                    obj
                 })
-                obj.id = ''
+            } else {
+                map.delete(index1 + '' + index2)
+                this.checkList.forEach((item, index) => {
+                    if (item.id === index1 + '' + index2) this.checkList.splice(index, 1)
+                })
             }
+        },
+        clear () {
+            this.checkList.forEach((item, index) => {
+                this.checkList[index].obj.isCheck = false;
+            })
+            this.checkList = []
         }
     }
 }
@@ -940,6 +882,10 @@ export default {
                             margin-bottom: 10px;
                             transition: .4s;
 
+                            &.actived {
+                                background-color: #ff2352;
+                            }
+
                             &:hover {
                                 background-color: #ff2352;
                             }
@@ -966,7 +912,6 @@ export default {
                         .item {
                             display: flex;
                             flex-wrap:wrap;
-                            justify-content: space-between;
                             
                             .item-content {
                                 width: calc(100% / 3);
@@ -987,8 +932,13 @@ export default {
                                 }
 
                                 p {
+                                    width: calc(100% - 30px);
                                     font-size: 16px;
                                     line-height: 16px;
+                                    text-align: left;
+                                    white-space: nowrap;
+                                    text-overflow: ellipsis;
+                                    overflow: hidden;
                                     color: #333;
                                 }
 
@@ -1047,9 +997,13 @@ export default {
                                 }
 
                                 .item-text {
+                                    width: calc(100% - 75px);
                                     font-size: 14px;
                                     line-height: 14px;
+                                    text-align: left;
                                     white-space: nowrap;
+                                    text-overflow: ellipsis;
+                                    overflow: hidden;
                                     color: #333;
                                 }
                             }

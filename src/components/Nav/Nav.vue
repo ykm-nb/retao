@@ -9,9 +9,9 @@
                 </div>
 
                 <div class="search">
-                    <input v-model="searchText" @keyup.enter="handleSearch(searchText)" type="text" placeholder="请输入店铺关键词进行查找">
+                    <input v-model="searchText" @keyup.enter="handleSearch(searchText)" type="text" placeholder="请输入店铺标题进行查找">
                     <button @click="handleSearch(searchText)" class="btn1" type="button">查看网店</button>
-                    <button class="btn2" type="button">我要卖网店</button>
+                    <button @click="consult" class="btn2" type="button">我要卖网店</button>
                     <img class="logo-search" src="./search.png">
                 </div>
             </div>
@@ -32,7 +32,7 @@
                     <i class="hot"></i>
                 </li>
                 <div class="divide"></div>
-                <li @click="gotoPage('tblistpage')">
+                <li @click="gotoPage('tmtjlistpage')">
                     <img src="./du.png">
                     <span class="text">特价新店</span>
                     <i class="new"></i>
@@ -82,11 +82,12 @@ export default {
         handleSearch(text) {
             const curPath = this.$route.path.substring(1);
 
-            ls.session("rtSearch", {storeName: text})
+            ls.session("rtSearch", {title: text})
             this.$emit("navSearch", text)
-            if(curPath === "tblistpage") return; // 页面相同
+            if(curPath === "tmlistpage") return; // 页面相同
+            if(curPath === "tmtjlistpage") return; // 页面相同
             
-            this.$router.push('tblistpage')
+            this.$router.push('tmlistpage')
         },
         consult () { // 联系客服
             window.open("https://url.cn/5iD2Ua8?_type=wpa&qidian=true");

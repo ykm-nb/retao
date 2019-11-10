@@ -1,5 +1,5 @@
 <template>
-    <div class="inner-bg" style="background-color: #f1f1f1">
+    <div class="inner-bg">
         <div class="inner">
             
             <div class="inner-left">
@@ -16,7 +16,7 @@
                                 :key="index" 
                                 @click="handleType('goodsIndex', index)" 
                             >
-                                <p :class="{'active': goodsIndex === index}">{{ item }}</p>
+                                <p :class="{'active': goodsIndex === index}">{{ item.mainProductName }}</p>
                             </li>
                         </ul>
                     </div>
@@ -24,19 +24,16 @@
                         <div class="left">
                             <img src="./type.png">
                             <p>类型：</p>
-                            <button @click="sliderIndex = 0, form.secondCategory = '', getGoodsList()" 
-                                    class="all" :class="{'all-actived': sliderIndex === 0}" type="button">全部</button>
+                            <button @click="handleType('shopIndex', -1)"  class="all" :class="{'all-actived': shopIndex === -1}" type="button">全部</button>
                         </div>
-                        <div class="right">
-                            <div class="right-left">
-                                <ul class="slider">
-                                    <button @mousedown="btnMove" class="btn-left" :style="{'left': (sliderIndex * 42) + 'px'}">{{ sliderList[sliderIndex] }}</button>
-                                    <li @click="handleType('sliderIndex', index)" v-for="(item, index) in sliderList" :key="index"></li>
-                                </ul>
-                                <img src="./type2.png">
-                            </div>
-                            <button @click="getGoodsList(1)" class="sure" type="button">确认</button>
-                        </div>
+                        <ul class="right">
+                            <li v-for="(item, index) in shopList" 
+                                :key="index" 
+                                @click="handleType('shopIndex', index)" 
+                            >
+                                <p :class="{'active': shopIndex === index}" >{{ item }}</p>
+                            </li>
+                        </ul>
                     </div>
                     <div class="layer price">
                         <div class="left">
@@ -69,10 +66,12 @@
                                 <span>{{ regionList[regionIndex] || '地域选择' }}</span>
                                 <i class="iconfont iconxia"></i>
                                 <ul class="dropdown">
-                                    <li v-for="(item, index) in regionList" :key="index" 
+                                    <li 
+                                        v-for="(item, index) in regionList" 
+                                        :key="index" 
                                         @click="handleMore('regionIndex', index, 'area')"
                                     >
-                                        {{ item || '全部' }}
+                                        {{ item || '不限' }}
                                     </li>
                                 </ul>
                             </li>
@@ -92,7 +91,9 @@
                                 <span>{{ dealList[dealIndex] || '是否陪同' }}</span>
                                 <i class="iconfont iconxia"></i>
                                 <ul class="dropdown">
-                                    <li v-for="(item, index) in dealList" :key="index" 
+                                    <li 
+                                        v-for="(item, index) in dealList" 
+                                        :key="index" 
                                         @click="handleMore('dealIndex', index, 'isEscort')"
                                     >
                                         {{ item || '不限' }}
@@ -103,7 +104,9 @@
                                 <span>{{ pointList[pointIndex]===1?'扣分情况':'无扣分' }}</span>
                                 <i class="iconfont iconxia"></i>
                                 <ul class="dropdown">
-                                    <li v-for="(item, index) in pointList" :key="index" 
+                                    <li 
+                                        v-for="(item, index) in pointList" 
+                                        :key="index" 
                                         @click="handleMore('pointIndex', index, 'deductPoints')"
                                     >
                                         {{ item===1?'不限':'无扣分' }}
@@ -225,7 +228,7 @@
                                 <span @click="consult">联系客服</span>
                             </button>
                             <p class="number" :title="item.productNo">编号：{{ item.productNo }}</p>
-                            <p class="time" :title="item.followTime || item.updateTime">更新时间：{{ item.followTime || item.updateTime }}</p>
+                            <p class="time" :title="item.followTime">更新时间：{{ item.followTime }}</p>
                         </div>
                     </div>
                     <div v-show="goodsLists.length === 0" class="no-data">暂无数据</div>
@@ -233,10 +236,11 @@
 
                 <!-- 分页 -->
                 <div class="page">
-                    <Page :current="pageForm.pageNum" 
-                          :total="pageForm.total" 
-                          show-elevator 
-                          @on-change="getGoodsList"
+                    <Page 
+                        :current="pageForm.pageNum" 
+                        :total="pageForm.total" 
+                        show-elevator 
+                        @on-change="getGoodsList"
                     />
                     <p class="msg">
                         <span>共{{ Math.ceil(pageForm.total / 10) }}页</span>
@@ -270,19 +274,20 @@
 import api from '@/api';
 import ls from "store2";
 export default {
-    name: "goods",
+    name: "tmtransfer-goods",
     data() {
         return {
-            storeName: '',
             // 分页
             pageForm: {
                 pageNum: 1,
                 total: 1
             },
             form: {
-                storeProperties: '',// 店铺属性
-                mainProducts: '', // 主营
-                secondCategory: '',
+                title: '',
+                productType: 'xd', // 新店
+                storeProperties: '1',// 店铺属性
+                mainPriductId: '', // 主营
+                storeType: '',
                 // 价格
                 startPrice: '',
                 endPrice: '',
@@ -297,8 +302,8 @@ export default {
             },
             goodsIndex: -1,
             goodsList: ['服饰', '鞋类箱包', '居家日用', '家装家具家纺', '化妆品', '母婴', '3C数码', '运动户外', '保健/医药', '食品', '乐器', '网游及QQ', '话费通信', '其他行业', '汽车及配件', '图书音像', '珠宝配饰', '服务大类', '家用电器'],
-            sliderList: ['1钻', '2钻', '3钻', '4钻', '5钻', '1皇冠', '2皇冠', '3皇冠', '4皇冠', '5皇冠', '1金冠', '2金冠', '3金冠', '4金冠', '5金冠'],
-            sliderIndex: 0,
+            shopIndex: -1,
+            shopList: ['旗舰店', '专营店', '专卖店'],
             priceIndex: -1,
             priceList: ['5万以下', '5-10万', '10-30万', '30-50万', '50万以上'],
             // === 其他 ===
@@ -556,7 +561,7 @@ export default {
 
             pageForm.pageNum = pageNum;
             
-            api.axs('post', "/tmStore/queryCommonStorePages", {...form, ...pageForm, storeName: this.storeName}).then(({ data }) => {
+            api.axs('post', "/tmStore/queryCommonStorePages", {...form, ...pageForm}).then(({ data }) => {
                 if(data.code === "SUCCESS") {
                     pageForm.total = data.data.total;
                     this.goodsLists = data.data.list;
@@ -577,8 +582,8 @@ export default {
             for(let i in form) {
                 form[i] = '';
                 form['defaultSorting'] = form['priceSorting'] = form['followTimeSorting'] = 2;
-                this.goodsIndex = this.priceIndex = -1;
-                this.sliderIndex = this.regionIndex = this.brandIndex = this.dealIndex = this.pointIndex = 0;
+                this.goodsIndex = this.shopIndex = this.priceIndex = -1;
+                this.regionIndex = this.brandIndex = this.dealIndex = this.pointIndex = 0;
             }
         },
         handleType (type, index) { // 点击 类目、类型、价格
@@ -587,9 +592,13 @@ export default {
             this[type] = index;
             switch (type) {
                 case 'goodsIndex': (index === -1) ?
-                    form.mainProducts = '' : form.mainProducts = this.goodsList[index];
+                    form.mainPriductId = '' : form.mainPriductId = this.goodsList[index].id;
                     break;
-                case 'sliderIndex': form.secondCategory = this.sliderList[index]
+                case 'shopIndex': 
+                    if(index === -1) form.storeType = ''
+                    if(index === 0) form.storeType = '2'
+                    if(index === 1) form.storeType = '1'
+                    if(index === 2) form.storeType = '3'
                     break;
                 case 'priceIndex': 
                     if(index === -1) form.startPrice = '', form.endPrice = ''
@@ -620,40 +629,6 @@ export default {
 
             this.getGoodsList();
         },
-        btnMove (e) { // 滑块滑动
-            var oDiv = document.getElementsByClassName("btn-left")[0];
-            var e = e || window.event;
-
-            const oDivLeft = oDiv.offsetLeft; // oDiv到父级左边的距离
-            /*鼠标点击的位置距离DIV左侧的距离 */
-            var disX = e.clientX - oDivLeft;
-            
-            document.onmousemove = (e) => {
-                var e = e || window.event;
-                // 横轴坐标
-                let leftX = e.clientX - disX;
-
-                if( leftX < 0 ) leftX = 0;
-                if (leftX > 630 - oDiv.offsetWidth) leftX = 630 - oDiv.offsetWidth;
-
-                oDiv.style.left = leftX + "px";
-
-                let index = (leftX / 42).toFixed(2); // 所对应的索引值
-                if(index > (parseInt(index) + 0.5)) {
-                    this.sliderIndex = Math.ceil(index)
-                } else {
-                    this.sliderIndex = Math.floor(index)
-                }
-            }
-
-            document.onmouseup = () => {
-                document.onmousemove = null;
-                document.onmouseup = null;
-
-                this.form.secondCategory = this.sliderList[this.sliderIndex]
-                this.getGoodsList(1)
-            }
-        },
         gotoDetail(id) { // 跳转详情
             this.$router.push({ 
                 path: 'shopdetails',
@@ -663,15 +638,22 @@ export default {
         consult() { // 联系客服
             window.open("https://url.cn/5iD2Ua8?_type=wpa&qidian=true");
         },
+        getMainProductLists () {
+            api.axs('post', "/mainProduct/queryForList", {}).then(({ data }) => {
+                if(data.code === "SUCCESS") {
+                    this.goodsList = data.data
+                }
+            });
+        }
     },
     created() {
         const tbList = ls.session.get("tbList"),
               rtSearch = ls.session.get("rtSearch");
 
-        this.storeName = rtSearch.storeName;
-
+        this.getMainProductLists() // 获取主营列表
+        if(rtSearch) this.form.title = rtSearch.title;
         if(tbList != null) Object.assign(this.form, tbList)
-
+        
         this.getGoodsList()
     }
 }
@@ -765,65 +747,6 @@ export default {
 
                         
                     }
-                }
-            }
-
-            // 类型
-            .shopType .right {
-                padding-top: 10px;
-                position: relative;
-
-                .right-left {
-                    width: 630px;
-
-                    .slider {
-                        width: 100%;
-                        height: 5px;
-                        display: flex;
-                        justify-content: space-around;
-                        margin-bottom: 15px;
-                        background-color: #f74549;
-                        position: relative;
-
-                        button {
-                            height: 20px;
-                            line-height: 20px;
-                            white-space: nowrap;
-                            color: #fff;
-                            padding: 0 10px;
-                            background-color: #f74549;
-                            border-radius: 20px;
-                            border: none;
-                            position: absolute;
-                            top: 50%;
-                            transform: translate(0,-50%);
-                            cursor: pointer;
-                        }
-                        
-                        li {
-                            width: 30px;
-                            height: 20px;
-                            background-color: transparent;
-                            transform: translate(0,100%);
-                            cursor: pointer;
-                        }
-                    }
-                }
-
-                .sure {
-                    height: 20px;
-                    line-height: 20px;
-                    color: #fff;
-                    padding: 0 10px;
-                    margin-top: 3px;
-                    background-color: #f74549;
-                    border-radius: 20px;
-                    border: none;
-                    position: absolute;
-                    right: 0;
-                    top: 10px;
-                    transform: translate(0,-50%);
-                    cursor: pointer;
                 }
             }
 
@@ -1134,10 +1057,14 @@ export default {
                     }
 
                     .layer2 {
+                        height: 14px;
+                        line-height: 14px;
                         display: flex;
                         margin-bottom: 20px;
 
                         li {
+                            height: 14px;
+                            line-height: 14px;
                             margin-right: 25px;
 
                             span {

@@ -9,35 +9,17 @@
 
             <ul class="imgs">
                 <li class="item" v-for="(item, index) in lists" :key="index">
-                    <div class="time-limit">
-                        <span>商标 :</span>
-                        <span>{{ item.mainProductName }}</span>
-                    </div>
                     <div class="goods-img">
                         <img :src="item.mainProductUrl">
                     </div>
                     <div class="section1">
-                        <img src="./images/tm1.png">
-                        <div>
-                            <p class="name">{{ item.storeName }}</p>
-                            <p>
-                                <span>{{ item.firstCategory }}</span>
-                                <span>{{ item.trademarkCategory }}</span>
-                                <span>{{ item.brand }}</span>
-                            </p>
-                        </div>
+                        <span class="name">{{ item.mainProductName }}</span>
+                        <span class="price">{{ item.price }}万</span>
                     </div>
                     <div class="section2">
-                        <div class="left">
-                            <p class="store-type">{{ item.storeType }}</p>
-                            <p>
-                                <span>{{ item.brand }}</span>
-                                <span>{{ item.city }}</span>
-                            </p>
-                        </div>
-                        <div class="right">
-                            <p>{{ item.price }}万</p>
-                        </div>
+                        <span>{{ item.mainProductName }}</span>
+                        <span>{{ item.trademarkCategory }}类</span>
+                        <span>R标</span>
                     </div>
                 </li>
             </ul>
@@ -118,71 +100,44 @@ export default {
                     .goods-img {
                         width: 100%;
                         height: 230px;
+                        overflow: hidden;
                         display: flex;
                         justify-content: center;
                         align-items: center;
+
+                        img {
+                            max-width: 260px;
+                            max-height: 260px;
+                        }
                     }
 
                     .section1 {
+                        font-size: 16px;
+                        line-height: 16px;
+                        font-weight: bold;
                         display: flex;
-                        align-items: center;
-                        margin-bottom: 14px;
+                        justify-content: space-between;
+                        margin-bottom: 6px;
 
-                        div {
-                            text-align: left;
-                            margin-left: 10px;
+                        .name {
+                            color: #222222;
+                        }
 
-                            .name {
-                                font-size: 18px;
-                                line-height: 18px;
-                                font-weight: bold;
-                                color: #000;
-                                margin-bottom: 5px;
-                            }
-
-                            p span {
-                                font-size: 14px;
-                                line-height: 14px;
-                                color: #999999;
-                                display: inline-block;
-                            }
+                        .price {
+                            color: #ff0036;
                         }
                     }
 
                     .section2 {
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
+                        text-align: left;
+                        line-height: 14px;
 
-                        .left {
-                            p {
-                                font-size: 14px;
-                                line-height: 14px;
-                                text-align: left;
-                                color: #999;
-                            }
-                            .store-type {
-                                margin-bottom: 4px;
-                            }
-
-                            p span {
-                                display: inline-block;
-                                margin-right: 4px;
-                            }
-                        }
-
-                        .right {
-                            width: 130px;
-                            text-align: center;
-                            background-color: #fff3f3;
-                            border-radius: 30px 0 0 30px;
-                            
-                            p {
-                                font-size: 24px;
-                                font-weight: bold;
-                                line-height: 44px;
-                                color: #ff5050;
-                            }
+                        span {
+                            font-size: 14px;
+                            line-height: 14px;
+                            color: #999999;
+                            display: inline-block;
+                            margin-right: 4px;
                         }
                     }
                 }

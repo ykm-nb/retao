@@ -25,27 +25,30 @@
 </template>
 
 <script>
+import api from '@/api';
 // Swiper
 import Swiper from 'swiper';
 export default {
     name: "screenshot",
+    props: {
+        picture: {
+            type: String,
+            default: ''
+        }
+    },
     data() {
         return {
-            list: [require('./images/screen1.png'), require('./images/screen1.png'), require('./images/screen1.png')]
+            // list: [require('./images/screen1.png'), require('./images/screen1.png'), require('./images/screen1.png')]
+            list: []
         }
     },
     methods: {
         initSwiper() {
             var mySwiper = new Swiper ('.swiper-container', {
                 loop: true, // 循环模式选项
-                // autoplay: {
-                //     delay: 1000,
-                //     stopOnLastSlide: false,
-                //     disableOnInteraction: true,
-                // },
                 // 切换效果
                 effect : 'coverflow',
-                slidesPerView: 3,
+                // slidesPerView: 3,
                 centeredSlides: true,
                 coverflowEffect: {
                     rotate: 0,
@@ -67,8 +70,16 @@ export default {
                 },
             })
         },
+        getPicture () {
+            
+        },
+    },
+    created () {
+        if (this.picture.length > 70) this.list = this.picture.split(',')
+        else this.list = [this.picture]
     },
     mounted() {
+        // console.log(this.list)
         this.initSwiper()
     },
 }
@@ -113,11 +124,23 @@ export default {
                 
                 .swiper-wrapper {
                     width: 100%;
+                    height: 410px;
 
                     .swiper-slide {
+                        width: 100%;
+                        height: 410px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        .swiper-slide-shadow-left, .swiper-slide-shadow-right {
+                            background: none;
+                        }
+
                         img {
-                            width: 690px;
-                            height: 410px;
+                            max-width: 690px;
+                            max-height: 410px;
+                            display: block;
                             overflow: hidden;
                         }
                     }

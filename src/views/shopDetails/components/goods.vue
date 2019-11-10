@@ -254,7 +254,7 @@
                 
                 <div @mouseenter="showDropdown = true" @mouseleave="showDropdown = false" 
                     class="dropdown" :class="{'dropdown-open':showDropdown}" 
-                    :style="{top: (dropdownIndex * 440) + 'px'}"
+                    :style="{top: ((dropdownIndex * 430) + 56) + 'px'}"
                 >
                     <img :src="serviceList[dropdownIndex].wxUrl">
                 </div>
@@ -280,7 +280,6 @@ export default {
             showDropdown: false,
             dropdownIndex: 0,
             serviceList: [
-                
                 {
                     imgUrl: require('./images/service4.png'),
                     name: '高奕豪',
@@ -696,19 +695,27 @@ export default {
                         }
                     }
 
-                    .name span {
+                    .name {
                         font-size: 14px;
                         line-height: 14px;
-                        color: #333;
+
+                        span {
+                            line-height: 14px;
+                            color: #333;
+                            display: inline-block;
+                        }
                     }
 
                     .phone {
+                        font-size: 14px;
+                        line-height: 14px;
                         margin: 20px 0;
 
                         span {
                             font-size: 14px;
                             line-height: 14px;
                             color: #333;
+                            display: inline-block;
                         }
 
                         .value {
@@ -749,9 +756,9 @@ export default {
                     background-color: #fff;
                     box-shadow: 0 10px 30px rgba(0,0,0,.1);
                     position: absolute;
-                    left: 0;
-                    top: 0;
-                    transform: translate(-100%);
+                    left: 50%;
+                    top: 50px;
+                    transform: translate(-50%);
                     transition: .6s;
                     opacity: 0;
                     overflow: hidden;
@@ -759,7 +766,7 @@ export default {
 
                     img {
                         display: block;
-                        margin: 26px auto 0;
+                        margin: 18px auto;
                     }
 
                     &:after {
@@ -767,6 +774,7 @@ export default {
                         width: 0;
                         height: 0;
                         border-top: 15px solid #f1f1f1;
+                        border-bottom: 0;
                         border-left: 15px solid transparent;
                         border-right: 15px solid transparent;
                         position: absolute;
@@ -776,7 +784,7 @@ export default {
                     }
                 }
                 .dropdown-open {
-                    max-height: 100%;
+                    max-height: 300px;
                     opacity: 1;
                 }
             }
