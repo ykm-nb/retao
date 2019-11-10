@@ -88,7 +88,7 @@ export default {
     mounted() {
         setTimeout(() => {
             this.showConsult = true
-        }, 1000);
+        }, 1500);
     }
 }
 </script>
