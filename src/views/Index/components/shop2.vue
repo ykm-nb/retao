@@ -9,7 +9,7 @@
                 </div>
 
                 <ul class="layer-right">
-                    <li class="item" :class="`item${index}`" v-for="(item, index) in tmList" :key="index">
+                    <li class="item" :class="`item${index}`" v-for="(item, index) in tmList" :key="index" @click="gotoDetail(item.id)">
                         <div class="section1">
                             <img src="./images/tm.png">
                             <div>
@@ -43,7 +43,7 @@
 
                 <ul class="layer-right">
                     <p class="no-data" v-if="tbList.length < 1">暂无数据</p>
-                    <li class="item" :class="`item${index}`" v-for="(item, index) in tbList" :key="index">
+                    <li class="item" :class="`item${index}`" v-for="(item, index) in tbList" :key="index" @click="gotoDetail(item.id)">
                         <div class="section1">
                             <img src="./images/tb.png">
                             <div>
@@ -147,14 +147,20 @@ export default {
                 direction: 'horizontal',
                 loopFillGroupWithBlank: true,  
                 observer:true,//修改swiper自己或子元素时，自动初始化swiper
-            　　 observeParents:true,//修改swiper的父元素时，自动初始化swiper
+                observeParents:true,//修改swiper的父元素时，自动初始化swiper
                 //使用分页器
                 paginationClickable :true,
-            　　 pagination: {
-                　　el: '.swiper-pagination'
-            　　 }
+                pagination: {
+                    el: '.swiper-pagination'
+                }
             });
-        }
+        },
+        gotoDetail(id) { // 跳转详情
+            this.$router.push({ 
+                path: 'shopdetails',
+                query: { id: parseInt(id) }
+            })
+        },
     },
     mounted() {
         this.initSwiper();
@@ -202,6 +208,7 @@ export default {
                     }
 
                     .item {
+                        cursor: pointer;
                         width: 300px;
                         height: 200px;
                         padding: 32px 20px;

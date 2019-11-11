@@ -285,7 +285,7 @@ export default {
             form: {
                 title: '',
                 storeProperties: '',// 店铺属性
-                mainPriductId: '', // 主营
+                mainProductId: '', // 主营
                 storeType: '',
                 // 价格
                 startPrice: '',
@@ -590,7 +590,7 @@ export default {
             this[type] = index;
             switch (type) {
                 case 'goodsIndex': (index === -1) ?
-                    form.mainPriductId = '' : form.mainPriductId = this.goodsList[index].id;
+                    form.mainProductId = '' : form.mainProductId = this.goodsList[index].id;
                     break;
                 case 'shopIndex': 
                     if(index === -1) form.storeType = ''
