@@ -23,7 +23,7 @@
                 </div>
 
                 <ul class="layer-right">
-                    <li class="item" v-for="(item, index) in tjList.slice(1,4)" :key="index">
+                    <li class="item" v-for="(item, index) in tjList.slice(1,4)" :key="index" @click="gotoDetail(item.id)">
                         <div class="time-limit">
                             <img src="./images/shop1-limit.png">
                             <span>{{ index==0?`${day1}天${hour1}时${minute1}分${second1}秒`:'' || index==1?`${day2}天${hour2}时${minute2}分${second2}秒`:'' || index==2?`${day3}天${hour3}时${minute3}分${second3}秒`:'' }}</span>
@@ -81,7 +81,7 @@
 
                 <ul class="layer-right">
                     <p class="no-data" v-if="yzList.length < 2">暂无数据</p>
-                    <li class="item" v-for="(item, index) in yzList.slice(1,4)" :key="index">
+                    <li class="item" v-for="(item, index) in yzList.slice(1,4)" :key="index" @click="gotoDetail(item.id)">
                         <div class="time-limit">
                             <span>商标 :</span>
                             <span>{{ item.trademark | shortWr}}</span>
@@ -139,7 +139,7 @@
 
                 <ul class="layer-right">
                     <p class="no-data" v-if="xqList.length < 2">暂无数据</p>
-                    <li class="item" v-for="(item, index) in xqList.slice(1,4)" :key="index">
+                    <li class="item" v-for="(item, index) in xqList.slice(1,4)" :key="index" @click="gotoDetail(item.id)">
                         <div class="time-limit">
                             <span>一级类目 :</span>
                             <span :title="item.firstCategory">{{ item.firstCategory }}</span>
@@ -236,7 +236,13 @@ export default {
                 (shenyuM < 10) ? (this['minute'+index] = '0' + shenyuM) : (this['minute'+index] = shenyuM);
                 (shenyuS < 10) ? (this['second'+index] = '0' + shenyuS) : (this['second'+index] = shenyuS);
             }, 1000)
-        }
+        },
+        gotoDetail(id) { // 跳转详情
+            this.$router.push({ 
+                path: 'shopdetails',
+                query: { id: parseInt(id) }
+            })
+        },
     },
     updated () {
         this.tjList.slice(1,4).forEach((item, index) => {
@@ -342,6 +348,7 @@ export default {
                     position: relative;
 
                     .item {
+                        cursor: pointer;
                         width: 300px;
                         padding-top: 12px;
                         border-right: 1px solid #f4f4f4;

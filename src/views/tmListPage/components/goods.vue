@@ -220,7 +220,7 @@
                                 <span class="price" :title="item.price">{{ item.price }}</span>
                                 <span class="unit">万</span>
                                 <div class="tag" v-if="item.storeProperties">
-                                    <p>{{ item.storeProperties==1?'特价':'' || item.storeProperties==2?'优质':'' || item.storeProperties==3?'稀缺':'' || item.storeProperties>=4?'普通':'' }}</p>
+                                    <p>{{ item.storeProperties==1?'特价':'' || item.storeProperties==2?'优质':'' || item.storeProperties==3?'稀缺':'' || item.storeProperties>=4?'可议':'' }}</p>
                                 </div>
                             </div>
                             <button type="button">
@@ -285,7 +285,7 @@ export default {
             form: {
                 title: '',
                 storeProperties: '',// 店铺属性
-                mainPriductId: '', // 主营
+                mainProductId: '', // 主营
                 storeType: '',
                 // 价格
                 startPrice: '',
@@ -590,7 +590,7 @@ export default {
             this[type] = index;
             switch (type) {
                 case 'goodsIndex': (index === -1) ?
-                    form.mainPriductId = '' : form.mainPriductId = this.goodsList[index].id;
+                    form.mainProductId = '' : form.mainProductId = this.goodsList[index].id;
                     break;
                 case 'shopIndex': 
                     if(index === -1) form.storeType = ''

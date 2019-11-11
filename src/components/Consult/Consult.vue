@@ -9,7 +9,7 @@
                     <li class="item" :class="`item${index + 1}`"
                         v-for="(item, index) in list" :key="index"
                     >
-                        <div class="avatar" :style="{background: `url('${item.imgUrl}') no-repeat 50% -4px`}"></div>    
+                        <div class="avatar" :style="{background: `url('${item.imgUrl}') no-repeat 50% -4px`,backgroundSize: '130%'}"></div>    
                         <p class="position">{{ item.position }}</p>
                         <p class="name">{{ item.name }}</p>
                         <button @click="consult" type="button">联系TA</button>
