@@ -21,9 +21,11 @@
             </div>
 
             <div class="imgs">
-                <img src="./img1.png">
-                <img src="./img2.png">
-                <img src="./img3.png">
+                <img @click="go(0)" class="img1" src="./img1-1.png">
+                <img @click="go(1)" src="./img1-2.png">
+                <img @click="go(2)" src="./img1-3.png">
+                <img @click="go(3)" src="./img2.png">
+                <img @click="go(4)" src="./img3.png">
             </div>
 
             <p class="footer-bottom">浙ICP备19040911号 版权所有 | 仟呗（绍兴）信息科技有限公司 浙江绍兴文化创意产业园6幢</p>
@@ -129,6 +131,16 @@ export default {
         gotoExplain() {
             let curPath = this.$route.path.substring(1);
             if(curPath != "explain") this.$router.push("explain")
+        },
+        go (index) {
+            switch (index) {
+                case 0: window.open('https://baike.shuidi.cn/companywiki-fdd0d827c8f6bf4bfbe8c3e4f151ca01.html', '_blank')
+                break;
+                case 2: window.open('http://www.beian.gov.cn/portal/registerSystemInfo', '_blank')
+                break;
+                case 4: window.open('http://www.cyberpolice.cn/wfjb/', '_blank')
+                break;
+            }
         }
     }
 }
@@ -201,8 +213,18 @@ export default {
 
         .imgs {
             width: 575px;
+            height: 38px;
             .flex();
             margin: 10px 0 20px;
+
+            img {
+                cursor: pointer;
+            }
+
+            .img1 {
+                border-radius: 5px;
+                overflow: hidden;
+            }
         }
 
         .footer-bottom {
