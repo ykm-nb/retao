@@ -285,7 +285,7 @@ export default {
             form: {
                 title: '',
                 productType: 'xd', // 新店
-                storeProperties: '1',// 店铺属性
+                storeProperties: '',// 店铺属性
                 mainProductId: '', // 主营
                 storeType: '',
                 // 价格
