@@ -96,7 +96,7 @@ export default {
         .nav-bg {
             .bread-crumb {
                 height: 30px;
-                line-height: 30px;
+                line-height: 18px;
                 text-align: left;
 
                 span {

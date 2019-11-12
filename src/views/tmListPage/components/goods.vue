@@ -619,7 +619,7 @@ export default {
                     break;
                 case 'brandIndex': form[key] = this.brandList[index].value
                     break;
-                case 'dealIndex': form[key] = this.dealList[index]
+                case 'dealIndex': form[key] = this.dealList[index] == '是' ? 1 : (this.dealList[index] == '否' ? 0 : '')
                     break;
                 case 'pointIndex': form[key] = this.pointList[index]
                     break;
