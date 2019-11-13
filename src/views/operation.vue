@@ -3,6 +3,7 @@
     <div class="operation-box">
 
         <div class="swiper-container">
+
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
 
@@ -39,13 +40,90 @@
                                 <p class="description">专业多渠道推广，开拓市场</p>
                                 <p class="translate">TRUSTEESHIP</p>
                             </div>
-                            <ul class="content">
-                                <li class="item" v-for="(item, index) in trusteeshipList.slice(0,3)" :key="index">
-                                    <img :src="item.imgUrl">                        
-                                    <p class="title">{{ item.title }}</p>
-                                    <p class="text">{{ item.text }}</p>
-                                </li>
-                            </ul>
+                            <div class="content">
+                                <!-- 首个展示的 -->
+                                <div class="first-ul-bg">
+                                    <ul :class="['first-ul', {'first-ul1': switchUl}]" :style="getLeft">
+                                        <li class="first-item">
+                                            <p class="title">{{ popularList1[3].title }}</p>
+                                            <p class="info">{{ popularList1[3].info }}</p>
+                                            <div class="divide"></div>
+                                            <ul class="tag tag1">
+                                                <li v-for="(item1, index) in popularList1[3].tagLists.slice(0,2)" :key="index">
+                                                    <img src="@/assets/images/operation-2-2.png">
+                                                    <p>{{ item1 }}</p>
+                                                </li>
+                                            </ul>
+                                            <ul class="tag tag2">
+                                                <li v-for="(item2, index) in popularList1[3].tagLists.slice(2)" :key="index">
+                                                    <img src="@/assets/images/operation-2-2.png">
+                                                    <p>{{ item2 }}</p>
+                                                </li>
+                                            </ul>
+                                            <div @click="consult" class="btn"></div>
+                                        </li>
+                                        <li class="first-item" v-for="(item, index) in popularList1" :key="index">
+                                            <p class="title">{{ item.title }}</p>
+                                            <p class="info">{{ item.info }}</p>
+                                            <div class="divide"></div>
+                                            <ul class="tag tag1">
+                                                <li v-for="(item1, index) in item.tagLists.slice(0,2)" :key="index">
+                                                    <img src="@/assets/images/operation-2-2.png">
+                                                    <p>{{ item1 }}</p>
+                                                </li>
+                                            </ul>
+                                            <ul class="tag tag2">
+                                                <li v-for="(item2, index) in item.tagLists.slice(2)" :key="index">
+                                                    <img src="@/assets/images/operation-2-2.png">
+                                                    <p>{{ item2 }}</p>
+                                                </li>
+                                            </ul>
+                                            <div @click="consult" class="btn"></div>
+                                        </li>
+                                        <li class="first-item">
+                                            <p class="title">{{ popularList1[0].title }}</p>
+                                            <p class="info">{{ popularList1[0].info }}</p>
+                                            <div class="divide"></div>
+                                            <ul class="tag tag1">
+                                                <li v-for="(item1, index) in popularList1[0].tagLists.slice(0,2)" :key="index">
+                                                    <img src="@/assets/images/operation-2-2.png">
+                                                    <p>{{ item1 }}</p>
+                                                </li>
+                                            </ul>
+                                            <ul class="tag tag2">
+                                                <li v-for="(item2, index) in popularList1[0].tagLists.slice(2)" :key="index">
+                                                    <img src="@/assets/images/operation-2-2.png">
+                                                    <p>{{ item2 }}</p>
+                                                </li>
+                                            </ul>
+                                            <div @click="consult" class="btn"></div>
+                                        </li>
+                                    </ul>
+
+                                    <div class="right-index">
+                                        <p class="cur-page">{{ returnPopIndex }}</p>
+                                        <em>/</em>
+                                        <p class="all-page">04</p>
+                                    </div>
+                                </div>
+
+                                <transition-group name="fade" class="item-bg">
+                                    <div :class="['item', `item${item.id}`, {'last-item': index === 3 && clickRight}]" 
+                                        v-for="(item, index) in popularList2" :key="item.id"
+                                    >
+                                        <p class="title">{{ item.title }}</p>
+                                        <p class="refer">查看详情></p>
+                                        <div>
+                                            <p class="number">0{{ item.id }}</p>
+                                            <p class="part">PART</p>
+                                        </div>
+                                    </div>
+                                </transition-group>
+
+                                <!-- 前进后退 -->
+                                <div class="prev" @click="switchPopIndex('prev')"></div>
+                                <div class="next" @click="switchPopIndex('next')"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -155,8 +233,17 @@
 
                 </div>
             </div>
-            <!-- 分页器 -->
-            <div class="swiper-pagination"></div>
+
+            <div class="common-boxbm">
+                <span class="circle1"></span>
+                <span class="circle2"></span>
+                <span class="circle3"></span>
+                <i class="sprite"></i>
+                <span class="circle4"></span>
+                <span class="circle5"></span>
+                <span class="circle6"></span>
+            </div>
+
         </div>
 
     </div>
@@ -196,39 +283,113 @@ export default {
                     info: "专业团队主导 成熟管理体系"
                 }
             ],
+            popIndex: 1,
+            switchUl: false, // 首个展示索引4切换1 或 1切换4
+            clickRight: false, // 点击的是否为next按钮
+            popularList1: [
+                {
+                    id: 1,
+                    title: '01营销策划',
+                    info: '我们通过店铺全面分析，帮助店铺快速获取精准客户流量，解决客户不匹配、转化率低等问题，制定个性化推广营销策略，针对店铺产品进行合理化选择，快速成单，提高店铺运作效率，实现店铺销量和品牌双重提升。',
+                    tagLists: ['客户管理', '活动提报', '文案策划', '促销策划']
+                },
+                {
+                    id: 2,
+                    title: "02直通车投放",
+                    info: "针对客户对产品不够了解、需求不匹配、犹豫购买等情况。我们将通过一系列的优化手段，针对关键词、落地页、店铺整体视觉等进行优化和提升，让客户更精准，降低跳失率，提高转化率。",
+                    tagLists: ['关键词优化', '人群优化', '地域优化', '创意优化']
+                },
+                {
+                    id: 3,
+                    title: "03钻展推广",
+                    info: "我们将提供详细的店铺推广和创意文案，为店铺量身定制钻展推广方案，多年丰富的钻展投放经验、精心的主推产品分析，实现更精准的定向投放和新老客户的精准营销，完美配合店铺各类活动！",
+                    tagLists: ['创意优化', '精准投放', '精确人群', '提高ROI']
+                },
+                {
+                    id: 4,
+                    title: "04淘宝客",
+                    info: "我们将用丰富的经验呈现出每个行业产品的佣金模式，合理降低所需成本，提高利润率，为店铺提供更多流量，增加店铺知名度，帮助店铺更快更好的了解市场环境以及市场动态。",
+                    tagLists: ['产品定位', '招募淘客', '佣金优化', '整体策划']
+                }
+            ],
+            popularList2: [
+                {
+                    id: 1,
+                    imgUrl: require("@/assets/images/operation-2-4.png"),
+                    title: '01营销策划',
+                },
+                {
+                    id: 2,
+                    imgUrl: require("@/assets/images/operation-2-5.png"),
+                    title: "02直通车投放",
+                },
+                {
+                    id: 3,
+                    imgUrl: require("@/assets/images/operation-2-6.png"),
+                    title: "03钻展推广",
+                },
+                {
+                    id: 4,
+                    imgUrl: require("@/assets/images/operation-2-7.png"),
+                    title: "04淘宝客",
+                }
+            ]
+        }
+    },
+    computed: {
+        getLeft () {
+            return `left: -${this.popIndex * 460}px`
+        },
+        returnPopIndex () {
+            const index = this.popIndex;
+            if(index > 4) return `01`;
+            if(index < 1) return `04`;
+            return `0${index}`
         }
     },
     methods: {
-        scroll () {
-            
-        },
-        initSwiper() { // swiper
+        // swiper
+        initSwiper() {
             var mySwiper = new Swiper ('.swiper-container', {
                 direction: 'vertical',
                 speed: 800,
                 mousewheel: true,
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                    type: 'fraction',
-                },
-                // on:{
-                //     init: function(){
-                //         swiperAnimateCache(this);
-                //         swiperAnimate(this);
-                //     },
-                //     slideChangeTransitionEnd: function(){
-                //         swiperAnimate(this);
-                //     }
-                // }
             })
         },
-    },
-    created () {
-        
+        switchPopIndex (value) {
+            value === 'next' ? this.popIndex += 1 : this.popIndex -= 1;
+            this.switchUl = this.clickRight = false
+
+            // 索引大于或小于
+            if (this.popIndex === this.popularList1.length + 1) { // 大于
+                setTimeout(() => {
+                    this.popIndex = 1
+                    this.switchUl = true
+                }, 401)
+            }
+            if (this.popIndex === 0) { // 小于
+                setTimeout(() => {
+                    this.popIndex = this.popularList1.length
+                    this.switchUl = true
+                }, 401)
+            }
+
+            if (value === 'next') { // 切换小div
+                this.clickRight = true
+                let arr = this.popularList2.shift()
+                this.popularList2.push(arr)
+            } else {
+                let arr = this.popularList2.pop()
+                this.popularList2.unshift(arr)
+            }
+        },
+        // 联系客服
+        consult() {
+            window.open("https://url.cn/5iD2Ua8?_type=wpa&qidian=true", '_blank');
+        },
     },
     mounted () {
-        this.initSwiper();
+        this.initSwiper()
     }
 }
 </script>
@@ -241,6 +402,59 @@ export default {
         .swiper-container {
             width: 100%;
             height: 100%;
+
+            .common-boxbm {
+                width: 85px;
+                height: 32px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                position: absolute;
+                left: 50%;
+                bottom: 18px;
+                transform: translate(-50%);
+                z-index: 99;
+
+                span {
+                    width: 5px;
+                    height: 5px;
+                    background-color: rgba(255,255,255,.5);
+                    border-radius: 50%;
+                }
+                .circle1 {
+                    animation: goWhite 1s 0.5s forwards infinite alternate;
+                }
+                .circle2 {
+                    animation: goWhite 1s 1s forwards infinite alternate;
+                }
+                .circle3 {
+                    animation: goWhite 1s 1.5s forwards infinite alternate;
+                }
+                .circle4 {
+                    animation: goWhite 1s 2s forwards infinite alternate;
+                }
+                .circle5 {
+                    animation: goWhite 1s 2.5s forwards infinite alternate;
+                }
+                .circle6 {
+                    animation: goWhite 1s 3s forwards infinite alternate;
+                }
+
+                .sprite {
+                    width: 22px;
+                    height: 33px;
+                    background: url("../assets/images/pull_down_fff.png") no-repeat center;
+                    animation: goDown .6s linear forwards infinite alternate;
+                    position: relative;
+                }
+
+                @keyframes goWhite {
+                    100% {background-color: #fff}
+                }
+                @keyframes goDown {
+                    100% {top: 2px}
+                }
+            }
         }
 
         .title-box {
@@ -277,7 +491,6 @@ export default {
         }
 
         .trusteeship-bg {
-            // height: 1000px;
             height: 100%;
             background: url("../assets/images/operation-trusteeship1.png") no-repeat 50% 0;
 
@@ -287,7 +500,7 @@ export default {
                 .content {
                     display: flex;
                     justify-content: space-between;
-                    margin: 170px 0 145px;
+                    margin: 150px 0 100px;
                     
                     li {
                         width: 215px;
@@ -326,7 +539,6 @@ export default {
         }
 
         .popularize-bg {
-            // height: 890px;
             height: 100%;
             background: #fc4bae url("../assets/images/operation-popularize1.png") no-repeat 50% 0;
 
@@ -334,39 +546,261 @@ export default {
                 padding: 36px 0 80px;
 
                 .content {
-                    display: flex;
-                    justify-content: space-between;
-                    flex-wrap: wrap;
-                    margin-top: 45px;
+                    width: 1102px;
+                    height: 422px;
+                    padding: 0 30px 0 260px;
+                    margin: 50px auto 0;
+                    background: url("../assets/images/operation-2-bg.png") no-repeat center;
+                    position: relative;
 
-                    .item {
-                        width: 390px;
-                        height: 340px;
-                        text-align: center;
-                        padding: 60px 35px 0;
-                        margin-bottom: 20px;
+                    // 首个展示的
+                    .first-ul-bg {
+                        width: 460px;
+                        height: 450px;
                         background-color: #fff;
-                        border-top: 2px solid #ff0537;
+                        border-radius: 8px;
+                        box-shadow: 0 0 32px rgba(46, 72, 242, 0.2);
+                        overflow: hidden;
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        z-index: 2;
+
+                        .first-ul {
+                            width: calc(460 * 4px);
+                            display: flex;
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            transition: .4s;
+
+                            &.first-ul1 {
+                                transition: 0s;
+                            }
+
+                            .first-item {
+                                width: 460px;
+                                height: 450px;
+                                text-align: left;
+                                flex-shrink: 0;
+                                padding: 60px 0 0 50px;
+
+                                .title {
+                                    font-size: 28px;
+                                    font-weight: bold;
+                                    line-height: 28px;
+                                    color: #9e5fef;
+                                    margin-bottom: 20px;
+                                }
+
+                                .info {
+                                    width: 370px;
+                                    font-size: 14px;
+                                    font-weight: bold;
+                                    line-height: 25px;
+                                    color: #808080;
+                                }
+
+                                .divide {
+                                    width: 46px;
+                                    height: 1px;
+                                    margin: 20px 0;
+                                    background: url("../assets/images/operation-2-1.png") no-repeat center;
+                                }
+
+                                .tag {
+                                    width: 322px;
+                                    height: 40px;
+                                    line-height: 40px;
+                                    display: flex;
+                                    justify-content: space-around;
+                                    padding: 0 12px;
+                                    margin-bottom: 20px;
+                                    background-color: #fff;
+                                    border-radius: 40px;
+                                    box-shadow: 0 0 21px rgba(0, 0, 0, 0.06);
+
+                                    li {
+                                        display: flex;
+                                        align-items: center;
+
+                                        p {
+                                            font-size: 12px;
+                                            line-height: 40px;
+                                            color: #333;
+                                            margin-left: 6px;
+                                        }
+                                    }
+
+                                    &.tag2 {
+                                        margin-bottom: 0;
+                                    }
+                                }
+
+                                .btn {
+                                    width: 160px;
+                                    height: 40px;
+                                    display: block;
+                                    margin-top: 40px;
+                                    background: url("../assets/images/operation-2-3.png") no-repeat center;
+                                    transition: .4s;
+                                    cursor: pointer;
+
+                                    &:hover {
+                                        background: url("../assets/images/operation-2-31.png") no-repeat center;
+                                    }
+                                }
+                            }
+                        }
+
+                        .right-index {
+                            width: 75px;
+                            height: 24px;
+                            display: flex;
+                            align-items: flex-end;
+                            position: absolute;
+                            right: 30px;
+                            bottom: 26px;
+
+                            .cur-page {
+                                font-size: 22px;
+                                line-height: 22px;
+                                color: #1e70f8;
+                            }
+
+                            em, .all-page {
+                                font-size: 14px;
+                                line-height: 14px;
+                                color: #999;
+                            }
+                            em {
+                                margin: 0 6px;
+                            }
+                        }
+                    }
+
+                    .item-bg {
+                        height: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        .fade-enter-active, .fade-leave-active {
+                        transition: opacity .4s;
+                        }
+                        .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+                            opacity: 0;
+                        }
+
+                        .item {
+                            width: 200px;
+                            height: 256px;
+                            text-align: left;
+                            padding: 50px 0 0 25px;
+                            overflow: hidden;
+                            transition: .4s;
+                            position: relative;
+                            z-index: 1;
+
+                            // 最后一个item
+                            &.last-item {
+                                transition: 0s;
+                                animation: lastItem .4s;
+                            }
+                            @keyframes lastItem {
+                                0% {
+                                    width: 0;
+                                }
+                                100% {
+                                    width: 200px;
+                                }
+                            }
+
+                            .title {
+                                width: 100%;
+                                height: 18px;
+                                font-size: 18px;
+                                line-height: 18px;
+                                color: #fff;
+                                margin-bottom: 18px;
+                            }
+
+                            .refer {
+                                height: 12px;
+                                font-size: 12px;
+                                line-height: 12px;
+                                color: #63bbf0;
+                                cursor: pointer;
+                            }
+
+                            div {
+                                width: 34px;
+                                height: 42px;
+                                text-align: center;
+                                position: absolute;
+                                bottom: 20px;
+                                right: 20px;
+
+                                .number {
+                                    font-size: 22px;
+                                    line-height: 22px;
+                                    color: rgba(255, 255, 255, 0.4);
+                                    margin-bottom: 6px;
+                                }
+
+                                .part {
+                                    font-size: 12px;
+                                    line-height: 12px;
+                                    color: rgba(255, 255, 255, 0.4);
+                                }
+                            }
+                        }
+
+                        .item1 {
+                            background: url("../assets/images/operation-2-4.png") no-repeat center;
+                        }
+                        .item2 {
+                            background: url("../assets/images/operation-2-5.png") no-repeat center;
+                        }
+                        .item3 {
+                            background: url("../assets/images/operation-2-6.png") no-repeat center;
+                        }
+                        .item4 {
+                            background: url("../assets/images/operation-2-7.png") no-repeat center;
+                        }
+                    }
+
+
+                    // 前进后退
+                    .prev, .next {
+                        width: 46px;
+                        height: 46px;
+                        border-radius: 50%;
+                        box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
+                        position: absolute;
+                        top: 50%;
+                        transition: .4s;
+                        z-index: 3;
                         cursor: pointer;
-                        transition: .5s;
+                    }
+
+                    .prev {
+                        background: url("../assets/images/operation-2-left.png") no-repeat center;
+                        left: 0;
+                        transform: translate(-50%,-50%);
 
                         &:hover {
-                            transform: translate(0,-10px);
-                            box-shadow: 0 5px 10px rgba(0,0,0,.1);
+                            background: url("../assets/images/operation-2-left1.png") no-repeat center;
                         }
+                    }
 
-                        .title {
-                            font-size: 26px;
-                            font-weight: bold;
-                            line-height: 26px;
-                            color: #333;
-                            margin: 38px 0 26px;
-                        }
+                    .next {
+                        background: url("../assets/images/operation-2-right.png") no-repeat center;
+                        right: 0;
+                        transform: translate(50%,-50%);
 
-                        .text {
-                            font-size: 18px;
-                            line-height: 26px;
-                            color: #999;
+                        &:hover {
+                            background: url("../assets/images/operation-2-right1.png") no-repeat center;
                         }
                     }
                 }

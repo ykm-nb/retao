@@ -28,7 +28,7 @@
                             <li>{{ `${item.province==null?'':item.province}${item.city}` }}</li>
                         </ul>
                         <div class="section2">
-                            <p class="new">{{ item.storeProperties==1?'特价':'' ||  item.storeProperties==2?'优质':'' || item.storeProperties==3?'稀缺':'' || item.storeProperties>=4?'普通':''}}</p>
+                            <p class="new">{{ item.storeProperties==1?'特价':'' ||  item.storeProperties==2?'优质':'' || item.storeProperties==3?'稀缺':'' || item.storeProperties>=4?'可议':''}}</p>
                             <p class="price">{{ item.price }}万</p>
                         </div>
                     </li>
@@ -62,7 +62,7 @@
                             <li>{{ `${item.province==null?'':item.province}${item.city}` }}</li>
                         </ul>
                         <div class="section2">
-                            <p class="new">{{ item.storeProperties==1?'特价':'' ||  item.storeProperties==2?'优质':'' || item.storeProperties==3?'稀缺':'' || item.storeProperties>=4?'普通':''}}</p>
+                            <p class="new">{{ item.storeProperties==1?'特价':'' ||  item.storeProperties==2?'优质':'' || item.storeProperties==3?'稀缺':'' || item.storeProperties>=4?'可议':''}}</p>
                             <p class="price">{{ item.price }}万</p>
                         </div>
                     </li>

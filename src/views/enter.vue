@@ -45,7 +45,7 @@
                         </ul>
                         <ul class="middle">
                             <li class="item" v-show="goodIndex === index1" v-for="(good, index1) in goodList" :key="index1">
-                                <div class="item-content" :class="{'actived': item.isCheck}" 
+                                <div :class="['item-content', {'actived': item.isCheck}]" 
                                     v-for="(item, index2) in good.content" :key="index2" 
                                     @click="checkThis(index1, index2)"
                                 >
