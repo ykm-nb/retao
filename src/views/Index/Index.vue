@@ -184,7 +184,7 @@ export default {
             ls.session('firstLists',firstLists)
 
         }
-    });
+    })
   },
   mounted() {
     this.initSwiper() // swiper初始化必须在mounted，因为此时dom元素已经渲染完
