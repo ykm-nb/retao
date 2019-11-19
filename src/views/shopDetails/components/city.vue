@@ -19,32 +19,19 @@
                     <img src="./images/next.png">
                 </li>
             </ul>
-
-            <!-- <img class="position" src="./images/city-pos.png"> -->
-            <!-- <div class="service" :style="getBgUrl">
-                <p>
-                    <span class="name">{{ serviceList[tagIndex].name }}</span>
-                    <span class="info">{{ serviceList[tagIndex].info }}</span>
-                </p>
-                <div class="btn">
-                    <button class="qq" type="button">QQ咨询</button>
-                    <button class="wechat" type="button">微信咨询</button>
-                </div>
-            </div> -->
         </div>
 
         <div class="amap-wrapper">
-            <el-amap class="amap-box" :zoom="zoom" :plugin="plugin" :events="events" :center="center" :vid="'amap-vue'" :zoomEnable="false">
-                <el-amap-marker :position="componentMarker.position" 
-                :visible="componentMarker.visible" 
-                :draggable="componentMarker.draggable"
-                >
-                </el-amap-marker>
+            <el-amap class="amap-box" :zoom="zoom" :plugin="plugin" :events="events" :center="markers[tagIndex].position" :vid="'amap-vue'" :zoomEnable="false">
+                <el-amap-marker :position="markers[tagIndex].position" :visible="markers[tagIndex].visible"></el-amap-marker>
+
                 <el-amap-info-window
-                    :position="currentWindow.position"
-                    :content="currentWindow.content"
-                    :visible="currentWindow.visible"
-                    :events="currentWindow.events">
+                    :isCustom="true" 
+                    :offset="[160, 200]" 
+                    :showShadow="true" 
+                    :position="windows[tagIndex].position"
+                    :visible="windows[tagIndex].visible"
+                    :content="windows[tagIndex].content">
                 </el-amap-info-window>
             </el-amap>
         </div>
@@ -119,14 +106,7 @@ export default {
             ],
 
             address: null,
-            searchKey: '',
-            markers: [],
-            searchOption: {
-                city: '全国',
-                citylimit: true
-            },
             zoom: 8,
-            center: [120.329838, 30.249249],
             events: {
                 init: (o) => {
                 console.log(o.getCenter())
@@ -149,49 +129,186 @@ export default {
                     pName: 'ToolBar',
                 },
             ],
-            componentMarker: {
-                position: [120.329838, 30.249249],
-                visible: true,
-                draggable: false,
-                // template: '<span>1</span>',
-            },
-            windows: [
+            markers: [
                 {
-                    position: [120.327091, 30.39861],
-                    isCustom: true,
-                    content: "",
+                    position: [120.200748, 30.242131],
                     visible: true,
-                    events: {
-                        close() {
-                            console.log('close infowindow1');
-                        }
-                    }
-                }, 
+                },
                 {
-                    position: [121.5375285, 31.21515044],
-                    content: 'Hi! I am here too!',
+                    position: [116.397705, 39.914627],
                     visible: true,
-                    events: {
-                        close() {
-                            console.log('close infowindow2');
-                        }
-                    }
+                },
+                {
+                    position: [121.464176, 31.243009],
+                    visible: true,
+                },
+                {
+                    position: [114.075871, 22.555333],
+                    visible: true,
+                },
+                {
+                    position: [113.254643, 23.134959],
+                    visible: true,
+                },
+                {
+                    position: [119.643192, 29.099045],
+                    visible: true,
+                },
+                {
+                    position: [120.571537, 30.002188],
+                    visible: true,
+                },
+                {
+                    position: [120.664921, 28.008617],
+                    visible: true,
+                },
+                {
+                    position: [120.752811, 30.774553],
+                    visible: true,
                 }
             ],
-            slotWindow: {
-                position: [120.192508, 30.265856]
-            },
-            currentWindow: {
-                position: [0, 0],
-                content: '',
-                events: {},
-                visible: false
-            }
+            windows: [
+                {
+                    position: [120.200748, 30.242131],
+                    content: `
+                    <div class="service service1">
+                        <p>
+                            <span class="name">竺金晶</span>
+                            <span class="info">杭州公司6年从业经验</span>
+                        </p>
+                        <div class="btn">
+                            <button @click="consult" class="qq" type="button">QQ咨询</button>
+                            <button class="wechat" type="button">微信咨询</button>
+                        </div>
+                    </div>`,
+                    visible: true,
+                }, 
+                {
+                    position: [116.397705, 39.914627],
+                    content: `
+                    <div class="service service2">
+                        <p>
+                            <span class="name">赵峰</span>
+                            <span class="info">北京公司5年从业经验</span>
+                        </p>
+                        <div class="btn">
+                            <button @click="consult" class="qq" type="button">QQ咨询</button>
+                            <button class="wechat" type="button">微信咨询</button>
+                        </div>
+                    </div>`,
+                    visible: true,
+                },
+                {
+                    position: [121.464176, 31.243009],
+                    content: `
+                    <div class="service service3">
+                        <p>
+                            <span class="name">傅心玉</span>
+                            <span class="info">上海公司3年从业经验</span>
+                        </p>
+                        <div class="btn">
+                            <button @click="consult" class="qq" type="button">QQ咨询</button>
+                            <button class="wechat" type="button">微信咨询</button>
+                        </div>
+                    </div>`,
+                    visible: true,
+                },
+                {
+                    position: [114.075871, 22.555333],
+                    content: `
+                    <div class="service service4">
+                        <p>
+                            <span class="name">高奕豪</span>
+                            <span class="info">深圳公司6年从业经验</span>
+                        </p>
+                        <div class="btn">
+                            <button @click="consult" class="qq" type="button">QQ咨询</button>
+                            <button class="wechat" type="button">微信咨询</button>
+                        </div>
+                    </div>`,
+                    visible: true,
+                },
+                {
+                    position: [113.254643, 23.134959],
+                    content: `
+                    <div class="service service5">
+                        <p>
+                            <span class="name">郑梦琳</span>
+                            <span class="info">广州公司5年从业经验</span>
+                        </p>
+                        <div class="btn">
+                            <button @click="consult" class="qq" type="button">QQ咨询</button>
+                            <button class="wechat" type="button">微信咨询</button>
+                        </div>
+                    </div>`,
+                    visible: true,
+                },
+                {
+                    position: [119.643192, 29.099045],
+                    content: `
+                    <div class="service service6">
+                        <p>
+                            <span class="name">史媛</span>
+                            <span class="info">金华公司3年从业经验</span>
+                        </p>
+                        <div class="btn">
+                            <button @click="consult" class="qq" type="button">QQ咨询</button>
+                            <button class="wechat" type="button">微信咨询</button>
+                        </div>
+                    </div>`,
+                    visible: true,
+                },
+                {
+                    position: [120.571537, 30.002188],
+                    content: `
+                    <div class="service service7">
+                        <p>
+                            <span class="name">张凯莉</span>
+                            <span class="info">绍兴公司4年从业经验</span>
+                        </p>
+                        <div class="btn">
+                            <button @click="consult" class="qq" type="button">QQ咨询</button>
+                            <button class="wechat" type="button">微信咨询</button>
+                        </div>
+                    </div>`,
+                    visible: true,
+                },
+                {
+                    position: [120.664921, 28.008617],
+                    content: `
+                    <div class="service service8">
+                        <p>
+                            <span class="name">盛炎明</span>
+                            <span class="info">温州公司5年从业经验</span>
+                        </p>
+                        <div class="btn">
+                            <button @click="consult" class="qq" type="button">QQ咨询</button>
+                            <button class="wechat" type="button">微信咨询</button>
+                        </div>
+                    </div>`,
+                    visible: true,
+                },
+                {
+                    position: [120.752811, 30.774553],
+                    content: `
+                    <div class="service service9">
+                        <p>
+                            <span class="name">张杭峰</span>
+                            <span class="info">嘉兴公司3年从业经验</span>
+                        </p>
+                        <div class="btn">
+                            <button @click="consult" class="qq" type="button">QQ咨询</button>
+                            <button class="wechat" type="button">微信咨询</button>
+                        </div>
+                    </div>`,
+                    visible: true,
+                },
+            ],
         }
     },
     computed: {
         getBgUrl () {
-            return `background: url('${this.serviceList[this.tagIndex].imgUrl}') 50% 0 / 112% no-repeat`
+            return `background: url('${this.serviceList[this.tagIndex].imgUrl}') 50% 112% no-repeat`
         }
     },
     methods: {
@@ -203,7 +320,16 @@ export default {
                 this.tagIndex += 1
                 if(this.tagIndex === this.list.length) this.tagIndex = 0
             }
-        }
+
+            this.currentWindow.visible = false;
+            this.$nextTick(() => {
+                this.currentWindow = this.windows[this.tagIndex];
+                this.currentWindow.visible = true;
+            });
+        },
+        consult () { // 联系客服
+            window.open("https://url.cn/5iD2Ua8?_type=wpa&qidian=true");
+        },
     },
     mounted() {
         this.currentWindow = this.windows[0];
@@ -226,33 +352,6 @@ export default {
             top: 0;
             z-index: 2;
         }
-        // &.city-bg1 {
-        //     background: url('./images/city-bg1.png') no-repeat center;
-        // }
-        // &.city-bg2 {
-        //     background: url('./images/city-bg2.png') no-repeat center;
-        // }
-        // &.city-bg3 {
-        //     background: url('./images/city-bg3.png') no-repeat center;
-        // }
-        // &.city-bg4 {
-        //     background: url('./images/city-bg4.png') no-repeat center;
-        // }
-        // &.city-bg5 {
-        //     background: url('./images/city-bg5.png') no-repeat center;
-        // }
-        // &.city-bg6 {
-        //     background: url('./images/city-bg6.png') no-repeat center;
-        // }
-        // &.city-bg7 {
-        //     background: url('./images/city-bg7.png') no-repeat center;
-        // }
-        // &.city-bg8 {
-        //     background: url('./images/city-bg8.png') no-repeat center;
-        // }
-        // &.city-bg9 {
-        //     background: url('./images/city-bg9.png') no-repeat center;
-        // }
 
         .city {
             height: 100%;
@@ -309,40 +408,43 @@ export default {
                     align-items: center;
                 }
             }
+        }
 
-            .position {
-                position: absolute;
-                top: 55%;
-                left: 70%;
-                z-index: 2;
-            }
+        // 地图
+        /deep/ .amap-wrapper {
+            width: 100%;
+            height: 655px;
+            position: absolute;
+            left: 0;
+            top: 0;
 
             .service {
                 width: 280px;
                 height: 350px;
-                padding-top: 230px;
+                padding-top: 255px;
                 overflow: hidden;
-                position: absolute;
-                top: 58%;
-                left: 73%;
-                transform: translate(0,-50%);
-                z-index: 2;
+                background-color: red;
 
                 p {
                     color: #fff;
+                    height: 22px;
+                    display: block;
                     padding-bottom: 10px;
                     margin: 0 10px 12px;
+                    box-sizing: initial;
                     border-bottom: 1px solid #fff;
 
                     .name {
                         font-size: 22px;
                         line-height: 22px;
+                        display: inline-block;
                         margin-right: 10px;
                     }
 
                     .info {
                         font-size: 14px;
                         line-height: 14px;
+                        display: inline-block;
                     }
                 }
 
@@ -371,15 +473,43 @@ export default {
                     }
                 }
             }
-        }
 
-        // 地图
-        .amap-wrapper {
-            width: 100%;
-            height: 655px;
-            position: absolute;
-            left: 0;
-            top: 0;
+            .service1 {
+                background: url('./images/service1.png') 50% 0 no-repeat;
+                background-size: cover;
+            }
+            .service2 {
+                background: url('./images/service2.png') 50% 0 no-repeat;
+                background-size: cover;
+            }
+            .service3 {
+                background: url('./images/service3.png') 50% 0 no-repeat;
+                background-size: cover;
+            }
+            .service4 {
+                background: url('./images/service4.png') 50% 0 no-repeat;
+                background-size: cover;
+            }
+            .service5 {
+                background: url('./images/service5.png') 50% 0 no-repeat;
+                background-size: cover;
+            }
+            .service6 {
+                background: url('./images/service6.png') 50% 0 no-repeat;
+                background-size: cover;
+            }
+            .service7 {
+                background: url('./images/service7.png') 50% 0 no-repeat;
+                background-size: cover;
+            }
+            .service8 {
+                background: url('./images/service8.png') 50% 0 no-repeat;
+                background-size: cover;
+            }
+            .service9 {
+                background: url('./images/service9.png') 50% 0 no-repeat;
+                background-size: cover;
+            }
         }
     }
 </style>
