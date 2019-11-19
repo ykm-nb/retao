@@ -88,6 +88,14 @@ var router = new Router({
     },
     {
       meta: {
+        title: '新闻咨询'
+      },
+      path: '/newsdetails',
+      name: 'newsdetails',
+      component: () => import('@/views/newsdetails.vue')
+    },
+    {
+      meta: {
         title: '我们的服务'
       },
       path: '/service',
