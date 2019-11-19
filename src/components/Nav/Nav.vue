@@ -26,35 +26,34 @@
                     <span class="text">首页</span>
                 </li>
                 <div class="divide"></div>
-                <li @click="gotoPage('tmlistpage')">
+                <li @click="gotoPage('tmlistpage')" class="item">
                     <img src="./tm.png">
                     <span class="text">天猫店铺</span>
                     <i class="hot"></i>
                 </li>
                 <div class="divide"></div>
-                <li @click="gotoPage('tmtjlistpage')">
+                <li @click="gotoPage('tmtjlistpage')" class="item">
                     <img src="./du.png">
                     <span class="text">特价新店</span>
                     <i class="new"></i>
                 </li>
                 <div class="divide"></div>
-                <li @click="consult()">
+                <li @click="consult()" class="item">
                     <img src="./tao.png">
                     <span class="text">淘宝店铺</span>
                     <i class="hot"></i>
                 </li>
                 <div class="divide"></div>
-                <li @click="gotoPage('enter')">
+                <li @click="gotoPage('enter')" class="item">
                     <img src="./mao.png">
                     <span class="text">天猫入驻</span>
                 </li>
                 <div class="divide"></div>
-                <li @click="gotoPage('operation')">
+                <li @click="gotoPage('operation')" class="item">
                     <img src="./dai.png">
                     <span class="text">电商运营</span>
                     <i class="hot"></i>
                 </li>
-                <div class="divide"></div>
             </ul>
         </div>
     </div>
@@ -237,6 +236,15 @@ export default {
 
             .home .text{
                 font-weight: bold;
+                color: #ff0036;
+            }
+
+            .item {
+                transition: .4s;
+
+                &:hover span {
+                    color: #ff0036;
+                }
             }
         }
     }

@@ -67,36 +67,42 @@
                         <div class="layer layer2">
                             <p>
                                 <span class="title">宝贝与描述：</span>
-                                <span class="key">比同行平均水平</span>
-                                <span class="value" :class="goodsList.description==='高'?'good':'' || goodsList.description==='低'?'bad':'' ">{{ goodsList.description }}</span>
-                                <img v-if="goodsList.description==='高'" src="./images/good.png">
-                                <img v-if="goodsList.description==='低'" src="./images/bad.png">
+                                <span class="box">
+                                    <span class="key">比同行平均水平</span>
+                                    <span class="value" :class="goodsList.description==='高'?'good':'' || goodsList.description==='低'?'bad':'' ">{{ goodsList.description }}</span>
+                                    <img v-if="goodsList.description==='高'" src="./images/good.png">
+                                    <img v-if="goodsList.description==='低'" src="./images/bad.png">
+                                </span>
                             </p>
                             <p>
                                 <span class="title">卖家的服务：</span>
-                                <span class="key">比同行平均水平</span>
-                                <span class="value" :class="goodsList.sellerService==='高'?'good':'' || goodsList.sellerService==='低'?'bad':'' ">{{ goodsList.sellerService }}</span>
-                                <img v-if="goodsList.sellerService==='高'" src="./images/good.png">
-                                <img v-if="goodsList.sellerService==='低'" src="./images/bad.png">
+                                <span class="box">
+                                    <span class="key">比同行平均水平</span>
+                                    <span class="value" :class="goodsList.sellerService==='高'?'good':'' || goodsList.sellerService==='低'?'bad':'' ">{{ goodsList.sellerService }}</span>
+                                    <img v-if="goodsList.sellerService==='高'" src="./images/good.png">
+                                    <img v-if="goodsList.sellerService==='低'" src="./images/bad.png">
+                                </span>
                             </p>
                             <p>
                                 <span class="title">卖家发货速度：</span>
-                                <span class="key">比同行平均水平</span>
-                                <span class="value" :class="goodsList.sellerSpeeder==='高'?'good':'' || goodsList.sellerSpeeder==='低'?'bad':'' ">{{ goodsList.sellerSpeeder }}</span>
-                                <img v-if="goodsList.sellerSpeeder==='高'" src="./images/good.png">
-                                <img v-if="goodsList.sellerSpeeder==='低'" src="./images/bad.png">
+                                <span class="box">
+                                    <span class="key">比同行平均水平</span>
+                                    <span class="value" :class="goodsList.sellerSpeeder==='高'?'good':'' || goodsList.sellerSpeeder==='低'?'bad':'' ">{{ goodsList.sellerSpeeder }}</span>
+                                    <img v-if="goodsList.sellerSpeeder==='高'" src="./images/good.png">
+                                    <img v-if="goodsList.sellerSpeeder==='低'" src="./images/bad.png">
+                                </span>
                             </p>
                         </div>
                         <div class="layer layer3">
                             <p class="title">一级类目：</p>
                             <ul>
-                                <li>{{ goodsList.firstCategory }}</li>
+                                <li :title="goodsList.firstCategory">{{ goodsList.firstCategory }}</li>
                             </ul>
                         </div>
                         <div class="layer layer4">
                             <p class="title">二级类目：</p>
                             <ul>
-                                <li>{{ goodsList.secondCategory }}</li>
+                                <li :title="goodsList.secondCategory">{{ goodsList.secondCategory }}</li>
                             </ul>
                         </div>
                     </div>
@@ -150,8 +156,8 @@
                     </div>
                     <!-- 按钮 -->
                     <div class="info-btn">
-                        <button class="buy" type="button">立即购买</button>
-                        <button @click="consult" class="consult" type="button">咨询顾问</button>
+                        <button class="buy" type="button">立即预定</button>
+                        <button @click="consult" class="consult" type="button">我要砍价</button>
                     </div>
                     <!-- 底部 -->
                     <ul class="info-bottom">
@@ -187,7 +193,7 @@
                 <li class="item">
                     <p class="title">咨询顾问</p>
                     <div class="avatar">
-                        <img :src="serviceList[0].imgUrl">
+                        <img :src="dropdownIndex === 0 ? serviceList[0].wxUrl : serviceList[0].imgUrl">
                     </div>
                     <p class="name">
                         <span>专业顾问：</span>
@@ -198,19 +204,14 @@
                         <span class="value">{{serviceList[0].phone}}</span>
                     </p>
                     <div class="btn">
-                        <button @click="consult" class="qq" type="button">QQ咨询</button>
-                        <button 
-                            @mouseenter="dropdown(0)" 
-                            @mouseleave="showDropdown = false" 
-                            class="wechat" 
-                            type="button"
-                        >微信咨询</button>
+                        <button @click="consult" @mouseenter="dropdownIndex = -1"  class="qq" type="button">QQ咨询</button>
+                        <button @mouseenter="dropdownIndex = 0" class="wechat" type="button">微信咨询</button>
                     </div>
                 </li>
                 <li class="item">
                     <p class="title">咨询顾问</p>
                     <div class="avatar">
-                        <img :src="serviceList[1].imgUrl">
+                        <img :src="dropdownIndex === 1 ? serviceList[1].wxUrl : serviceList[1].imgUrl">
                     </div>
                     <p class="name">
                         <span>专业顾问：</span>
@@ -221,19 +222,14 @@
                         <span class="value">{{serviceList[1].phone}}</span>
                     </p>
                     <div class="btn">
-                        <button @click="consult" class="qq" type="button">QQ咨询</button>
-                        <button 
-                            @mouseenter="dropdown(1)" 
-                            @mouseleave="showDropdown = false" 
-                            class="wechat" 
-                            type="button"
-                        >微信咨询</button>
+                        <button @click="consult" @mouseenter="dropdownIndex = -1" class="qq" type="button">QQ咨询</button>
+                        <button @mouseenter="dropdownIndex = 1" class="wechat" type="button">微信咨询</button>
                     </div>
                 </li>
                 <li class="item">
                     <p class="title">咨询顾问</p>
                     <div class="avatar">
-                        <img :src="serviceList[2].imgUrl">
+                        <img :src="dropdownIndex === 2 ? serviceList[2].wxUrl : serviceList[2].imgUrl">
                     </div>
                     <p class="name">
                         <span>专业顾问：</span>
@@ -244,20 +240,17 @@
                         <span class="value">{{serviceList[2].phone}}</span>
                     </p>
                     <div class="btn">
-                        <button @click="consult" class="qq" type="button">QQ咨询</button>
-                        <button 
-                            @mouseenter="dropdown(2)" @mouseleave="showDropdown = false" 
-                            class="wechat" type="button"
-                        >微信咨询</button>
+                        <button @click="consult" @mouseenter="dropdownIndex = -1" class="qq" type="button">QQ咨询</button>
+                        <button @mouseenter="dropdownIndex = 2" class="wechat" type="button">微信咨询</button>
                     </div>
                 </li>
                 
-                <div @mouseenter="showDropdown = true" @mouseleave="showDropdown = false" 
+                <!-- <div @mouseenter="showDropdown = true" @mouseleave="showDropdown = false" 
                     class="dropdown" :class="{'dropdown-open':showDropdown}" 
                     :style="{top: ((dropdownIndex * 430) + 56) + 'px'}"
                 >
                     <img :src="serviceList[dropdownIndex].wxUrl">
-                </div>
+                </div> -->
             </ul>
         </div>
 
@@ -277,8 +270,7 @@ export default {
     data() {
         return {
             infoForm: {},
-            showDropdown: false,
-            dropdownIndex: 0,
+            dropdownIndex: -1,
             serviceList: [
                 {
                     imgUrl: require('./images/service4.png'),
@@ -307,7 +299,7 @@ export default {
     methods: {
         clickCopy() { // 复制微信号
             const num = this.$refs.wechatNum,
-                  input = document.createElement('input');
+                input = document.createElement('input');
 
             input.setAttribute('readonly', 'readonly'), input.setAttribute('value', num.innerHTML);
             document.body.appendChild(input);
@@ -322,10 +314,6 @@ export default {
         consult() { // 联系客服
             window.open("https://url.cn/5iD2Ua8?_type=wpa&qidian=true");
         },
-        dropdown (index) {
-            this.showDropdown = true
-            this.dropdownIndex = index
-        }
     }
 }
 </script>
@@ -399,18 +387,17 @@ export default {
                             .item {
                                 width: 25%;
                                 text-align: center;
-                                margin-bottom: 44px;
+                                margin-bottom: 40px;
 
                                 p {
-                                    font-size: 18px;
-                                    line-height: 18px;
+                                    font-size: 14x;
+                                    line-height: 14x;
                                     color: #999;
                                 }
 
                                 .value {
-                                    font-size: 24px;
-                                    font-weight: bold;
-                                    line-height: 24px;
+                                    font-size: 18px;
+                                    line-height: 18px;
                                     color: #333;
                                     margin-top: 10px;
                                 }
@@ -428,6 +415,16 @@ export default {
                                 display: flex;
                                 align-items: center;
 
+                                .box {
+                                    height: 28px;
+                                    line-height: 16px;
+                                    display: flex;
+                                    align-items: center;
+                                    padding: 0 2px;
+                                    border: solid 1px #d8d8d8;
+                                    border-radius: 13px;
+                                }
+
                                 .title, .key {
                                     font-size: 16px;
                                     line-height: 16px;
@@ -437,8 +434,12 @@ export default {
                                     color: #999;
                                 }
                                 .key {
+                                    line-height: 24px;
                                     font-weight: bold;
-                                    color: #333;
+                                    color: #fff;
+                                    padding: 0 5px;
+                                    background-color: red;
+                                    border-radius: 30px;
                                 }
                                 .value {
                                     font-size: 18px;
@@ -466,6 +467,7 @@ export default {
                             .title {
                                 font-size: 16px;
                                 line-height: 16px;
+                                white-space: nowrap;
                                 color: #999;
                                 margin-right: 20px;
                             }
@@ -475,9 +477,13 @@ export default {
                                 align-items: center;
 
                                 li {
+                                    max-width: 300px;
                                     font-size: 16px;
                                     font-weight: bold;
                                     line-height: 28px;
+                                    white-space: nowrap;
+                                    text-overflow: ellipsis;
+                                    overflow: hidden;
                                     color: #ff0733;
                                     padding: 0 10px;
                                     margin-right: 5px;
@@ -613,11 +619,21 @@ export default {
                         .buy {
                             font-weight: bold;
                             margin-right: 15px;
-                            background-color: #ff0036;
+                            background-color: rgba(255,0,54,.8);
+                            transition: .4s;
+
+                            &:hover {
+                                background-color: rgba(255,0,54,1);
+                            }
                         }
 
                         .consult {
-                            background-color: #ff8a00;
+                            background-color: rgba(255,138,0,.8);
+                            transition: .4s;
+
+                            &:hover {
+                                background-color: rgba(255,138,0,1);
+                            }
                         }
                     }
 
@@ -690,6 +706,7 @@ export default {
                         margin: 15px 15px 25px;
                         border-radius: 5px;
                         overflow: hidden;
+
                         img {
                             width: 100%;
                         }

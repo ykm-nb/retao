@@ -87,7 +87,7 @@
                                 <span>{{ tag }}</span>
                             </li>
                             <li>
-                                <button class="btn" v-show="serviceIndex === index1" type="button">立即入驻</button>
+                                <button @click="consult" class="btn" v-show="serviceIndex === index1" type="button">立即入驻</button>
                             </li>
                         </ul>
                         <div class="item-border"></div>
@@ -773,7 +773,10 @@ export default {
                 this.checkList[index].obj.isCheck = false;
             })
             this.checkList = []
-        }
+        },
+        consult () { // 联系客服
+            window.open("https://url.cn/5iD2Ua8?_type=wpa&qidian=true");
+        },
     }
 }
 </script>

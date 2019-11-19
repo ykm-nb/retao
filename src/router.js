@@ -109,7 +109,122 @@ var router = new Router({
       path: '/explain',
       name: 'explain',
       component: () => import('@/views/explain.vue')
-    }
+    },
+
+    // ============ adminvip =============
+    {
+      meta: {
+          title: "会员管理"
+      },
+      path: "/adminvip",
+      redirect: {
+          name: "productsforsale"
+      },
+      name: "adminvip",
+      component: () => import('@/views/adminvip/admin.vue'),
+      children: [
+          // ===== 交易管理 =====
+          {
+              meta: {
+                  title: "热淘-出售的产品"
+              },
+              path: "/productsforsale",
+              name: "productsforsale",
+              component: () => import("./views/adminvip/dealManagement/ProductsForSale.vue")
+          },
+          {
+              meta: {
+                  title: "热淘-购买的产品"
+              },
+              path: "/purchasedproducts",
+              name: "purchasedproducts",
+              component: () => import("./views/adminvip/dealManagement/PurchasedProducts.vue")
+          },
+          // ===== 合同管理 =====
+          {
+              meta: {
+                  title: "热淘-实名认证"
+              },
+              path: "/certification",
+              name: "certification",
+              component: () => import("./views/adminvip/contractManagement/Certification.vue")
+          },
+          {
+              meta: {
+                  title: "热淘-我的合同"
+              },
+              path: "/mycontract",
+              name: "mycontract",
+              component: () => import("./views/adminvip/contractManagement/MyContract.vue")
+          },
+          // ===== 资金管理 =====
+          {
+              meta: {
+                  title: "热淘-我要充值"
+              },
+              path: "/recharge",
+              name: "recharge",
+              component: () => import("./views/adminvip/fundsManagement/Recharge.vue")
+          },
+          {
+              meta: {
+                  title: "热淘-充值记录"
+              },
+              path: "/rechargerecord",
+              name: "rechargerecord",
+              component: () => import("./views/adminvip/fundsManagement/RechargeRecord.vue")
+          },
+          {
+              meta: {
+                  title: "热淘-我要提现"
+              },
+              path: "/withdrawdeposit",
+              name: "withdrawdeposit",
+              component: () => import("./views/adminvip/fundsManagement/WithdrawDeposit.vue")
+          },
+          {
+              meta: {
+                  title: "热淘-提现记录"
+              },
+              path: "/withdrawalrecord",
+              name: "withdrawalrecord",
+              component: () => import("./views/adminvip/fundsManagement/WithdrawalRecord.vue")
+          },
+          {
+              meta: {
+                  title: "热淘-设置提现账号"
+              },
+              path: "/settingcashaccount",
+              name: "settingcashaccount",
+              component: () => import("./views/adminvip/fundsManagement/SettingCashAccount.vue")
+          },
+          // ===== 账号中心 =====
+          {
+              meta: {
+                  title: "热淘-完善资料"
+              },
+              path: "/learningdocument",
+              name: "learningdocument",
+              component: () => import("./views/adminvip/accountCenter/LearningDocument.vue")
+          },
+          {
+              meta: {
+                  title: "热淘-支付密码"
+              },
+              path: "/companyprofile",
+              name: "companyprofile",
+              component: () => import("./views/adminvip/accountCenter/CompanyProfile.vue")
+          },
+          {
+              meta: {
+                  title: "热淘-登录密码"
+              },
+              path: "/applyforreimbursement",
+              name: "applyforreimbursement",
+              component: () => import("./views/adminvip/accountCenter/ApplyForReimbursement.vue")
+          }
+      ]
+  },
   ]
 })
 

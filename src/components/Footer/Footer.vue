@@ -188,6 +188,7 @@ export default {
                         transition: .4s;
 
                         &:hover {
+                            text-decoration: underline;
                             color: #d71421;
                         }
                     }

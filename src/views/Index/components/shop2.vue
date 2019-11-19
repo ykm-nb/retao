@@ -8,31 +8,38 @@
                     <img src="./images/shop2-left1.png">
                 </div>
 
-                <ul class="layer-right">
-                    <li class="item" :class="`item${index}`" v-for="(item, index) in tmList" :key="index" @click="gotoDetail(item.id)">
-                        <div class="section1">
-                            <img src="./images/tm.png">
-                            <div>
-                                <p class="name">{{ item.storeName }}</p>
-                                <p>
-                                    <span>{{ item.mainProductName }}</span>
-                                    <span>{{ item.trademarkCategory }}类</span>
-                                    <span>R标</span>
-                                </p>
-                            </div>
+                <div class="swiper-container layer-rightbg">
+                    <ul class="swiper-wrapper layer-right">
+                        <div class="swiper-slide" v-for="(item, index1) in tmList.slice(0,3)" :key="index1">
+                            <li class="item" :class="`item${index}`" v-for="(item, index) in tmList.slice(index1 * 6, (index1 * 6) + 6)" :key="index" @click="gotoDetail(item.id)">
+                                <div class="section1">
+                                    <img src="./images/tm.png">
+                                    <div>
+                                        <p class="name">{{ item.storeName }}</p>
+                                        <p>
+                                            <span>{{ item.mainProductName }}</span>
+                                            <span>{{ item.trademarkCategory }}类</span>
+                                            <span>R标</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <ul class="tags">
+                                    <li v-show="item.mainProductName">{{ item.mainProductName }}</li>
+                                    <li v-show="item.storeType">{{ item.storeType==1?'专营店':'' || item.storeType==2?'旗舰店':'' || item.storeType==3?'专卖店':'' }}</li>
+                                    <li>R标</li>
+                                    <li>{{ `${item.province==null?'':item.province}${item.city}` }}</li>
+                                </ul>
+                                <div class="section2">
+                                    <p class="new">{{ item.storeProperties==1?'特价':'' ||  item.storeProperties==2?'优质':'' || item.storeProperties==3?'稀缺':'' || item.storeProperties>=4?'可议':''}}</p>
+                                    <p class="price">{{ item.price }}万</p>
+                                </div>
+                            </li>
                         </div>
-                        <ul class="tags">
-                            <li v-show="item.mainProductName">{{ item.mainProductName }}</li>
-                            <li v-show="item.storeType">{{ item.storeType==1?'专营店':'' || item.storeType==2?'旗舰店':'' || item.storeType==3?'专卖店':'' }}</li>
-                            <li>R标</li>
-                            <li>{{ `${item.province==null?'':item.province}${item.city}` }}</li>
-                        </ul>
-                        <div class="section2">
-                            <p class="new">{{ item.storeProperties==1?'特价':'' ||  item.storeProperties==2?'优质':'' || item.storeProperties==3?'稀缺':'' || item.storeProperties>=4?'可议':''}}</p>
-                            <p class="price">{{ item.price }}万</p>
-                        </div>
-                    </li>
-                </ul>
+                    </ul>
+
+                    <!-- 分页器 -->
+                    <div class="swiper-pagination"></div>
+                </div>
             </div>
 
             <!-- 淘宝 -->
@@ -41,32 +48,39 @@
                     <img src="./images/shop2-left2.png">
                 </div>
 
-                <ul class="layer-right">
-                    <p class="no-data" v-if="tbList.length < 1">暂无数据</p>
-                    <li class="item" :class="`item${index}`" v-for="(item, index) in tbList" :key="index" @click="gotoDetail(item.id)">
-                        <div class="section1">
-                            <img src="./images/tb.png">
-                            <div>
-                                <p class="name">{{ item.storeName }}</p>
-                                <p>
-                                    <span>{{ item.mainProductName }}</span>
-                                    <span>{{ item.trademarkCategory }}类</span>
-                                    <span>R标</span>
-                                </p>
-                            </div>
+                <div class="swiper-container layer-rightbg">
+                    <ul class="swiper-wrapper layer-right">
+                        <div class="swiper-slide" v-for="(item, index1) in tmList.slice(0,3)" :key="index1">
+                            <p class="no-data" v-if="tbList.length < 1">暂无数据</p>
+                            <li class="item" :class="`item${index}`" v-for="(item, index) in tbList.slice(index1 * 6, (index1 * 6) + 6)" :key="index" @click="gotoDetail(item.id)">
+                                <div class="section1">
+                                    <img src="./images/tb.png">
+                                    <div>
+                                        <p class="name">{{ item.storeName }}</p>
+                                        <p>
+                                            <span>{{ item.mainProductName }}</span>
+                                            <span>{{ item.trademarkCategory }}类</span>
+                                            <span>R标</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <ul class="tags">
+                                    <li v-show="item.mainProductName">{{ item.mainProductName }}</li>
+                                    <li v-show="item.storeType">{{ item.storeType==1?'专营店':'' || item.storeType==2?'旗舰店':'' || item.storeType==3?'专卖店':'' }}</li>
+                                    <li>R标</li>
+                                    <li>{{ `${item.province==null?'':item.province}${item.city}` }}</li>
+                                </ul>
+                                <div class="section2">
+                                    <p class="new">{{ item.storeProperties==1?'特价':'' ||  item.storeProperties==2?'优质':'' || item.storeProperties==3?'稀缺':'' || item.storeProperties>=4?'可议':''}}</p>
+                                    <p class="price">{{ item.price }}万</p>
+                                </div>
+                            </li>
                         </div>
-                        <ul class="tags">
-                            <li v-show="item.mainProductName">{{ item.mainProductName }}</li>
-                            <li v-show="item.storeType">{{ item.storeType==1?'专营店':'' || item.storeType==2?'旗舰店':'' || item.storeType==3?'专卖店':'' }}</li>
-                            <li>R标</li>
-                            <li>{{ `${item.province==null?'':item.province}${item.city}` }}</li>
-                        </ul>
-                        <div class="section2">
-                            <p class="new">{{ item.storeProperties==1?'特价':'' ||  item.storeProperties==2?'优质':'' || item.storeProperties==3?'稀缺':'' || item.storeProperties>=4?'可议':''}}</p>
-                            <p class="price">{{ item.price }}万</p>
-                        </div>
-                    </li>
-                </ul>
+                    </ul>
+
+                    <!-- 分页器 -->
+                    <div class="swiper-pagination"></div>
+                </div>
             </div>
 
         </div>
@@ -151,8 +165,9 @@ export default {
                 //使用分页器
                 paginationClickable :true,
                 pagination: {
-                    el: '.swiper-pagination'
-                }
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
             });
         },
         gotoDetail(id) { // 跳转详情
@@ -189,108 +204,125 @@ export default {
                     border-right: 1px solid #f4f4f4;
                 }
 
-                .layer-right {
+                /deep/ .layer-rightbg {
                     width: calc(100% - 300px);
-                    display: flex;
-                    flex-wrap: wrap;
-                    background-color: #fff;
-                    box-sizing: border-box;
-                    position: relative;
 
-                    .no-data {
-                        font-size: 22px;
-                        font-weight: bold;
-                        line-height: 22px;
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                    }
+                    .layer-right {
+                        width: 100%;
+                        display: flex;
+                        background-color: #fff;
+                        box-sizing: border-box;
+                        position: relative;
 
-                    .item {
-                        cursor: pointer;
-                        width: 300px;
-                        height: 200px;
-                        padding: 32px 20px;
-                        border-right: 1px solid #f4f4f4;
-                        border-bottom: 1px solid #f4f4f4;
-
-                        .section1 {
+                        .swiper-slide {
                             display: flex;
-                            align-items: center;
+                            flex-wrap: wrap;
 
-                            div {
-                                text-align: left;
-                                margin-left: 10px;
+                            .no-data {
+                                font-size: 22px;
+                                font-weight: bold;
+                                line-height: 22px;
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                            }
 
-                                .name {
-                                    font-size: 18px;
-                                    line-height: 18px;
-                                    font-weight: bold;
-                                    color: #000;
-                                    margin-bottom: 5px;
+                            .item {
+                                cursor: pointer;
+                                width: 300px;
+                                height: 200px;
+                                padding: 32px 20px;
+                                border-right: 1px solid #f4f4f4;
+                                border-bottom: 1px solid #f4f4f4;
+
+                                .section1 {
+                                    display: flex;
+                                    align-items: center;
+
+                                    div {
+                                        text-align: left;
+                                        margin-left: 10px;
+
+                                        .name {
+                                            font-size: 18px;
+                                            line-height: 18px;
+                                            font-weight: bold;
+                                            color: #000;
+                                            margin-bottom: 5px;
+                                        }
+
+                                        p {
+                                            font-size: 14px;
+                                            line-height: 14px;
+
+                                            span {
+                                                color: #999999;
+                                                display: inline-block;
+                                                margin-right: 5px;
+                                            }
+                                        }
+                                    }
                                 }
 
-                                p {
-                                    font-size: 14px;
-                                    line-height: 14px;
+                                .tags {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    margin: 16px 0 24px;
 
-                                    span {
-                                        color: #999999;
-                                        display: inline-block;
-                                        margin-right: 5px;
+                                    li {
+                                        font-size: 12px;
+                                        line-height: 26px;
+                                        white-space: nowrap;
+                                        color: #666666;
+                                        padding: 0 9px;
+                                        background-color: #f8f8f8;
+                                        border-radius: 20px;
+                                    }
+                                }
+
+                                .section2 {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+
+                                    .new {
+                                        width: 78px;
+                                        font-size: 14px;
+                                        font-weight: bold;
+                                        line-height: 32px;
+                                        color: #ff0036;
+                                        background-color: #fff3f3;
+                                        border-radius: 20px;
+                                    }
+
+                                    .price {
+                                        font-size: 24px;
+                                        font-weight: bold;
+                                        line-height: 24px;
+                                        text-align: center;
+                                        color: #ff5050;
                                     }
                                 }
                             }
-                        }
 
-                        .tags {
-                            display: flex;
-                            justify-content: space-between;
-                            margin: 16px 0 24px;
-
-                            li {
-                                font-size: 12px;
-                                line-height: 26px;
-                                white-space: nowrap;
-                                color: #666666;
-                                padding: 0 9px;
-                                background-color: #f8f8f8;
-                                border-radius: 20px;
-                            }
-                        }
-
-                        .section2 {
-                            display: flex;
-                            justify-content: space-between;
-                            align-items: center;
-
-                            .new {
-                                width: 78px;
-                                font-size: 14px;
-                                font-weight: bold;
-                                line-height: 32px;
-                                color: #ff0036;
-                                background-color: #fff3f3;
-                                border-radius: 20px;
+                            .item2, .item5 {
+                                border-right: none;
                             }
 
-                            .price {
-                                font-size: 24px;
-                                font-weight: bold;
-                                line-height: 24px;
-                                text-align: center;
-                                color: #ff5050;
+                            .item3, .item4, .item5 {
+                                border-bottom: none;
                             }
                         }
                     }
 
-                    .item2, .item5 {
-                        border-right: none;
-                    }
-
-                    .item3, .item4, .item5 {
-                        border-bottom: none;
+                    .swiper-pagination {
+                        .swiper-pagination-bullet {
+                            outline: none;
+                        }
+                        .swiper-pagination-bullet-active {
+                            background-color: #ff0036;
+                        }
                     }
                 }
             }

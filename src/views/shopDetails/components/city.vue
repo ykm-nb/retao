@@ -20,8 +20,8 @@
                 </li>
             </ul>
 
-            <img class="position" src="./images/city-pos.png">
-            <div class="service" :style="getBgUrl">
+            <!-- <img class="position" src="./images/city-pos.png"> -->
+            <!-- <div class="service" :style="getBgUrl">
                 <p>
                     <span class="name">{{ serviceList[tagIndex].name }}</span>
                     <span class="info">{{ serviceList[tagIndex].info }}</span>
@@ -30,20 +30,46 @@
                     <button class="qq" type="button">QQ咨询</button>
                     <button class="wechat" type="button">微信咨询</button>
                 </div>
-            </div>
+            </div> -->
+        </div>
+
+        <div class="amap-wrapper">
+            <el-amap class="amap-box" :zoom="zoom" :plugin="plugin" :events="events" :center="center" :vid="'amap-vue'" :zoomEnable="false">
+                <el-amap-marker :position="componentMarker.position" 
+                :visible="componentMarker.visible" 
+                :draggable="componentMarker.draggable"
+                >
+                </el-amap-marker>
+                <el-amap-info-window
+                    :position="currentWindow.position"
+                    :content="currentWindow.content"
+                    :visible="currentWindow.visible"
+                    :events="currentWindow.events">
+                </el-amap-info-window>
+            </el-amap>
         </div>
     </div>
 </template>
 
 <script>
+import VueAMap from 'vue-amap';
+VueAMap.initAMapApiLoader({
+    key: 'e8496e8ac4b0f01100b98da5bde96597',
+    plugin: ['AMap.ToolBar'],
+        // 默认高德 sdk 版本为 1.4.4
+    v: '1.4.4'
+})
+// const exampleComponents = {
+//     props: ['text'],
+//     template: `<div>text from  parent: {{text}}</div>`
+// }
 export default {
-    name: "process",
+    name: "city",
     data() {
         return {
             tagIndex: 0,
             bgLists: [],
             list: ["杭州", "北京", "上海", "深圳", "广州", "金华", "绍兴", "温州", "嘉兴"],
-            // list: ["杭州", "北京", "上海", "深圳", "广州", "金华", "绍兴", "温州", "嘉兴", "湖州", "苏州", "南京", "无锡", "连云港", "徐州", "石家庄", "天津", "青岛", "济南", "长春", "哈尔滨", "西宁", "成都", "重庆", "长沙", "拉萨", "乌鲁木齐", "沈阳", "贵阳", "昆明", "泉州", "福州", "厦门", "东莞", "珠海", "南宁", "海口", "南昌", "宁波", "大连", "郑州"]
             serviceList: [
                 {
                     name: "竺金晶",
@@ -91,11 +117,81 @@ export default {
                     imgUrl: require("./images/service9.png")
                 }
             ],
+
+            address: null,
+            searchKey: '',
+            markers: [],
+            searchOption: {
+                city: '全国',
+                citylimit: true
+            },
+            zoom: 8,
+            center: [120.329838, 30.249249],
+            events: {
+                init: (o) => {
+                console.log(o.getCenter())
+                // console.log(this.$refs.map.$$getInstance())
+                o.getCity(result => {
+                    // console.log(result)
+                })
+                },
+                'moveend': () => {
+                },
+                'zoomchange': () => {
+                },
+                'click': (e) => {
+                    console.log(e)
+                }
+            },
+            plugin: [
+                {
+                    // 工具栏
+                    pName: 'ToolBar',
+                },
+            ],
+            componentMarker: {
+                position: [120.329838, 30.249249],
+                visible: true,
+                draggable: false,
+                // template: '<span>1</span>',
+            },
+            windows: [
+                {
+                    position: [120.327091, 30.39861],
+                    isCustom: true,
+                    content: "",
+                    visible: true,
+                    events: {
+                        close() {
+                            console.log('close infowindow1');
+                        }
+                    }
+                }, 
+                {
+                    position: [121.5375285, 31.21515044],
+                    content: 'Hi! I am here too!',
+                    visible: true,
+                    events: {
+                        close() {
+                            console.log('close infowindow2');
+                        }
+                    }
+                }
+            ],
+            slotWindow: {
+                position: [120.192508, 30.265856]
+            },
+            currentWindow: {
+                position: [0, 0],
+                content: '',
+                events: {},
+                visible: false
+            }
         }
     },
     computed: {
         getBgUrl () {
-            return `background: url('${this.serviceList[this.tagIndex].imgUrl}') no-repeat 50% -25px`
+            return `background: url('${this.serviceList[this.tagIndex].imgUrl}') 50% 0 / 112% no-repeat`
         }
     },
     methods: {
@@ -108,7 +204,10 @@ export default {
                 if(this.tagIndex === this.list.length) this.tagIndex = 0
             }
         }
-    }
+    },
+    mounted() {
+        this.currentWindow = this.windows[0];
+    },
 }
 </script>
 
@@ -120,40 +219,40 @@ export default {
         &::before {
             content: "";
             width: 100%;
-            height: 40%;
+            height: 30%;
             background: linear-gradient(to bottom, rgba(0,0,0,.6), rgba(0,0,0,.01));
             position: absolute;
             left: 0;
             top: 0;
+            z-index: 2;
         }
-
-        &.city-bg1 {
-            background: url('./images/city-bg1.png') no-repeat center;
-        }
-        &.city-bg2 {
-            background: url('./images/city-bg2.png') no-repeat center;
-        }
-        &.city-bg3 {
-            background: url('./images/city-bg3.png') no-repeat center;
-        }
-        &.city-bg4 {
-            background: url('./images/city-bg4.png') no-repeat center;
-        }
-        &.city-bg5 {
-            background: url('./images/city-bg5.png') no-repeat center;
-        }
-        &.city-bg6 {
-            background: url('./images/city-bg6.png') no-repeat center;
-        }
-        &.city-bg7 {
-            background: url('./images/city-bg7.png') no-repeat center;
-        }
-        &.city-bg8 {
-            background: url('./images/city-bg8.png') no-repeat center;
-        }
-        &.city-bg9 {
-            background: url('./images/city-bg9.png') no-repeat center;
-        }
+        // &.city-bg1 {
+        //     background: url('./images/city-bg1.png') no-repeat center;
+        // }
+        // &.city-bg2 {
+        //     background: url('./images/city-bg2.png') no-repeat center;
+        // }
+        // &.city-bg3 {
+        //     background: url('./images/city-bg3.png') no-repeat center;
+        // }
+        // &.city-bg4 {
+        //     background: url('./images/city-bg4.png') no-repeat center;
+        // }
+        // &.city-bg5 {
+        //     background: url('./images/city-bg5.png') no-repeat center;
+        // }
+        // &.city-bg6 {
+        //     background: url('./images/city-bg6.png') no-repeat center;
+        // }
+        // &.city-bg7 {
+        //     background: url('./images/city-bg7.png') no-repeat center;
+        // }
+        // &.city-bg8 {
+        //     background: url('./images/city-bg8.png') no-repeat center;
+        // }
+        // &.city-bg9 {
+        //     background: url('./images/city-bg9.png') no-repeat center;
+        // }
 
         .city {
             height: 100%;
@@ -165,6 +264,7 @@ export default {
                 text-align: center;
                 padding-bottom: 35px;
                 position: relative;
+                z-index: 2;
 
                 .title {
                     font-size: 30px;
@@ -185,6 +285,8 @@ export default {
             .city-tag {
                 display: flex;
                 justify-content: space-between;
+                position: relative;
+                z-index: 2;
 
                 li {
                     height: 48px;
@@ -212,6 +314,7 @@ export default {
                 position: absolute;
                 top: 55%;
                 left: 70%;
+                z-index: 2;
             }
 
             .service {
@@ -223,6 +326,7 @@ export default {
                 top: 58%;
                 left: 73%;
                 transform: translate(0,-50%);
+                z-index: 2;
 
                 p {
                     color: #fff;
@@ -267,6 +371,15 @@ export default {
                     }
                 }
             }
+        }
+
+        // 地图
+        .amap-wrapper {
+            width: 100%;
+            height: 655px;
+            position: absolute;
+            left: 0;
+            top: 0;
         }
     }
 </style>

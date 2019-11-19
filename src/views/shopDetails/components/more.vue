@@ -8,7 +8,8 @@
             </div>
 
             <ul class="imgs">
-                <li class="item" v-for="(item, index) in lists" :key="index">
+                <li class="item" @click="gotoMore(index)"
+                    v-for="(item, index) in lists" :key="index">
                     <div class="goods-img">
                         <img :src="item.mainProductUrl">
                     </div>
@@ -34,6 +35,16 @@ export default {
     data() {
         return {
             lists: ls.session.get('firstLists') //首页特价/优质/稀缺模块第一条
+        }
+    },
+    methods: {
+        gotoMore (index) {
+            const id = this.lists[index].id;
+            let path = this.$router.resolve({
+                path: "/shopdetails",
+                query: { id }
+            })
+            window.open(path.href, '_blank')
         }
     }
 }
@@ -79,6 +90,7 @@ export default {
                     width: 350px;
                     padding: 32px 28px;
                     box-shadow: 0 0 15px rgba(0,0,0,.1);
+                    cursor: pointer;
 
                     .time-limit {
                         width: 150px;

@@ -176,8 +176,8 @@ export default {
     methods: {
         changeIndex(index) { // 点击切换客户
             const service = this.$refs.service.style,
-                  tagIndex = this.tagIndex,
-                  length = this.tagList.length;
+                tagIndex = this.tagIndex,
+                length = this.tagList.length;
 
             if(index === tagIndex) return;
             this.tagIndex = index;

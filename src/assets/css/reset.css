@@ -220,3 +220,8 @@ hr {
         transform: scale(1);
     }
 }
+
+.common-page {
+    /* float: right; */
+    padding: 20px 0;
+}

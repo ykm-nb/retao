@@ -194,7 +194,7 @@ export default {
                             this.$router.push('index')
                         } else {               // 注册
                             this.$Message.success({content: '注册成功，赶快登录吧~'})
-                            this.type = 1;
+                            this.type = 0;
                         }
                     } else {
                         this.$Message.error(data.remark)

@@ -995,9 +995,15 @@ export default {
                 margin-bottom: 15px;
                 background-color: #fff;
                 transition: .4s;
+                cursor: pointer;
 
                 &:hover {
                     box-shadow: 0 3px 6px 0 rgba(202, 202, 202, 0.8);
+                    transform: translate(0,-6px);
+
+                    .goods-middle .layer1 .title {
+                        color: #f66060;
+                    }
                 }
 
                 .goods-left {
@@ -1050,7 +1056,7 @@ export default {
                             white-space: nowrap;
                             text-overflow: ellipsis;
                             overflow: hidden;
-                            color: #f66060;
+                            color: #000;
                             margin-left: 5px;
                             cursor: pointer;
                         }

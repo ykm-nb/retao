@@ -3,7 +3,7 @@
         <header class="inner">
             <div class="header-left">
                 <p>Hi您好，欢迎来到仟呗！</p>
-                <div class="userinfo" v-if="userInfo">
+                <div class="userinfo" v-if="userInfos">
                     <Dropdown>
                         <img class="head-portrait" src="@/assets/images/user.png" alt="头像">
                         <DropdownMenu slot="list">
@@ -12,7 +12,7 @@
                             </a>
                         </DropdownMenu>
                     </Dropdown>
-                    <span>{{ userInfo.account }}</span>
+                    <span @click="$router.push('/adminvip')">{{ userInfos.account }}</span>
                 </div>
                 <p v-else>
                     <span @click="gotoPage('login', 0)" class="login">登录</span>
@@ -56,7 +56,8 @@ export default {
     },
     data () {
         return {
-            showAccount: false
+            showAccount: false,
+            userInfos: ls.session.get('qbuserInfo')
         }
     },
     methods: {
@@ -120,6 +121,7 @@ export default {
                 height: 36px;
                 display: flex;
                 align-items: center;
+                cursor: pointer;
 
                 .head-portrait {
                     width: 30px;

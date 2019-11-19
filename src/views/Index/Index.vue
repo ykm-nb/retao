@@ -406,9 +406,10 @@ html, body {
         }
 
         .swiper-pagination {
-          .swiper-pagination-bullet {
+          /deep/ .swiper-pagination-bullet {
             width: 8px;
             height: 8px;
+            opacity: 1;
             margin: 0 5px;
             background-color: #fff;
           }
