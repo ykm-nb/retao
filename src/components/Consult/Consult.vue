@@ -81,7 +81,7 @@ export default {
             this.showConsult = false
             setTimeout(() => {
                 this.showConsult = true
-            }, 10000999);
+            }, 10000);
         }
     },
     mounted() {
