@@ -81,7 +81,7 @@ export default {
             this.showConsult = false
             setTimeout(() => {
                 this.showConsult = true
-            }, 10000999);
+            }, 10000);
         }
     },
     mounted() {
@@ -98,9 +98,17 @@ export default {
         position: fixed;
         left: 5%;
         bottom: 5%;
+        animation: side 3s infinite;
         cursor: pointer;
         z-index: 1002;
     }
+    @keyframes side {
+        0% {transform: scale(1)}
+        50% {transform: scale(0.8)}
+        100% {transform: scale(1)}
+    }
+
+
     .consult-bg {
         width: 100%;
         height: 100%;
