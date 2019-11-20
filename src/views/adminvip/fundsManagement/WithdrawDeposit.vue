@@ -1,7 +1,7 @@
 <template>
     <!-- 修改密码 -->
     <div class="change-password">
-        <Form ref="formValidate" :model="form">
+        <!-- <Form ref="formValidate" :model="form">
             <FormItem label="原密码：">
                 <Input v-model="form.name1"></Input>
             </FormItem>
@@ -14,6 +14,15 @@
             <FormItem>
                 <Button @click="handleSubmit" type="primary" long>提交</Button>
             </FormItem>
+        </Form> -->
+        <Form :label-width="110">
+            <FormItem label="提现金额(元)：">
+                <Input v-model="form.amount" readonly/>
+            </FormItem>
+            <FormItem >
+                <Button type='info' @click='toCash' v-if='tocash'>提现</Button>
+                <Button type='warning' v-else>提现审核中...</Button>
+            </FormItem>
         </Form>
     </div>
 </template>
@@ -25,41 +34,38 @@ export default {
     data() {
         return {
             form: {
-                name1: '',
-                name2: '',
-                name3: ''
-            }
+                amount: 0,
+            },
+            tocash: true
         }
     },
     methods: {
-        handleSubmit() {
-            var arr = [];
-            for(var i in this.form) {
-                arr.push(this.form[i]);
-            };
-            var result1 = arr.every((item, index) => {
-                return item != "";
+        toCash() {
+            if (this.form.amount < 1) {
+                this.$Message.warning('无法提现!');
+                return
+            } 
+            api.axs("post", "/cashOut/save", this.form).then(({ data })=>{
+                if (data.code === "SUCCESS") {
+                    this.tocash = false
+                    this.$Message.success('提交成功, 请耐心等待审核!');
+                } else {
+                    this.$Message.error(data.remark);
+                }
             });
-            var result2 = (this.form.name2 == this.form.name3) ? true : false;
-            
-            if(result1 && result2) {
-                // api.axs("post", "/contract/saveOrUpdate", this.form).then(({ data })=>{
-                //     if (data.code === "SUCCESS") {
-                        this.$Message.success({content: "合同上传成功~"});
-                //         for(var i in this.form) this.form[i] = "";
-                //     } else {
-                //         this.$Message.warning(data.remark);
-                //     };
-                // });
-            } else if(!result1) {
-                this.$Message.warning({content: "未全部填写，有遗漏~"});
-            } else if(!result2) {
-                this.$Message.warning({content: "新密码不统一"});
-            }
+        },
+        getCash() {
+            api.axs("post", "/cashOut/queryAmount").then(({ data })=>{
+                if (data.code === "SUCCESS") {
+                    this.form.amount = data.data.amount || 999
+                } else {
+                    this.$Message.error(data.remark);
+                }
+            });
         }
     },
     mounted() {
-         
+        this.getCash()
     }
 }
 </script>
@@ -67,11 +73,14 @@ export default {
 <style lang="less" scoped>
     .change-password {
         /deep/ form {
-            width: 50%;
+            width: 30%;
+            margin-left: 30%;
 
             .ivu-form-item {
                 label, .ivu-input, button {
                     font-size: 14px;
+                    font-weight: bold;
+                    text-align: center;
                 }
 
                 .ivu-select-selection span {

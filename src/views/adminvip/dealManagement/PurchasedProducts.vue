@@ -81,7 +81,7 @@ export default {
     methods: {
         // 获取所有产品数据
         getAllProductDatas(page) {
-            this.$store.state.spinShow = true;
+            // this.$store.state.spinShow = true;
             this.pageForm.pageNum = page || 1;
 
             api.axs("post", "/tmStore/queryAllProducts", {}).then(({ data })=>{

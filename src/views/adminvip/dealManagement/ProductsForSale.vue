@@ -98,7 +98,7 @@ export default {
     methods: {
         // 获取我的产品数据
         getMyProductDatas(page) {
-            this.$store.state.spinShow = true; // 开启加载动画
+            //this.$store.state.spinShow = true; // 开启加载动画
             this.pageForm.pageNum = page || 1;
 
             api.axs("post", "/tmStore/queryMyProducts", this.pageForm).then(({ data })=>{

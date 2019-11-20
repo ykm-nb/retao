@@ -62,7 +62,8 @@
                                 <Input v-model="formPay.payerAccount" style="width:310px" />
                             </FormItem>
                             
-                            <Button type="primary" @click='toPay'>立即提交</Button>
+                            <Button type="primary" @click='toPay' v-if='isCz'>立即提交</Button>
+                            <Button type="warning" v-else>提交审批中...</Button>
                         </Form>
                     </div>
                 </TabPane>
@@ -152,10 +153,16 @@ export default {
     name: "recharge",
     data() {
         return {
-            formPay: {},
+            formPay: {
+                type: 1
+            },
+            formPay2: {
+                type: 2
+            },
             form2: {
                 name1: ''
             },
+            isCz: true,
             errorTipForm2: {
                 name1: false
             },
@@ -172,6 +179,7 @@ export default {
         toPay() {
             api.axs('post', "/payRecord/saveOrUpdate", this.formPay).then(({ data }) => {
                 if(data.code === "SUCCESS") {
+                    this.isCz = false
                     this.$Message.success('提交成功!')
                 }
             });
@@ -410,15 +418,17 @@ export default {
                                 font-size: 16px;
                                 line-height: 21px;
                                 font-weight: 700;
-                                margin: 16px 0;
+                                margin: 30px 0 15px;
                             }
                         }
 
                         .layer1 .layer-content {
                             display: flex;
+                            text-align: left;
+                            justify-content: center;
 
                             img {
-                                margin-right: 10px;
+                                margin-right: 20px;
                             }
 
                             div {
@@ -443,6 +453,7 @@ export default {
 
                         .layer3 form {
                             width: 500px;
+                            margin: 10px auto;
 
                             label, input, textarea {
                                 font-size: 14px;

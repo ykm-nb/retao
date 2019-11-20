@@ -77,7 +77,7 @@ export default {
                 },
                 {
                     title: '充值金额',
-                    key: 'name2',
+                    key: 'amount',
                     // width: 100,
                     align: "center"
                 },
@@ -94,34 +94,16 @@ export default {
                     align: "center"
                 }
             ],
-            recordDatas: [
-                {
-                    name1: "500",
-                    name2: "1000",
-                    name3: "10",
-                    name4: "2",
-                    name5: "good"
-                },
-                {
-                    name1: "500",
-                    name2: "1000",
-                    name3: "10",
-                    name4: "2",
-                    name5: "good"
-                },
-                {
-                    name1: "500",
-                    name2: "1000",
-                    name3: "10",
-                    name4: "2",
-                    name5: "good"
-                }
-            ]
+            recordDatas: []
         }
     },
     methods: {
         getMyProductDatas() {
-
+            api.axs('post', "/payRecord/queryPayRecordPages", {pageNum: 20}).then(({ data }) => {
+                if(data.code === "SUCCESS") {
+                    this.recordDatas = data.data
+                }
+            });
         },
         handleSubmit() {
             var arr = [];
@@ -150,7 +132,7 @@ export default {
         }
     },
     mounted() {
-         
+         this.getMyProductDatas()
     }
 }
 </script>
