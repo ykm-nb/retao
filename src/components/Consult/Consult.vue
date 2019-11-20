@@ -135,11 +135,18 @@ export default {
             // min-height: 760px;
             // height: 80%;
             padding: 70px 80px 0;
+            opacity: 1;
             position: absolute;
             left: 50%;
             top: 5%;
             transform: translate(-50%);
+            animation: show 1.2s;
             z-index: 1002;
+
+            @keyframes show {
+                0% {opacity: 0;}
+                100% {opacity: 1;}
+            }
 
             ul {
                 display: flex;

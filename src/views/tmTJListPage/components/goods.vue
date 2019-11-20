@@ -1171,6 +1171,7 @@ export default {
                             position: absolute;
                             right: -5px;
                             top: 1px;
+                            animation: tag 1s infinite;
 
                             p {
                                 font-size: 14px;
@@ -1178,6 +1179,11 @@ export default {
                                 text-align: center;
                                 color: #fff;
                             }
+                        }
+                        @keyframes tag {
+                            0%{top: 1px}
+                            50%{top: 10px}
+                            100%{top: 1px}
                         }
 
                         .price {

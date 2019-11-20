@@ -16,51 +16,51 @@
                     <div class="info-content">
                         <div class="layer layer1">
                             <div class="item">
-                                <p>商城类型</p>
+                                <p class="key">商城类型</p>
                                 <p class="value">{{ goodsList.storeType==1?'专营店':'' || goodsList.storeType==2?'旗舰店':'' || goodsList.storeType==3?'专卖店':'' }}</p>
                             </div>
                             <div class="item">
-                                <p>主营类目</p>
+                                <p class="key">主营类目</p>
                                 <p class="value">{{ goodsList.mainProductName || 0 }}</p>
                             </div>
                             <div class="item">
-                                <p>商标类型</p>
+                                <p class="key">商标类型</p>
                                 <p class="value">{{ goodsList.trademarkCategory	 || 0 }}类</p>
                             </div>
                             <div class="item">
-                                <p>考核情况</p>
+                                <p class="key">考核情况</p>
                                 <p class="value">未通过{{ goodsList.kpi || 0 }}月</p>
                             </div>
                             <div class="item">
-                                <p>支持迁址</p>
+                                <p class="key">支持迁址</p>
                                 <p class="value">{{ goodsList.relocation==1?'是':'否' }}</p>
                             </div>
                             <div class="item">
-                                <p>注册资金</p>
+                                <p class="key">注册资金</p>
                                 <p class="value">{{ goodsList.registMoney || 0 }}万</p>
                             </div>
                             <div class="item">
-                                <p>所在地区</p>
+                                <p class="key">所在地区</p>
                                 <p class="value">{{ goodsList.area }}地区</p>
                             </div>
                             <div class="item">
-                                <p>纳税类型</p>
+                                <p class="key">纳税类型</p>
                                 <p class="value">{{ goodsList.taxIntelligence==1?'小规模纳税人':'一般纳税人' }}</p>
                             </div>
                             <div class="item">
-                                <p>一般扣分</p>
+                                <p class="key">一般扣分</p>
                                 <p class="value">{{ goodsList.normalPunishment || 0 }}</p>
                             </div>
                             <div class="item">
-                                <p>严重扣分</p>
+                                <p class="key">严重扣分</p>
                                 <p class="value">{{ goodsList.punishment || 0 }}</p>
                             </div>
                             <div class="item">
-                                <p>售假扣分</p>
+                                <p class="key">售假扣分</p>
                                 <p class="value">{{ goodsList.fakePunishment || 0 }}</p>
                             </div>
                             <div class="item">
-                                <p>是否贷款</p>
+                                <p class="key">是否贷款</p>
                                 <p class="value">{{ goodsList.hasLoan==1?'有':'无' }}</p>
                             </div>
                         </div>
@@ -389,9 +389,9 @@ export default {
                                 text-align: center;
                                 margin-bottom: 40px;
 
-                                p {
-                                    font-size: 14x;
-                                    line-height: 14x;
+                                .key {
+                                    font-size: 14px;
+                                    line-height: 14px;
                                     color: #999;
                                 }
 

@@ -106,7 +106,7 @@ export default {
             ],
 
             address: null,
-            zoom: 8,
+            zoom: 12,
             events: {
                 init: (o) => {
                 console.log(o.getCenter())
