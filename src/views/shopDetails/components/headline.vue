@@ -8,16 +8,16 @@
             </div>
 
             <ul class="imgs">
-                <li v-for="(item, index) in imgsList" 
+                <li v-for="(item, index) in newsLists" 
                     :key="index" 
                     @mouseover="imgIndex = index" 
                     @mouseout="imgIndex = -1" 
                     :class="{'img-hover': imgIndex === index}">
                     <div class="img">
-                        <img :src="item.imgUrl">
+                        <img :src="item.pictureUrl" style='width:100%;'>
                     </div>
                     <div class="text">
-                        <p class="title">{{ item.title }}</p>
+                        <p class="title">{{ item.title | shortWr }}</p>
                         <p class="more">
                             <span>了解更多</span>
                             <img :src="imgIndex === index ? item.arrow2 : item.arrow1">
@@ -30,31 +30,49 @@
 </template>
 
 <script>
+import api from '@/api';
+
 export default {
     name: "headline",
     data() {
         return {
+            newsLists: [],
             imgIndex: -1,
             imgsList: [
                 {
-                    imgUrl: require('./images/msg1.png'),
+                    pictureUrl: require('./images/msg1.png'),
                     title: "国家扶贫日交答卷,社交电商扣开扶贫新大门",
                     arrow1: require('./images/msg-arrow1.png'),
                     arrow2: require('./images/msg-arrow2.png'),
                 },
                 {
-                    imgUrl: require('./images/msg2.png'),
+                    pictureUrl: require('./images/msg2.png'),
                     title: "月薪4万招不到人,曾经电商的巨型风口将在这里重现?",
                     arrow1: require('./images/msg-arrow1.png'),
                     arrow2: require('./images/msg-arrow2.png'),
                 },
                 {
-                    imgUrl: require('./images/msg3.png'),
+                    pictureUrl: require('./images/msg3.png'),
                     title: "汪向东:对农村电商扶贫与乡村振兴的新思考",
                     arrow1: require('./images/msg-arrow1.png'),
                     arrow2: require('./images/msg-arrow2.png'),
                 }
             ],
+        }
+    },
+    mounted() {
+        api.axs("post", "/news/anon/queryForPage").then(({ data })=>{
+            if (data.code === "SUCCESS") {
+                this.newsLists = data.data.list.slice(0,3);
+            } else {
+                this.$Message.error(data.remark);
+            }
+        })
+    },
+    filters: {
+        'shortWr'(val) {
+            if (val && val.length > 12) return val.substr(0,12) + '...'
+            else  return val
         }
     }
 }
@@ -112,6 +130,7 @@ export default {
                         justify-content: center;
                         align-items: center;
                         overflow: hidden;
+                        border-bottom: 1px solid #f2f2f2;
                     }
 
                     .text {
@@ -126,6 +145,7 @@ export default {
                             letter-spacing: 1px;
                             color: #999;
                             margin-bottom: 30px;
+                            word-break: break-all;
                         }
 
                         .more {
