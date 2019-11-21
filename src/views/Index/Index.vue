@@ -59,11 +59,11 @@
 
     <Info></Info>
 
-    <Shop1 id="shop1" ref="shop1" v-if="tjList.length > 0" @author-index="getAuthorIndex" :tjList="tjList" :yzList="yzList" :xqList="xqList"></Shop1>
+    <Shop1 id="shop1" ref="shop1" @author-index="getAuthorIndex" :tjList="tjList" :yzList="yzList" :xqList="xqList"></Shop1>
 
     <Service id="service" @author-index="getAuthorIndex"></Service>
 
-    <Shop2 id="shop2" v-if="tmList.length > 0" @author-index="getAuthorIndex" :tmList="tmList" :tbList="tbList"></Shop2>
+    <Shop2 id="shop2" @author-index="getAuthorIndex" :tmList="tmList" :tbList="tbList"></Shop2>
     
     <Message id="msg" @author-index="getAuthorIndex"></Message>
 
@@ -176,13 +176,7 @@ export default {
       this.authorIndex = index
     }
   },
-  mounted() {
-    this.initSwiper() // swiper初始化必须在mounted，因为此时dom元素已经渲染完
-    window.addEventListener('scroll', this.keyupEnter)
-    
-    ls.session("rtSearch", "") // 清空搜索
-    ls.session("tbList", null)
-    
+  created () {
     // 获取首页五个店铺信息
     api.axs('post', "/tmStore/queryHomeStorePages", {pageSize: 18}).then(({ data }) => {
         if(data.code === "SUCCESS") {
@@ -200,7 +194,14 @@ export default {
             if (datas.xqList.list.length) firstLists.push(datas.xqList.list[0])
             ls.session('firstLists',firstLists)
         }
-    });
+    })
+  },
+  mounted() {
+    this.initSwiper() // swiper初始化必须在mounted，因为此时dom元素已经渲染完
+    window.addEventListener('scroll', this.keyupEnter)
+    
+    ls.session("rtSearch", "") // 清空搜索
+    ls.session("tbList", null)
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.keyupEnter)

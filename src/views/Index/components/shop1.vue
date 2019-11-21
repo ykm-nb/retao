@@ -436,6 +436,7 @@ export default {
     },
     data() {
         return {
+            isInitSwiper: false,
             // 倒计时
             day1: 0,
             hour1: 0,
@@ -503,10 +504,22 @@ export default {
         },
     },
     mounted () {
-        this.initSwiper() // swiper初始化必须在mounted，因为此时dom元素已经渲染完
-        this.tjList.slice(1,4).forEach((item, index) => {
-            this.countDown(item.bargainPriceTime, index+1)
-        })
+        if (this.tjList.length > 0) { // 有数据则初始化
+            this.initSwiper() // swiper初始化必须在mounted，因为此时dom元素已经渲染完
+            this.tjList.slice(1,4).forEach((item, index) => {
+                this.countDown(item.bargainPriceTime, index+1)
+            })
+            this.isInitSwiper = true;
+        }
+    },
+    updated () {
+        if (!this.isInitSwiper) { // swiper未初始化
+            this.initSwiper() // swiper初始化必须在mounted，因为此时dom元素已经渲染完
+            this.tjList.slice(1,4).forEach((item, index) => {
+                this.countDown(item.bargainPriceTime, index+1)
+            })
+            this.isInitSwiper = true;
+        }
     },
     filters: {
         'shortWr'(val) {
