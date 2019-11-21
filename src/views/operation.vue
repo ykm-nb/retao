@@ -24,7 +24,7 @@
                                     <p class="info">{{ item.info }}</p>
                                 </li>
                             </ul>
-                            <button class="btn" type="button">联系客服</button>
+                            <button @click="consult" class="btn" type="button">联系客服</button>
                         </div>
                     </div>
 

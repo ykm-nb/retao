@@ -2,7 +2,7 @@
     <div class="inner-bg info-bg">
         <div class="inner info">
             <ul class="top">
-                <li @click="$router.push('message')" v-for="(item, index) in list1" :key="index">
+                <li @click="gotoPage" v-for="(item, index) in list1" :key="index">
                     <img :src="item">
                 </li>
             </ul>
@@ -51,6 +51,14 @@ export default {
                 
             ]
         }
+    },
+    methods: {
+        gotoPage () { // 跳转页面
+            let { href } = this.$router.resolve({
+                path: 'message'
+            })
+            window.open(href)
+        },
     },
     created() {
         let list = this.list2;

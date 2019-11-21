@@ -6,7 +6,7 @@
             <ul class="content">
                 <li v-for="(item, index) in list" 
                     :key="index" 
-                    @click="$router.push('service')"
+                    @click="gotoPage"
                 >
                     <img :src="item.imgUrl">
                     <p class="title">{{ item.title }}</p>
@@ -50,7 +50,15 @@ export default {
                 }
             ]
         }
-    }
+    },
+    methods: {
+        gotoPage () { // 跳转页面
+            let { href } = this.$router.resolve({
+                path: 'service'
+            })
+            window.open(href)
+        },
+    },
 }
 </script>
 

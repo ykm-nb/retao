@@ -3,7 +3,7 @@
         <div class="inner shop2">
             
             <!-- 天猫 -->
-            <div class="layer layer1">
+            <div class="layer layer1" @mousemove="$emit('author-index', 4)">
                 <div class="layer-left">
                     <img src="./images/shop2-left1.png">
                 </div>
@@ -43,7 +43,7 @@
             </div>
 
             <!-- 淘宝 -->
-            <div class="layer layer2">
+            <div class="layer layer2" @mousemove="$emit('author-index', 5)">
                 <div class="layer-left">
                     <img src="./images/shop2-left2.png">
                 </div>
@@ -158,12 +158,12 @@ export default {
         // 初始化 swiper 插件
         initSwiper() {
             var mySwiper = new Swiper (".swiper-container", {
-                direction: 'horizontal',
-                loopFillGroupWithBlank: true,  
-                observer:true,//修改swiper自己或子元素时，自动初始化swiper
-                observeParents:true,//修改swiper的父元素时，自动初始化swiper
+                autoplay: {
+                    delay: 4000,
+                    // 用户操作swiper之后，是否禁止autoplay。默认为true：停止。
+                    disableOnInteraction: false,
+                },
                 //使用分页器
-                paginationClickable :true,
                 pagination: {
                     el: ".swiper-pagination",
                     clickable: true,
@@ -171,10 +171,11 @@ export default {
             });
         },
         gotoDetail(id) { // 跳转详情
-            this.$router.push({ 
+            let { href } = this.$router.resolve({
                 path: 'shopdetails',
                 query: { id: parseInt(id) }
             })
+            window.open(href)
         },
     },
     mounted() {
@@ -233,8 +234,15 @@ export default {
                                 width: 300px;
                                 height: 200px;
                                 padding: 32px 20px;
+                                background-color: #fff;
                                 border-right: 1px solid #f4f4f4;
                                 border-bottom: 1px solid #f4f4f4;
+                                transition: .4s;
+
+                                &:hover {
+                                    box-shadow: 0 1px 15px rgba(0,0,0,.5);
+                                    transform: translate(0,-10px);
+                                }
 
                                 .section1 {
                                     display: flex;

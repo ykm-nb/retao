@@ -1,5 +1,5 @@
 <template>
-    <div class="inner-bg service-bg">
+    <div class="inner-bg service-bg" @mousemove="$emit('author-index', 0)">
         <div class="inner service">
             <div class="title-box">
                 <p class="title">高级顾问</p>

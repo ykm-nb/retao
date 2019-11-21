@@ -2,7 +2,7 @@
     <div class="inner-bg shop1-bg">
         <div class="inner shop1">
             <!-- 特价 -->
-            <div class="layer layer1" v-if="tjList.length">
+            <div class="layer layer1" @mousemove="$emit('author-index', 1)" v-if="tjList.length">
                 <div class="layer-left">
                     <div class="top">
                         <p class="title">特价店铺</p>
@@ -138,7 +138,7 @@
             </div>
 
             <!-- 优质 -->
-            <div class="layer layer2" v-if="yzList.length">
+            <div class="layer layer2" @mousemove="$emit('author-index', 2)" v-if="yzList.length">
                 <div class="layer-left">
                     <div class="top">
                         <p class="title">优质店铺</p>
@@ -276,7 +276,7 @@
             </div>
 
             <!-- 稀缺 -->
-            <div class="layer layer3" v-if="xqList.length">
+            <div class="layer layer3" @mousemove="$emit('author-index', 3)" v-if="xqList.length">
                 <div class="layer-left">
                     <div class="top">
                         <p class="title">稀缺店铺</p>
@@ -495,10 +495,11 @@ export default {
             }, 1000)
         },
         gotoDetail(id) { // 跳转详情
-            this.$router.push({ 
+            let { href } = this.$router.resolve({
                 path: 'shopdetails',
                 query: { id: parseInt(id) }
             })
+            window.open(href)
         },
     },
     mounted () {
@@ -609,12 +610,6 @@ export default {
                     }
 
                     .swiper-pagination {
-                        width: auto;
-                        position: absolute;
-                        bottom: 2px;
-                        left: 50%;
-                        transform: translate(-50%);
-
                         .swiper-pagination-bullet {
                             outline: none;
                         }

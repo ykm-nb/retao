@@ -1,5 +1,5 @@
 <template>
-    <div class="inner-bg message-bg">
+    <div class="inner-bg message-bg" @mousemove="$emit('author-index', 6)">
         <div class="inner message">
             <div class="title-box">
                 <p class="title">仟呗头条</p>
