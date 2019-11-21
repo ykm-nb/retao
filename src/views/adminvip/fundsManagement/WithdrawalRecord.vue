@@ -5,7 +5,7 @@
         <div class="record-top">
             <p class="title">提现记录</p>
         </div>
-        <div class="record-content">
+        <!-- <div class="record-content">
             <div class="content-left">
                 <p class="title">账户总额</p>
                 <p class="money"><b>0</b>元</p>
@@ -32,7 +32,7 @@
                 <Button long type="primary">我要充值</Button>
                 <Button long>我要提现</Button>
             </div>
-        </div>
+        </div> -->
         <div class="record-bottom">
             <div v-if="recordDatas.length" class="common-main">
                 <!-- 列表 -->
@@ -40,9 +40,9 @@
                     <Table border :columns="recordColumns" :data="recordDatas"></Table>
                 </div>
                 <!-- 分页器 -->
-                <div class="common-page">
+                <!-- <div class="common-page">
                     <Page :total="pageForm.total" :current="pageForm.pageNum" :page-size="pageForm.pageSize" @on-change='getMyProductDatas' />
-                </div>
+                </div> -->
             </div>
 
             <!-- 暂无数据 -->
@@ -70,44 +70,20 @@ export default {
             },
             recordColumns: [
                 {
-                    title: '时间',
+                    title: '提现时间',
                     key: 'name1',
                     // width: 100,
                     align: "center"
                 },
                 {
-                    title: '流水号',
+                    title: '提现金额',
                     key: 'name2',
                     // width: 100,
                     align: "center"
                 },
                 {
-                    title: '开户银行',
+                    title: '处理人',
                     key: 'name3',
-                    // width: 100,
-                    align: "center"
-                },
-                {
-                    title: '银行卡号',
-                    key: 'name4',
-                    // width: 100,
-                    align: "center"
-                },
-                {
-                    title: '提现金额',
-                    key: 'name5',
-                    // width: 100,
-                    align: "center"
-                },
-                {
-                    title: '提现状态',
-                    key: 'name6',
-                    // width: 100,
-                    align: "center"
-                },
-                {
-                    title: '备注',
-                    key: 'name7',
                     // width: 100,
                     align: "center"
                 }
