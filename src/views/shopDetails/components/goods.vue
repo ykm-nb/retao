@@ -477,7 +477,7 @@ export default {
                                 align-items: center;
 
                                 li {
-                                    max-width: 300px;
+                                    max-width: 800px;
                                     font-size: 16px;
                                     font-weight: bold;
                                     line-height: 28px;
