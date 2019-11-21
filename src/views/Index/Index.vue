@@ -59,11 +59,11 @@
 
     <Info></Info>
 
-    <Shop1 id="shop1" ref="shop1" @author-index="getAuthorIndex" :tjList="tjList" :yzList="yzList" :xqList="xqList"></Shop1>
+    <Shop1 id="shop1" ref="shop1" v-if="tjList.length > 0" @author-index="getAuthorIndex" :tjList="tjList" :yzList="yzList" :xqList="xqList"></Shop1>
 
     <Service id="service" @author-index="getAuthorIndex"></Service>
 
-    <Shop2 id="shop2" @author-index="getAuthorIndex" :tmList="tmList" :tbList="tbList"></Shop2>
+    <Shop2 id="shop2" v-if="tmList.length > 0" @author-index="getAuthorIndex" :tmList="tmList" :tbList="tbList"></Shop2>
     
     <Message id="msg" @author-index="getAuthorIndex"></Message>
 
@@ -176,39 +176,9 @@ export default {
       this.authorIndex = index
     }
   },
-<<<<<<< HEAD
-  created() {
-    ls.session("rtSearch", "") // 清空搜索
-    ls.session("tbList", null)
-    
-    // 获取首页五个店铺信息
-    api.axs('post', "/tmStore/queryHomeStorePages", {}).then(({ data }) => {
-        if(data.code === "SUCCESS") {
-            var datas = data.data;
-            this.tjList = datas.tjList.list
-            this.yzList = datas.yzList.list
-            this.xqList = datas.xqList.list
-            this.tmList = datas.tmList.list
-            this.tbList = datas.tbList.list
-
-            //详情页-猜你喜欢 的数据来源
-            var firstLists = []
-            if (datas.tjList.list.length) firstLists.push(datas.tjList.list[0])
-            if (datas.yzList.list.length) firstLists.push(datas.yzList.list[0])
-            if (datas.xqList.list.length) firstLists.push(datas.xqList.list[0])
-            ls.session('firstLists',firstLists)
-
-        }
-    });
-  },
-=======
->>>>>>> 02784af398a31b49e67289cd8fb088bfa2b23166
   mounted() {
-
     this.initSwiper() // swiper初始化必须在mounted，因为此时dom元素已经渲染完
     window.addEventListener('scroll', this.keyupEnter)
-<<<<<<< HEAD
-=======
     
     ls.session("rtSearch", "") // 清空搜索
     ls.session("tbList", null)
@@ -229,10 +199,8 @@ export default {
             if (datas.yzList.list.length) firstLists.push(datas.yzList.list[0])
             if (datas.xqList.list.length) firstLists.push(datas.xqList.list[0])
             ls.session('firstLists',firstLists)
-
         }
     });
->>>>>>> 02784af398a31b49e67289cd8fb088bfa2b23166
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.keyupEnter)
@@ -275,17 +243,12 @@ html, body {
         border-bottom: 1px dashed #dfdfdf;
         transition: .4s;
 
-<<<<<<< HEAD
         &.no-border {
           border: none;
         }
 
         &.actived {
-          color: #fff;
-=======
-        &.service { // 客服中心
           color: rgba(255,255,255,.9);
->>>>>>> 02784af398a31b49e67289cd8fb088bfa2b23166
           background-color: #ff0036;
         }
       }
@@ -467,8 +430,4 @@ html, body {
       }
   }
 }
-<<<<<<< HEAD
 </style>
-=======
-</style>
->>>>>>> 02784af398a31b49e67289cd8fb088bfa2b23166

@@ -76,7 +76,13 @@ export default {
             const curPath = this.$route.path.substring(1);
 
             if(curPath === page) return; // 页面相同
-            this.$router.push(page)
+            if(curPath === 'index') {
+                let { href } = this.$router.resolve({
+                    path: page
+                })
+                window.open(href)
+            } else 
+                this.$router.push(page)
         },
         handleSearch(text) {
             const curPath = this.$route.path.substring(1);

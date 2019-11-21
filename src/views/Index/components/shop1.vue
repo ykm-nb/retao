@@ -504,8 +504,6 @@ export default {
     },
     mounted () {
         this.initSwiper() // swiper初始化必须在mounted，因为此时dom元素已经渲染完
-    },
-    updated () {
         this.tjList.slice(1,4).forEach((item, index) => {
             this.countDown(item.bargainPriceTime, index+1)
         })
