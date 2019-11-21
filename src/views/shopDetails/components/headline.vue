@@ -10,6 +10,7 @@
             <ul class="imgs">
                 <li v-for="(item, index) in newsLists" 
                     :key="index" 
+                    @click="gotoDetail(item.id)"
                     @mouseover="imgIndex = index" 
                     @mouseout="imgIndex = -1" 
                     :class="{'img-hover': imgIndex === index}">
@@ -59,6 +60,15 @@ export default {
                 }
             ],
         }
+    },
+    methods: {
+        gotoDetail(id) { // 跳转详情
+            let { href } = this.$router.resolve({
+                path: 'newsdetails',
+                query: { id: parseInt(id) }
+            })
+            window.open(href)
+        },
     },
     mounted() {
         api.axs("post", "/news/anon/queryForPage").then(({ data })=>{

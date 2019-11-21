@@ -10,7 +10,7 @@
             <p class="curNav">所在位置: 千呗 >> 新闻咨询</p>
             <div class="content">
                 <h3 class="tit">{{contents.title}}</h3>
-                <p class="time">时间: {{contents.createTime.substring(0,10)}} &nbsp;&nbsp;&nbsp;&nbsp;来源: 仟呗官方</p>
+                <p class="time">时间: {{contents.createTime && contents.createTime.substring(0,10)}} &nbsp;&nbsp;&nbsp;&nbsp;来源: 仟呗官方</p>
                 <div class="desc" v-html="contents.content"></div>
             </div>
         </div>
