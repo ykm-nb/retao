@@ -7,16 +7,17 @@
             </div>
 
             <ul class="imgs">
-                <li v-for="(item, index) in imgsList" 
+                <li v-for="(item, index) in newsLists" 
                     :key="index" 
+                    @click="gotoDetail(item.id)"
                     @mouseover="imgIndex = index" 
                     @mouseout="imgIndex = -1" 
                     :class="{'img-hover': imgIndex === index}">
                     <div class="img">
-                        <img :src="item.imgUrl">
+                        <img :src="item.pictureUrl" style='width:100%;'>
                     </div>
                     <div class="text">
-                        <p class="title">{{ item.title }}</p>
+                        <p class="title">{{ item.title | shortWr }}</p>
                         <p class="more">
                             <span>了解更多</span>
                             <img :src="imgIndex === index ? item.arrow2 : item.arrow1">
@@ -44,11 +45,14 @@
 </template>
 
 <script>
+import api from "@/api";
+
 export default {
     name: "index-msg",
     data() {
         return {
             imgIndex: -1,
+            newsLists: [],
             imgsList: [
                 {
                     imgUrl: require('./images/msg1.png'),
@@ -173,6 +177,30 @@ export default {
                     },
                 ],
             ]
+        }
+    },
+    methods: {
+        gotoDetail(id) { // 跳转详情
+            let { href } = this.$router.resolve({
+                path: 'newsdetails',
+                query: { id: parseInt(id) }
+            })
+            window.open(href)
+        },
+    },
+    mounted() {
+        api.axs("post", "/news/anon/queryForPage").then(({ data })=>{
+            if (data.code === "SUCCESS") {
+                this.newsLists = data.data.list.slice(0,3);
+            } else {
+                this.$Message.error(data.remark);
+            }
+        })
+    },
+    filters: {
+        'shortWr'(val) {
+            if (val && val.length > 12) return val.substr(0,12) + '...'
+            else  return val
         }
     }
 }
