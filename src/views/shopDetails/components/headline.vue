@@ -73,7 +73,7 @@ export default {
     mounted() {
         api.axs("post", "/news/anon/queryForPage").then(({ data })=>{
             if (data.code === "SUCCESS") {
-                this.newsLists = data.data.list.slice(0,3);
+                this.newsLists = data.data[2].list.slice(0,3);
             } else {
                 this.$Message.error(data.remark);
             }

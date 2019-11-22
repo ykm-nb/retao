@@ -95,12 +95,13 @@ export default {
 
         .nav-bg {
             .bread-crumb {
-                height: 30px;
+                height: 40px;
                 line-height: 18px;
                 text-align: left;
 
                 span {
                     font-size: 14px;
+                    line-height: 40px;
                     color: #999;
                 }
 

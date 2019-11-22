@@ -3,15 +3,27 @@
         
         <div class="inner goods">
             <div class="goods-left">
-                <p class="title">
-                    <img class="avatar" src="./images/tm.png">
-                    <span>{{ goodsList.title }}</span>
-                </p>
-                <p class="description">仟呗您值得信赖的店铺管家</p>
                 
                 <!-- 店铺信息 -->
                 <div class="info">
-                    <p class="info-title">网店店铺信息</p>
+                    <!-- 头部 -->
+                    <div class="info-head">
+                        <p class="title">
+                            <img class="avatar" src="./images/tm.png">
+                            <span>{{ goodsList.title }}</span>
+                        </p>
+                        <p class="description">仟呗您值得信赖的店铺管家</p>
+                        <ul class="tags">
+                            <li>极速匹配</li>
+                            <li>专属客服</li>
+                            <li>交易随行</li>
+                            <li>服务升级</li>
+                            <li>实地付款</li>
+                            <li>免过户费</li>
+                            <li>极速退款</li>
+                            <li>全额赔付</li>
+                        </ul>
+                    </div>
                     <!-- 内容 -->
                     <div class="info-content">
                         <div class="layer layer1">
@@ -332,45 +344,59 @@ export default {
                 width: 970px;
                 text-align: left;
                 padding: 25px 0 0 20px;
-                background: #fff url('./images/goods-bg.png') no-repeat 0 0;
-
-                .title {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    cursor: pointer;
-
-                    .avatar {
-                        margin-right: 10px;
-                    }
-
-                    span {
-                        font-size: 24px;
-                        line-height: 24px;
-                        font-weight: bold;
-                        color: #fff;
-                        vertical-align: bottom;
-                    }
-                }
-
-                .description {
-                    font-size: 16px;
-                    line-height: 16px;
-                    text-align: center;
-                    color: #fff;
-                    margin: 18px 0 70px;
-                }
+                background-color: #fff;
 
                 .info {
-                    .info-title {
-                        font-size: 24px;
-                        font-weight: bold;
-                        line-height: 24px;
-                        text-align: center;
-                        color: #333;
-                        margin-bottom: 20px;
+                    // 头部
+                    .info-head {
+                        padding: 28px 0 8px 105px;
+                        margin-bottom: 10px;
+                        background-color: #fffbf6;
+                        border-radius: 8px;
+
+                        .title {
+                            display: flex;
+                            align-items: center;
+
+                            .avatar {
+                                margin-right: 10px;
+                            }
+
+                            span {
+                                font-size: 24px;
+                                line-height: 24px;
+                                font-weight: bold;
+                                color: #020202;
+                            }
+                        }
+
+                        .description {
+                            font-size: 14px;
+                            line-height: 14px;
+                            text-indent: 35px;
+                            color: #969696;
+                            margin: 20px 0;
+                        }
+
+                        .tags {
+                            width: 440px;
+                            display: flex;
+                            flex-wrap: wrap;
+                            background: url('./images/info-head1.png') no-repeat 0 0;
+
+                            li {
+                                width: 25%;
+                                height: 20px;
+                                font-size: 12px;
+                                line-height: 20px;
+                                color: #020202;
+                                text-align: center;
+                                margin-bottom: 12px;
+                            }
+                        }
                     }
 
+                    // 内容
                     .info-content {
                         padding: 45px 20px 0;
                         background-color: #fffbf6;
@@ -463,6 +489,7 @@ export default {
                         .layer3, .layer4 {
                             height: 90px;
                             display: flex;
+                            align-items: center;
 
                             .title {
                                 font-size: 16px;
