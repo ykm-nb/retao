@@ -6,7 +6,7 @@
                 <p class="info">NEWS</p>
             </div>
 
-            <ul class="imgs">
+            <ul class="imgs" v-if='newsLists.length'>
                 <li v-for="(item, index) in newsLists" 
                     :key="index" 
                     @click="gotoDetail(item.id)"
@@ -191,7 +191,10 @@ export default {
     mounted() {
         api.axs("post", "/news/anon/queryForPage").then(({ data })=>{
             if (data.code === "SUCCESS") {
-                this.newsLists = data.data.list.slice(0,3);
+                this.newsLists[0] = data.data[0].list[0]
+                this.newsLists[1] = data.data[1].list[0]
+                this.newsLists[2] = data.data[2].list[0]
+                console.log(this.newsLists)
             } else {
                 this.$Message.error(data.remark);
             }
