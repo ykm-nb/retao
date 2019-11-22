@@ -109,6 +109,8 @@
             </div>
         </div>
 
+        <img src="/static/xx.jpg" alt="">
+
         <!-- 底部 -->
         <Footer id="footer"></Footer>
     </div>
