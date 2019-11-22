@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 02784af398a31b49e67289cd8fb088bfa2b23166
 <template>
   <div class="index">
 
@@ -9,7 +5,7 @@
     <Header id="header" :userInfo="userInfo"></Header>
 
     <Nav></Nav>
-
+    
     <div class="inner-bg banner-bg">
       <div class="inner banner">
         <div class="banner-left">
