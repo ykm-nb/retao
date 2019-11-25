@@ -99,6 +99,12 @@
         <!-- 仟呗入驻教程 -->
         <div class="inner-bg enter-bg">
             <div class="inner enter">
+                <div class="crr cr1"></div>
+                <div class="crr cr2"></div>
+                <div class="crr cr3"></div>
+                <div class="crr cr4"></div>
+                <div class="crr cr5"></div>
+                <div class="crr cr6"></div>
                 <div class="title-box">
                     <p class="title">仟呗入驻教程</p>
                 </div>
@@ -1159,9 +1165,59 @@ export default {
             background: #fff7f7 url("../assets/images/enter-bg1.png") no-repeat 45% -22%;
 
             .enter {
+                position: relative;
                 height: 100%;
                 padding: 160px 0 0 0;
                 background: url("../assets/images/enter-bg2.png") no-repeat 50% 85%;
+
+                .crr {
+                    position: absolute;
+                    border-radius: 50%;
+                    width: 146px;
+                    height: 146px;
+                }
+                .cr1 {
+                    top: 542px;
+                    left: -2px;
+                    &:hover {
+                        box-shadow: 0 0 50px #be2121;
+                    }
+                }
+                .cr2 {
+                    top: 379px;
+                    left: 211px;
+                    &:hover {
+                        box-shadow: 0 0 50px #da7f36;
+                    }
+                }
+                .cr3 {
+                    top: 234px;
+                    left: 424px;
+                    &:hover {
+                        box-shadow: 0 0 50px #c7c42d;
+                    }
+                }
+                .cr4 {
+                    top: 215px;
+                    left: 638px;
+                    &:hover {
+                        box-shadow: 0 0 50px #be2121;
+                    }
+                }
+                .cr5 {
+                    top: 368px;
+                    left: 851px;
+                    &:hover {
+                        box-shadow: 0 0 50px #da7f36;
+                    }
+                }
+                .cr6 {
+                    top: 552px;
+                    left: 1064px;
+                    &:hover {
+                        box-shadow: 0 0 50px #c7c42d;
+                    }
+                }
 
                 .content {
                     height: 100%;

@@ -72,6 +72,7 @@ export default {
 
 <style lang="less" scoped>
     .change-password {
+        margin-top: 50px;
         /deep/ form {
             width: 30%;
             margin-left: 30%;

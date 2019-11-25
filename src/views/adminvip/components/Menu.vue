@@ -3,25 +3,28 @@
         <Menu @on-open-change="selectMenuGroup" @on-select="selectMenuItem" theme="dark" :accordion=true width="200px">
             <Submenu name="交易管理">
                 <template slot="title">
-                    <Icon type="ios-cart"></Icon>交易管理
+                    <Icon type="ios-cart"></Icon>个人中心
                 </template>
-                <router-link to="/productsforsale">
+                <router-link to="/userinfo">
+                    <MenuItem name="个人信息">◎ 个人信息</MenuItem>
+                </router-link>
+                <!-- <router-link to="/productsforsale">
                     <MenuItem name="出售的产品">◎ 出售的产品</MenuItem>
                 </router-link>
                 <router-link to="/purchasedproducts">
                     <MenuItem name="购买的产品">◎ 购买的产品</MenuItem>
-                </router-link>
+                </router-link> -->
             </Submenu>
-            <Submenu name="合同管理">
+            <Submenu name="合同签署">
                 <template slot="title">
-                    <Icon type="ios-paper-outline"></Icon>合同管理
+                    <Icon type="ios-paper-outline"></Icon>合同签署
                 </template>
-                <router-link to="/certification">
-                    <MenuItem name="实名认证">◎ 实名认证</MenuItem>
+                <router-link to="/signature">
+                    <MenuItem name="签署列表">◎ 签署列表</MenuItem>
                 </router-link>
-                <router-link to="/mycontract">
+                <!-- <router-link to="/mycontract">
                     <MenuItem name="我的合同">◎ 我的合同</MenuItem>
-                </router-link>
+                </router-link> -->
             </Submenu>
             <Submenu name="资金管理">
                 <template slot="title">
@@ -39,22 +42,25 @@
                 <router-link to="/withdrawalrecord">
                     <MenuItem name="提现记录">◎ 提现记录</MenuItem>
                 </router-link>
-                <router-link to="/settingcashaccount">
+                <!-- <router-link to="/settingcashaccount">
                     <MenuItem name="设置提现账号">◎ 设置提现账号</MenuItem>
-                </router-link>
+                </router-link> -->
             </Submenu>
             <Submenu name="账号中心">
                 <template slot="title">
-                    <Icon type="ios-settings"></Icon>账号中心
+                    <Icon type="ios-settings"></Icon>账户管理
                 </template>
-                <router-link to="/learningdocument">
-                    <MenuItem name="完善资料">◎ 完善资料</MenuItem>
+                <router-link to="/certification">
+                    <MenuItem name="实名认证">◎ 实名认证</MenuItem>
                 </router-link>
+                <!-- <router-link to="/learningdocument">
+                    <MenuItem name="完善资料">◎ 完善资料</MenuItem>
+                </router-link> -->
                 <router-link to="/companyprofile">
-                    <MenuItem name="支付密码">◎ 支付密码</MenuItem>
+                    <MenuItem name="设置支付密码">◎ 设置支付密码</MenuItem>
                 </router-link>
                 <router-link to="/applyforreimbursement">
-                    <MenuItem name="登录密码">◎ 登录密码</MenuItem>
+                    <MenuItem name="设置登录密码">◎ 设置登录密码</MenuItem>
                 </router-link>
             </Submenu>
         </Menu>
