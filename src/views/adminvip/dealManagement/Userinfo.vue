@@ -12,7 +12,7 @@
                         <span>登录账号: {{userInfo.account || '--'}}</span>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span>会员状态: 未审核</span>
+                        <span>会员状态: {{userInfo.hasRealAccount ? '已审核' : '待审核' }}</span>
                     </p>
                     <p class="tip">
                         <span>登录时间: {{getTime()}}</span>
@@ -23,15 +23,15 @@
         <div class="recharge-content">
             <div class="content-left">
                 <p class="title">账户总额</p>
-                <p class="money"><b>0</b>元</p>
+                <p class="money"><b>{{cashes.allRemainMoney}}</b>元</p>
             </div>
             <div class="content-left">
                 <p class="title">充值总额</p>
-                <p class="money"><b>0</b>元</p>
+                <p class="money"><b>{{cashes.payMoney}}</b>元</p>
             </div>
             <div class="content-left">
                 <p class="title">提现总额</p>
-                <p class="money"><b>0</b>元</p>
+                <p class="money"><b>{{cashes.cashOutMoney}}</b>元</p>
             </div>
             <ul>
                 <!-- <div class="item item1">
@@ -63,7 +63,8 @@ export default {
     name: "recharge",
     data() {
         return {
-            userInfo: ls.session.get("qbuserInfo")
+            userInfo: ls.session.get("qbuserInfo"),
+            cashes: {}
         }
     },
     methods: {
@@ -87,7 +88,13 @@ export default {
         }
     },
     mounted() {
-         
+         api.axs("post", "/user/queryRemainMoney").then(({ data })=>{
+            if (data.code === "SUCCESS") {
+                this.cashes = data.data
+            } else {
+                this.$Message.warning(data.remark);
+            }
+        });
     }
 }
 </script>

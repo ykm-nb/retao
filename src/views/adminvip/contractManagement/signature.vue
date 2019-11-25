@@ -5,39 +5,11 @@
         <div class="record-top">
             <p class="title">签署列表</p>
         </div>
-        <!-- <div class="record-content">
-            <div class="content-left">
-                <p class="title">账户总额</p>
-                <p class="money"><b>0</b>元</p>
-            </div>
-            <ul>
-                <div class="item item1">
-                    <p class="title">可用资金</p>
-                    <p class="money"><b>0</b>元</p>
-                </div>
-                <div class="item item1">
-                    <p class="title">已充值金额</p>
-                    <p class="money"><b>0</b>元</p>
-                </div>
-                <div class="item">
-                    <p class="title">冻结资金</p>
-                    <p class="money"><b>0</b>元</p>
-                </div>
-                <div class="item">
-                    <p class="title">已提现总额</p>
-                    <p class="money"><b>0</b>元</p>
-                </div>
-            </ul>
-            <div class="content-right">
-                <Button long type="primary">我要充值</Button>
-                <Button long>我要提现</Button>
-            </div>
-        </div> -->
         <div class="record-bottom">
-            <div v-if="signatureDatas.length" class="common-main">
+            <div v-if="signDatas.length" class="common-main">
                 <!-- 列表 -->
                 <div class="common-list">
-                    <Table border :columns="signColumns" :data="signatureDatas"></Table>
+                    <Table border :columns="signColumns" :data="signDatas"></Table>
                 </div>
                 <!-- 分页器 -->
                 <!-- <div class="common-page">
@@ -58,6 +30,7 @@ export default {
     name: "changepassword",
     data() {
         return {
+            signDatas: [],
             form: {
                 name1: '',
                 name2: '',
@@ -71,55 +44,44 @@ export default {
             signColumns: [
                 {
                     title: '合同名称',
-                    key: 'name1',
+                    key: 'fileName',
                     // width: 100,
                     align: "center"
                 },
                 {
-                    title: '签署状态',
-                    key: 'name2',
+                    title: '合同ID',
+                    key: 'fileId',
                     // width: 100,
                     align: "center"
                 },
                 {
-                    title: '签署时间',
-                    key: 'name3',
+                    title: '操作',
                     // width: 100,
-                    align: "center"
-                }
-            ],
-            signatureDatas: [
-                {
-                    name1: "500",
-                    name2: "1000",
-                    name3: "10",
-                    name4: "2",
-                    name5: "good"
-                },
-                {
-                    name1: "500",
-                    name2: "1000",
-                    name3: "10",
-                    name4: "2",
-                    name5: "good"
-                },
-                {
-                    name1: "500",
-                    name2: "1000",
-                    name3: "10",
-                    name4: "2",
-                    name5: "good"
+                    align: "center",
+                    render: (h, params) => {
+                        return h('a', {
+                            attrs: {
+                                href: params.row.fileUrl
+                            }
+                        }, "下载")
+                    }
                 }
             ]
         }
     },
     methods: {
         getSignDatas() {
-
+            api.axs("post", "/user/queryFlowPages",{pageSize: 30}).then(({ data })=>{
+                if (data.code === "SUCCESS") {
+                    this.signDatas = data.data
+                } else {
+                    this.$Message.warning(data.remark);
+                }
+            });
         }
     },
     mounted() {
-         
+         this.getSignDatas()
     }
 }
 </script>

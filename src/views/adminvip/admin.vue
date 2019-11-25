@@ -1,7 +1,7 @@
 <template>
     <div class="adminvip">
 
-        <!-- <Header></Header> -->
+        <Header></Header>
 
         <div class="inner-bg nav-bg">
             <Nav @navSearch="navSearch"></Nav>
