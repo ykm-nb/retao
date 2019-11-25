@@ -5,9 +5,8 @@
                 <p class="title">仟呗头条</p>
                 <p class="info">NEWS</p>
             </div>
-
-            <ul class="imgs" v-if='newsLists.length'>
-                <li v-for="(item, index) in newsLists" 
+            <ul class="imgs" v-if='newAllDatas.newsLists.length'>
+                <li v-for="(item, index) in newAllDatas.newsLists" 
                     :key="index" 
                     @click="gotoDetail(item.id)"
                     @mouseover="imgIndex = index" 
@@ -27,19 +26,19 @@
             </ul>
 
             <ul class="content">
-                <li v-for="(item, index) in list" :key="index">
+                <li v-for="(item, index) in newAllDatas.datas" :key="index">
                     <div class="time">
-                        <p class="day">{{ item[0].day }}</p>
-                        <p class="date">{{ item[0].date }}</p>
+                        <p class="day">{{ item.list[0].newDate.substring(8,10) }}</p>
+                        <p class="date">{{ item.list[0].newDate.substring(0,9) }}</p>
                     </div>
-                    <p class="text" v-for="(p, index1) in item.slice(1)" :key="index1">
-                        <span class="title">{{ p.title }}</span>
-                        <span class="date">{{ p.date }}</span>
+                    <p class="text" v-for="(list,inxx) in item.list" :key='inxx'>
+                        <span class="title">{{list.title}}</span>
+                        <span class="date">{{list.newDate.substring(5,10)}}</span>
                     </p>
                 </li>
             </ul>
 
-            <button class="btn-more" type="button">查看更多</button>
+            <!-- <button class="btn-more" type="button">查看更多</button> -->
         </div>
     </div>
 </template>
@@ -49,134 +48,10 @@ import api from "@/api";
 
 export default {
     name: "index-msg",
+    props: ['newAllDatas'],
     data() {
         return {
-            imgIndex: -1,
-            newsLists: [],
-            imgsList: [
-                {
-                    imgUrl: require('./images/msg1.png'),
-                    title: "国家扶贫日交答卷,社交电商扣开扶贫新大门",
-                    arrow1: require('./images/msg-arrow1.png'),
-                    arrow2: require('./images/msg-arrow2.png'),
-                },
-                {
-                    imgUrl: require('./images/msg2.png'),
-                    title: "月薪4万招不到人,曾经电商的巨型风口将在这里重现?",
-                    arrow1: require('./images/msg-arrow1.png'),
-                    arrow2: require('./images/msg-arrow2.png'),
-                },
-                {
-                    imgUrl: require('./images/msg3.png'),
-                    title: "汪向东:对农村电商扶贫与乡村振兴的新思考",
-                    arrow1: require('./images/msg-arrow1.png'),
-                    arrow2: require('./images/msg-arrow2.png'),
-                }
-            ],
-            list: [
-                [
-                    {
-                        date: "2019-10",
-                        day: "19"
-                    },
-                    {
-                        title: "购买转让的网店有没有风险？",
-                        date: "10-10"
-                    },
-                    {
-                        title: "购买转让的网店有没有风险？",
-                        date: "10-10"
-                    },
-                    {
-                        title: "购买转让的网店有没有风险？",
-                        date: "10-10"
-                    },
-                    {
-                        title: "购买转让的网店有没有风险？",
-                        date: "10-10"
-                    },
-                    {
-                        title: "购买转让的网店有没有风险？",
-                        date: "10-10"
-                    },
-                    {
-                        title: "购买转让的网店有没有风险？",
-                        date: "10-10"
-                    },
-                    {
-                        title: "购买转让的网店有没有风险？",
-                        date: "10-10"
-                    },
-                ],
-                [
-                    {
-                        date: "2019-10",
-                        day: "18"
-                    },
-                    {
-                        title: "购买转让的网店有没有风险？",
-                        date: "10-10"
-                    },
-                    {
-                        title: "购买转让的网店有没有风险？",
-                        date: "10-10"
-                    },
-                    {
-                        title: "购买转让的网店有没有风险？",
-                        date: "10-10"
-                    },
-                    {
-                        title: "购买转让的网店有没有风险？",
-                        date: "10-10"
-                    },
-                    {
-                        title: "购买转让的网店有没有风险？",
-                        date: "10-10"
-                    },
-                    {
-                        title: "购买转让的网店有没有风险？",
-                        date: "10-10"
-                    },
-                    {
-                        title: "购买转让的网店有没有风险？",
-                        date: "10-10"
-                    },
-                ],
-                [
-                    {
-                        date: "2019-10",
-                        day: "17"
-                    },
-                    {
-                        title: "购买转让的网店有没有风险？",
-                        date: "10-10"
-                    },
-                    {
-                        title: "购买转让的网店有没有风险？",
-                        date: "10-10"
-                    },
-                    {
-                        title: "购买转让的网店有没有风险？",
-                        date: "10-10"
-                    },
-                    {
-                        title: "购买转让的网店有没有风险？",
-                        date: "10-10"
-                    },
-                    {
-                        title: "购买转让的网店有没有风险？",
-                        date: "10-10"
-                    },
-                    {
-                        title: "购买转让的网店有没有风险？",
-                        date: "10-10"
-                    },
-                    {
-                        title: "购买转让的网店有没有风险？",
-                        date: "10-10"
-                    },
-                ],
-            ]
+            imgIndex: -1
         }
     },
     methods: {
@@ -188,17 +63,16 @@ export default {
             window.open(href)
         },
     },
-    mounted() {
-        api.axs("post", "/news/anon/queryForPage").then(({ data })=>{
-            if (data.code === "SUCCESS") {
-                this.newsLists[0] = data.data[0].list[0]
-                this.newsLists[1] = data.data[1].list[0]
-                this.newsLists[2] = data.data[2].list[0]
-                console.log(this.newsLists)
-            } else {
-                this.$Message.error(data.remark);
-            }
-        })
+    created() {
+        // api.axs("post", "/news/anon/queryForPage").then(({ data })=>{
+        //     if (data.code === "SUCCESS") {
+        //         this.newsLists[0] = data.data[0].list[0]
+        //         this.newsLists[1] = data.data[1].list[0]
+        //         this.newsLists[2] = data.data[2].list[0]
+        //     } else {
+        //         this.$Message.error(data.remark);
+        //     }
+        // })
     },
     filters: {
         'shortWr'(val) {
@@ -307,6 +181,8 @@ export default {
                 height: 368px;
                 display: flex;
                 justify-content: space-between;
+                padding-top: 42px;
+                overflow: hidden;
 
                 li {
                     width: 382px;

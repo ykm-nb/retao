@@ -126,12 +126,20 @@ var router = new Router({
       },
       path: "/adminvip",
       redirect: {
-          name: "productsforsale"
+          name: "userinfo"
       },
       name: "adminvip",
       component: () => import('@/views/adminvip/admin.vue'),
       children: [
           // ===== 交易管理 =====
+          {
+              meta: {
+                  title: "热淘-用户信息"
+              },
+              path: "/userinfo",
+              name: "userinfo",
+              component: () => import("./views/adminvip/dealManagement/Userinfo.vue")
+          },
           {
               meta: {
                   title: "热淘-出售的产品"
@@ -149,6 +157,14 @@ var router = new Router({
               component: () => import("./views/adminvip/dealManagement/PurchasedProducts.vue")
           },
           // ===== 合同管理 =====
+          {
+              meta: {
+                  title: "热淘-签署列表"
+              },
+              path: "/signature",
+              name: "signature",
+              component: () => import("./views/adminvip/contractManagement/signature.vue")
+          },
           {
               meta: {
                   title: "热淘-实名认证"

@@ -1,20 +1,17 @@
 <template>
     <!-- 实名认证 -->
     <div class="certification">
+        <h3 class="title">设置登录密码</h3>
         <Form ref="formValidate" :model="form" :label-width="100">
-            <FormItem label="手机号：">
-                <Input v-model="form.name1"></Input>
-            </FormItem>
-            <FormItem label="验证码：">
-                <Input v-model="form.name2"></Input>
-                <Button class="telcode-btn" :disabled="isStartCountDown ? 'disabled' : false" @click="getTelCode">{{ isStartCountDown ? num + '秒后重新发送' : '获取验证码' }}</Button>
-                <p class="error-tip" v-show="errorTipForm.telcode">验证码不正确~</p>
+            
+            <FormItem label="输入旧密码：">
+                <Input v-model="form.oldPassword"></Input>
             </FormItem>
             <FormItem label="输入新密码：">
-                <Input v-model="form.name3"></Input>
+                <Input v-model="form.newPassword"></Input>
             </FormItem>
             <FormItem label="确认新密码：">
-                <Input v-model="form.name4"></Input>
+                <Input v-model="form.newPassword2"></Input>
             </FormItem>
             <FormItem class="btn">
                 <Button type="primary" @click="handleSubmit">提交</Button>
@@ -30,10 +27,9 @@ export default {
     data() {
         return {
             form: {
-                name1: '',
-                name2: '',
-                name3: '',
-                name4: ''
+                oldPassword: '',
+                newPassword: '',
+                newPassword2: ''
             },
             spinFile: false,
             isStartCountDown: false,
@@ -64,11 +60,11 @@ export default {
                         clearInterval(time);
                         this.isStartCountDown = false;
                         this.num = 60;
-                    };
+                    }
 
                     this.num -= 1;
                 }, 1000);
-            };
+            }
         },
         // 提交
         handleSubmit() {
@@ -78,7 +74,7 @@ export default {
                     for(var i in this.form) this.form[i] = "";
                 } else {
                     this.$Message.warning(data.remark);
-                };
+                }
             });
         }
     },
@@ -90,6 +86,11 @@ export default {
 
 <style lang="less" scoped>
     .certification {
+        .title {
+            font-size: 16px;
+            padding-bottom: 30px;
+            text-align: left;
+        }
         /deep/ form {
             width: 40%;
 

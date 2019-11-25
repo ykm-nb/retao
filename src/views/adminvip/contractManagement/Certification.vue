@@ -2,83 +2,50 @@
     <!-- 实名认证 -->
     <div class="certification">
         <Form ref="formValidate" :model="form">
-            <FormItem label="真实姓名：">
-                <Input v-model="form.name1"></Input>
+            <FormItem>
+                <span class='tip'>真实姓名：</span><Input v-model="form.name" placeholder="请输入姓名"  style='width:400px'></Input>
             </FormItem>
-            <FormItem label="手机号：">
-                <Input v-model="form.name2"></Input>
+            <FormItem>
+                <span class='tip'>身份证号：</span><Input v-model="form.idNumber" placeholder="请输入身份证号码" style='width:400px'></Input>
             </FormItem>
-            <FormItem label="验证码：">
-                <Input v-model="form.buyerIdNo"></Input>
-                <Button class="telcode-btn" :disabled="isStartCountDown ? 'disabled' : false" @click="getTelCode">{{ isStartCountDown ? num + '秒后重新发送' : '获取验证码' }}</Button>
-                <p class="error-tip" v-show="errorTipForm.telcode">验证码不正确~</p>
-            </FormItem>
-            <FormItem label="身份证号：">
-                <Input v-model="form.buyerPhone"></Input>
-            </FormItem>
-            <FormItem label="身份证正面：">
+            <FormItem>
+                <span class='tip'>手持身份证正面照：</span>
                 <div class="wrapUpload">
                     <label for="up_file" class="up_label">
-                        <input @change="uploadFile" type="file" name="file" accept="application/msword,.docx,.xlsx,text/html,text/html,application/vnd.ms-excel,application/pdf" id="up_file" class="up-files">
+                        <input @change="uploadFunc" type="file" name="file" accept="images/*" id="up_file" class="up-files">
                     </label>
                     <Upload class='up-oth' action=''>
-                        <Button type="ghost">
-                            <Icon type="link"></Icon>
+                        <Button style='opacity:0'>
                             <span>选择图片</span>
                         </Button>
                     </Upload>
-                    <p v-if="form.contractUrl" style="margin-left:5px;white-space:nowrap">
-                        合同地址：
-                        <a :href="form.contractUrl" target="_blank">123</a>
-                    </p>
-                    <div v-if="!form.contractUrl && spinFile">
-                        <Spin size="large"></Spin>
-                    </div>
+                    <template v-if='form.ossPath'>
+                        <img :src="form.ossPath" class="upimgg">
+                        <span class='delimg' @click='form.ossPath=""'>×</span>
+                    </template>
                 </div>
             </FormItem>
-            <FormItem label="身份证反面：">
-                <div class="wrapUpload">
-                    <label for="up_file" class="up_label">
-                        <input @change="uploadFile" type="file" name="file" accept="application/msword,.docx,.xlsx,text/html,text/html,application/vnd.ms-excel,application/pdf" id="up_file" class="up-files">
-                    </label>
-                    <Upload class='up-oth' action=''>
-                        <Button type="ghost">
-                            <Icon type="link"></Icon>
-                            <span>选择图片</span>
-                        </Button>
-                    </Upload>
-                    <p v-if="form.contractUrl" style="margin-left:5px;white-space:nowrap">
-                        合同地址：
-                        <a :href="form.contractUrl" target="_blank">123</a>
-                    </p>
-                    <div v-if="!form.contractUrl && spinFile">
-                        <Spin size="large"></Spin>
-                    </div>
-                </div>
-            </FormItem>
-            <FormItem class="btn">
-                <Button type="primary" @click="handleSubmit">提交实名认证</Button>
-                <Button @click="handleReset" style="margin-left: 8px">重置</Button>
-            </FormItem>
+            
+            <div style='text-align:center'>
+                <Button type="primary" @click="handleSubmit" style='width:150px'>提交实名认证</Button>
+            </div>
         </Form>
     </div>
 </template>
 
 <script>
 import api from "@/api";
+import axios from 'axios'
+// import sfcard from "@/assets/images/sf_card.png"
 export default {
     name: "certification",
     data() {
         return {
+            
             form: {
-                productNo: '',
-                buyer: '',
-                buyerIdNo: '',
-                buyerPhone: '',
-                seller: '',
-                sellerIdNo: '',
-                sellerPhone: '',
-                contractUrl: ''
+                name: '',
+                idNumber: '',
+                ossPath: ''
             },
             spinFile: false,
             isStartCountDown: false,
@@ -90,77 +57,124 @@ export default {
         }
     },
     methods: {
-        // 获取验证码
-        getTelCode() {
-            if(this.detectionMobile()) {
-                this.isStartCountDown = true;
-
-                api.axs("post", "/phoneValidate", {phone: this.form.account, type: "regist"}).then(({ data })=>{
+        
+        // 提交
+        handleSubmit() {
+            if(this.form.name && this.form.idNumber && this.form.ossPath) {
+                api.axs("post", "/user/saveIdNumber", this.form).then(({ data })=>{
                     if (data.code === "SUCCESS") {
-                        this.$Message.success({content: "验证码已发送，请查收~"});
+                        this.$Message.success({content: "合同上传成功~"});
                     } else {
                         this.$Message.warning(data.remark);
                     }
                 });
-            
-                var time = null;
-                time = setInterval(() => {
-                    if(this.num === 0) {
-                        clearInterval(time);
-                        this.isStartCountDown = false;
-                        this.num = 60;
-                    };
-
-                    this.num -= 1;
-                }, 1000);
-            };
-        },
-        uploadFile() {
-            this.spinFile = true;
-            var myfile = document.getElementById("up_file").files[0];
-            if(myfile) {
-                var a = (myfile.name.split('.'))[0];
-                this.form.contractUrl = a;
-                
-                var oMyForm = new FormData();
-                oMyForm.append("file", myfile);
-                
-                api.asxUpFile("post", "/oss/fileUpload", oMyForm).then(({data}) => {
-                    if (data.code === "SUCCESS") {
-                        this.form.contractUrl = data.data;
-                        this.$Message.success({content: "文件上传成功!"});
-                    };
-                });
-            };
-            console.log(this.form)
-        },
-        // 提交
-        handleSubmit() {
-            var arr = [];
-            for(var i in this.form) {
-                arr.push(this.form[i]);
-            };
-            var result = arr.every((item, index) => {
-                return item != "";
-            });
-            
-            if(result) {
-                api.axs("post", "/contract/saveOrUpdate", this.form).then(({ data })=>{
-                    if (data.code === "SUCCESS") {
-                        this.$Message.success({content: "合同上传成功~"});
-                        for(var i in this.form) this.form[i] = "";
-                    } else {
-                        this.$Message.warning(data.remark);
-                    };
-                });
             } else {
-                this.$Message.warning({content: "未全部填写，有遗漏~"});
-            };
+                this.$Message.warning({content: "请填写完整~"});
+            }
         },
         handleReset () {
             for(var i in this.form) this.form[i] = "";
             this.$Message.success({content: "已重置~"});
-        }
+        },
+        randomChar: function(length) {
+            var x = "0123456789qwertyuioplkjhgfdsazxcvbnm";
+            var tmp = "";
+            var timestamp = new Date().getTime();
+            for (var i = 0; i < length; i++) {
+                tmp += x.charAt(
+                    Math.ceil(Math.random() * 100000000) % x.length
+                );
+            }
+            return timestamp + tmp;
+        },
+        uploadimg: function(files, tag, id) {
+            var vm = this;
+
+            var oMyForm = new FormData();
+            var upFile = null;
+            var fileSize = 0;
+            var upType = "1";
+            try {
+                const rst = lrz(files, {
+                    width: 1200,
+                    height: 1200,
+                    quality: 0.8
+                });
+                upFile = rst.file;
+                fileSize = rst.fileLen;
+                upType = "2";
+            } catch (error) {
+                upFile = files;
+                fileSize = files.size;
+            }
+            try {
+                axios({
+                    method: "post",
+                    url: "/retao-web/queryOssdomian"
+                }).then(function(data) {
+                    var data = data.data.data;
+                    const name = files.name;
+                    const arr_name = name.split(".");
+                    let ext = arr_name[arr_name.length - 1].toLowerCase();
+                    // if (!['jpg', 'png', 'gif', 'jpeg'].includes(ext)) ext = 'png'
+                    const key = vm.randomChar(6) + "." + ext;
+                    const url = data.url + "/" + key;
+                    console.log("url:::::" + url);
+                    oMyForm.append("name", files.name);
+                    oMyForm.append("key", key);
+                    oMyForm.append("success_action_status", "200");
+                    Object.keys(data).forEach(item => {
+                        if (item === "accessid")
+                            oMyForm.append("OSSAccessKeyId", data[item]);
+                        else oMyForm.append(item, data[item]);
+                    });
+                    oMyForm.append("file", upFile);
+                    console.log(
+                        data.url + "?fileSize=" + fileSize + "&upType=" + upType
+                    );
+                    axios({
+                        headers: {
+                            "X-Requested-With": "XMLHttpRequest",
+                            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+                        },
+                        method: "post",
+                        data: oMyForm,
+                        url: data.url +
+                            "?fileSize=" +
+                            fileSize +
+                            "&upType=" +
+                            upType
+                    }).then(function(data) {
+                        vm.form.ossPath = url;
+                        // vm.$Message.success({content: "上传成功!"});
+                        api.asxUpFile("post", "/user/queryIdNumberOrc", oMyForm).then(({data}) => {
+                            if (data.code === "SUCCESS") {
+                                vm.$Message.success("上传成功!");
+                            } else {
+                                vm.form.ossPath = ''
+                                vm.$Message.error("请上传正确的手持证件照!");
+                            }
+                        })
+                        // axios({
+                        //     method: "post",
+                        //     url: "/retao-web/user/queryIdNumberOrc",
+                        //     datas: oMyForm
+                        // })
+                        
+                        // vm.form.contractUrl = url;
+                        return Promise.resolve(url);
+                    });
+                });
+            } catch (error) {
+                return Promise.reject("上传失败, 请重试");
+            }
+        },
+        uploadFunc() {
+            var vm = this;
+            var myfile;
+            myfile = document.getElementById("up_file");
+            this.uploadimg(myfile.files[0]);
+        },
     },
     mounted() {
          
@@ -170,8 +184,18 @@ export default {
 
 <style lang="less" scoped>
     .certification {
+        width: 800px;
+        margin: 20px auto;
         /deep/ form {
-            width: 50%;
+            width: 100%;
+            margin: 20px auto;
+
+            .tip {
+                display: inline-block;
+                width: 150px;
+                text-align: right;
+                font-size: 14px;
+            }
 
             .ivu-form-item {
                 label, .ivu-input {
@@ -186,8 +210,35 @@ export default {
                     resize: none;
                 }
 
-                .up_label {
-                    width: 90px;
+                .wrapUpload {
+                    position: relative;
+                    background: url('http://retao.oss-cn-hangzhou.aliyuncs.com/1574578579262oyhb4k.jpg') no-repeat;
+                    background-size: 100%;
+                    border-radius: 10px;
+                    .upimgg {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 10px;
+                        border: 1px solid #ddd;
+                    }
+                    .delimg {
+                        position: absolute;
+                        top: -15px;
+                        right: -20px;
+                        font-size: 26px;
+                        cursor: pointer;
+                    }
+                    
+                }
+                .up_label,.ivu-upload,.ivu-btn-ghost {
+                    width: 404px;
+                    height: 208px;
+                    left: 0;
+                    cursor: pointer;
+                    border: none;
 
                     input {
                         width: 100%;

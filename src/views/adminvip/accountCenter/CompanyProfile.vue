@@ -1,20 +1,21 @@
 <template>
     <!-- 实名认证 -->
     <div class="certification">
+        <h3 class="title">设置支付密码</h3>
         <Form ref="formValidate" :model="form" :label-width="100">
-            <FormItem label="手机号：">
-                <Input v-model="form.name1"></Input>
+            <FormItem label="设置密码：">
+                <Input v-model="form.name3"></Input>
             </FormItem>
+            <FormItem label="确认密码：">
+                <Input v-model="form.name4"></Input>
+            </FormItem>
+            <!-- <FormItem label="手机号：">
+                <Input v-model="form.name1"></Input>
+            </FormItem> -->
             <FormItem label="验证码：">
                 <Input v-model="form.name2"></Input>
                 <Button class="telcode-btn" :disabled="isStartCountDown ? 'disabled' : false" @click="getTelCode">{{ isStartCountDown ? num + '秒后重新发送' : '获取验证码' }}</Button>
                 <p class="error-tip" v-show="errorTipForm.telcode">验证码不正确~</p>
-            </FormItem>
-            <FormItem label="输入新密码：">
-                <Input v-model="form.name3"></Input>
-            </FormItem>
-            <FormItem label="确认新密码：">
-                <Input v-model="form.name4"></Input>
             </FormItem>
             <FormItem class="btn">
                 <Button type="primary" @click="handleSubmit">提交</Button>
@@ -47,7 +48,7 @@ export default {
     methods: {
         // 获取验证码
         getTelCode() {
-            if(this.detectionMobile()) {
+            if(true) {
                 this.isStartCountDown = true;
 
                 api.axs("post", "/phoneValidate", {phone: this.form.account, type: "regist"}).then(({ data })=>{
@@ -64,11 +65,11 @@ export default {
                         clearInterval(time);
                         this.isStartCountDown = false;
                         this.num = 60;
-                    };
+                    }
 
                     this.num -= 1;
                 }, 1000);
-            };
+            }
         },
         // 提交
         handleSubmit() {
@@ -78,7 +79,7 @@ export default {
                     for(var i in this.form) this.form[i] = "";
                 } else {
                     this.$Message.warning(data.remark);
-                };
+                }
             });
         }
     },
@@ -90,6 +91,11 @@ export default {
 
 <style lang="less" scoped>
     .certification {
+        .title {
+            font-size: 16px;
+            padding-bottom: 30px;
+            text-align: left;
+        }
         /deep/ form {
             width: 40%;
 
@@ -99,7 +105,7 @@ export default {
                 }
 
                 .telcode-btn {
-                    padding: 6px 15px;
+                    padding: 5px 15px;
                     border: none;
                     border-left: 1px solid #dddee1;
                     border-radius: 0 4px 4px 0;

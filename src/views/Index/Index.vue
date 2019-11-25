@@ -5,7 +5,7 @@
     <Header id="header" :userInfo="userInfo"></Header>
 
     <Nav></Nav>
-    
+
     <div class="inner-bg banner-bg">
       <div class="inner banner">
         <div class="banner-left">
@@ -61,7 +61,7 @@
 
     <Shop2 id="shop2" @author-index="getAuthorIndex" :tmList="tmList" :tbList="tbList"></Shop2>
     
-    <Message id="msg" @author-index="getAuthorIndex"></Message>
+    <Message id="msg" :newAllDatas="newAllDatas" @author-index="getAuthorIndex"></Message>
 
     <Safe></Safe>
 
@@ -125,7 +125,11 @@ export default {
       yzList: [],
       xqList: [],
       tmList: [],
-      tbList: []
+      tbList: [],
+      newAllDatas: {
+        datas: [],
+        newsLists: []
+      }
     }
   },
   methods: {
@@ -191,6 +195,18 @@ export default {
             ls.session('firstLists',firstLists)
         }
     })
+
+    api.axs("post", "/news/anon/queryForPage").then(({ data })=>{
+        if (data.code === "SUCCESS") {
+            this.newAllDatas.datas = data.data
+            this.newAllDatas.newsLists[0] = data.data[0].list[0]
+            this.newAllDatas.newsLists[1] = data.data[1].list[0]
+            this.newAllDatas.newsLists[2] = data.data[2].list[0]
+        } else {
+            this.$Message.error(data.remark);
+        }
+    })
+    
   },
   mounted() {
     this.initSwiper() // swiper初始化必须在mounted，因为此时dom元素已经渲染完
