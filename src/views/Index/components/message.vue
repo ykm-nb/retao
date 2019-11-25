@@ -32,7 +32,7 @@
                         <p class="date">{{ item.list[0].newDate.substring(0,9) }}</p>
                     </div>
                     <p class="text" v-for="(list,inxx) in item.list" :key='inxx'>
-                        <span class="title">{{list.title}}</span>
+                        <span class="title">{{list.title | shortWr}}</span>
                         <span class="date">{{list.newDate.substring(5,10)}}</span>
                     </p>
                 </li>

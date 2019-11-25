@@ -158,11 +158,11 @@ export default {
       const curPath = this.$route.path.substring(1);
 
       if(curPath === page) return; // 页面相同
-      let { href } = this.$router.resolve({
+      this.$router.push({
         path: page,
         query: { type }
       })
-      window.open(href)
+      // window.open(href)
     },
     keyupEnter() { // 监听滚动
       let a = document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset;
@@ -366,7 +366,7 @@ html, body {
           .btn {
             display: flex;
             justify-content: center;
-            margin: 20px 0 55px;
+            margin: 20px 0 0;
 
             button {
               width: 78px;
@@ -387,6 +387,10 @@ html, body {
               background-color: #fff;
               border: 1px solid #ff0036;
             }
+          }
+
+          .wx {
+            margin-top: 55px;
           }
 
           .wx p {
