@@ -563,15 +563,6 @@ export default {
                 if(data.code === "SUCCESS") {
                     pageForm.total = data.data.total;
                     this.goodsLists = data.data.list;
-
-                    this.goodsLists.forEach((item, index) => {
-                        if(item.pictureUrl != null) {
-                            this.goodsLists[index].pictureUrl = (item.pictureUrl.split(','))[0]
-                        }
-                        if(item.pictureUrl != null && item.pictureUrl.length > 70) {
-                            this.goodsLists[index].pictureUrl = (item.pictureUrl.split('png'))[0] + 'png'
-                        }
-                    })
                 }
             });
         },
@@ -646,7 +637,7 @@ export default {
     },
     created() {
         const tbList = ls.session.get("tbList"),
-              rtSearch = ls.session.get("rtSearch");
+            rtSearch = ls.session.get("rtSearch");
 
         this.getMainProductLists() // 获取主营列表
         if(rtSearch) this.form.title = rtSearch.title;

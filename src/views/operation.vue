@@ -9,7 +9,7 @@
 
                     <!-- 网店托管 -->
                     <div class="inner-bg trusteeship-bg">
-                        <div class="inner trusteeship">
+                        <div class="inner trusteeship" v-if="activeIndex === 0">
                             <div class="title-box">
                                 <p class="num">01</p>
                                 <p class="title">网店托管</p>
@@ -17,8 +17,9 @@
                                 <p class="translate">TRUSTEESHIP</p>
                             </div>
                             <ul class="content">
-                                <li v-for="(item, index) in trusteeshipList" :key="index"
-                                    :style="`background: url(${item.imgUrl}) no-repeat center`"
+                                <li v-for="(item, index) in trusteeshipList" :key="index" 
+                                    :class="['item', `item${index}`]"
+                                    :style="`background: url(${item.imgUrl}) no-repeat center`" 
                                 >
                                     <p class="title">{{ item.title }}</p>
                                     <p class="info">{{ item.info }}</p>
@@ -33,7 +34,7 @@
 
                     <!-- 营销推广 -->
                     <div class="inner-bg popularize-bg">
-                        <div class="inner popularize">
+                        <div class="inner popularize" v-if="activeIndex === 1">
                             <div class="title-box">
                                 <p class="num">02</p>
                                 <p class="title">营销推广</p>
@@ -107,7 +108,7 @@
                                     </div>
                                 </div>
 
-                                <transition-group name="fade" class="item-bg">
+                                <transition-group name="fade" class="item-bg" tag="div">
                                     <div :class="['item', `item${item.id}`, {'last-item': index === 3 && clickRight}]" 
                                         v-for="(item, index) in popularList2" :key="item.id"
                                     >
@@ -132,7 +133,7 @@
 
                     <!-- 视觉设计 -->
                     <div class="inner-bg vision-bg">
-                        <div class="inner vision">
+                        <div class="inner vision" v-if="activeIndex === 2">
                             <div class="title-box">
                                 <p class="num">03</p>
                                 <p class="title">视觉设计</p>
@@ -140,7 +141,12 @@
                                 <p class="translate">POPULARIZE</p>
                             </div>
                             <ul class="content">
-                                <img src="@/assets/images/operation-3-2.png">
+                                <img class="item item0" src="@/assets/images/operation-3-2-1.png">
+                                <img class="item item1 item-bottom" src="@/assets/images/operation-3-2-2.png">
+                                <img class="item item2" src="@/assets/images/operation-3-2-3.png">
+                                <img class="item item3 item-bottom" src="@/assets/images/operation-3-2-4.png">
+                                <img class="item item4" src="@/assets/images/operation-3-2-5.png">
+                                <img class="item item5 item-bottom" src="@/assets/images/operation-3-2-6.png">
                             </ul>
                         </div>
                     </div>
@@ -150,7 +156,7 @@
 
                     <!-- 客服外包 -->
                     <div class="inner-bg epiboly-bg">
-                        <div class="inner epiboly">
+                        <div class="inner epiboly" v-if="activeIndex === 3">
                             <div class="title-box">
                                 <p class="num">04</p>
                                 <p class="title">客服外包</p>
@@ -198,7 +204,7 @@
 
                     <!-- 仟呗优势 -->
                     <div class="inner-bg advantage-bg">
-                        <div class="inner advantage">
+                        <div class="inner advantage" v-if="activeIndex === 4">
                             <div class="title-box">
                                 <p class="num">05</p>
                                 <p class="title">仟呗优势</p>
@@ -206,7 +212,12 @@
                                 <p class="translate">OUR SUPERIORITY</p>
                             </div>
                             <ul class="content">
-                                <img src="@/assets/images/operation-5-2.png">
+                                <i class="sprite"></i>
+                                <img class="item item0" src="@/assets/images/operation-5-2-1.png">
+                                <img class="item item1" src="@/assets/images/operation-5-2-2.png">
+                                <img class="item item2" src="@/assets/images/operation-5-2-3.png">
+                                <img class="item item3" src="@/assets/images/operation-5-2-4.png">
+                                <img class="text" src="@/assets/images/operation-5-2-5.png">
                             </ul>
                         </div>
                     </div>
@@ -216,7 +227,7 @@
                     
                     <!-- 合作伙伴 -->
                     <div class="inner-bg partner-bg">
-                        <div class="inner partner">
+                        <div class="inner partner" v-if="activeIndex === 5">
                             <div class="title-box">
                                 <p class="num">06</p>
                                 <p class="title">合作伙伴</p>
@@ -225,7 +236,33 @@
                             </div>
                             <ul class="content">
                                 <div class="img-box">
-                                    <img src="@/assets/images/operation-6-2.png">
+                                    <div>
+                                        <img class="item item0" src="@/assets/images/operation-6-2-1.png">
+                                        <ul class="ul0">
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <img class="item item1" src="@/assets/images/operation-6-2-2.png">
+                                        <ul class="ul1">
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <img class="item item2" src="@/assets/images/operation-6-2-3.png">
+                                        <ul class="ul2">
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </ul>
                         </div>
@@ -256,6 +293,7 @@ export default {
     name: "operation",
     data () {
         return {
+            activeIndex: 0, // 当前页面索引
             trusteeshipList: [
                 {
                     imgUrl: require("@/assets/images/operation-trusteeship3.png"),
@@ -350,10 +388,17 @@ export default {
     methods: {
         // swiper
         initSwiper() {
+            const that = this;
             var mySwiper = new Swiper ('.swiper-container', {
                 direction: 'vertical',
                 speed: 800,
                 mousewheel: true,
+                on: {
+                    slideChangeTransitionStart: function () {
+                        that.activeIndex = this.activeIndex;
+                        // console.log(this.activeIndex);//切换结束时，告诉我现在是第几个slide
+                    }
+                },
             })
         },
         switchPopIndex (value) {
@@ -468,6 +513,10 @@ export default {
                 font-size: 48px;
                 font-weight: bold;
                 line-height: 48px;
+                opacity: 1;
+                animation: fadeInDown 1s;
+                animation-delay: .4s;
+                animation-fill-mode: both;
             }
 
             .title {
@@ -475,11 +524,19 @@ export default {
                 font-weight: 400;
                 line-height: 48px;
                 margin: 20px 0 12px;
+                opacity: 1;
+                animation: fadeInDown 1s;
+                animation-delay: .6s;
+                animation-fill-mode: both;
             }
 
             .description {
                 font-size: 18px;
                 line-height: 18px;
+                opacity: 1;
+                animation: fadeInDown 1s;
+                animation-delay: .8s;
+                animation-fill-mode: both;
             }
 
             .translate {
@@ -487,9 +544,14 @@ export default {
                 line-height: 18px;
                 color: #fda55d;
                 margin-top: 38px;
+                opacity: 1;
+                animation: fadeInDown 1s;
+                animation-delay: 1s;
+                animation-fill-mode: both;
             }
         }
 
+        // 网店托管
         .trusteeship-bg {
             height: 100%;
             background: url("../assets/images/operation-trusteeship1.png") no-repeat 50% 0;
@@ -501,12 +563,13 @@ export default {
                     display: flex;
                     justify-content: space-between;
                     margin: 150px 0 100px;
-                    
-                    li {
+
+                    .item {
                         width: 215px;
                         height: 266px;
                         text-align: left;
-                        color: white;
+                        color: #fff;
+                        opacity: 0;
                         padding-left: 20px;
 
                         .title {
@@ -520,6 +583,27 @@ export default {
                             width: 110px;
                             font-size: 18px;
                             line-height: 26px;
+                        }
+
+                        &.item0 {
+                            animation: fadeInLeft 1s forwards;
+                            animation-delay: .6s;
+                        }
+                        &.item1 {
+                            animation: fadeInLeft 1s forwards;
+                            animation-delay: .4s;
+                        }
+                        &.item2 {
+                            animation: fadeInUp 1s forwards;
+                            animation-delay: .2s;
+                        }
+                        &.item3 {
+                            animation: fadeInRight 1s forwards;
+                            animation-delay: .4s;
+                        }
+                        &.item4 {
+                            animation: fadeInRight 1s forwards;
+                            animation-delay: .6s;
                         }
                     }
                 }
@@ -538,6 +622,7 @@ export default {
             }
         }
 
+        // 营销推广
         .popularize-bg {
             height: 100%;
             background: #fc4bae url("../assets/images/operation-popularize1.png") no-repeat 50% 0;
@@ -565,6 +650,9 @@ export default {
                         bottom: 0;
                         left: 0;
                         z-index: 2;
+                        animation: fadeInLeft 1s;
+                        animation-delay: .4s;
+                        animation-fill-mode: both;
 
                         .first-ul {
                             width: calc(460 * 4px);
@@ -686,7 +774,7 @@ export default {
                         align-items: center;
 
                         .fade-enter-active, .fade-leave-active {
-                        transition: opacity .4s;
+                            transition: opacity .4s;
                         }
                         .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
                             opacity: 0;
@@ -696,8 +784,10 @@ export default {
                             width: 200px;
                             height: 256px;
                             text-align: left;
+                            opacity: 0;
                             padding: 50px 0 0 25px;
                             overflow: hidden;
+                            animation: fadeInRight 1s forwards;
                             transition: .4s;
                             position: relative;
                             z-index: 1;
@@ -758,18 +848,21 @@ export default {
 
                         .item1 {
                             background: url("../assets/images/operation-2-4.png") no-repeat center;
+                            animation-delay: .2s;
                         }
                         .item2 {
                             background: url("../assets/images/operation-2-5.png") no-repeat center;
+                            animation-delay: .3s;
                         }
                         .item3 {
                             background: url("../assets/images/operation-2-6.png") no-repeat center;
+                            animation-delay: .4s;
                         }
                         .item4 {
                             background: url("../assets/images/operation-2-7.png") no-repeat center;
+                            animation-delay: .5s;
                         }
                     }
-
 
                     // 前进后退
                     .prev, .next {
@@ -807,8 +900,8 @@ export default {
             }
         }
 
+        // 视觉设计
         .vision-bg {
-            // height: 898px;
             height: 100%;
             background: #2e3b97 url("../assets/images/operation-3-1.png") no-repeat center;
             background-size: cover;
@@ -821,13 +914,50 @@ export default {
                 padding: 45px 0 160px;
 
                 .content {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
                     margin-top: 65px;
+
+                    .item {
+                        opacity: 0;
+                        transition: all 0.3s linear;
+
+                        &.item-bottom {
+                            margin-top: 66px;
+                        }
+
+                        &.item0 {
+                            animation: fadeInDown 1s forwards;
+                            animation-delay: .1s;
+                        }
+                        &.item1 {
+                            animation: fadeInUp 1s forwards;
+                            animation-delay: .2s;
+                        }
+                        &.item2 {
+                            animation: fadeInDown 1s forwards;
+                            animation-delay: .3s;
+                        }
+                        &.item3 {
+                            animation: fadeInUp 1s forwards;
+                            animation-delay: .4s;
+                        }
+                        &.item4 {
+                            animation: fadeInDown 1s forwards;
+                            animation-delay: .5s;
+                        }
+                        &.item5 {
+                            animation: fadeInUp 1s forwards;
+                            animation-delay: .6s;
+                        }
+                    }
                 }
             }
         }
 
+        // 客服外包
         .epiboly-bg {
-            // height: 964px;
             height: 100%;
             background: url("../assets/images/operation-4-1.png") no-repeat 50% 100%;
 
@@ -842,6 +972,7 @@ export default {
 
                 .content {
                     height: 440px;
+                    overflow: hidden;
                     display: flex;
                     margin-top: 96px;
                     z-index: 2;
@@ -881,6 +1012,9 @@ export default {
                         width: 50%;
                         background: url("../assets/images/operation-4-2.png") no-repeat center;
                         position: relative;
+                        animation: fadeInLeft 1s;
+                        animation-delay: .4s;
+                        animation-fill-mode: both;
 
                         .text-box {
                             background-color: rgba(107,71,157,.8);
@@ -900,26 +1034,36 @@ export default {
                             height: 220px;
                             display: flex;
                             overflow: hidden;
+                            opacity: 0;
+                            animation: fadeInUp 1s forwards;
 
                             img {
                                 width: 50%;
                             }
                         }
 
-                        .custom .text-box {
-                            background-color: #05ccb6;
+                        .custom {
+                            animation-delay: .6s;
+
+                            .text-box {
+                                background-color: #05ccb6;
+                            }
                         }
 
-                        .after-sales .text-box {
-                            background-color: #7483ff;
+                        .after-sales {
+                            animation-delay: .8s;
+
+                            .text-box {
+                                background-color: #7483ff;
+                            }
                         }
                     }
                 }
             }
         }
 
+        // 仟呗优势
         .advantage-bg {
-            // height: 1018px;
             height: 100%;
             background: url("../assets/images/operation-5-1.png") no-repeat center;
 
@@ -933,15 +1077,77 @@ export default {
                 padding-top: 62px;
 
                 .content {
+                    overflow: hidden;
+                    display: flex;
+                    justify-content: space-between;
+                    flex-wrap: wrap;
+                    padding: 5px;
                     margin-top: 105px;
+                    background-color: #fafafa;
+                    border-radius: 8px;
+                    position: relative;
+
+                    .sprite {
+                        width: 37px;
+                        height: 37px;
+                        opacity: 0;
+                        background: url("../assets/images/sprite2.png") no-repeat -303px -102px;
+                        position: absolute;
+                        left: 49%;
+                        top: 38%;
+                        transform: translate(-3px, 0) rotate(0);
+                        animation: rollIn 1s forwards;
+                        animation-delay: 1s;
+                        z-index: 2;
+                    }
+                    @keyframes rollIn {
+                        0% {
+                            opacity: 0;
+                            transform: translate(-100%, 0) rotate(-120deg);
+                        }
+                        100% {
+                            opacity: 1;
+                            transform: translate(-3px, 0) rotate(0);
+                        }
+                    }
+
+                    .item {
+                        width: 590px;
+                        opacity: 0;
+                        margin-bottom: 10px;
+
+                        &.item0 {
+                            animation: fadeInLeft 1s forwards;
+                            animation-delay: .4s;
+                        }
+                        &.item1 {
+                            animation: fadeInRight 1s forwards;
+                            animation-delay: .6s;
+                        }
+                        &.item2 {
+                            animation: fadeInLeft 1s forwards;
+                            animation-delay: .8s;
+                        }
+                        &.item3 {
+                            animation: fadeInRight 1s forwards;
+                            animation-delay: 1s;
+                        }
+                    }
+
+                    .text {
+                        margin: 14px auto 10px;
+                        animation: fadeInUp 1s;
+                        animation-delay: 1s;
+                        animation-fill-mode: both;
+                    }
                 }
             }
         }
 
+        // 合作伙伴
         .partner-bg {
-            // height: 780px;
             height: 100%;
-            background: #af30c5 url("../assets/images/operation-6-1.png") no-repeat 50% 100%;
+            background: #af30c5 url('../assets/images/operation-6-1.png') no-repeat 50% 100%;
             background-size: cover;
 
             .title-box .translate {
@@ -954,16 +1160,137 @@ export default {
                 padding-top: 25px;
 
                 .content {
-                    margin-top: 22px;
+                    margin-top: 60px;
 
                     .img-box {
+                        width: 996px;
                         display: inline-block;
                         padding: 40px 20px;
                         margin: 0 auto;
-                        background-color: #fff;
+                        background: url('../assets/images/operation-6-2-4.png') no-repeat center;
                         border-radius: 18px;
+
+                        div {
+                            width: 100%;
+                            height: 107px;
+                            margin-bottom: 10px;
+                            position: relative;
+
+                            .item {
+                                opacity: 0;
+                                animation: flipInX 1s forwards;
+
+                                &.item0 {
+                                    animation-delay: .4s;
+                                }
+                                &.item1 {
+                                    animation-delay: .8s;
+                                }
+                                &.item2 {
+                                    animation-delay: 1.2s;
+                                }
+                            }
+
+                            ul {
+                                width: 100%;
+                                height: 100%;
+                                display: flex;
+                                justify-content: space-between;
+                                position: absolute;
+                                left: 0;
+                                top: 0;
+                                opacity: 0;
+                                animation: flipInX 1s forwards;
+
+                                li {
+                                    width: 24%;
+                                    height: 100%;
+                                    box-shadow: 0px 1px 21px 0px rgba(0, 0, 0, 0.07);
+                                }
+
+                                &.ul0 {
+                                    animation-delay: .4s;
+                                }
+                                &.ul1 {
+                                    animation-delay: .8s;
+                                }
+                                &.ul2 {
+                                    animation-delay: 1.2s;
+                                }
+                            }
+
+                            @keyframes flipInX {
+                                0% {
+                                    opacity: 0;
+                                    transform: perspective(400px) rotate3d(1,0,0,90deg);
+                                    transition-timing-function: ease-in;
+                                }
+                                40% {
+                                    opacity: 0;
+                                    transform: perspective(400px) rotate3d(1,0,0,-20deg);
+                                    transition-timing-function: ease-in;
+                                }
+                                60% {
+                                    opacity: 1;
+                                    transform: perspective(400px) rotate3d(1,0,0,10deg);
+                                    transition-timing-function: ease-in;
+                                }
+                                80% {
+                                    opacity: 1;
+                                    transform: perspective(400px) rotate3d(1,0,0,-5deg);
+                                }
+                                100% {
+                                    opacity: 1;
+                                    transform: perspective(400px);
+                                }
+                            }
+                        }
                     }
                 }
+            }
+        }
+
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translate(0, -100%);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(0, 0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            0% {
+                opacity: 0;
+                transform: translate(-100%, 0);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(0, 0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translate(0, 100%);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(0, 0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            0% {
+                opacity: 0;
+                transform: translate(100%, 0);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(0, 0);
             }
         }
     }
