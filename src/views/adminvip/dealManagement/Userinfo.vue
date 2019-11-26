@@ -23,15 +23,15 @@
         <div class="recharge-content">
             <div class="content-left">
                 <p class="title">账户总额</p>
-                <p class="money"><b>{{cashes.allRemainMoney}}</b>元</p>
+                <p class="money"><b>{{cashes.allRemainMoney || 0}}</b>元</p>
             </div>
             <div class="content-left">
                 <p class="title">充值总额</p>
-                <p class="money"><b>{{cashes.payMoney}}</b>元</p>
+                <p class="money"><b>{{cashes.payMoney || 0}}</b>元</p>
             </div>
             <div class="content-left">
                 <p class="title">提现总额</p>
-                <p class="money"><b>{{cashes.cashOutMoney}}</b>元</p>
+                <p class="money"><b>{{cashes.cashOutMoney || 0}}</b>元</p>
             </div>
             <ul>
                 <!-- <div class="item item1">

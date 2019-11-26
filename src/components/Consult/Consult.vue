@@ -79,9 +79,9 @@ export default {
         },
         close () {
             this.showConsult = false
-            setTimeout(() => {
-                this.showConsult = true
-            }, 20000);
+            // setTimeout(() => {
+            //     this.showConsult = true
+            // }, 20000);
         }
     },
     mounted() {
@@ -158,7 +158,7 @@ export default {
 
                 .item {
                     width: 25%;
-                    margin-bottom: 16px;
+                    margin-bottom: 25px;
 
                     .avatar {
                         width: 60px;
@@ -189,7 +189,7 @@ export default {
 
                     button {
                         position: relative;
-                        top: -10px;
+                        top: 8px;
                         width: 80px;
                         height: 24px;
                         font-size: 12px;

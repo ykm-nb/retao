@@ -19,6 +19,9 @@
             <FormItem label="提现金额(元)：">
                 <Input v-model="form.amount" readonly/>
             </FormItem>
+            <FormItem label="提现密码：">
+                <Input type='password' v-model="form.payPassword"/>
+            </FormItem>
             <FormItem >
                 <Button type='info' @click='toCash' v-if='tocash'>提现</Button>
                 <Button type='warning' v-else>提现审核中...</Button>
@@ -35,6 +38,7 @@ export default {
         return {
             form: {
                 amount: 0,
+                payPassword: ''
             },
             tocash: true
         }

@@ -70,6 +70,7 @@ export default {
         display: flex;
         width: 1200px;
         margin: 0 auto;
+        line-height: normal;
 
         .content-bg {
             width: calc(100% - 200px);

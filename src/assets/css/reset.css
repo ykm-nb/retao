@@ -38,7 +38,7 @@ th, td {
 
 body, button, input, select, textarea {
     /* for ie */
-    font: 36px/42px 'PingFang SC','Lantinghei SC','Microsoft YaHei','HanHei SC','Helvetica Neue','Open Sans',Arial,'Hiragino Sans GB','微软雅黑';
+    font: 12px/1 'PingFang SC','Lantinghei SC','Microsoft YaHei','HanHei SC','Helvetica Neue','Open Sans',Arial,'Hiragino Sans GB','微软雅黑';
     /* font: 12px/1 'PingFang SC','Lantinghei SC','Microsoft YaHei', "\5b8b\4f53", 'HanHei SC','Helvetica Neue','Open Sans',Arial,'Hiragino Sans GB','微软雅黑'; */
     /* 用 ascii 字符表示，使得在任何编码下都无问题 */
 }

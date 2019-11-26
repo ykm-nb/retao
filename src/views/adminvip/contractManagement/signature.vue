@@ -18,7 +18,10 @@
             </div>
 
             <!-- 暂无数据 -->
-            <div v-else class="common-nodatas">暂无数据</div>
+            <div v-else class="common-nodatas">
+                <span v-if='loading'>加载中...</span>
+                <span v-else>暂无数据</span>
+            </div>
         </div>
 
     </div>
@@ -30,6 +33,7 @@ export default {
     name: "changepassword",
     data() {
         return {
+            loading: true,
             signDatas: [],
             form: {
                 name1: '',
@@ -74,6 +78,7 @@ export default {
             api.axs("post", "/user/queryFlowPages",{pageSize: 30}).then(({ data })=>{
                 if (data.code === "SUCCESS") {
                     this.signDatas = data.data
+                    this.loading = false
                 } else {
                     this.$Message.warning(data.remark);
                 }

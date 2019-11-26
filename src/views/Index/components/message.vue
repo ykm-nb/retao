@@ -29,10 +29,10 @@
                 <li v-for="(item, index) in newAllDatas.datas" :key="index">
                     <div class="time">
                         <p class="day">{{ item.list[0].newDate.substring(8,10) }}</p>
-                        <p class="date">{{ item.list[0].newDate.substring(0,9) }}</p>
+                        <p class="date">{{ item.list[0].newDate.substring(0,10) }}</p>
                     </div>
                     <p class="text" v-for="(list,inxx) in item.list" :key='inxx'>
-                        <span class="title">{{list.title | shortWr}}</span>
+                        <span class="title" @click="gotoDetail(list.id)">{{list.title | shortWr}}</span>
                         <span class="date">{{list.newDate.substring(5,10)}}</span>
                     </p>
                 </li>
@@ -225,6 +225,9 @@ export default {
                         justify-content: space-between;
                         margin-bottom: 20px;
                         cursor: pointer;
+                        &:hover .title {
+                            color: #fb4545;
+                        }
 
                         .title {
                             color: #333;
