@@ -52,7 +52,7 @@
                     <ul class="swiper-wrapper layer-right">
                         <div class="swiper-slide" v-for="(item, index1) in tmList.slice(0,3)" :key="index1">
                             <p class="no-data" v-if="tbList.length < 1">暂无数据</p>
-                            <li class="item" :class="`item${index}`" v-for="(item, index) in tbList.slice(index1 * 6, (index1 * 6) + 6)" :key="index" @click="gotoDetail(item.id)">
+                            <li class="item" :class="`item${index}`" v-for="(item, index) in tbList.slice(index1 * 6, (index1 * 6) + 6)" :key="index">
                                 <div class="section1">
                                     <img src="./images/tb.png">
                                     <div>

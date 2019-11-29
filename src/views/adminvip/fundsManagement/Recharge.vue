@@ -211,7 +211,7 @@ export default {
         }
     },
     mounted() {
-         
+        api.axs("post", "/cashOut/queryAmount")
     }
 }
 </script>

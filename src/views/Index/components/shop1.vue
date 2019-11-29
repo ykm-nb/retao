@@ -451,7 +451,7 @@ export default {
             day3: 0,
             hour3: 0,
             minute3: 0,
-            second3: 0,
+            second3: 0
         }
     },
     methods: {

@@ -11,55 +11,29 @@
             <div class="inner">
                 <form class="form">
                     <div class="form-head">
-                        <p @click="type = 0" :class="{'actived': type == 0}">用户登录</p>
-                        <p @click="type = 1" :class="{'actived': type == 1}">手机号注册</p>
+                        <p style='width:100%'>找回密码</p>
                     </div>
-                    <!-- 登录 -->
-                    <div class="form-content" v-show="!type">
+                    <!-- 忘记密码 -->
+                    <div class="form-content">
                         <div class="form-item">
-                            <input v-model="loginForm.account" type="text" placeholder="请输入您的账号或者手机号">
-                            <Alert v-show="showForm.account" type="error">账号不正确</Alert>
-                        </div>
-                        <div class="form-item">
-                            <input @keyup="handleEnter" v-model="loginForm.pwd" type="password" placeholder="请输入您的密码">
-                            <Alert v-show="showForm.pwd" type="error">密码长度不正确</Alert>
-                        </div>
-                        <!-- <div class="form-item form-check">
-                            <i @click="isCheck = !isCheck">
-                                <img v-show="isCheck" src="./check.png">
-                            </i>
-                            <span>同意并遵守</span>
-                            <a href="#">《XXX条款》</a>
-                        </div> -->
-                        <div class="form-item form-btn">
-                            <button @click="handleLogin(detectionMobile(), detectionPwd())" type="button">登录</button>
-                        </div>
-                        <div class="form-item form-forget">
-                            <a href="javascript:;" @click="$router.push('/forgetpsd')">忘记密码？</a>
-                            <p @click="type = 1"><a href="javascript:;">免费注册</a></p>
-                        </div>
-                    </div>
-                    <!-- 注册 -->
-                    <div class="form-content" v-show="type">
-                        <div class="form-item">
-                            <input v-model="registForm.realName" type="text" placeholder="请输入您的昵称">
-                            <Alert v-show="showForm.realName" type="error">昵称未填写</Alert>
+                            <input v-model="forgetForm.phone" type="text" placeholder="请输入您的手机号">
+                            <Alert v-show="showForm.phone" type="error">手机号不正确</Alert>
                         </div>
                         <div class="form-item">
-                            <input v-model="registForm.account" type="text" placeholder="请输入您的账号或者手机号">
-                            <Alert v-show="showForm.account" type="error">账号不正确</Alert>
-                        </div>
-                        <div class="form-item">
-                            <input v-model="registForm.password" type="text" placeholder="请输入您的密码">
+                            <input v-model="forgetForm.newPassword" type="password" placeholder="请输入您的密码">
                             <Alert v-show="showForm.pwd" type="error">密码不正确</Alert>
                         </div>
                         <div class="form-item form-captch" :class="{'captch-error': showForm.telCode}">
-                            <input v-model="registForm.telCode" type="text" placeholder="输入验证码">
+                            <input v-model="forgetForm.telCode" type="text" placeholder="输入验证码">
                             <button @click="getCaptch(detectionMobile())" type="button" :class="{'disabled': disabled}" :disabled=disabled>{{ disabled ? `${time}秒后重新发送` : '获取验证码' }}</button>
                             <Alert v-show="showForm.telCode" type="error">验证码未填写</Alert>
                         </div>
                         <div class="form-item form-btn">
-                            <button @click="handleLogin(detectionName(), detectionMobile(), detectionPwd(), detectionCaptch())" type="button">注册</button>
+                            <button @click="handleLogin(detectionMobile(), detectionPwd(), detectionCaptch())" type="button">提交</button>
+                        </div>
+                        <div class="form-item form-forget">
+                            <a href="javascript:;" @click="$router.push('/login?type=0')">登录</a>
+                            <p @click="$router.push('/login?type=1')"><a href="javascript:;">免费注册</a></p>
                         </div>
                     </div>
                 </form>
@@ -88,24 +62,16 @@ export default {
         return {
             type: 0, // 类型 => 0：登录，1：注册
             isCheck: true,
-            // 登录
-            loginForm: {
-                account: '',
-                pwd: ''
-            },
-            // 注册
             time: 60,
             disabled: false,
-            registForm: {
-                account: '',
-                password: '',
-                realName: '',
+            forgetForm: {
+                phone: '',
+                newPassword: '',
                 telCode: '',
             },
             showForm: {
-                account: false,
+                phone: false,
                 pwd: false,
-                realName: false,
                 telCode: false
             }
         }
@@ -124,7 +90,7 @@ export default {
                     }
                 }, 1000)
 
-                api.axs('post', "/phoneValidate", {phone: this.registForm.account, type: 'regist'}).then(({ data }) => {
+                api.axs('post', "/phoneValidate", {phone: this.forgetForm.phone, type: 'password'}).then(({ data }) => {
                     if(data.code === "SUCCESS") {
                         this.$Message.success({content: '验证码已发送~'})
                     } else {
@@ -138,64 +104,38 @@ export default {
             let value = "", showForm = this.showForm,
                 reg = /^1(3|4|5|6|7|8|9)\d{9}$/;
 
-            this.type === 0 ? (value = this.loginForm.account) : (value = this.registForm.account);
+            value = this.forgetForm.phone
 
-            reg.test(value) ? showForm.account = false : showForm.account = true;
+            reg.test(value) ? showForm.phone = false : showForm.phone = true;
             return reg.test(value);
         },
         // 检测密码是否为空
         detectionPwd () {
             let value = "", showForm = this.showForm;
 
-            this.type === 0 ? value = this.loginForm.pwd : value = this.registForm.password;
+            value = this.forgetForm.newPassword;
 
             value.length ? showForm.pwd = false : showForm.pwd = true;
             return value.length;
         },
-        // 检测昵称
-        detectionName () {
-            let value = this.registForm.realName, showForm = this.showForm;
-
-            value.length ? showForm.realName = false : showForm.realName = true;
-            return value.length;
-        },
         // 检测验证码
         detectionCaptch () {
-            let value = this.registForm.telCode, showForm = this.showForm;
+            let value = this.forgetForm.telCode, showForm = this.showForm;
 
             value.length ? showForm.telCode = false : showForm.telCode = true;
             return value.length;
         },
-        // 登录
+        // 找回密码
         handleLogin (...arr) {
-            let url = "", form = {};
-            if (this.type === 0) { // 登录
-                url = "/login"
-                form = this.loginForm
-            } else {               // 注册
-                url = "/regist"
-                form = this.registForm
-            }
+            let url = "/user/updateNewPassword"
 
             const result = arr.every(item => item !== false);
-            if(result) {
-                if(this.type === 0) { // 未阅读条款
-                    if(!this.isCheck) {
-                        this.$Message.warning({content: "请阅读条款"})
-                        return
-                    }
-                }
 
-                api.axs('post', url, form).then(({ data }) => {
+            if(result) {
+                api.axs('post', url, this.forgetForm).then(({ data }) => {
                     if(data.code === "SUCCESS") {
-                        if (this.type === 0) { // 登录
-                            this.$Message.success({content: '登录成功~'})
-                            ls.session("qbuserInfo", data.data.userInfo)
-                            this.$router.push('index')
-                        } else {               // 注册
-                            this.$Message.success({content: '注册成功，赶快登录吧~'})
-                            this.type = 0;
-                        }
+                        this.$Message.success({content: '密码设置成功~'})
+                        this.$router.push('/login')
                     } else {
                         this.$Message.error(data.remark)
                     }

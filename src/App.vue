@@ -8,7 +8,9 @@
 import "@/assets/css/reset.css";
 import "@/assets/css/index.less";
 export default {
-  
+  mounted() {
+    setTimeout(()=>{document.getElementsByClassName("qidian_wpa_img")[0].click()},3000);
+  }
 }
 </script>
 

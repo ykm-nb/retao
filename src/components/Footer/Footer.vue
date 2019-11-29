@@ -5,7 +5,7 @@
                 <ul>
                     <li v-for="(li, index) in list" :key="index">
                         <p class="title" >{{ li[0].text }}</p>
-                        <p @click="gotoExplain" class="item" v-for="(p, index2) in li.slice(1)" :key="index2">{{ p.text }}</p>
+                        <p @click="gotoExplain(p.path)" class="item" v-for="(p, index2) in li.slice(1)" :key="index2">{{ p.text }}</p>
                     </li>
                 </ul>
                 <div class="wx-code">
@@ -45,15 +45,15 @@ export default {
                     },
                     {
                         text: "购买网店",
-                        path: "index"
+                        path: "/helpcenter?tag=taggmwd"
                     },
                     {
                         text: "出售网店",
-                        path: "index"
+                        path: "/helpcenter?tag=tagcswd"
                     },
                     {
                         text: "过户流程",
-                        path: "index"
+                        path: "/helpcenter?tag=tagghlc"
                     }
                 ],
                 [
@@ -62,16 +62,16 @@ export default {
                     },
                     {
                         text: "充值服务",
-                        path: "index"
+                        path: "/recharge"
                     },
                     {
                         text: "提现服务",
-                        path: "index"
+                        path: "/withdrawdeposit"
                     },
                     {
                         text: "服务费用",
-                        path: "index"
-                    }
+                        path: "/recharge"
+                    },
                 ],
                 [
                     {
@@ -79,15 +79,15 @@ export default {
                     },
                     {
                         text: "资金安全",
-                        path: "index"
+                        path: "/helpcenter?tag=tagzjaq"
                     },
                     {
                         text: "担保交易",
-                        path: "index"
+                        path: "/helpcenter?tag=tagdbjy"
                     },
                     {
                         text: "用户协议",
-                        path: "index"
+                        path: "/helpcenter?tag=tagyhxy"
                     }
                 ],
                 [
@@ -113,24 +113,23 @@ export default {
                     },
                     {
                         text: "公司简介",
-                        path: "index"
+                        path: "/helpcenter?tag=taggsjj"
                     },
                     {
                         text: "营业执照",
-                        path: "index"
+                        path: "/helpcenter?tag=tagyyzz"
                     },
                     {
                         text: "联系我们",
-                        path: "index"
+                        path: "/helpcenter?tag=taglxwm"
                     }
                 ]
             ]
         }
     },
     methods: {
-        gotoExplain() {
-            let curPath = this.$route.path.substring(1);
-            if(curPath != "explain") this.$router.push("explain")
+        gotoExplain(path) {
+            if (path) this.$router.push(path)
         },
         go (index) {
             switch (index) {

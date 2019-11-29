@@ -35,7 +35,7 @@
             <button @click="gotoPage('login', 1)" class="regist" type="button">立即注册</button>
           </div>
           <div class="wx">
-            <img src="./components/images/wx.png">
+            <img src="./components/images/wxcode.jpg" style='width: 142px;'>
             <p>扫一扫 ，有惊喜</p>
           </div>
         </div>
@@ -103,6 +103,8 @@ const Service = () => import ('./components/service')
 const Message = () => import ('./components/message')
 // Swiper
 import Swiper from 'swiper';
+import axios from "axios";
+
 export default {
   name: 'index',
   components: {
@@ -214,6 +216,11 @@ export default {
     
     ls.session("rtSearch", "") // 清空搜索
     ls.session("tbList", null)
+
+    // document.getElementById("_QIDIAN_WEB_IM_IFRAME_2885771089").style.display = 'block'
+    // axios.post("https://admin.qidian.qq.com/webim/innerPage/getPCIMInfo?kfuin=2885771089")
+    // axios.post("https://admin.qidian.qq.com/webim/commonRequest/checkTime?kfuin=2885771089")
+    // axios.post("https://admin.qidian.qq.com/ar/ActCap/ActRpt")
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.keyupEnter)

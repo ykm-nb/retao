@@ -10,7 +10,7 @@
             <div class="swiper-container">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide" v-for="(item, index) in list" :key="index">
-                        <img :src="item">
+                        <img :src="item+syin">
                     </div>
                 </div>
                 <!-- 前进后退按钮 -->
@@ -39,7 +39,8 @@ export default {
     data() {
         return {
             // list: [require('./images/screen1.png'), require('./images/screen1.png'), require('./images/screen1.png')]
-            list: []
+            list: [],
+            syin: '?x-oss-process=image/resize,h_900/watermark,image_MTU3NDg1OTUwMjc3N2ZhNTVzei5wbmc=,t_90,g_center'
         }
     },
     methods: {

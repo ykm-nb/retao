@@ -168,7 +168,7 @@
                     </div>
                     <!-- 按钮 -->
                     <div class="info-btn">
-                        <button class="buy" type="button">立即预定</button>
+                        <button class="buy" type="button" @click='toDing'>立即预定</button>
                         <button @click="consult" class="consult" type="button">我要砍价</button>
                     </div>
                     <!-- 底部 -->
@@ -281,6 +281,7 @@ export default {
     },
     data() {
         return {
+            userInfo: ls.session.get("qbuserInfo"),
             infoForm: {},
             dropdownIndex: -1,
             serviceList: [
@@ -289,21 +290,21 @@ export default {
                     name: '高奕豪',
                     description: '6年从业经验',
                     phone: 17342065160,
-                    wxUrl: require('./images/wxcode4.png')
+                    wxUrl: require('./images/wxcode.jpg')
                 },
                 {
                     imgUrl: require('./images/service5.png'),
                     name: '郑梦琳',
                     description: '5年从业经验',
                     phone: 17342063807,
-                    wxUrl: require('./images/wxcode5.png')
+                    wxUrl: require('./images/wxcode.jpg')
                 },
                 {
                     imgUrl: require('./images/service7.png'),
                     name: '张凯莉',
                     description: '4年从业经验',
                     phone: 17788557963,
-                    wxUrl: require('./images/wxcode7.png')
+                    wxUrl: require('./images/wxcode.jpg')
                 }
             ]
         }
@@ -322,6 +323,10 @@ export default {
                 this.$Message.success({content: "复制成功~"})
             }
             document.body.removeChild(input);
+        },
+        toDing() {
+            if (this.userInfo && this.userInfo.account) this.$router.push("/recharge")
+            else this.$router.push("/login?type=0")
         },
         consult() { // 联系客服
             window.open("https://url.cn/5iD2Ua8?_type=wpa&qidian=true");

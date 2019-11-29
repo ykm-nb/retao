@@ -25,7 +25,7 @@
                     <i class="iconfont iconxiaoxi"></i>
                     <span>我的消息</span>
                 </li> -->
-                <li>
+                <li @click="toHelp">
                     <i class="iconfont iconbangzhu"></i>
                     <span>帮助中心</span>
                 </li>
@@ -80,6 +80,12 @@ export default {
                 }
             });
         },
+        toHelp() {
+            let { href } = this.$router.resolve({
+                path: '/helpcenter'
+            })
+            window.open(href)
+        }
     },
     created () {
 

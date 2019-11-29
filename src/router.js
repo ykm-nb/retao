@@ -37,6 +37,22 @@ var router = new Router({
       name: 'login',
       component: () => import('@/components/Login/Login.vue')
     },
+    {
+      meta: {
+        title: '热淘网—忘记密码'
+      },
+      path: '/forgetpsd',
+      name: 'forgetpsd',
+      component: () => import('@/components/Login/Forgetpsd.vue')
+    },
+    {
+      meta: {
+        title: '帮助中心'
+      },
+      path: '/helpcenter',
+      name: 'helpcenter',
+      component: () => import('@/views/helpcenter.vue')
+    },
     // === 列表页 ===
     {
       meta: {
@@ -85,6 +101,14 @@ var router = new Router({
       path: '/enter',
       name: 'enter',
       component: () => import('@/views/enter.vue')
+    },
+    {
+      meta: {
+        title: '新闻咨询列表'
+      },
+      path: '/newslists',
+      name: 'newslists',
+      component: () => import('@/views/newslists.vue')
     },
     {
       meta: {
