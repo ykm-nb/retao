@@ -548,7 +548,6 @@ export default {
             const scrollTop = document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset
             if(scrollTop > 265) this.isfixed = true
             else this.isfixed = false
-            console.log(scrollTop)
         },
     },
     mounted() {
