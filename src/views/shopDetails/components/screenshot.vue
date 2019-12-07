@@ -40,7 +40,7 @@ export default {
         return {
             // list: [require('./images/screen1.png'), require('./images/screen1.png'), require('./images/screen1.png')]
             list: [],
-            syin: '?x-oss-process=image/resize,h_900/watermark,image_MTU3NDg1OTUwMjc3N2ZhNTVzei5wbmc=,t_90,g_center'
+            syin: '?x-oss-process=image/resize,h_1000/watermark,image_MTU3NTE5NTMzNzQzMTl0NG04OS5wbmc=,t_90,g_center'
         }
     },
     methods: {

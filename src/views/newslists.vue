@@ -7,7 +7,7 @@
         <Nav></Nav>
         <div class="bcWrap">
             <div class="contentWrap">
-                <p class="curNav">所在位置: 千呗 >> 新闻咨询列表</p>
+                <p class="curNav">所在位置: 热淘 >> 新闻咨询列表</p>
 
                 <ul class="leftNav">
                     <li class='tittt'>关于我们</li>
@@ -36,18 +36,18 @@
                             <div class="nimg">
                                 <img :src="item.pictureUrl" style='width:100%;'>
                             </div>
-                            <strong>{{item.title | shortWr}} <em>【仟呗官方】</em></strong>
+                            <strong>{{item.title | shortWr}} <em>【热淘官方】</em></strong>
                             <time>{{item.createTime}}</time>
                         </li>
                     </ul>
 
-                    <div v-else style='color:#ff6600;font-size:16px;padding:100px 0'>
+                    <div v-else style='background:#fff;color:#ff6600;font-size:16px;padding:100px 0'>
                         <span v-if='isLoading'>加载中...</span>
                         <span v-else>暂无数据</span>
                     </div>  
 
                     <!-- 分页器 -->
-                    <div class="common-page" v-if='newsForm.total'>
+                    <div class="common-page" v-if='newsForm.total' style='margin-left:170px;'>
                         <Page :total="newsForm.total" :current="newsForm.pageNum" :page-size="newsForm.pageSize" @on-change='getLists' />
                     </div>
                     

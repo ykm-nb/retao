@@ -2,7 +2,7 @@
     <div class="inner-bg message-bg" @mousemove="$emit('author-index', 6)">
         <div class="inner message">
             <div class="title-box">
-                <p class="title">仟呗头条</p>
+                <p class="title">热淘头条</p>
                 <p class="info">NEWS</p>
             </div>
             <ul class="imgs" v-if='newAllDatas.newsLists.length'>
@@ -12,29 +12,34 @@
                     @mouseover="imgIndex = index" 
                     @mouseout="imgIndex = -1" 
                     :class="{'img-hover': imgIndex === index}">
-                    <div class="img">
-                        <img :src="item.pictureUrl" style='width:100%;'>
-                    </div>
-                    <div class="text">
-                        <p class="title">{{ item.title | shortWr }}</p>
-                        <p class="more">
-                            <span>了解更多</span>
-                            <img :src="imgIndex === index ? item.arrow2 : item.arrow1">
-                        </p>
-                    </div>
+                    <template v-if='item'>
+                        <div class="img">
+                            <img :src="item.pictureUrl" v-if='item.pictureUrl' style='width:100%;'>
+                            <img src="@/assets/images/logoimg.jpg" v-else style='width:100%;'>
+                        </div>
+                        <div class="text">
+                            <p class="title">{{ item.title | shortWr }}</p>
+                            <p class="more">
+                                <span>了解更多</span>
+                                <img :src="imgIndex === index ? item.arrow2 : item.arrow1">
+                            </p>
+                        </div>
+                    </template>
                 </li>
             </ul>
 
             <ul class="content">
                 <li v-for="(item, index) in newAllDatas.datas" :key="index">
-                    <div class="time">
-                        <p class="day">{{ item.list[0].newDate.substring(8,10) }}</p>
-                        <p class="date">{{ item.list[0].newDate.substring(0,10) }}</p>
-                    </div>
-                    <p class="text" v-for="(list,inxx) in item.list" :key='inxx'>
-                        <span class="title" @click="gotoDetail(list.id)">{{list.title | shortWr}}</span>
-                        <span class="date">{{list.newDate.substring(5,10)}}</span>
-                    </p>
+                    <template v-if='item'>
+                        <div class="time">
+                            <p class="day">{{ item.list[0] && item.list[0].newDate.substring(8,10) }}</p>
+                            <p class="date">{{ item.list[0] && item.list[0].newDate.substring(0,10) }}</p>
+                        </div>
+                        <p class="text" v-for="(list,inxx) in item.list" :key='inxx'>
+                            <span class="title" @click="gotoDetail(list.id)">{{list.title | shortWr}}</span>
+                            <span class="date">{{list.newDate.substring(5,10)}}</span>
+                        </p>
+                    </template>
                 </li>
             </ul>
 

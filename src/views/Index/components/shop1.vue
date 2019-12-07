@@ -469,7 +469,7 @@ export default {
             })
         },
         consult() { // 联系客服
-            window.open("https://url.cn/5iD2Ua8?_type=wpa&qidian=true");
+            window.open("https://url.cn/5FanN8i?_type=wpa&qidian=true");
         },
         countDown (bargainPriceTime, index) { // 倒计时
             const stopTime = new Date(bargainPriceTime); // 结束的时间

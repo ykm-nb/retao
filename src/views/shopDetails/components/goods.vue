@@ -12,7 +12,7 @@
                             <img class="avatar" src="./images/tm.png">
                             <span>{{ goodsList.title }}</span>
                         </p>
-                        <p class="description">仟呗您值得信赖的店铺管家</p>
+                        <p class="description">热淘您值得信赖的店铺管家</p>
                         <ul class="tags">
                             <li>极速匹配</li>
                             <li>专属客服</li>
@@ -135,7 +135,7 @@
                         </li>
                         <li>
                             <p class="key">交易方式</p>
-                            <p class="value">仟呗居间</p>
+                            <p class="value">热淘居间</p>
                         </li>
                     </ul>
                     <!-- 广告 -->
@@ -329,7 +329,7 @@ export default {
             else this.$router.push("/login?type=0")
         },
         consult() { // 联系客服
-            window.open("https://url.cn/5iD2Ua8?_type=wpa&qidian=true");
+            window.open("https://url.cn/5FanN8i?_type=wpa&qidian=true");
         },
     }
 }

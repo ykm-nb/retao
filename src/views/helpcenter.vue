@@ -9,7 +9,7 @@
         <div class="contentCenter">
 
             <div class="contentWrap">
-                <p class="curNav">所在位置: 千呗 >> 新闻咨询</p>
+                <p class="curNav">所在位置: 热淘 >> 新闻咨询</p>
                 <ul class="leftNav" :class="isfixed ? 'navFixed' : ''">
                     <li class='tittt'>关于我们</li>
                     <li class="lit" @click="$router.push('/helpcenter?tag=taggsjj')">公司简介</li>
@@ -41,7 +41,7 @@
 
                 <p class=MsoNormal align=left style='text-align:center;padding:15px 0 20px;line-height:20pt;
                 mso-pagination:widow-orphan'><span style='font-size:12.0pt;font-family:"微软雅黑",sans-serif;
-                mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:0pt'>第一步：登录仟呗账户，在网站首页导航条点击天猫转让，进入店铺列表页。<span
+                mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:0pt'>第一步：登录热淘账户，在网站首页导航条点击天猫转让，进入店铺列表页。<span
                 lang=EN-US></span></span></p>
 
                 <p class=MsoNormal align=center style='text-align:center;line-height:20pt;
@@ -135,7 +135,7 @@
                 lang=EN-US style='font-family:"微软雅黑",sans-serif;color:#333333'></span></p>
 
                 <p class=p style='font-size: 12pt;margin:0cm;margin-bottom:.0001pt;line-height:22.5pt'><span
-                style='font-family:"微软雅黑",sans-serif;color:#333333'>第一步：登录仟呗账户，在网站首页点击“联系客服”。<span
+                style='font-family:"微软雅黑",sans-serif;color:#333333'>第一步：登录热淘账户，在网站首页点击“联系客服”。<span
                 lang=EN-US></span></span></p>
 
                 <p class=p align=center style='margin:0cm;margin-bottom:.0001pt;text-align:
@@ -173,27 +173,27 @@
 
                 <p class=p style='margin:0cm;margin-bottom:.0001pt;line-height:22.5pt'><span
                 lang=EN-US style='font-family:"微软雅黑",sans-serif;color:#333333'>1</span><span
-                style='font-family:"微软雅黑",sans-serif;color:#333333'>、买家付定金到仟呗平台，仟呗与卖家签署一份网店独家出售承诺书，或者缴纳网店转让费的<span
-                lang=EN-US>10%</span>作为保证金到仟呗平台；<span lang=EN-US></span></span></p>
+                style='font-family:"微软雅黑",sans-serif;color:#333333'>、买家付定金到热淘平台，热淘与卖家签署一份网店独家出售承诺书，或者缴纳网店转让费的<span
+                lang=EN-US>10%</span>作为保证金到热淘平台；<span lang=EN-US></span></span></p>
 
                 <p class=p style='margin:0cm;margin-bottom:.0001pt;line-height:22.5pt'><span
                 lang=EN-US style='font-family:"微软雅黑",sans-serif;color:#333333'>2</span><span
-                style='font-family:"微软雅黑",sans-serif;color:#333333'>、买家验证网店没有问题后，仟呗客服就与买卖双方约定时间和会面地点，签署正式转让合同；<span
+                style='font-family:"微软雅黑",sans-serif;color:#333333'>、买家验证网店没有问题后，热淘客服就与买卖双方约定时间和会面地点，签署正式转让合同；<span
                 lang=EN-US></span></span></p>
 
                 <p class=p style='margin:0cm;margin-bottom:.0001pt;line-height:22.5pt'><span
                 lang=EN-US style='font-family:"微软雅黑",sans-serif;color:#333333'>3</span><span
-                style='font-family:"微软雅黑",sans-serif;color:#333333'>、合同签署完毕后，买家支付全款到仟呗平台，然后买卖双方在仟呗客服的陪同下，去工商局提交法人变更手续；<span
+                style='font-family:"微软雅黑",sans-serif;color:#333333'>、合同签署完毕后，买家支付全款到热淘平台，然后买卖双方在热淘客服的陪同下，去工商局提交法人变更手续；<span
                 lang=EN-US></span></span></p>
 
                 <p class=p style='margin:0cm;margin-bottom:.0001pt;line-height:22.5pt'><span
                 lang=EN-US style='font-family:"微软雅黑",sans-serif;color:#333333'>4</span><span
-                style='font-family:"微软雅黑",sans-serif;color:#333333'>、法人变更手续完成后，仟呗平台放款网店全款的<span
+                style='font-family:"微软雅黑",sans-serif;color:#333333'>、法人变更手续完成后，热淘平台放款网店全款的<span
                 lang=EN-US>50%</span>到卖家账户；<span lang=EN-US></span></span></p>
 
                 <p class=p style='margin:0cm;margin-bottom:.0001pt;line-height:22.5pt'><span
                 lang=EN-US style='font-family:"微软雅黑",sans-serif;color:#333333'>5</span><span
-                style='font-family:"微软雅黑",sans-serif;color:#333333'>、买卖双方交接网店后台，等新的营业执照下来，国税地税变更好后，仟呗平台将<span
+                style='font-family:"微软雅黑",sans-serif;color:#333333'>、买卖双方交接网店后台，等新的营业执照下来，国税地税变更好后，热淘平台将<span
                 lang=EN-US>50%</span>的尾款转到卖家账户；<span lang=EN-US></span></span></p>
 
                 <p class=p style='margin:0cm;margin-bottom:.0001pt;line-height:22.5pt'><span
@@ -211,21 +211,21 @@
                 <p class=p style='margin:0cm;margin-bottom:.0001pt;line-height:22.5pt'><span
                 lang=EN-US style='font-family:"微软雅黑",sans-serif;color:#333333'>1</span><span
                 style='font-family:"微软雅黑",sans-serif;color:#333333'>、买家选择中意的网店后，付网店转让费的<span
-                lang=EN-US>20%</span>作为定金到仟呗平台；<span lang=EN-US></span></span></p>
+                lang=EN-US>20%</span>作为定金到热淘平台；<span lang=EN-US></span></span></p>
 
                 <p class=p style='margin:0cm;margin-bottom:.0001pt;line-height:22.5pt'><span
                 lang=EN-US style='font-family:"微软雅黑",sans-serif;color:#333333'>2</span><span
-                style='font-family:"微软雅黑",sans-serif;color:#333333'>、仟呗平台与卖家签署确认出售协议后，买家登陆网店子账号，确认网店各项信息与描述无误后，仟呗安排三方过户事宜。<span
+                style='font-family:"微软雅黑",sans-serif;color:#333333'>、热淘平台与卖家签署确认出售协议后，买家登陆网店子账号，确认网店各项信息与描述无误后，热淘安排三方过户事宜。<span
                 lang=EN-US></span></span></p>
 
                 <p class=p style='margin:0cm;margin-bottom:.0001pt;line-height:22.5pt'><span
                 lang=EN-US style='font-family:"微软雅黑",sans-serif;color:#333333'>3</span><span
-                style='font-family:"微软雅黑",sans-serif;color:#333333'>、仟呗平台与买卖双方约定过户时间及会面地点，三方见面，签署正式转让合同；买家将网店转让全款支付到仟呗平台。<span
+                style='font-family:"微软雅黑",sans-serif;color:#333333'>、热淘平台与买卖双方约定过户时间及会面地点，三方见面，签署正式转让合同；买家将网店转让全款支付到热淘平台。<span
                 lang=EN-US></span></span></p>
 
                 <p class=p style='margin:0cm;margin-bottom:.0001pt;line-height:22.5pt'><span
                 lang=EN-US style='font-family:"微软雅黑",sans-serif;color:#333333'>4</span><span
-                style='font-family:"微软雅黑",sans-serif;color:#333333'>、合同签署后，买卖双方在仟呗客服的陪同下，去工商局提交法人变更手续，提交后仟呗平台放款网店总款的<span
+                style='font-family:"微软雅黑",sans-serif;color:#333333'>、合同签署后，买卖双方在热淘客服的陪同下，去工商局提交法人变更手续，提交后热淘平台放款网店总款的<span
                 lang=EN-US>80%</span>给卖家；<span lang=EN-US></span></span></p>
 
                 <p class=p style='margin:0cm;margin-bottom:.0001pt;line-height:22.5pt'><span
@@ -248,7 +248,7 @@
                 lang=EN-US style='font-family:"微软雅黑",sans-serif;color:#333333'></span></p>
 
                 <p class=p style='font-size: 12pt;margin:0cm;margin-bottom:.0001pt;line-height:22.5pt'><span
-                style='font-family:"微软雅黑",sans-serif;color:#333333'>第一步：登录仟呗账号进入“用户中心”。<span
+                style='font-family:"微软雅黑",sans-serif;color:#333333'>第一步：登录热淘账号进入“用户中心”。<span
                 lang=EN-US></span></span></p>
 
                 <p class=p align=center style='margin:0cm;margin-bottom:.0001pt;text-align:
@@ -300,7 +300,7 @@
                 lang=EN-US style='font-family:"微软雅黑",sans-serif;color:#333333'></span></p>
 
                 <p class=p style='font-size: 12pt;margin:0cm;margin-bottom:.0001pt;line-height:22.5pt'><span
-                style='font-family:"微软雅黑",sans-serif;color:#333333'>第一步：登录仟呗账号进入“用户中心”。<span
+                style='font-family:"微软雅黑",sans-serif;color:#333333'>第一步：登录热淘账号进入“用户中心”。<span
                 lang=EN-US></span></span></p>
 
                 <p class=p align=center style='margin:0cm;margin-bottom:.0001pt;text-align:
@@ -351,7 +351,7 @@
                 lang=EN-US style='font-size:12.0pt;font-family:"微软雅黑",sans-serif;mso-bidi-font-family:
                 宋体;color:#282828;mso-font-kerning:0pt'>&nbsp; </span><span style='font-size:
                 12.0pt;font-family:"微软雅黑",sans-serif;mso-bidi-font-family:宋体;color:#282828;
-                mso-font-kerning:0pt'>担保交易是指卖家只需在仟呗网站上发布担保出售信息，无须填写出售帐号密码等资料，交易时由仟呗网站客服通知卖家登录帐号，与买家交易的一种全新安全模式。买家付款之后，费用暂时由本网站保管而并没有直接打给卖家，当买家确认交易帐号无误后，卖家才会收到相关款项，如果拿到的交易账户因卖家原因导致不能正常使用或者与仟呗网网站展示信息严重不符时，可以退款。就像支付宝一样，买家买商家的货物，付款之后资金是在支付宝中间环节担保着的，当买家收到商家的货物并确认签字无误之后，支付宝再把资金处理到商家的支付宝内！</span><span
+                mso-font-kerning:0pt'>担保交易是指卖家只需在热淘网站上发布担保出售信息，无须填写出售帐号密码等资料，交易时由热淘网站客服通知卖家登录帐号，与买家交易的一种全新安全模式。买家付款之后，费用暂时由本网站保管而并没有直接打给卖家，当买家确认交易帐号无误后，卖家才会收到相关款项，如果拿到的交易账户因卖家原因导致不能正常使用或者与热淘网网站展示信息严重不符时，可以退款。就像支付宝一样，买家买商家的货物，付款之后资金是在支付宝中间环节担保着的，当买家收到商家的货物并确认签字无误之后，支付宝再把资金处理到商家的支付宝内！</span><span
                 lang=EN-US style='font-size:9.0pt;font-family:"微软雅黑",sans-serif;mso-bidi-font-family:
                 宋体;color:#282828;mso-font-kerning:0pt'></span></p>
 
@@ -412,7 +412,7 @@
                 <p class=MsoNormal align=left style='padding:15px 0 20px;text-indent:24.0pt;
                 line-height:20pt;mso-pagination:widow-orphan;background:white'><span
                 style='font-size:12.0pt;font-family:"微软雅黑",sans-serif;mso-bidi-font-family:
-                宋体;color:#282828;mso-font-kerning:0pt'>在信息时代，谁掌握了信息资源，谁就掌握着巨大商机的可能。一个创业者，需要有敏锐的市场嗅觉与经营头脑。如果您什么都没有，又想作出合理的投资或推广，仟呗就是您的不二之选，一个以信息资源为核心的现代化服务管理平台。<span
+                宋体;color:#282828;mso-font-kerning:0pt'>在信息时代，谁掌握了信息资源，谁就掌握着巨大商机的可能。一个创业者，需要有敏锐的市场嗅觉与经营头脑。如果您什么都没有，又想作出合理的投资或推广，热淘就是您的不二之选，一个以信息资源为核心的现代化服务管理平台。<span
                 lang=EN-US></span></span></p>
 
                 <p class=MsoNormal align=left style='padding:15px 0 20px;text-indent:24.0pt;
@@ -420,37 +420,37 @@
                 lang=EN-US style='font-size:12.0pt;font-family:"微软雅黑",sans-serif;mso-bidi-font-family:
                 宋体;color:#282828;mso-font-kerning:0pt'><span style='mso-spacerun:yes'>   
                 </span></span><span style='font-size:12.0pt;font-family:"微软雅黑",sans-serif;
-                mso-bidi-font-family:宋体;color:#282828;mso-font-kerning:0pt'>仟呗，一家专业的集店铺、商标、专利、媒体账号等的转让、营销推广、代理工商注册、商铺商品广告设计等业务为一体的一站式信息服务管理平台。目前淘宝、天猫、京东、拼多多、蘑菇街、唯品会、腾讯、新浪、网易、今日头条等多家单位已经成为仟呗的合作伙伴，仟呗有最庞大的信息资源，成立一年多以来，仟呗已经帮助百万客户圆梦，成交额已经超过<span
+                mso-bidi-font-family:宋体;color:#282828;mso-font-kerning:0pt'>热淘，一家专业的集店铺、商标、专利、媒体账号等的转让、营销推广、代理工商注册、商铺商品广告设计等业务为一体的一站式信息服务管理平台。目前淘宝、天猫、京东、拼多多、蘑菇街、唯品会、腾讯、新浪、网易、今日头条等多家单位已经成为热淘的合作伙伴，热淘有最庞大的信息资源，成立一年多以来，热淘已经帮助百万客户圆梦，成交额已经超过<span
                 lang=EN-US>3370</span>万元，实现了零退款、零事故、零投诉的良好业绩。<span lang=EN-US></span></span></p>
 
                 <p class=MsoNormal align=left style='padding:15px 0 20px;text-indent:24.0pt;
                 line-height:20pt;mso-pagination:widow-orphan;background:white'><span
                 style='font-size:12.0pt;font-family:"微软雅黑",sans-serif;mso-bidi-font-family:
-                宋体;color:#282828;mso-font-kerning:0pt'>在仟呗，您可以实时了解商铺、专利、媒体账号的的售卖信息，从中找到属于自己的商机；您也可以把商品指标交给我们，由我们为您营造良好的营商环境；您若想注册，我们可以为您跑腿；您若想吸粉，我们可以为您效劳；您若想推广，我们可以为您解忧。<span
+                宋体;color:#282828;mso-font-kerning:0pt'>在热淘，您可以实时了解商铺、专利、媒体账号的的售卖信息，从中找到属于自己的商机；您也可以把商品指标交给我们，由我们为您营造良好的营商环境；您若想注册，我们可以为您跑腿；您若想吸粉，我们可以为您效劳；您若想推广，我们可以为您解忧。<span
                 lang=EN-US></span></span></p>
 
                 <p class=MsoNormal align=left style='padding:15px 0 20px;text-indent:24.0pt;
                 line-height:20pt;mso-pagination:widow-orphan;background:white'><span
                 style='font-size:12.0pt;font-family:"微软雅黑",sans-serif;mso-bidi-font-family:
-                宋体;color:#282828;mso-font-kerning:0pt'>在仟呗，我们有最高级的资质认证，您不用担心我们的服务资质；我们有最精悍的专家团队，您不用担心你的理财计划是否有道；我们有最权威的法律顾问，您不用担心售买权责、产品推广等方面产生经济纠纷；我们有最专业的人工客服，真诚为您转呈解决各种矛盾。<span
+                宋体;color:#282828;mso-font-kerning:0pt'>在热淘，我们有最高级的资质认证，您不用担心我们的服务资质；我们有最精悍的专家团队，您不用担心你的理财计划是否有道；我们有最权威的法律顾问，您不用担心售买权责、产品推广等方面产生经济纠纷；我们有最专业的人工客服，真诚为您转呈解决各种矛盾。<span
                 lang=EN-US></span></span></p>
 
                 <p class=MsoNormal align=left style='padding:15px 0 20px;text-indent:24.0pt;
                 line-height:20pt;mso-pagination:widow-orphan;background:white'><span
                 style='font-size:12.0pt;font-family:"微软雅黑",sans-serif;mso-bidi-font-family:
-                宋体;color:#282828;mso-font-kerning:0pt'>在仟呗，我们有最精致的网页设计，您可以精确地定位到每一个功能的详细信息；我们有最翔实的产品说明，您可以知道买卖的产品的所有资料；我们有最安全的交易平台，若因交易双方对相关内容存在分歧，及时已经交易的也可以申请交易终止；我们有最方便的客户服务，在每一个交易或服务的界面中，都配置有至少一名专业老师和一名专业的客户人员，方便买卖双方的各类咨询。<span
+                宋体;color:#282828;mso-font-kerning:0pt'>在热淘，我们有最精致的网页设计，您可以精确地定位到每一个功能的详细信息；我们有最翔实的产品说明，您可以知道买卖的产品的所有资料；我们有最安全的交易平台，若因交易双方对相关内容存在分歧，及时已经交易的也可以申请交易终止；我们有最方便的客户服务，在每一个交易或服务的界面中，都配置有至少一名专业老师和一名专业的客户人员，方便买卖双方的各类咨询。<span
                 lang=EN-US></span></span></p>
 
                 <p class=MsoNormal align=left style='padding:15px 0 20px;text-indent:24.0pt;
                 line-height:20pt;mso-pagination:widow-orphan;background:white'><span
                 style='font-size:12.0pt;font-family:"微软雅黑",sans-serif;mso-bidi-font-family:
-                宋体;color:#282828;mso-font-kerning:0pt'>在仟呗，客户永远都是我们的上帝，促成买卖双方完成交易，是我们最终的目标追求；在仟呗，“品质第一、服务第一”是我们的工作理念，努力把产品或服务做到第一是我们的最大愿景；在仟呗，用心做好平台，安全服务每一次平台交易，让买卖双方都有好的买卖体验，是我们的最高的努力方向。<span
+                宋体;color:#282828;mso-font-kerning:0pt'>在热淘，客户永远都是我们的上帝，促成买卖双方完成交易，是我们最终的目标追求；在热淘，“品质第一、服务第一”是我们的工作理念，努力把产品或服务做到第一是我们的最大愿景；在热淘，用心做好平台，安全服务每一次平台交易，让买卖双方都有好的买卖体验，是我们的最高的努力方向。<span
                 lang=EN-US></span></span></p>
 
                 <p class=MsoNormal align=left style='padding:15px 0 20px;text-indent:24.0pt;
                 line-height:20pt;mso-pagination:widow-orphan;background:white'><span
                 style='font-size:12.0pt;font-family:"微软雅黑",sans-serif;mso-bidi-font-family:
-                宋体;color:#282828;mso-font-kerning:0pt'>仟呗，我们关注您的关注，渴望您的功成名就。<span lang=EN-US></span></span></p>
+                宋体;color:#282828;mso-font-kerning:0pt'>热淘，我们关注您的关注，渴望您的功成名就。<span lang=EN-US></span></span></p>
 
                 <p class=MsoNormal align=left style='padding:15px 0 20px;line-height:20pt;
                 mso-pagination:widow-orphan;background:white'><span lang=EN-US
@@ -471,7 +471,7 @@
                 "微软雅黑",sans-serif;mso-bidi-font-family:宋体;color:#424242;mso-font-kerning:0pt'>如果您有业务以外的问题咨询或提交建议<span
                 lang=EN-US>, </span>可以采用以下任意一种方式联系我们。<span lang=EN-US><br>
                 <br>
-                </span><b>公司名称：仟呗（绍兴）信息科技有限公司</b><span lang=EN-US>&nbsp;<b>(</b></span><b>仟呗<span
+                </span><b>公司名称：热淘（绍兴）信息科技有限公司</b><span lang=EN-US>&nbsp;<b>(</b></span><b>热淘<span
                 lang=EN-US>)</span></b><span lang=EN-US><br>
                 <br>
                 </span><b>官方微信：</b><span lang=EN-US>qianbei-51</span></span></p>

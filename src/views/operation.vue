@@ -202,12 +202,12 @@
                 </div>
                 <div class="swiper-slide">
 
-                    <!-- 仟呗优势 -->
+                    <!-- 热淘优势 -->
                     <div class="inner-bg advantage-bg">
                         <div class="inner advantage" v-if="activeIndex === 4">
                             <div class="title-box">
                                 <p class="num">05</p>
-                                <p class="title">仟呗优势</p>
+                                <p class="title">热淘优势</p>
                                 <p class="description">为您提供专业解决方案</p>
                                 <p class="translate">OUR SUPERIORITY</p>
                             </div>
@@ -430,7 +430,7 @@ export default {
         },
         // 联系客服
         consult() {
-            window.open("https://url.cn/5iD2Ua8?_type=wpa&qidian=true", '_blank');
+            window.open("https://url.cn/5FanN8i?_type=wpa&qidian=true", '_blank');
         },
     },
     mounted () {
@@ -1062,7 +1062,7 @@ export default {
             }
         }
 
-        // 仟呗优势
+        // 热淘优势
         .advantage-bg {
             height: 100%;
             background: url("../assets/images/operation-5-1.png") no-repeat center;

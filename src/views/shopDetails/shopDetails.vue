@@ -8,7 +8,7 @@
     <div class="inner-bg nav-bg">
         <div class="inner bread-crumb">
             <span>所在位置：</span>
-            <span class="page page-index">仟呗</span>
+            <span class="page page-index">热淘</span>
             <span class="arrow">>></span>
             <span class="page page-transfer">天猫店转让</span>
             <span class="arrow">>></span>
@@ -29,7 +29,7 @@
 
     <City></City>
     
-    <!-- 仟呗头条 -->
+    <!-- 热淘头条 -->
     <HeadLine></HeadLine>
 
     <More></More>

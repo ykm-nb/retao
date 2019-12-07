@@ -39,7 +39,7 @@
                 <TabPane label="支付宝扫码充值" name="name1" class="tab1">
                     <div class="zfb-title"></div>
                     <div class="zfb-payoption">
-                        <img src="../images/code.png">
+                        <img src="../images/code.jpg">
                     </div>
                     <div class="zfb-info">
                         <p>1.支付宝账号：163382005@qq.ocm</p>
@@ -93,11 +93,11 @@
                         <li class="layer1">
                             <p class="layer-title">1、转款帐号信息</p>
                             <div class="layer-content">
-                                <img src="../images/tlbank.png">
+                                <img src="../images/tlbank.jpg" style='flex:0 0 190px;width: 190px;border-radius: 6px;'>
                                 <div>
-                                    <p>帐号 ：3308 0240 2010 0000 1732</p>
-                                    <p>户名 ：浙江春风十里网络科技有限公司</p>
-                                    <p>开户行：浙江泰隆商业银行股份有限公司金华东阳支行</p>
+                                    <p>帐号 ：80030122000090687</p>
+                                    <p>户名 ：热淘（绍兴）信息科技有限公司</p>
+                                    <p>开户行：宁波银行嵊州小微企业专营支行</p>
                                 </div>
                             </div>
                         </li>
@@ -110,24 +110,25 @@
                         </li>
                         <li class="layer3">
                             <p class="layer-title">3、提交汇款确认单</p>
-                            <Form class="xx-form" :model="form3" :label-width="110" label-position="right">
+                            <Form class="xx-form" :model="bankForm" :label-width="110" label-position="right">
                                 <FormItem label="收款账户：">
-                                    <Input v-model="form3.name1" style="width: 300px" :readonly=true />
+                                    <Input v-model="bankForm.payerAccount" style="width: 300px" :readonly=true />
                                 </FormItem>
                                 <FormItem label="汇款银行：">
-                                    <Input v-model="form3.name2" style="width: 300px" />
+                                    <Input v-model="bankForm.payerName" style="width: 300px" />
                                 </FormItem>
                                 <FormItem label="汇款金额(元)：">
-                                    <Input v-model="form3.name3" style="width: 300px" />
+                                    <Input v-model="bankForm.amount" style="width: 300px" />
                                 </FormItem>
                                 <FormItem label="汇款姓名：">
-                                    <Input v-model="form3.name4" style="width: 300px" />
+                                    <Input v-model="bankForm.name" style="width: 300px" />
                                 </FormItem>
                                 <FormItem label="备注：">
-                                    <Input v-model="form3.name5" type="textarea" :autosize="{minRows: 4,maxRows: 5}"></Input>
+                                    <Input v-model="bankForm.busPayRecord" type="textarea"  style="width: 300px"  :autosize="{minRows: 4,maxRows: 5}"></Input>
                                 </FormItem>
                                 <FormItem>
-                                    <Button type="primary">提交</Button>
+                                    <Button type="primary" @click='toBankPay' v-if='isCzb' style='margin-left:110px'>立即提交</Button>
+                                    <Button type="warning" v-else style='margin-left:110px'>提交审批中...</Button>
                                 </FormItem>
                             </Form>
                         </li>
@@ -163,15 +164,17 @@ export default {
                 name1: ''
             },
             isCz: true,
+            isCzb: true,
             errorTipForm2: {
                 name1: false
             },
-            form3: {
-                name1: '3308 0240 2010 0000 1732 泰隆银行)',
-                name2: '',
-                name3: '',
-                name4: '',
-                name5: ''
+            bankForm: {
+                type: 2,
+                payerAccount: '80030122000090687',
+                payerName: '',
+                amount: '',
+                name: '',
+                busPayRecord: ''
             }
         }
     },
@@ -180,6 +183,14 @@ export default {
             api.axs('post', "/payRecord/saveOrUpdate", this.formPay).then(({ data }) => {
                 if(data.code === "SUCCESS") {
                     this.isCz = false
+                    this.$Message.success('提交成功!')
+                }
+            });
+        },
+        toBankPay() {
+            api.axs('post', "/payRecord/saveOrUpdate", this.bankForm).then(({ data }) => {
+                if(data.code === "SUCCESS") {
+                    this.isCzb = false
                     this.$Message.success('提交成功!')
                 }
             });
@@ -400,7 +411,7 @@ export default {
                     .xx-title {
                         width: 100%;
                         height: 36px;
-                        margin-bottom: 55px;
+                        margin-bottom: 30px;
                     }
 
                     .xx-info {
@@ -413,19 +424,22 @@ export default {
                     }
 
                     ul {
+                        padding-left: 30px;
+                        text-align: left;
                         li {
                             .layer-title {
+                                color: #444;
                                 font-size: 16px;
                                 line-height: 21px;
                                 font-weight: 700;
-                                margin: 30px 0 15px;
+                                margin: 40px 0 15px;
                             }
                         }
 
                         .layer1 .layer-content {
                             display: flex;
                             text-align: left;
-                            justify-content: center;
+                            // justify-content: center;
 
                             img {
                                 margin-right: 20px;
@@ -453,7 +467,7 @@ export default {
 
                         .layer3 form {
                             width: 500px;
-                            margin: 10px auto;
+                            margin: 10px 0;
 
                             label, input, textarea {
                                 font-size: 14px;

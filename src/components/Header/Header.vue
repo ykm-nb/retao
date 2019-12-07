@@ -2,7 +2,7 @@
     <div class="inner-bg header-bg">
         <header class="inner">
             <div class="header-left">
-                <p>Hi您好，欢迎来到仟呗！</p>
+                <p>Hi您好，欢迎来到热淘！</p>
                 <div class="userinfo" v-if="userInfos">
                     <Dropdown>
                         <img class="head-portrait" src="@/assets/images/user.png" alt="头像">

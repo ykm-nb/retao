@@ -28,13 +28,13 @@ export default {
                 {
                     url: require('./images/process1.png'),
                     title: '注册',
-                    info: '一分钟快速注册仟呗账号',
+                    info: '一分钟快速注册热淘账号',
                     number: "1"
                 },
                 {
                     url: require('./images/process2.png'),
                     title: '选择网店',
-                    info: '仟呗100万资源供您选择',
+                    info: '热淘100万资源供您选择',
                     number: "2"
                 },
                 {

@@ -4,7 +4,7 @@
             <div class="search-wrap">
                 <div class="wrap-left">
                     <div class="logo" @click="gotoPage('index')">
-                        <img src="./logo.png" alt="logo">
+                        <img src="./logo2.png" alt="logo" style='height:80px'>
                     </div>
                 </div>
 
@@ -95,7 +95,7 @@ export default {
             this.$router.push('tmlistpage')
         },
         consult () { // 联系客服
-            window.open("https://url.cn/5iD2Ua8?_type=wpa&qidian=true");
+            window.open("https://url.cn/5FanN8i?_type=wpa&qidian=true");
         },
     },
     created() {

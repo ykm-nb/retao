@@ -7,7 +7,7 @@
             <Nav @navSearch="navSearch"></Nav>
         </div>
 
-        <p class="curNav">所在位置: 千呗 >> 个人中心</p>
+        <p class="curNav">所在位置: 热淘 >> 个人中心</p>
 
         <div class="adminWrap">
 

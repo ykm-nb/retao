@@ -96,7 +96,7 @@
             </div>
         </div>
 
-        <!-- 仟呗入驻教程 -->
+        <!-- 热淘入驻教程 -->
         <div class="inner-bg enter-bg">
             <div class="inner enter">
                 <div class="crr cr1"></div>
@@ -106,7 +106,7 @@
                 <div class="crr cr5"></div>
                 <div class="crr cr6"></div>
                 <div class="title-box">
-                    <p class="title">仟呗入驻教程</p>
+                    <p class="title">热淘入驻教程</p>
                 </div>
                 <div class="content">
                     <p class="title">专业一站式入驻服务</p>
@@ -783,7 +783,7 @@ export default {
             this.checkList = []
         },
         consult () { // 联系客服
-            window.open("https://url.cn/5iD2Ua8?_type=wpa&qidian=true");
+            window.open("https://url.cn/5FanN8i?_type=wpa&qidian=true");
         },
     }
 }

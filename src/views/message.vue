@@ -11,7 +11,7 @@
             <div class="inner banner1">
                 <p class="title1">海量真店源</p>
                 <p class="title2">省钱买好店</p>
-                <p class="description">仟呗 陪你发现最好的店</p>
+                <p class="description">热淘 陪你发现最好的店</p>
             </div>
         </div>
 
@@ -37,8 +37,8 @@
             <div class="inner banner2">
                 <p class="title1">卖家资源信息丰富</p>
                 <p class="title2">品类齐全选择多样化</p>
-                <p class="description">仟呗平台专注做天猫新店，天猫店，淘宝企业店铺，在店铺入驻，店铺装让领域长达5年多，掌握市面上几乎 所有店铺来源，让各个电商圈大牛达成长久的合作，在新电猫平台找到的店铺，我们承诺只会比其他右上更实惠，</p>
-                <p class="description">信息展示更全面，在其他平台有的网店，仟呗90%都有，而仟呗有的网店其他平台掌握的不到60%。</p>
+                <p class="description">热淘平台专注做天猫新店，天猫店，淘宝企业店铺，在店铺入驻，店铺装让领域长达5年多，掌握市面上几乎 所有店铺来源，让各个电商圈大牛达成长久的合作，在新电猫平台找到的店铺，我们承诺只会比其他右上更实惠，</p>
+                <p class="description">信息展示更全面，在其他平台有的网店，热淘90%都有，而热淘有的网店其他平台掌握的不到60%。</p>
             </div>
         </div>
 
@@ -64,7 +64,7 @@
             <div class="inner banner3">
                 <p class="title1">全新入驻模式</p>
                 <p class="title2">最快七天可交接完成</p>
-                <p class="description">仟呗平台旨在为电商人创造安全便捷的网店交易平台 目前市面上所有的平台网店交易过于缓慢，切不能做 到全面保障。</p>
+                <p class="description">热淘平台旨在为电商人创造安全便捷的网店交易平台 目前市面上所有的平台网店交易过于缓慢，切不能做 到全面保障。</p>
             </div>
         </div>
 
@@ -89,7 +89,7 @@ export default {
                 {
                     imgUrl: require("@/assets/images/shopinfo1.png"),
                     title: "真实店铺信息",
-                    text: "仟呗平台只展示店铺真实状态, 专人合适违规扣分，商标信息，店铺贷款情况"
+                    text: "热淘平台只展示店铺真实状态, 专人合适违规扣分，商标信息，店铺贷款情况"
                 },
                 {
                     imgUrl: require("@/assets/images/shopinfo2.png"),

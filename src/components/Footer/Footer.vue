@@ -28,7 +28,7 @@
                 <img @click="go(4)" src="./img3.png">
             </div>
 
-            <p class="footer-bottom">浙ICP备19040911号 版权所有 | 仟呗（绍兴）信息科技有限公司 浙江绍兴文化创意产业园6幢</p>
+            <p class="footer-bottom">浙ICP备19040911号 版权所有 | 热淘（绍兴）信息科技有限公司 浙江绍兴文化创意产业园6幢</p>
         </footer>
     </div>
 </template>

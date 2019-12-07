@@ -1,14 +1,14 @@
 <template>
-    <!-- 仟呗头条 -->
+    <!-- 热淘头条 -->
     <div class="inner-bg headline-bg">
-        <div class="inner headline">
+        <div class="inner headline" v-if='newAllDatas.length'>
             <div class="title-box">
-                <p class="title">仟呗头条</p>
+                <p class="title">热淘头条</p>
                 <p class="info">NEWS</p>
             </div>
 
-            <ul class="imgs" v-if='newsLists.length'>
-                <li v-for="(item, index) in newsLists" 
+            <ul class="imgs">
+                <li v-for="(item, index) in newAllDatas" 
                     :key="index" 
                     @click="gotoDetail(item.id)"
                     @mouseover="imgIndex = index" 
@@ -32,36 +32,30 @@
 
 <script>
 import api from '@/api';
-
+import ls from "store2";
 export default {
     name: "headline",
     data() {
         return {
-            newsLists: [],
             imgIndex: -1,
-            imgsList: [
-                {
-                    pictureUrl: require('./images/msg1.png'),
-                    title: "国家扶贫日交答卷,社交电商扣开扶贫新大门",
-                    arrow1: require('./images/msg-arrow1.png'),
-                    arrow2: require('./images/msg-arrow2.png'),
-                },
-                {
-                    pictureUrl: require('./images/msg2.png'),
-                    title: "月薪4万招不到人,曾经电商的巨型风口将在这里重现?",
-                    arrow1: require('./images/msg-arrow1.png'),
-                    arrow2: require('./images/msg-arrow2.png'),
-                },
-                {
-                    pictureUrl: require('./images/msg3.png'),
-                    title: "汪向东:对农村电商扶贫与乡村振兴的新思考",
-                    arrow1: require('./images/msg-arrow1.png'),
-                    arrow2: require('./images/msg-arrow2.png'),
-                }
-            ],
+            newsLists: [],
+            newAllDatas: ls.session.get('newAllDatas')
         }
     },
     methods: {
+        getNewsLists() {
+            api.axs("post", "/news/anon/queryForPage").then(({ data })=>{
+                if (data.code === "SUCCESS") {
+                    // this.newsLists = data.data.list.slice(0,3);
+                    this.newsLists[0] = data.data[0].list[0]
+                    this.newsLists[1] = data.data[1].list[0]
+                    this.newsLists[2] = data.data[2].list[0]
+                    console.log(this.newsLists)
+                } else {
+                    this.$Message.error(data.remark);
+                }
+            })
+        },
         gotoDetail(id) { // 跳转详情
             let { href } = this.$router.resolve({
                 path: 'newsdetails',
@@ -71,16 +65,7 @@ export default {
         },
     },
     mounted() {
-        api.axs("post", "/news/anon/queryForPage").then(({ data })=>{
-            if (data.code === "SUCCESS") {
-                // this.newsLists = data.data.list.slice(0,3);
-                this.newsLists[0] = data.data[0].list[0]
-                this.newsLists[1] = data.data[1].list[0]
-                this.newsLists[2] = data.data[2].list[0]
-            } else {
-                this.$Message.error(data.remark);
-            }
-        })
+        // this.getNewsLists()
     },
     filters: {
         'shortWr'(val) {

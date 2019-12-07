@@ -75,7 +75,7 @@ export default {
     },
     methods: {
         consult () { // 联系客服
-            window.open("https://url.cn/5iD2Ua8?_type=wpa&qidian=true");
+            window.open("https://url.cn/5FanN8i?_type=wpa&qidian=true");
         },
         close () {
             this.showConsult = false
@@ -87,7 +87,7 @@ export default {
     mounted() {
         setTimeout(() => {
             this.showConsult = true
-        }, 2000);
+        }, 10000);
     }
 }
 </script>

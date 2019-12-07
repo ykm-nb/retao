@@ -7,7 +7,7 @@
         <Nav></Nav>
 
         <div class="contentWrap">
-            <p class="curNav">所在位置: 千呗 >> 新闻咨询</p>
+            <p class="curNav">所在位置: 热淘 >> 新闻咨询</p>
             <ul class="leftNav">
                 <li class='tittt'>关于我们</li>
                 <li class="lit" @click="$router.push('/helpcenter?tag=taggsjj')">公司简介</li>
@@ -30,7 +30,7 @@
             </ul>
             <div class="content">
                 <h3 class="tit">{{contents.title}}</h3>
-                <p class="time">时间: {{contents.createTime && contents.createTime.substring(0,10)}} &nbsp;&nbsp;&nbsp;&nbsp;来源: 仟呗官方</p>
+                <p class="time">时间: {{contents.createTime && contents.createTime.substring(0,10)}} &nbsp;&nbsp;&nbsp;&nbsp;来源: 热淘官方</p>
                 <div class="desc" v-html="contents.content"></div>
             </div>
         </div>
@@ -132,6 +132,10 @@ export default {
                     text-align: left;
                     font-size: 14px;
                     color: #444;
+
+                    p {
+                        line-height: 18px;
+                    } 
                 }
             }
         }

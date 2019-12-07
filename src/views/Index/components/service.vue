@@ -189,7 +189,7 @@ export default {
             // Math.random() > 0.5 ? qq = arr[0] : qq = arr[1];
             // window.open("http://wpa.qq.com/msgrd?v=3&uin="+qq+"&site=qq&menu=yes",'',"width=644,height=544,toolbar=no,scrollbars=no,menubar=no,status=no");
             
-            window.open("https://url.cn/5iD2Ua8?_type=wpa&qidian=true");
+            window.open("https://url.cn/5FanN8i?_type=wpa&qidian=true");
         },
         getBackground (imgUrl) { // 获取背景图
             return `background: url(${imgUrl}) no-repeat 50% 0; background-size: cover`

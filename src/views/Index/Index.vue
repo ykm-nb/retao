@@ -204,6 +204,7 @@ export default {
             this.newAllDatas.newsLists[0] = data.data[0].list[0]
             this.newAllDatas.newsLists[1] = data.data[1].list[0]
             this.newAllDatas.newsLists[2] = data.data[2].list[0]
+            ls.session('newAllDatas',this.newAllDatas.newsLists)
         } else {
             this.$Message.error(data.remark);
         }

@@ -3,8 +3,8 @@
         <Header></Header>
 
         <div class="nav">
-            <img @click="$router.push('index')" src="./logo.png">
-            <button type="button" @click="$router.push('index')">返回仟呗首页</button>
+            <img @click="$router.push('index')" src="./logo.png" style='height: 80px'>
+            <button type="button" @click="$router.push('index')">返回热淘新店</button>
         </div>
 
         <div class="inner-bg form-bg">
@@ -68,7 +68,7 @@
 
         <div class="inner-bg">
             <div class="inner">
-                <p class="login-footer">浙ICP备19040911号 版权所有 | 仟呗（绍兴）信息科技有限公司 浙江绍兴文化创意产业园6幢</p>
+                <p class="login-footer">浙ICP备19040911号 版权所有 | 热淘（绍兴）信息科技有限公司 浙江绍兴文化创意产业园6幢</p>
             </div>
         </div>
     </div>
