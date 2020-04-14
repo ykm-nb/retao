@@ -289,22 +289,22 @@ export default {
                     imgUrl: require('./images/service4.png'),
                     name: '高奕豪',
                     description: '6年从业经验',
-                    phone: 17342065160,
-                    wxUrl: require('./images/wxcode.jpg')
+                    phone: 17705851730,
+                    wxUrl: require('./images/wxcode.png')
                 },
                 {
                     imgUrl: require('./images/service5.png'),
                     name: '郑梦琳',
                     description: '5年从业经验',
-                    phone: 17342063807,
-                    wxUrl: require('./images/wxcode.jpg')
+                    phone: 17705851671,
+                    wxUrl: require('./images/wxcode.png')
                 },
                 {
                     imgUrl: require('./images/service7.png'),
                     name: '张凯莉',
                     description: '4年从业经验',
-                    phone: 17788557963,
-                    wxUrl: require('./images/wxcode.jpg')
+                    phone: 13858572923,
+                    wxUrl: require('./images/wxcode.png')
                 }
             ]
         }

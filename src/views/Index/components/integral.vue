@@ -47,15 +47,15 @@ export default {
             },
             serviceList: [
                 {
-                    url: require('./images/service1.png'),
+                    url: require('./images/service8.png'),
                     name: '贝贝'
                 },
                 {
-                    url: require('./images/service1.png'),
+                    url: require('./images/service8.png'),
                     name: '贝贝2'
                 },
                 {
-                    url: require('./images/service1.png'),
+                    url: require('./images/service8.png'),
                     name: '贝贝3'
                 }
             ]

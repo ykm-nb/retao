@@ -61,7 +61,7 @@ export default {
                 {
                     name: "竺金晶",
                     info: "杭州公司6年从业经验",
-                    imgUrl: require("./images/service1.png")
+                    imgUrl: require("./images/service8.png")
                 },
                 {
                     name: "张文豪",
@@ -475,7 +475,7 @@ export default {
             }
 
             .service1 {
-                background: url('./images/service1.png') 50% 0 no-repeat;
+                background: url('./images/service8.png') 50% 0 no-repeat;
                 background-size: cover;
             }
             .service2 {

@@ -42,7 +42,7 @@
                         <img src="../images/code.jpg">
                     </div>
                     <div class="zfb-info">
-                        <p>1.支付宝账号：163382005@qq.ocm</p>
+                        <p>1.支付宝账号：1632382005@qq.ocm</p>
                         <p>2.打开支付宝，扫一扫上面二维码进行付款充值</p>
                         <p>3.付款成功后，请填写以下充值表单并提交</p>
                     </div>
@@ -93,7 +93,9 @@
                         <li class="layer1">
                             <p class="layer-title">1、转款帐号信息</p>
                             <div class="layer-content">
-                                <img src="../images/tlbank.jpg" style='flex:0 0 190px;width: 190px;border-radius: 6px;'>
+                                <div class="card" style="flex:0 0 190px;width:190px;border-radius: 6px;margin-right:20px">
+                                    <img src="../images/tlbank.jpg" style='width:100%;border-radius: 6px;'>
+                                </div>
                                 <div>
                                     <p>帐号 ：80030122000090687</p>
                                     <p>户名 ：热淘（绍兴）信息科技有限公司</p>

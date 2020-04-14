@@ -51,124 +51,124 @@ export default {
             tagList: ["天猫转让", "淘宝转让", "天猫入驻", "电商运营", "企业服务"],
             serviceList: [
                 {
-                    imgUrl: require('./images/service1.png'),
+                    imgUrl: require('./images/service8.png'),
                     name: '竺金晶',
                     description: '6年从业经验',
-                    wxUrl: require('./images/wxcode.jpg')
+                    wxUrl: require('./images/wxcode.png')
                 },
                 {
                     imgUrl: require('./images/service2.png'),
                     name: '赵峰',
                     description: '5年从业经验',
-                    wxUrl: require('./images/wxcode.jpg')
+                    wxUrl: require('./images/wxcode.png')
                 },
                 {
                     imgUrl: require('./images/service3.png'),
                     name: '傅心玉',
                     description: '3年从业经验',
-                    wxUrl: require('./images/wxcode.jpg')
+                    wxUrl: require('./images/wxcode.png')
                 },
                 {
                     imgUrl: require('./images/service4.png'),
                     name: '高奕豪',
                     description: '6年从业经验',
-                    wxUrl: require('./images/wxcode.jpg')
+                    wxUrl: require('./images/wxcode.png')
                 },
                 {
                     imgUrl: require('./images/service5.png'),
                     name: '郑梦琳',
                     description: '5年从业经验',
-                    wxUrl: require('./images/wxcode.jpg')
+                    wxUrl: require('./images/wxcode.png')
                 },
                 {
                     imgUrl: require('./images/service6.png'),
                     name: '史媛',
                     description: '3年从业经验',
-                    wxUrl: require('./images/wxcode.jpg')
+                    wxUrl: require('./images/wxcode.png')
                 },
                 {
                     imgUrl: require('./images/service7.png'),
                     name: '张凯莉',
                     description: '4年从业经验',
-                    wxUrl: require('./images/wxcode.jpg')
+                    wxUrl: require('./images/wxcode.png')
                 },
                 {
                     imgUrl: require('./images/service8.png'),
                     name: '盛炎明',
                     description: '5年从业经验',
-                    wxUrl: require('./images/wxcode.jpg')
+                    wxUrl: require('./images/wxcode.png')
                 },
                 {
                     imgUrl: require('./images/service9.png'),
                     name: '张杭峰',
                     description: '3年从业经验',
-                    wxUrl: require('./images/wxcode.jpg')
+                    wxUrl: require('./images/wxcode.png')
                 },
                 {
-                    imgUrl: require('./images/service1.png'),
+                    imgUrl: require('./images/service8.png'),
                     name: '竺金晶',
                     description: '6年从业经验',
-                    wxUrl: require('./images/wxcode.jpg')
+                    wxUrl: require('./images/wxcode.png')
                 },
                 {
                     imgUrl: require('./images/service2.png'),
                     name: '赵峰',
                     description: '5年从业经验',
-                    wxUrl: require('./images/wxcode.jpg')
+                    wxUrl: require('./images/wxcode.png')
                 },
                 {
                     imgUrl: require('./images/service3.png'),
                     name: '傅心玉',
                     description: '3年从业经验',
-                    wxUrl: require('./images/wxcode.jpg')
+                    wxUrl: require('./images/wxcode.png')
                 },
                 {
                     imgUrl: require('./images/service4.png'),
                     name: '高奕豪',
                     description: '6年从业经验',
-                    wxUrl: require('./images/wxcode.jpg')
+                    wxUrl: require('./images/wxcode.png')
                 },
                 {
                     imgUrl: require('./images/service5.png'),
                     name: '郑梦琳',
                     description: '5年从业经验',
-                    wxUrl: require('./images/wxcode.jpg')
+                    wxUrl: require('./images/wxcode.png')
                 },
                 {
                     imgUrl: require('./images/service6.png'),
                     name: '史媛',
                     description: '3年从业经验',
-                    wxUrl: require('./images/wxcode.jpg')
+                    wxUrl: require('./images/wxcode.png')
                 },
                 {
                     imgUrl: require('./images/service7.png'),
                     name: '张凯莉',
                     description: '4年从业经验',
-                    wxUrl: require('./images/wxcode.jpg')
+                    wxUrl: require('./images/wxcode.png')
                 },
                 {
                     imgUrl: require('./images/service8.png'),
                     name: '盛炎明',
                     description: '5年从业经验',
-                    wxUrl: require('./images/wxcode.jpg')
+                    wxUrl: require('./images/wxcode.png')
                 },
                 {
                     imgUrl: require('./images/service9.png'),
                     name: '张杭峰',
                     description: '3年从业经验',
-                    wxUrl: require('./images/wxcode.jpg')
+                    wxUrl: require('./images/wxcode.png')
                 },
                 {
-                    imgUrl: require('./images/service1.png'),
+                    imgUrl: require('./images/service8.png'),
                     name: '竺金晶',
                     description: '6年从业经验',
-                    wxUrl: require('./images/wxcode.jpg')
+                    wxUrl: require('./images/wxcode.png')
                 },
                 {
                     imgUrl: require('./images/service2.png'),
                     name: '赵峰',
                     description: '5年从业经验',
-                    wxUrl: require('./images/wxcode.jpg')
+                    wxUrl: require('./images/wxcode.png')
                 },
             ]
         }

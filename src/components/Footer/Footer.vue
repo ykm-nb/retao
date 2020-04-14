@@ -10,11 +10,11 @@
                 </ul>
                 <div class="wx-code">
                     <div class="code1">
-                        <img src="./code1.png">
+                        <img src="./code2.png">
                         <p>关注我们</p>
                     </div>
                     <div class="code2">
-                        <img src="./code2.png">
+                        <img src="./code1.png">
                         <p>客服咨询</p>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                 <img @click="go(4)" src="./img3.png">
             </div>
 
-            <p class="footer-bottom">浙ICP备19040911号 版权所有 | 热淘（绍兴）信息科技有限公司 浙江绍兴文化创意产业园6幢</p>
+            <p class="footer-bottom">浙ICP备19040911号-2 版权所有 | 仟呗（绍兴）信息科技有限公司 浙江绍兴文化创意产业园6幢</p>
         </footer>
     </div>
 </template>
@@ -135,7 +135,7 @@ export default {
             switch (index) {
                 case 0: window.open('https://baike.shuidi.cn/companywiki-fdd0d827c8f6bf4bfbe8c3e4f151ca01.html', '_blank')
                 break;
-                case 2: window.open('http://www.beian.gov.cn/portal/registerSystemInfo', '_blank')
+                case 2: window.open('http://www.beian.miit.gov.cn', '_blank')
                 break;
                 case 4: window.open('http://www.cyberpolice.cn/wfjb/', '_blank')
                 break;

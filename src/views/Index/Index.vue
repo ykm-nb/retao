@@ -1,12 +1,15 @@
 <template>
   <div class="index">
 
-    <!-- 头部 -->
-    <Header id="header" :userInfo="userInfo"></Header>
+    <div class="showWrap">
+      <!-- 头部 -->
+      <Header id="header" :userInfo="userInfo"></Header>
 
-    <Nav></Nav>
+      <Nav></Nav>
 
-    <div class="inner-bg banner-bg">
+    </div>
+
+    <div class="inner-bg banner-bg" id="bannerBg">
       <div class="inner banner">
         <div class="banner-left">
           <div class="city">
@@ -35,13 +38,13 @@
             <button @click="gotoPage('login', 1)" class="regist" type="button">立即注册</button>
           </div>
           <div class="wx">
-            <img src="./components/images/wxcode.jpg" style='width: 142px;'>
+            <img src="./components/images/wxcode.png" style='width: 142px;'>
             <p>扫一扫 ，有惊喜</p>
           </div>
         </div>
       </div>
 
-      <div class="swiper-container">
+      <div class="swiper-container" id="swiperContainer" style="background: #240132 url(https://retao.oss-cn-hangzhou.aliyuncs.com/15761257517695fpw08.jpg) center no-repeat">
         <div class="swiper-wrapper">
           <div class="swiper-slide slide1"></div>
           <div class="swiper-slide slide2"></div>
@@ -51,22 +54,26 @@
         <!-- 分页器 -->
         <div class="swiper-pagination"></div>
       </div>
+
     </div>
 
     <Info></Info>
 
-    <Shop1 id="shop1" ref="shop1" @author-index="getAuthorIndex" :tjList="tjList" :yzList="yzList" :xqList="xqList"></Shop1>
+    <template>
+      <Shop1 id="shop1" ref="shop1" @author-index="getAuthorIndex" :tjList="tjList" :yzList="yzList" :xqList="xqList"></Shop1>
 
-    <Service id="service" @author-index="getAuthorIndex"></Service>
+      <Service id="service" @author-index="getAuthorIndex"></Service>
 
-    <Shop2 id="shop2" @author-index="getAuthorIndex" :tmList="tmList" :tbList="tbList"></Shop2>
-    
-    <Message id="msg" :newAllDatas="newAllDatas" @author-index="getAuthorIndex"></Message>
+      <Shop2 id="shop2" @author-index="getAuthorIndex" :tmList="tmList" :tbList="tbList"></Shop2>
 
-    <Safe></Safe>
+      <Message id="msg" :newAllDatas="newAllDatas" @author-index="getAuthorIndex"></Message>
 
-    <!-- 底部 -->
-    <Footer id="footer"></Footer>
+      <Safe></Safe>
+
+      <!-- 底部 -->
+      <Footer id="footer"></Footer>
+
+    </template>
 
     <!-- 锚点 -->
     <ul class="anchor" :class="{'show-anchor': showAnchor}">
@@ -116,6 +123,7 @@ export default {
   },
   data() {
     return {
+      loadContent: false,
       userInfo: ls.session.get('qbuserInfo'),
       showAnchor: false,
       authorIndex: -1,
@@ -214,6 +222,8 @@ export default {
   mounted() {
     this.initSwiper() // swiper初始化必须在mounted，因为此时dom元素已经渲染完
     window.addEventListener('scroll', this.keyupEnter)
+
+    document.getElementById('bannerBg').style.opacity = 1
     
     ls.session("rtSearch", "") // 清空搜索
     ls.session("tbList", null)
@@ -287,7 +297,14 @@ html, body {
       }
   }
 
+  .showWrap {
+		width: 100%;
+		height: 214px;
+	}
+
   .banner-bg {
+      opacity: 0;
+      transition: opacity 2s cubic-bezier(0.42,0,0,1);
       height: 515px;
       width: 100%;
       position: relative;
@@ -427,13 +444,13 @@ html, body {
           }
 
           .slide1 {
-            background: url('./components/images/banner2.png') no-repeat center;
+            background: url('./components/images/banner2.jpg') center no-repeat;
           }
           .slide2 {
-            background: url('./components/images/banner3.png') no-repeat center;
+            background: url('./components/images/banner3.jpg') center no-repeat;
           }
           .slide3 {
-            background: url('./components/images/banner4.png') no-repeat center;
+            background: url('./components/images/banner4.jpg') center no-repeat;
           }
         }
 

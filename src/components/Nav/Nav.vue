@@ -4,7 +4,7 @@
             <div class="search-wrap">
                 <div class="wrap-left">
                     <div class="logo" @click="gotoPage('index')">
-                        <img src="./logo2.png" alt="logo" style='height:80px'>
+                        <img src="./logo2.png" alt="logo">
                     </div>
                 </div>
 
@@ -120,11 +120,15 @@ export default {
             .wrap-left {
                 display: flex;
                 align-items: center;
-                padding: 30px 0 30px 14px;
+                padding: 30px 0 30px 32px;
                 margin-right: 180px;
 
                 .logo {
+                    width: 200px;
                     cursor: pointer;
+                    img {
+                        width: 100%;
+                    }
                 }
             }
 
